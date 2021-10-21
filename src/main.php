@@ -27,6 +27,7 @@ $discord->on('ready', function ($discord) {
     // Listen for messages.
     $discord->on('message', function ($message, $discord) {
         $message_ascii = mb_convert_kana($message->content, 'rnaskhc', 'UTF-8');
+        $img_url_base = 'https://raw.githubusercontent.com/luswdev/SplatoonBot/master/img/';
 
         if (strcasecmp("?rw", $message_ascii) === 0) {
             global $weapons;
@@ -35,7 +36,7 @@ $discord->on('ready', function ($discord) {
 
             $embed = new Embed($discord);
             $embed->setTitle('Random Weapon!!');
-            $embed->setImage('https://lusw.dev/splatoon/img/weapon/weapon_'.$key.'.png');
+            $embed->setImage($img_url_base.'weapon/weapon_'.$key.'.png');
             $embed->setColor(random_color());
             $embed->setDescription($check.' '.$weapons['en'][$key].PHP_EOL.
                                    $check.' '.$weapons['jp'][$key].PHP_EOL.
@@ -51,7 +52,7 @@ $discord->on('ready', function ($discord) {
 
             $embed = new Embed($discord);
             $embed->setTitle('Random Map!!');
-            $embed->setImage('https://lusw.dev/splatoon/img/map/map_'.$key.'.png');
+            $embed->setImage($img_url_base.'map/map_'.$key.'.png');
             $embed->setColor(random_color());
             $embed->setDescription($check.' '.$maps['en'][$key].PHP_EOL.
                                    $check.' '.$maps['jp'][$key].PHP_EOL.

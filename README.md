@@ -24,7 +24,7 @@ SplatoonBot is a simple bot for Splatoon 2.
 ```
 
 - Random choose map from 23 different maps.
-- Not include splatfest maps.
+- **Not** include splatfest maps.
 - Support English, Japanese, and Traditional Chinese (unofficial).
 
 ### Help Manual
