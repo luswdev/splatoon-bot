@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    background-image: url(../img/bg.png);
+    background-position: top;
+    background-size: 360px 360px;
+}
+
+footer {
+    font-size: .8rem;
+}
+
+footer a {
+    color: #f54910;
+}
+
+.round-32 {
+    border-radius: 32px !important;
+}
+
+.round-12 {
+    border-radius: 12px !important;
+}
+
+.intro-box {
+    margin: 8rem 0;
+}
+
+.intro-box .btn {
+    -webkit-appearance: none;
+    -webkit-user-select:none;
+    user-select:none;
+    -webkit-touch-callout: none;
+    background: hsla(0,0%,47.8%,.4);
+    border: hsla(0,0%,47.8%,.9);
+    color: #dbdbdb;
+}
+
+.intro-box .btn:hover,
+.intro-box .btn:active,
+.intro-box .btn:focus {
+    background: hsla(0,0%,71%,.5);
+    border: #b5b5b5;
+    color: #fff;
+}
+
+.btn.is-active,
+.btn.is-focused,
+.btn:active,
+.btn:focus {
+    outline: none;
+}
+
+.squid-card {
+    background-image: linear-gradient(180deg, transparent, rgba(36, 36, 36, .1)), var(--squid-card-bg-img);
+    background-position: top;
+    background-size: 100% 100%,80px 80px;
+    text-shadow: 1px 1px 0 #000;
+}
+
+.squid-card.squid-card-mask {
+    -webkit-mask-image: var(--squid-card-mask-img);
+    mask-image: var(--squid-card-mask-img);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 600px 960px;
+    mask-size: 600px 960px;
+    -webkit-mask-position: center top;
+    mask-position: center top;
+    padding-top: 18px;
+}
+
+.squid-card .keyword {
+    background-color: #460fc8;
+    padding: 2px 48px 2px 20px;
+    margin: 0 0 10px -16px;
+}
+
+.squid-card .keyword.keyword-mask {
+    -webkit-mask-image: var(--squid-card-keyword-img);
+    mask-image: var(--squid-card-keyword-img);
+    -webkit-mask-size: cover;
+    mask-size: cover;
+    -webkit-mask-position: right center;
+    mask-position: right center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+}
+
+.squid-card .list-group-item {
+    background: rgba(0, 0, 0, .7);
+    border-color: rgba(255, 255, 255, .125);
+}
+
+.squid-card .list-group-item .squid-icon {
+    transform: rotate(25deg);
+}
+
+.squid-card .list-group-item .squid-icon .fa-squid:before {
+    content: "\e065";
+}
