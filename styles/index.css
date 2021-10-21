@@ -19,6 +19,10 @@ footer a {
     color: #f54910;
 }
 
+footer a:hover {
+    color: #f02d7d;
+}
+
 .round-32 {
     border-radius: 32px !important;
 }
@@ -31,7 +35,7 @@ footer a {
     margin: 8rem 0;
 }
 
-.intro-box .btn {
+.btn.btn-clear {
     -webkit-appearance: none;
     -webkit-user-select:none;
     user-select:none;
@@ -41,18 +45,12 @@ footer a {
     color: #dbdbdb;
 }
 
-.intro-box .btn:hover,
-.intro-box .btn:active,
-.intro-box .btn:focus {
+.btn.btn-clear:hover,
+.btn.btn-clear:active,
+.btn.btn-clear:focus {
     background: hsla(0,0%,71%,.5);
     border: #b5b5b5;
     color: #fff;
-}
-
-.btn.is-active,
-.btn.is-focused,
-.btn:active,
-.btn:focus {
     outline: none;
 }
 
