@@ -75,7 +75,7 @@ $discord->on('ready', function ($discord) {
 
             $message->channel->sendMessage(MessageBuilder::new()->addEmbed($embed));
         } else if  (strcasecmp("?close", $message_ascii) === 0) {
-            $admins = ['838713926862635028', '607505877171306516'];
+            $admins = $ADMINS;
             foreach ($admins as $admin) {
                 if ($message->user->id === $admin) {
                     $embed = new Embed($discord);
@@ -101,3 +101,5 @@ $discord->on('ready', function ($discord) {
 });
 
 $discord->run();
+
+?>
