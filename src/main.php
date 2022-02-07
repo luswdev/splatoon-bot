@@ -41,7 +41,7 @@ $discord->on('ready', function ($discord) {
             $embed->setDescription($check.' '.$weapons['en'][$key].PHP_EOL.
                                    $check.' '.$weapons['jp'][$key].PHP_EOL.
                                    $check.' '.$weapons['zh'][$key]);
-            $embed->setFooter('Requested by '.$message->user->username, $message->user->avatar);
+            $embed->setFooter('Requested by '.$message->author->username, $message->author->avatar."");
             $embed->setTimestamp(time());
 
             $message->channel->sendMessage(MessageBuilder::new()->addEmbed($embed));
@@ -57,7 +57,7 @@ $discord->on('ready', function ($discord) {
             $embed->setDescription($check.' '.$maps['en'][$key].PHP_EOL.
                                    $check.' '.$maps['jp'][$key].PHP_EOL.
                                    $check.' '.$maps['zh'][$key]);
-            $embed->setFooter('Requested by '.$message->user->username, $message->user->avatar);
+            $embed->setFooter('Requested by '.$message->author->username, $message->author->avatar);
             $embed->setTimestamp(time());
 
             $message->channel->sendMessage(MessageBuilder::new()->addEmbed($embed));
@@ -70,19 +70,19 @@ $discord->on('ready', function ($discord) {
                                    '`?rw` Random choose a weapon.'.PHP_EOL.
                                    '`?rm` Random choose a map.'.PHP_EOL);
             $embed->setColor(random_color());
-            $embed->setFooter('Requested by '.$message->user->username, $message->user->avatar);
+            $embed->setFooter('Requested by '.$message->author->username, $message->author->avatar);
             $embed->setTimestamp(time());
 
             $message->channel->sendMessage(MessageBuilder::new()->addEmbed($embed));
         } else if  (strcasecmp("?close", $message_ascii) === 0) {
-            $admins = $ADMINS;
+            $admins = ['838713926862635028', '607505877171306516'];
             foreach ($admins as $admin) {
-                if ($message->user->id === $admin) {
+                if ($message->author->id === $admin) {
                     $embed = new Embed($discord);
                     $embed->setTitle('System Operation');
-                    $embed->setDescription('Close bot by admin: '.$message->user->username);
+                    $embed->setDescription('Close bot by admin: '.$message->author->username);
                     $embed->setColor(random_color());
-                    $embed->setFooter('Requested by '.$message->user->username, $message->user->avatar);
+                    $embed->setFooter('Requested by '.$message->author->username, $message->author->avatar);
                     $embed->setTimestamp(time());
         
                     $message->channel->sendMessage(MessageBuilder::new()->addEmbed($embed));
