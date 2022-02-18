@@ -2,3 +2,5 @@ vendor/
 log/
 composer*
 src/bot.php
+src/splatnet-config.php
+*.json

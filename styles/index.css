@@ -1,11 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 html {
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
+    background-color: #202020;
     background-image: url(../img/bg.png);
     background-position: top;
     background-size: 360px 360px;
@@ -13,6 +15,7 @@ body {
 
 footer {
     font-size: .8rem;
+    font-family: 'Roboto', sans-serif;
 }
 
 footer a {
@@ -25,6 +28,10 @@ footer a:hover {
 
 .round-32 {
     border-radius: 32px !important;
+}
+
+.round-18 {
+    border-radius: 18px !important;
 }
 
 .round-12 {
@@ -53,7 +60,7 @@ footer a:hover {
     color: #fff;
     outline: none;
 }
-
+.squid-card-hook-mask::before,
 .squid-card {
     background-image: linear-gradient(180deg, transparent, rgba(36, 36, 36, .1)), var(--squid-card-bg-img);
     background-position: top;
@@ -99,6 +106,148 @@ footer a:hover {
     transform: rotate(25deg);
 }
 
+.squid-card-hook-mask::before {
+    content: "";
+    position: absolute;
+    background-position-y: bottom!important;
+    width: 100%;
+    height: 29px;
+    top: -28px;
+    left: 0;
+    background-color: #f02d7d;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+}
+
+.squid-card-hook-mask::before {
+    -webkit-mask-image: var(--squid-card-hook-img);
+    mask-image: var(--squid-card-hook-img);
+    -webkit-mask-size: 36px 29px;
+    mask-size: 36px 29px;
+    -webkit-mask-position: center top;
+    mask-position: center top;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+}
+
 .squid-card .list-group-item .squid-icon .fa-squid:before {
     content: "\e065";
+}
+
+.rank-table {
+    background-color: rgba(0, 0, 0, .6);
+}
+
+table thead th {
+    font-size: .8rem;
+    font-weight: normal;
+}
+
+.rank-table table thead {
+    width: 100%;
+    height: 2.5px;
+    background-image: linear-gradient(to right, rgba(219,219,219,.5) 0%, rgba(219,219,219,.5) 50%, transparent 50%);
+    background-size: 4px 2.5px;
+    background-repeat: repeat-x;
+    background-position: bottom;
+}
+
+.tilt-left {
+    transform: rotate(-1.4deg);
+}
+
+.tilt-right {
+    transform: rotate(1.4deg);
+}
+
+.info-card {
+    background-color: #A0A09F;
+    color: #474748;
+}
+
+.info-card .league-result {
+    border-color: #919190 !important;
+}
+
+.info-card .league-power {
+    color: #000;
+}
+
+.info-card .league-metal {
+    color: #CACBCB;
+    background-color: #282828;
+}
+
+.info-card .league-metal img {
+    height: 1.375rem;
+}
+
+.info-card .league-peak {
+    font-size: .8rem;
+}
+
+.league-metal-container {
+    margin-left: 5rem;
+}
+
+.league-icon {
+    width: 4rem;
+    height: 1.875rem;
+    vertical-align: top;
+    font-size: .8rem;
+    letter-spacing: 1.125px;
+}
+
+.col {
+    max-width: 420px;
+}
+
+.league-icon img {
+    height: 1.75rem;
+}
+
+.splatnet-icon img {
+    width: 20rem;
+    margin-bottom: -4rem;
+    margin-top: -2rem;
+}
+
+.battle-table th,
+.battle-table td {
+    border-color: #BC59E9 !important;
+}
+
+.battle-summary tbody {
+    color: #C3BFC5;
+    background-color: rgba(0, 0, 0, .6);
+}
+
+.battle-summary tbody tr td:first-child {
+    border-radius: 50rem 0 0 50rem !important;
+}
+
+.battle-summary tbody tr td:last-child {
+    border-radius: 0 50rem 50rem 0 !important;
+}
+
+.battle-summary tbody {
+    color: #C3BFC5;
+    background-color: rgba(0, 0, 0, .6);
+}
+
+.battle-summary .summary-icon {
+    height: 1rem;
+    max-height: 1rem;
+    overflow: visible;
+    vertical-align: top;
+}
+
+.battle-summary .summary-icon img {
+    height: 2rem;
+    margin-top: -.375rem;
+}
+
+.fa-octo:before {
+    content: "\e064";
 }
