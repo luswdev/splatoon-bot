@@ -73,123 +73,109 @@ curl_setopt($ch, CURLOPT_COOKIE, 'iksm_session='.$curl_opt['Cookie']['iksm_sessi
 /*********************** api: records ***********************/
 
 curl_setopt($ch, CURLOPT_URL, $curl_opt['url'].'records');
-$ret = json_decode(curl_exec($ch), true);
-
-$id = $ret['records']['player']['principal_id'];
-
-$rank = array (
-    array (
-        'mode' => 'Splat Zones',
-        'rank' => $ret['records']['player']['udemae_zones']['name'],
-        'sp'   => $ret['records']['player']['udemae_zones']['s_plus_number']
-    ),
-    array (
-        'mode' => 'Tower Control',
-        'rank' => $ret['records']['player']['udemae_tower']['name'],
-        'sp'   => $ret['records']['player']['udemae_tower']['s_plus_number']
-    ),
-    array (
-        'mode' => 'Rainmaker',
-        'rank' => $ret['records']['player']['udemae_rainmaker']['name'],
-        'sp'   => $ret['records']['player']['udemae_rainmaker']['s_plus_number']
-    ),
-    array (
-        'mode' => 'Clam Blitz',
-        'rank' => $ret['records']['player']['udemae_clam']['name'],
-        'sp'   => $ret['records']['player']['udemae_clam']['s_plus_number']
-    )
-);
-
-$level       = $ret['records']['player']['player_rank'];
-$star        = $ret['records']['player']['star_rank'];
-$total_paint = $ret['challenges']['total_paint_point'];
-$ign         = $ret['records']['player']['nickname'];
-$dc          = $ret['records']['recent_disconnect_count'];
-
-$life_win = $ret['records']['win_count'];
-$life_lose = $ret['records']['lose_count'];
-
-$pair = array (
-    'gold'   => $ret['records']['league_stats']['pair']['gold_count'],
-    'sliver' => $ret['records']['league_stats']['pair']['silver_count'],
-    'bronze' => $ret['records']['league_stats']['pair']['bronze_count'],
-    'high'   => $ret['records']['player']['max_league_point_pair']
-);
-
-$team = array (
-    'gold'   => $ret['records']['league_stats']['team']['gold_count'],
-    'sliver' => $ret['records']['league_stats']['team']['silver_count'],
-    'bronze' => $ret['records']['league_stats']['team']['bronze_count'],
-    'high'   => $ret['records']['player']['max_league_point_team']
-);
+$ret_records = json_decode(curl_exec($ch), true);
+write_json($ret_records, '/../log/splatnet-records.json');
 
 /*********************** api: results ***********************/
 
 curl_setopt($ch, CURLOPT_URL, $curl_opt['url'].'results');
-$ret = json_decode(curl_exec($ch), true);
-
-$battle = array (
-    'win'    => $ret['summary']['victory_count'],
-    'lose'   => $ret['summary']['defeat_count'],
-    'sp'     => round($ret['summary']['special_count_average'] * 10) / 10,
-    'kill'   => round($ret['summary']['kill_count_average'] * 10) / 10,
-    'assist' => round($ret['summary']['assist_count_average'] * 10) / 10,
-);
-
-$sp_ico = 'https://app.splatoon2.nintendo.net' . $ret['results'][0]['player_result']['player']['weapon']['special']['image_a'];
+$ret_results = json_decode(curl_exec($ch), true);
+write_json($ret_results, '/../log/splatnet-results.json');
 
 /*********************** api: nickname_and_icon ***********************/
 
+$id = $ret_records['records']['player']['principal_id'];
 curl_setopt($ch, CURLOPT_URL, $curl_opt['url'].'nickname_and_icon?id='.$id);
-$ret = json_decode(curl_exec($ch), true);
-
-$ico = $ret['nickname_and_icons'][0]['thumbnail_url'];
+$ret_nick = json_decode(curl_exec($ch), true);
+write_json($ret_nick, '/../log/splatnet-nick.json');
 
 /*********************** api: records/hero ***********************/
 
 curl_setopt($ch, CURLOPT_URL, $curl_opt['url'].'records/hero');
-$ret = json_decode(curl_exec($ch), true);
+$ret_hero = json_decode(curl_exec($ch), true);
+write_json($ret_hero, '/../log/splatnet-hero.json');
+curl_close($ch);
 
-$hero_title = $ret['summary']['honor']['name'];
-$hero_per = 1000;
+/*********************** build output array ***********************/
 
 $splatnet = array (
-    'rank' => $rank,
+    'update' => time(),
+    'rank' =>  array (
+        array (
+            'mode' => 'Splat Zones',
+            'rank' => $ret_records['records']['player']['udemae_zones']['name'],
+            'sp'   => $ret_records['records']['player']['udemae_zones']['s_plus_number']
+        ),
+        array (
+            'mode' => 'Tower Control',
+            'rank' => $ret_records['records']['player']['udemae_tower']['name'],
+            'sp'   => $ret_records['records']['player']['udemae_tower']['s_plus_number']
+        ),
+        array (
+            'mode' => 'Rainmaker',
+            'rank' => $ret_records['records']['player']['udemae_rainmaker']['name'],
+            'sp'   => $ret_records['records']['player']['udemae_rainmaker']['s_plus_number']
+        ),
+        array (
+            'mode' => 'Clam Blitz',
+            'rank' => $ret_records['records']['player']['udemae_clam']['name'],
+            'sp'   => $ret_records['records']['player']['udemae_clam']['s_plus_number']
+        )
+    ),
     'battle' => array (
-        'summary' => $battle,
-        'sp' => $sp_ico,
+        'summary' => array (
+            'win'    => $ret_results['summary']['victory_count'],
+            'lose'   => $ret_results['summary']['defeat_count'],
+            'sp'     => round($ret_results['summary']['special_count_average'] * 10) / 10,
+            'kill'   => round($ret_results['summary']['kill_count_average'] * 10) / 10,
+            'assist' => round($ret_results['summary']['assist_count_average'] * 10) / 10,
+        ),
+        'sp' => 'https://app.splatoon2.nintendo.net' . $ret_results['results'][0]['player_result']['player']['weapon']['special']['image_a'],
         'life' => array (
-            'win' => $life_win,
-            'lose' => $life_lose
+            'win'  => $ret_records['records']['win_count'],
+            'lose' => $ret_records['records']['lose_count']
         )
     ),
     'league' => array (
-        'team' => $team,
-        'pair' => $pair
+        'team' =>  array (
+            'gold'   => $ret_records['records']['league_stats']['team']['gold_count'],
+            'sliver' => $ret_records['records']['league_stats']['team']['silver_count'],
+            'bronze' => $ret_records['records']['league_stats']['team']['bronze_count'],
+            'high'   => $ret_records['records']['player']['max_league_point_team']
+        ),
+        'pair' =>  array (
+            'gold'   => $ret_records['records']['league_stats']['pair']['gold_count'],
+            'sliver' => $ret_records['records']['league_stats']['pair']['silver_count'],
+            'bronze' => $ret_records['records']['league_stats']['pair']['bronze_count'],
+            'high'   => $ret_records['records']['player']['max_league_point_pair']
+        )
     ),
     'hero' => array (
-        'title' => $hero_title,
-        'percent' => intval($hero_per)
+        'title' =>  $ret_hero['summary']['honor']['name'],
+        'percent' => 1000
     ),
     'user' => array (
-        'ign' => $ign,
-        'ico' => $ico,
-        'dc' => $dc,
+        'ign' => $ret_records['records']['player']['nickname'],
+        'ico' => $ret_nick['nickname_and_icons'][0]['thumbnail_url'],
+        'dc'  => $ret_records['records']['recent_disconnect_count'],
         'level' => array (
-            'num' => $level,
-            'star' => $star
+            'num'  => $ret_records['records']['player']['player_rank'],
+            'star' => $ret_records['records']['player']['star_rank']
         ),
-        'inks' => $total_paint
+        'inks' => $ret_records['challenges']['total_paint_point']
     )
 );
 
 /*********************** output to JSON ***********************/
 
 print_r(json_encode($splatnet, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+write_json($splatnet, '/../splatnet-data.json');
 
-touch('../splatnet-data.json');
-$fp = fopen('../splatnet-data.json', 'w');
-fwrite($fp, json_encode($splatnet, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-fclose($fp);
-
-curl_close($ch);
+function write_json(array $json, string $file_path)
+{
+    $output_file = __DIR__.$file_path;
+    touch($output_file);
+    $fp = fopen($output_file, 'w');
+    fwrite($fp, json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    fclose($fp);
+}

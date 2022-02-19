@@ -43,34 +43,34 @@
                                 <table class="w-100 lh-sm">
                                     <thead>
                                         <tr>
-                                          <th class="fst-normal pb-1">Level</th>
-                                          <th class="fst-normal pb-1">Rank</th>
-                                          <th class="fst-normal ps-3 pb-1">Turf Inked</th>
+                                            <th class="fst-normal pb-1">Level</th>
+                                            <th class="fst-normal pb-1">Rank</th>
+                                            <th class="fst-normal ps-3 pb-1">Turf Inked</th>
                                         </tr>
-                                      </thead>
+                                    </thead>
                                     <tbody>
-                                      <tr v-for="(m, index) in splatnet.rank">
-                                        <td v-if="index == 0" class="splatoon-style-1 fs-5">
-                                            <div style="max-height: 1rem;">
-                                                {{splatnet.user.level.num}}
-                                            </div>
-                                        </td>
-                                        <td v-else-if="index == 1 && star > 0" style="font-size: .6rem; color: #f02d7d;">
-                                            ★{{splatnet.user.level.star}}
-                                        </td>
-                                        <td v-else></td>
-                                        <td :class="index == 3 ? 'pb-2' : ''">
-                                            <span style="font-size: .8rem;">{{m.mode}}</span>
-                                            <span class="splatoon-style-1 ps-1" :style="m.rank == 'X' ? 'color: #f02d7d;' : ''">{{m.rank}}</span>
-                                            <span class="splatoon-style-1" style="color: #f02d7d; font-size: .6rem;">{{m.sp}}</span>
-                                        </td>
-                                        <td v-if="index==0" class="px-3 fs-5">
-                                            <div style="max-height: 1rem;">
-                                                {{splatnet.user.inks}}p
-                                            </div>
-                                        </td>
-                                        <td v-else class="px-3"></td>
-                                      </tr>
+                                        <tr v-for="(m, index) in splatnet.rank">
+                                            <td v-if="index == 0" class="splatoon-style-1 fs-5">
+                                                <div style="max-height: 1rem;">
+                                                    {{splatnet.user.level.num}}
+                                                </div>
+                                            </td>
+                                            <td v-else-if="index == 1 && splatnet.user.level.star > 0" style="font-size: .6rem; color: #f02d7d;">
+                                                ★{{splatnet.user.level.star}}
+                                            </td>
+                                            <td v-else></td>
+                                            <td :class="index == 3 ? 'pb-2' : ''">
+                                                <span style="font-size: .8rem;">{{m.mode}}</span>
+                                                <span class="splatoon-style-1 ps-1" :style="m.rank == 'X' ? 'color: #f02d7d;' : ''">{{m.rank}}</span>
+                                                <span class="splatoon-style-1" style="color: #f02d7d; font-size: .6rem;">{{m.sp}}</span>
+                                            </td>
+                                            <td v-if="index==0" class="px-3 fs-5">
+                                                <div style="max-height: 1rem;">
+                                                    {{splatnet.user.inks}}p
+                                                </div>
+                                            </td>
+                                            <td v-else class="px-3"></td>
+                                        </tr>
                                     </tbody>
                                   </table>
                             </div>
@@ -82,26 +82,26 @@
                             <table class="mx-auto my-2 lh-sm text-center battle-table">
                                 <thead>
                                     <tr>
-                                      <th class="fst-normal px-3 border-end">VICTORY</th>
-                                      <th class="fst-normal px-3">DEFEAT</th>
+                                        <th class="fst-normal px-3 border-end">VICTORY</th>
+                                        <th class="fst-normal px-3">DEFEAT</th>
                                     </tr>
                                   </thead>
                                 <tbody>
-                                  <tr>
-                                    <td class="fs-1 px-3 border-end">{{splatnet.battle.summary.win}}</td>
-                                    <td class="fs-1 px-3">{{splatnet.battle.summary.lose}}</td>
-                                  </tr>
+                                    <tr>
+                                        <td class="fs-1 px-3 border-end">{{splatnet.battle.summary.win}}</td>
+                                        <td class="fs-1 px-3">{{splatnet.battle.summary.lose}}</td>
+                                    </tr>
                                 </tbody>
                             </table>
                             <table class="w-100 lh-sm text-center battle-summary">
                                 <thead>
                                     <tr>
-                                      <th class="fst-normal px-3 text-start" style="color: #DCB0EE;">Average</th>
-                                      <th class="fst-normal px-3"></th>
+                                        <th class="fst-normal px-3 text-start" style="color: #DCB0EE; text-shadow: none;">Average</th>
+                                        <th class="fst-normal px-3"></th>
                                     </tr>
-                                  </thead>
-                                <tbody class="rounded-pill">
-                                  <tr>
+                                </thead>
+                                <tbody>
+                                  <tr style=" text-shadow: none;">
                                     <td class="px-3 py-1">
                                         <div class="summary-icon d-inline-block">
                                             <span class="fa fa-octo splatoon-style-1 fs-3" style="color: #fff; transform: rotate(25deg);"></span>
@@ -197,14 +197,14 @@
                         <div class="card-body">
                             <table class="w-100 lh-sm">
                                 <tbody>
-                                  <tr class="border-bottom" style="border-color: #929191!important">
-                                    <td class="pb-2" style="color: #717070; font-size: .8rem; font-family: 'Roboto', sans-serif; width: 6.25rem;">Title</td>
-                                    <td class="fs-5 pb-2" style="color: #000">{{splatnet.hero.title}}</td>
-                                  </tr>
-                                  <tr>
-                                    <td class="pt-2" style="color: #717070; font-size: .8rem; font-family: 'Roboto', sans-serif; width: 6.25rem;">Stages clear</td>
-                                    <td class="fs-5 pt-2" style="color: #000">{{splatnet.hero.percent}}%</td>
-                                  </tr>
+                                    <tr class="border-bottom" style="border-color: #929191!important">
+                                        <td class="pb-2" style="color: #717070; font-size: .8rem; font-family: 'Roboto', sans-serif; width: 6.25rem;">Title</td>
+                                        <td class="fs-5 pb-2" style="color: #000">{{splatnet.hero.title}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pt-2" style="color: #717070; font-size: .8rem; font-family: 'Roboto', sans-serif; width: 6.25rem;">Stages clear</td>
+                                        <td class="fs-5 pt-2" style="color: #000">{{splatnet.hero.percent}}%</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -214,13 +214,16 @@
                         <div class="card-body">
                             <table class="w-100 lh-sm">
                                 <tbody>
-                                  <tr>
-                                    <td style="color: #717070; font-size: .8rem; font-family: 'Roboto', sans-serif; width: 6.25rem;">Disconnects</td>
-                                    <td class="fs-5" style="color: #000">{{splatnet.user.dc}}</td>
-                                  </tr>
+                                    <tr>
+                                        <td style="color: #717070; font-size: .8rem; font-family: 'Roboto', sans-serif; width: 6.25rem;">Disconnects</td>
+                                        <td class="fs-5" style="color: #000">{{splatnet.user.dc}}</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    <div class="text-end" style="color: #717070; font-size: .8rem; font-family: 'Roboto', sans-serif;">
+                        Last update at {{update}}
                     </div>
                 </div>
             </div>
@@ -241,6 +244,6 @@
             </a>
         </div>
     </footer>
-    <script src="/splatoon/scripts/splatnet.js?v=220218223239"></script>
+    <script src="/splatoon/scripts/splatnet.js?v=220218231918"></script>
 </body>
 </html>
