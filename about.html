@@ -56,7 +56,7 @@
                                                 </div>
                                             </td>
                                             <td v-else-if="index == 1 && splatnet.user.level.star > 0" style="font-size: .6rem; color: #f02d7d;">
-                                                ★{{splatnet.user.level.star}}
+                                                &#9733;{{splatnet.user.level.star}}
                                             </td>
                                             <td v-else></td>
                                             <td :class="index == 3 ? 'pb-2' : ''">
@@ -222,7 +222,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="text-end" style="color: #717070; font-size: .8rem; font-family: 'Roboto', sans-serif;">
+                    <div class="text-end pe-3" style="color: #717070; font-size: .8rem; font-family: 'Roboto', sans-serif;">
                         Last update at {{update}}
                     </div>
                 </div>
