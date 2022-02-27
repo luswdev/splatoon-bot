@@ -38,6 +38,14 @@ footer a:hover {
     border-radius: 12px !important;
 }
 
+.fs-dec-8 {
+    font-size: .8rem;
+}
+
+.w-6-25-rem {
+    width: 6.25rem;
+}
+
 .intro-box {
     margin: 8rem 0;
 }

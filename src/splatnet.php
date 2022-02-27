@@ -65,7 +65,7 @@ curl_close($ch);
 
 $splatnet = array (
     'update' => time(),
-    'rank' =>  array (
+    'rank' => array (
         array (
             'mode' => 'Splat Zones',
             'rank' => $ret_records['records']['player']['udemae_zones']['name'],
@@ -102,13 +102,13 @@ $splatnet = array (
         )
     ),
     'league' => array (
-        'team' =>  array (
+        'team' => array (
             'gold'   => $ret_records['records']['league_stats']['team']['gold_count'],
             'sliver' => $ret_records['records']['league_stats']['team']['silver_count'],
             'bronze' => $ret_records['records']['league_stats']['team']['bronze_count'],
             'high'   => $ret_records['records']['player']['max_league_point_team']
         ),
-        'pair' =>  array (
+        'pair' => array (
             'gold'   => $ret_records['records']['league_stats']['pair']['gold_count'],
             'sliver' => $ret_records['records']['league_stats']['pair']['silver_count'],
             'bronze' => $ret_records['records']['league_stats']['pair']['bronze_count'],
@@ -116,7 +116,7 @@ $splatnet = array (
         )
     ),
     'hero' => array (
-        'title' =>  $ret_hero['summary']['honor']['name'],
+        'title'   => $ret_hero['summary']['honor']['name'],
         'percent' => 1000
     ),
     'user' => array (
@@ -135,6 +135,8 @@ $splatnet = array (
 
 print_r(json_encode($splatnet, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 write_json($splatnet, '/../splatnet-data.json');
+
+/*********************** helper functions ***********************/
 
 function write_json(array $json, string $file_path)
 {
@@ -162,3 +164,5 @@ function get_timezone_offset() : int
     $app_timezone_offset = $time_ofst / 60;
     return $app_timezone_offset;
 }
+
+?>
