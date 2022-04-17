@@ -15,6 +15,7 @@ $app_user_agent      = SPLATNET_CONFIG['app_user_agent'] ?? 'Mozilla/5.0 (Linux;
 $app_timezone_offset = SPLATNET_CONFIG['app_timezone_offset'] ?? get_timezone_offset();
 
 const API_BASE_URL = 'https://app.splatoon2.nintendo.net/api/';
+const API_STAT_INK = 'https://stat.ink/api/v2/user-stats?screen_name=';
 
 $ch = curl_init();
 
@@ -59,6 +60,13 @@ write_json($ret_nick, '/../log/splatnet-nick.json');
 curl_setopt($ch, CURLOPT_URL,  API_BASE_URL . 'records/hero');
 $ret_hero = json_decode(curl_exec($ch), true);
 write_json($ret_hero, '/../log/splatnet-hero.json');
+// curl_close($ch);
+
+/*********************** api: stat.ink ***********************/
+
+curl_setopt($ch, CURLOPT_URL,  API_STAT_INK . SPLATNET_CONFIG['user_name']);
+$ret_stat_ink = json_decode(curl_exec($ch), true);
+write_json($ret_stat_ink, '/../log/stat-ink.json');
 curl_close($ch);
 
 /*********************** build output array ***********************/
@@ -67,24 +75,32 @@ $splatnet = array (
     'update' => time(),
     'rank' => array (
         array (
-            'mode' => 'Splat Zones',
-            'rank' => $ret_records['records']['player']['udemae_zones']['name'],
-            'sp'   => $ret_records['records']['player']['udemae_zones']['s_plus_number']
+            'mode'  => 'Splat Zones',
+            'rank'  => $ret_records['records']['player']['udemae_zones']['name'],
+            'sp'    => $ret_records['records']['player']['udemae_zones']['s_plus_number'],
+            'x_max' => $ret_stat_ink['gachi']['rules']['area']['x_power_peak'] ?? '-',
+            'x_cur' => $ret_stat_ink['gachi']['rules']['area']['x_power_current'] ?? '-'
         ),
         array (
-            'mode' => 'Tower Control',
-            'rank' => $ret_records['records']['player']['udemae_tower']['name'],
-            'sp'   => $ret_records['records']['player']['udemae_tower']['s_plus_number']
+            'mode'  => 'Tower Control',
+            'rank'  => $ret_records['records']['player']['udemae_tower']['name'],
+            'sp'    => $ret_records['records']['player']['udemae_tower']['s_plus_number'],
+            'x_max' => $ret_stat_ink['gachi']['rules']['yagura']['x_power_peak'] ?? '-',
+            'x_cur' => $ret_stat_ink['gachi']['rules']['yagura']['x_power_current'] ?? '-'
         ),
         array (
-            'mode' => 'Rainmaker',
-            'rank' => $ret_records['records']['player']['udemae_rainmaker']['name'],
-            'sp'   => $ret_records['records']['player']['udemae_rainmaker']['s_plus_number']
+            'mode'  => 'Rainmaker',
+            'rank'  => $ret_records['records']['player']['udemae_rainmaker']['name'],
+            'sp'    => $ret_records['records']['player']['udemae_rainmaker']['s_plus_number'],
+            'x_max' => $ret_stat_ink['gachi']['rules']['hoko']['x_power_peak'] ?? '-',
+            'x_cur' => $ret_stat_ink['gachi']['rules']['hoko']['x_power_current'] ?? '-'
         ),
         array (
-            'mode' => 'Clam Blitz',
-            'rank' => $ret_records['records']['player']['udemae_clam']['name'],
-            'sp'   => $ret_records['records']['player']['udemae_clam']['s_plus_number']
+            'mode'  => 'Clam Blitz',
+            'rank'  => $ret_records['records']['player']['udemae_clam']['name'],
+            'sp'    => $ret_records['records']['player']['udemae_clam']['s_plus_number'],
+            'x_max' => $ret_stat_ink['gachi']['rules']['asari']['x_power_peak'] ?? '-',
+            'x_cur' => $ret_stat_ink['gachi']['rules']['asari']['x_power_current'] ?? '-'
         )
     ),
     'battle' => array (

@@ -169,6 +169,19 @@ table thead th {
     transform: rotate(1.4deg);
 }
 
+.top-rank-mask {
+    width: 6.5rem;
+    left: 38%;
+    top: -1.625rem;
+}
+
+.top-rank {
+    font-size: 1.75rem;
+    left: 47.5%;
+    top: 0.425rem;
+    color: #CDF523;
+}
+
 .info-card {
     background-color: #A0A09F;
     color: #474748;
@@ -226,36 +239,74 @@ table thead th {
     border-color: #BC59E9 !important;
 }
 
-.battle-summary tbody {
+.battle-table tbody td {
+    font-size: 2.425rem;
+}
+
+.summary-title {
+    text-shadow: none;
+}
+
+.summary-row  {
     color: #C3BFC5;
     background-color: rgba(0, 0, 0, .6);
+    padding-top: 0.125rem;
+    padding-bottom: 0.125rem;
 }
 
-.battle-summary tbody tr td:first-child {
-    border-radius: 50rem 0 0 50rem !important;
-}
-
-.battle-summary tbody tr td:last-child {
-    border-radius: 0 50rem 50rem 0 !important;
-}
-
-.battle-summary tbody {
-    color: #C3BFC5;
-    background-color: rgba(0, 0, 0, .6);
-}
-
-.battle-summary .summary-icon {
+.summary-row .summary-icon {
     height: 1rem;
     max-height: 1rem;
     overflow: visible;
     vertical-align: top;
 }
 
-.battle-summary .summary-icon img {
+.summary-row .summary-icon {
+    height: 1rem;
+    max-height: 1rem;
+    overflow: visible;
+    vertical-align: top;
+}
+
+.summary-row .summary-icon img {
     height: 2rem;
     margin-top: -.375rem;
 }
 
 .fa-octo:before {
     content: "\e064";
+}
+
+.x-row {
+    background-color: rgba(0, 0, 0, .875);
+    font-size: .8rem;
+}
+
+.x-row .x-mode {
+    width: 25%;
+    white-space: pre-line;
+}
+
+.x-row .x-weapon {
+    width: 3rem;
+}
+
+.x-row .x-weapon img {
+    height: 2rem;
+}
+
+.x-row .x-power {
+    width: calc(75% - 3rem);
+}
+
+.x-row .x-power hr {
+    margin: .3rem 0 .3rem 0;
+    border: 2px dotted #878787;
+    border-style: none none dotted;
+    background-color: unset;
+    opacity: 1;
+}
+
+.x-row .x-power .peak-power {
+    color: #878787;
 }
