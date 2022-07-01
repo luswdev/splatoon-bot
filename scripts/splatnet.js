@@ -5,8 +5,8 @@ axios.get('/splatoon/splatnet-data.json').then( (res) => {
                 'splatnet': res.data,
                 'x_weapon': [
                         'https://app.splatoon2.nintendo.net/images/weapon/fdcd7cbe806eb84df374ea8f7e074ac9637d4762.png',
-                        '',
-                        '',
+                        'https://app.splatoon2.nintendo.net/images/weapon/fdcd7cbe806eb84df374ea8f7e074ac9637d4762.png',
+                        'https://app.splatoon2.nintendo.net/images/weapon/fdcd7cbe806eb84df374ea8f7e074ac9637d4762.png',
                         'https://app.splatoon2.nintendo.net/images/weapon/fdcd7cbe806eb84df374ea8f7e074ac9637d4762.png',
                     ],
                 'update': ''
