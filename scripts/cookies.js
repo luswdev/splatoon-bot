@@ -3,14 +3,11 @@ function set_cookie(cname, cvalue, exdays, cpath) {
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     let expires = "expires="+ d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/" + cpath;
-    console.log(document.cookie)
 }
 
 function get_cookie(cname) {
     let name = cname + "=";
-    console.log(document.cookie)
     let decodedCookie = decodeURIComponent(document.cookie);
-    console.log(decodedCookie)
     let ca = decodedCookie.split(';');
     for(let i = 0; i <ca.length; i++) {
         let c = ca[i];

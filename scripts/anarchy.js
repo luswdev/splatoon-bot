@@ -154,7 +154,6 @@ const app = {
         if (last_rank == '') {
             last_rank = 'C-'
         }
-        console.log(last_rank)
         this.update_ranking(last_rank)
         this.update_pt()
         set_cookie('sp3-rank', this.ranking_str, 365, 'splatoon')
