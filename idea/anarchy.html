@@ -19,7 +19,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4V7RWXWH1"></script>
     <script src="/splatoon/scripts/ga.js?v={BUILD_TIMESTAMP}"></script>
 </head>
-<body class="splatoon3 min-vh-100 d-flex flex-column text-white"></body>
+<body class="splatoon3 min-vh-100 d-flex flex-column text-white">
     <header>
         <nav class="navbar navbar-expand flex-column flex-md-row py-3 justify-content-center">
             <div class="splatoon-style-1 text-center">
@@ -47,7 +47,7 @@
                                 <span :class="res.win ? 'win' : 'lose'" @click="change_state(ridx)">
                                     {{ res.win ? 'WIN' : 'LOSE' }}
                                 </span>
-                                <div class="d-inline-block">
+                                <div class="d-inline-block float-end">
                                     <span v-for="(m, midx) in res.medals" class="medal rounded-circle border d-inline-block ms-1"
                                         :class="m == 1 ? 'gold' : m == 2 ? 'sliver' : ''" @click="change_medal(ridx, midx)">
                                     </span>
@@ -57,7 +57,7 @@
                                 <span>+</span>
                             </div>
                         </div>
-                        <div class="points mt-1">
+                        <div class="points mt-3">
                             <span class="fs-5 total">TOTAL</span><br>
                             <span class="fs-1 pe-1">=</span>
                             <span class="fs-1 total-pt">{{total_pt}}</span>
@@ -68,10 +68,10 @@
             </div>
         </div>
     </main>
-    <footer>
-        <div class="footer-inner container py-3 text-white-50">
+    <footer class="splatoon3">
+        <div class="footer-inner container py-3 text-white-50 text-center">
             This website is not affiliated with Nintendo. All product names, logos, and brands are property of their respective owners.
-            <hr class="m-1">
+            <br class="m-1">
             &copy; 2022 LuSkywalker v0.0.1 |
             <a href="https://github.com/luswdev/SplatoonBot" class="text-decoration-none">
                 <i class="fab fa-github"></i> 

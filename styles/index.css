@@ -31,6 +31,14 @@ footer a:hover {
     color: #f02d7d;
 }
 
+footer.splatoon3 a {
+    color: #DCDCDD;
+}
+
+footer.splatoon3 a:hover {
+    color: #6949ED;
+}
+
 .round-32 {
     border-radius: 32px !important;
 }
