@@ -326,31 +326,35 @@ table thead th {
     color: #878787;
 }
 
+.sp3-icon {
+    font-size: 3rem !important;
+}
+
 .anarchy-card {
     background-color: #0A0A0A;
 }
 
-.anarchy-card .dropdown.rank button {
+.anarchy-card .dropdown-center.rank button {
     background-color: transparent;
     border: none;
     color: #F4FF0A;
     box-shadow: none;
 }
 
-.anarchy-card .dropdown.rank button::after {
+.anarchy-card .dropdown-center.rank button::after {
     color: rgba(150,150,150,.5);
 }
 
-.anarchy-card .dropdown.rank .dropdown-menu {
+.anarchy-card .dropdown-center.rank .dropdown-menu {
     background-color: #212121;
     color: #fff;
 }
 
-.anarchy-card .dropdown.rank .dropdown-menu .dropdown-item {
+.anarchy-card .dropdown-center.rank .dropdown-menu .dropdown-item {
     color: #fff;
 }
 
-.anarchy-card .dropdown.rank .dropdown-menu .dropdown-item:hover {
+.anarchy-card .dropdown-center.rank .dropdown-menu .dropdown-item:hover {
     background-color: #131313;
     color: #fff;
 }

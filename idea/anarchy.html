@@ -24,7 +24,7 @@
 <body class="splatoon3 d-flex flex-column text-white">
     <header>
         <nav class="navbar navbar-expand flex-column flex-md-row py-3 justify-content-center">
-            <div class="splatoon-style-1 text-center">
+            <div class="splatoon-style-1 text-center mt-5">
                 <span class="navbar-brand mb-0 h1 mr-0 mr-md-2 fs-1 splatnet-icon">
                     Splatoon 3
                 </span>
@@ -36,12 +36,12 @@
             <div class="row align-items-center">
                 <div class="col-12 col-sm-10 col-md-8 mx-auto">
                     <div class="card anarchy-card text-center">
-                        <div class="dropdown rank">
+                        <div class="dropdown-center rank">
                             <button class="btn btn-secondary dropdown-toggle fs-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ranking_str}}
                             </button>
                             <ul class="dropdown-menu">
-                                <li v-for="rank in rank_list" class="dropdown-item" @click="update_ranking(rank)">{{rank}}</li>
+                                <li v-for="rank in rank_list" class="dropdown-item splatoon-style-2 text-center" @click="update_ranking(rank)">{{rank}}</li>
                             </ul>
                         </div>
                         <div class="card-dashed mx-4"></div>
@@ -79,9 +79,8 @@
         </div>
     </main>
     <footer class="splatoon3">
-        <div class="footer-inner container py-3 text-white-50 text-start text-md-center">
+        <div class="footer-inner container py-3 text-white-50 text-center">
             &copy; 2022 v0.1.0 LuSkywalker.
-            This website is not affiliated with Nintendo Co., Ltd. All product names, logos, and brands are property of their respective owners.
             <a href="https://github.com/luswdev/SplatoonBot" class="text-decoration-none">
                 <i class="fab fa-github"></i> 
             </a>
