@@ -149,12 +149,21 @@ const app = {
         }
     },
     mounted: function () {
-        this.ranking_str = get_cookie('sp3-rank')
-        if (this.ranking_str == '') {
-            this.ranking_str = 'C-'
+        let last_rank = get_cookie('sp3-rank')
+        if (last_rank == '') {
+            last_rank = 'C-'
         }
-        set_cookie('sp3-rank', this.ranking_str, 365, 'splatoon')
+        this.update_ranking(last_rank)
         this.update_pt()
+        set_cookie('sp3-rank', this.ranking_str, 365, 'splatoon')
+
+        let windowsVH = window.innerHeight / 100;
+        document.querySelector('body').style.setProperty('--vh', windowsVH + 'px')
+
+        window.addEventListener('resize', function() {
+            let windowsVH = window.innerHeight / 100;
+            document.querySelector('body').style.setProperty('--vh', windowsVH + 'px')
+        })
     },
 }
 

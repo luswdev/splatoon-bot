@@ -16,6 +16,8 @@ body {
 body.splatoon3 {
     background-image: unset;
     background-color: #131313;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
 }
 
 footer {
