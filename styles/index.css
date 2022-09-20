@@ -13,6 +13,11 @@ body {
     background-size: 360px 360px;
 }
 
+body.splatoon3 {
+    background-image: unset;
+    background-color: #131313;
+}
+
 footer {
     font-size: .8rem;
     font-family: 'Roboto', sans-serif;
@@ -309,4 +314,74 @@ table thead th {
 
 .x-row .x-power .peak-power {
     color: #878787;
+}
+
+.anarchy-card {
+    background-color: #0A0A0A;
+}
+
+.anarchy-card select {
+    background-color: transparent;
+    border: none;
+    color: #F4FF0A;
+}
+
+.anarchy-card .card-dashed {
+    width: calc( 100% - 1.5rem * 2 );
+    height: 3.5px;
+    background-image: linear-gradient(to right, rgba(150,150,150,.5) 0%, rgba(150,150,150,.5) 50%, transparent 50%);
+    background-size: 20px 3.5px;
+    background-repeat: repeat-x;
+    background-position: bottom;
+}
+
+.anarchy-card .result-tag {
+    background-color: #1B1B1B;
+    border-radius: 2.75px;
+}
+
+.anarchy-card .result-tag .medal {
+    width: 1rem;
+    height: 1rem;
+    border-style: dashed !important;
+}
+
+.anarchy-card .result-tag .medal.gold {
+    width: 1rem;
+    height: 1rem;
+    border-color: #C9B517 !important;
+    border-style: solid !important;
+    background-color: #C9B517;
+
+}
+
+.anarchy-card .result-tag .medal.sliver {
+    width: 1rem;
+    height: 1rem;
+    border-color: #949494 !important;
+    border-style: solid !important;
+    background-color: #949494;
+}
+
+.anarchy-card .add-result {
+    border: 1px dashed rgba(150,150,150,.5) !important;
+    color: rgba(150,150,150,.5);
+    background-color: transparent;
+}
+
+.anarchy-card .win {
+    color: #F6FE54;
+}
+
+.anarchy-card .lose {
+    color: #6949ED;
+}
+
+.anarchy-card span.total {
+    color: #DCDCDD;
+}
+
+.anarchy-card span.total-pt {
+    font-size: 3.75rem !important;
+    letter-spacing: 0.215rem;
 }

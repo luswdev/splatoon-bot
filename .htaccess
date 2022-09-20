@@ -2,3 +2,5 @@ RewriteEngine On
 RewriteBase /splatoon
 RewriteRule ^about$ about.html [NC,L]
 RewriteRule ^about/$ about.html [NC,L]
+RewriteRule ^anarchy$ anarchy.html [NC,L]
+RewriteRule ^anarchy/$ anarchy.html [NC,L]

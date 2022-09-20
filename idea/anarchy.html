@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <title>Splatoon 3 Anarchy Calculator | LuSkywalker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <script src="https://kit.fontawesome.com/7205443a15.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3.2.20/dist/vue.global.prod.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <link rel="icon" href="/splatoon/img/bot-icon.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/splatoon/styles/font.css?v={BUILD_TIMESTAMP}">
+    <link rel="stylesheet" href="/splatoon/styles/img.css?v={BUILD_TIMESTAMP}">
+    <link rel="stylesheet" href="/splatoon/styles/index.css?v={BUILD_TIMESTAMP}">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4V7RWXWH1"></script>
+    <script src="/splatoon/scripts/ga.js?v={BUILD_TIMESTAMP}"></script>
+</head>
+<body class="splatoon3 min-vh-100 d-flex flex-column text-white"></body>
+    <header>
+        <nav class="navbar navbar-expand flex-column flex-md-row py-3 justify-content-center">
+            <div class="splatoon-style-1 text-center">
+                <span class="navbar-brand mb-0 h1 mr-0 mr-md-2 fs-1 splatnet-icon">
+                    Splatoon 3
+                </span>
+            </div>
+        </nav>
+    </header>
+    <main class="flex-grow-1 flex-shrink-0 splatoon-style-1" id="app">
+        <div class="main-inner container my-4">
+            <div class="row align-items-center">
+                <div class="col-12 col-sm-10 col-md-8 mx-auto">
+                    <div class="card anarchy-card text-center">
+                        <select class="form-select splatoon-style-1 fs-1 text-center rank" aria-label="anarchy-rank" v-model="ranking">
+                            <option class="splatoon-style-1 fs-6" value="0">C</option>
+                            <option class="splatoon-style-1 fs-6" value="1">B</option>
+                            <option class="splatoon-style-1 fs-6" value="2">A</option>
+                            <option class="splatoon-style-1 fs-6" value="3">S</option>
+                            <option class="splatoon-style-1 fs-6" value="4">S+</option>
+                        </select>
+                        <div class="card-dashed mx-4"></div>
+                        <div class="row result-boxs mx-5 mt-4 round-18 justify-content-center">
+                            <div v-for="(res, ridx) in results" class="col-10 col-sm-8 col-md-6 col-lg-3 m-1 result-tag text-start px-1">
+                                <span :class="res.win ? 'win' : 'lose'" @click="change_state(ridx)">
+                                    {{ res.win ? 'WIN' : 'LOSE' }}
+                                </span>
+                                <div class="d-inline-block">
+                                    <span v-for="(m, midx) in res.medals" class="medal rounded-circle border d-inline-block ms-1"
+                                        :class="m == 1 ? 'gold' : m == 2 ? 'sliver' : ''" @click="change_medal(ridx, midx)">
+                                    </span>
+                                </div>
+                            </div>
+                            <div v-if="!is_done" class="col-10 col-sm-8 col-md-6 col-lg-3 my-1 result-tag text-center px-1 add-result" @click="add_result_entry">
+                                <span>+</span>
+                            </div>
+                        </div>
+                        <div class="points mt-1">
+                            <span class="fs-5 total">TOTAL</span><br>
+                            <span class="fs-1 pe-1">=</span>
+                            <span class="fs-1 total-pt">{{total_pt}}</span>
+                            <span class="fs-2 ps-1">p</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-inner container py-3 text-white-50">
+            This website is not affiliated with Nintendo. All product names, logos, and brands are property of their respective owners.
+            <hr class="m-1">
+            &copy; 2022 LuSkywalker v0.0.1 |
+            <a href="https://github.com/luswdev/SplatoonBot" class="text-decoration-none">
+                <i class="fab fa-github"></i> 
+                Source code
+            </a> | 
+            <a href="https://twitter.com/luswdev" class="text-decoration-none">
+                <i class="fab fa-twitter"></i>
+                Author
+            </a>
+        </div>
+    </footer>
+    <script src="/splatoon/scripts/anarchy.js?v={BUILD_TIMESTAMP}"></script>
+</body>
+</html>
