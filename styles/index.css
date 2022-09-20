@@ -393,3 +393,25 @@ table thead th {
     font-size: 3.75rem !important;
     letter-spacing: 0.215rem;
 }
+
+.btn-sp3 {
+    background-color: rgba(150,150,150,.2);
+    color: #d4d8d4;
+}
+
+.btn-sp3:hover {
+    background-color: rgba(150,150,150,.3);
+    color: #fff;
+}
+
+.btn-sp3:focus {
+    background-color: #6949ED;
+    color: #fff;
+}
+
+.btn-sp3,
+.btn-sp3:hover,
+.btn-sp3:active,
+.btn-sp3:focus {
+    box-shadow: none;
+}

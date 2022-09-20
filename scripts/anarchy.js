@@ -68,6 +68,12 @@ const app = {
             this.results[_result_idx].medals[_medal_idx]++
             this.results[_result_idx].medals[_medal_idx] %= 3
         },
+        reset_results: function (e) {
+            this.results = []
+            setTimeout( () => {
+                e.target.blur()
+            }, 500)
+        },
         update_ranking: function (_rank) {
             this.ranking_str = _rank
             if (_rank[0] == 'C') {
@@ -137,9 +143,18 @@ const app = {
         ranking: {
             handler: function () {
                 this.update_pt()
+                set_cookie('sp3-rank', this.ranking_str, 365, 'splatoon')
             },
             deep: true
         }
+    },
+    mounted: function () {
+        this.ranking_str = get_cookie('sp3-rank')
+        if (this.ranking_str == '') {
+            this.ranking_str = 'C-'
+        }
+        set_cookie('sp3-rank', this.ranking_str, 365, 'splatoon')
+        this.update_pt()
     },
 }
 
