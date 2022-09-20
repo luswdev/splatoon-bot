@@ -11,28 +11,19 @@ const app = {
         }
     },
     methods: {
-        get_wins_cnt: function () {
-            let wins = 0
+        get_wins_loses_cnt: function (_is_win) {
+            let cnt = 0
             this.results.forEach( (res) => {
-                if (res.win) {
-                    ++wins
+                if (res.win == _is_win) {
+                    ++cnt
                 }
             })
-            return wins
-        },
-        get_loses_cnt: function () {
-            let loses = 0
-            this.results.forEach( (res) => {
-                if (!res.win) {
-                    loses++
-                }
-            })
-            return loses
+            return cnt
         },
         check_done: function () {
-            if (this.get_wins_cnt() >= MAX_WIN) {
+            if (this.get_wins_loses_cnt(true) >= MAX_WIN) {
                 this.is_done = true
-            } else if (this.get_loses_cnt() >= MAX_LOSE) {
+            } else if (this.get_wins_loses_cnt(false) >= MAX_LOSE) {
                 this.is_done = true
             } else if (this.results.length >= MAX_GAME) {
                 this.is_done = true
