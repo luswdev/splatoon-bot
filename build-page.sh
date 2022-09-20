@@ -6,6 +6,7 @@ uglifyjs  ./scripts/ga.js -o ./scripts/ga.min.js
 uglifyjs  ./scripts/commands.js -o ./scripts/commands.min.js
 uglifyjs  ./scripts/splatnet.js -o ./scripts/splatnet.min.js
 uglifyjs  ./scripts/anarchy.js -o ./scripts/anarchy.min.js
+uglifyjs  ./scripts/anarchy-const.js -o ./scripts/anarchy-const.min.js
 uglifyjs  ./scripts/cookies.js -o ./scripts/cookies.min.js
 uglifycss ./styles/font.css > ./styles/font.min.css
 uglifycss ./styles/img.css > ./styles/img.min.css

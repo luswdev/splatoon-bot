@@ -5,9 +5,6 @@ const app = {
             ranking_str: 'C-',
             rank_list: ['C-', 'C', 'C+', 'B-', 'B', 'B+', 'A-', 'A', 'A+', 'S', 'S+'],
             results: [],
-            max_wins: 5,
-            max_loses: 3,
-            max_results: 7,
             total_pt: 0,
             actually_pt: 0,
             is_done: false
@@ -33,11 +30,11 @@ const app = {
             return loses
         },
         check_done: function () {
-            if (this.get_wins_cnt() >= this.max_wins) {
+            if (this.get_wins_cnt() >= MAX_WIN) {
                 this.is_done = true
-            } else if (this.get_loses_cnt() >= this.max_loses) {
+            } else if (this.get_loses_cnt() >= MAX_LOSE) {
                 this.is_done = true
-            } else if (this.results.length >= this.max_results) {
+            } else if (this.results.length >= MAX_GAME) {
                 this.is_done = true
             } else {
                 this.is_done = false
@@ -52,13 +49,8 @@ const app = {
             this.check_done()
         },
         return_medal: function (_medal) {
-            if (_medal == 1) {
-                return 'gold'
-            } else if (_medal == 2) {
-                return 'sliver'
-            } else {
-                return 'none'
-            }
+            return Object.keys(MEDAL_MAP)
+                         .find(key => MEDAL_MAP[key] === _medal)
         },
         change_state: function (_result_idx) {
             this.results[_result_idx].win = !this.results[_result_idx].win
@@ -66,72 +58,54 @@ const app = {
         },
         change_medal: function (_result_idx, _medal_idx) {
             this.results[_result_idx].medals[_medal_idx]++
-            this.results[_result_idx].medals[_medal_idx] %= 3
+            this.results[_result_idx].medals[_medal_idx] %= ENUM_MEDAL_COUNT
         },
         reset_results: function (e) {
             this.results = []
+            this.check_done()
             setTimeout( () => {
                 e.target.blur()
             }, 500)
         },
         update_ranking: function (_rank) {
             this.ranking_str = _rank
-            if (_rank[0] == 'C') {
-                this.ranking = 0
-            } else if (_rank[0] == 'B') {
-                this.ranking = 1
-            } else if (_rank[0] == 'A') {
-                this.ranking = 2
-            } else if (_rank[0] == 'S') {
-                this.ranking = 3
-            }
-            set_cookie('sp3-rank', this.ranking_str, 365, 'splatoon')
+            this.ranking = RANK_MAP[_rank[0]]
+            this.update_actually_pt()
+            set_cookie(RANK_COOKIES_NAME, this.ranking_str, RANK_COOKIES_EXP_TIME, RANK_COOKIES_PATH)
         },
         update_pt: function () {
-            let wins = 0
-            let golds = 0
-            let sliver = 0
-
-            const wins_base_pt = [
-                [0, 20,  45,  75, 110, 150],
-                [0, 30,  65, 105, 150, 200],
-                [0, 40,  85, 135, 190, 250],
-                [0, 50, 105, 165, 230, 300]
-            ]
-            const gold_base = 5
-            const sliver_base = 1
+            let wins    = 0
+            let golds   = 0
+            let slivers = 0
 
             this.results.forEach( (res) => {
                 if (res.win) {
                     ++wins
                 }
                 res.medals.forEach( (med) => {
-                    if (med == 1) {
+                    if (med == MEDAL_MAP['gold']) {
                         ++golds
-                    } else if (med == 2) {
-                        ++sliver
+                    } else if (med == MEDAL_MAP['sliver']) {
+                        ++slivers
                     }
                 })
             })
-            wins = Math.min(wins, this.max_wins)
+            wins = Math.min(wins, MAX_WIN)
 
-            const max_rank = 3
-            let rank_idx = Math.min(this.ranking, max_rank)
+            let rank_idx = this.ranking
             let total_pt = 0
 
-            total_pt += wins_base_pt[rank_idx][wins]
-            total_pt += golds * gold_base
-            total_pt += sliver * sliver_base
+            total_pt += WIN_BASE_PT[rank_idx][wins]
+            total_pt += golds   * GOLD_BASE
+            total_pt += slivers * SLIVER_BASE
 
             this.total_pt = total_pt
             this.update_actually_pt()
         },
         update_actually_pt: function () {
-            const challenge_cost = [0, 20, 40, 55, 70, 85, 100, 110, 120, 150, 160]
             let rank_idx = this.rank_list.indexOf(this.ranking_str)
-
-            this.actually_pt = this.total_pt
-            this.actually_pt -= challenge_cost[rank_idx]
+            this.actually_pt  = this.total_pt
+            this.actually_pt -= CHALLENGE_COST[rank_idx]
         }
     },
     watch: {
@@ -144,19 +118,17 @@ const app = {
         ranking: {
             handler: function () {
                 this.update_pt()
-                set_cookie('sp3-rank', this.ranking_str, 365, 'splatoon')
             },
             deep: true
         }
     },
     mounted: function () {
-        let last_rank = get_cookie('sp3-rank')
+        let last_rank = get_cookie(RANK_COOKIES_NAME)
         if (last_rank == '') {
-            last_rank = 'C-'
+            last_rank = this.rank_list[0]
         }
         this.update_ranking(last_rank)
         this.update_pt()
-        set_cookie('sp3-rank', this.ranking_str, 365, 'splatoon')
 
         let windowsVH = window.innerHeight / 100;
         document.querySelector('body').style.setProperty('--vh', windowsVH + 'px')
