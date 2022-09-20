@@ -82,6 +82,7 @@ const app = {
                     }
                 })
             })
+            wins = Math.min(wins, this.max_wins)
 
             const max_rank = 3
             let rank_idx = Math.min(this.ranking, max_rank)
