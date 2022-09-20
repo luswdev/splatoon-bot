@@ -328,10 +328,29 @@ table thead th {
     background-color: #0A0A0A;
 }
 
-.anarchy-card select {
+.anarchy-card .dropdown.rank button {
     background-color: transparent;
     border: none;
     color: #F4FF0A;
+    box-shadow: none;
+}
+
+.anarchy-card .dropdown.rank button::after {
+    color: rgba(150,150,150,.5);
+}
+
+.anarchy-card .dropdown.rank .dropdown-menu {
+    background-color: #212121;
+    color: #fff;
+}
+
+.anarchy-card .dropdown.rank .dropdown-menu .dropdown-item {
+    color: #fff;
+}
+
+.anarchy-card .dropdown.rank .dropdown-menu .dropdown-item:hover {
+    background-color: #131313;
+    color: #fff;
 }
 
 .anarchy-card .card-dashed {

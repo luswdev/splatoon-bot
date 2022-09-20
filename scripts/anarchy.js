@@ -2,11 +2,14 @@ const app = {
     data() {
         return {
             ranking: 0,
+            ranking_str: 'C-',
+            rank_list: ['C-', 'C', 'C+', 'B-', 'B', 'B+', 'A-', 'A', 'A+', 'S', 'S+'],
             results: [],
             max_wins: 5,
             max_loses: 3,
             max_results: 7,
             total_pt: 0,
+            actually_pt: 0,
             is_done: false
         }
     },
@@ -65,6 +68,18 @@ const app = {
             this.results[_result_idx].medals[_medal_idx]++
             this.results[_result_idx].medals[_medal_idx] %= 3
         },
+        update_ranking: function (_rank) {
+            this.ranking_str = _rank
+            if (_rank[0] == 'C') {
+                this.ranking = 0
+            } else if (_rank[0] == 'B') {
+                this.ranking = 1
+            } else if (_rank[0] == 'A') {
+                this.ranking = 2
+            } else if (_rank[0] == 'S') {
+                this.ranking = 3
+            } 
+        },
         update_pt: function () {
             let wins = 0
             let golds = 0
@@ -102,6 +117,14 @@ const app = {
             total_pt += sliver * sliver_base
 
             this.total_pt = total_pt
+            this.update_actually_pt()
+        },
+        update_actually_pt: function () {
+            const challenge_cost = [0, 20, 40, 55, 70, 85, 100, 110, 120, 150, 160]
+            let rank_idx = this.rank_list.indexOf(this.ranking_str)
+
+            this.actually_pt = this.total_pt
+            this.actually_pt -= challenge_cost[rank_idx]
         }
     },
     watch: {
