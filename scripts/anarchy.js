@@ -18,7 +18,7 @@ const app = {
             let wins = 0
             this.results.forEach( (res) => {
                 if (res.win) {
-                    wins++
+                    ++wins
                 }
             })
             return wins
@@ -103,13 +103,13 @@ const app = {
 
             this.results.forEach( (res) => {
                 if (res.win) {
-                    wins++
+                    ++wins
                 }
                 res.medals.forEach( (med) => {
                     if (med == 1) {
-                        golds++
+                        ++golds
                     } else if (med == 2) {
-                        sliver++
+                        ++sliver
                     }
                 })
             })
