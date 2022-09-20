@@ -48,9 +48,10 @@
                                     {{ res.win ? 'WIN' : 'LOSE' }}
                                 </span>
                                 <div class="d-inline-block float-end">
-                                    <span v-for="(m, midx) in res.medals" class="medal rounded-circle border d-inline-block ms-1"
-                                        :class="m == 1 ? 'gold' : m == 2 ? 'sliver' : ''" @click="change_medal(ridx, midx)">
-                                    </span>
+                                    <img v-for="(m, midx) in res.medals" class="medal"
+                                        :src="'/splatoon/img/anarchy-' + return_medal(m) + '.png'"
+                                        :alt="return_medal(m)" :class="return_medal(m)"
+                                        @click="change_medal(ridx, midx)">
                                 </div>
                             </div>
                             <div v-if="!is_done" class="col-10 col-sm-8 col-md-6 col-lg-3 my-1 result-tag text-center px-1 add-result" @click="add_result_entry">

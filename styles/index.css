@@ -348,27 +348,8 @@ table thead th {
     border-radius: 2.75px;
 }
 
-.anarchy-card .result-tag .medal {
-    width: 1rem;
-    height: 1rem;
-    border-style: dashed !important;
-}
-
-.anarchy-card .result-tag .medal.gold {
-    width: 1rem;
-    height: 1rem;
-    border-color: #C9B517 !important;
-    border-style: solid !important;
-    background-color: #C9B517;
-
-}
-
-.anarchy-card .result-tag .medal.sliver {
-    width: 1rem;
-    height: 1rem;
-    border-color: #949494 !important;
-    border-style: solid !important;
-    background-color: #949494;
+.anarchy-card img.medal {
+    height: 1.5rem;
 }
 
 .anarchy-card .add-result {

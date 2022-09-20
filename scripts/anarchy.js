@@ -48,6 +48,15 @@ const app = {
             this.results.push(result_row)
             this.check_done()
         },
+        return_medal: function (_medal) {
+            if (_medal == 1) {
+                return 'gold'
+            } else if (_medal == 2) {
+                return 'sliver'
+            } else {
+                return 'none'
+            }
+        },
         change_state: function (_result_idx) {
             this.results[_result_idx].win = !this.results[_result_idx].win
             this.check_done()
