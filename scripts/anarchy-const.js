@@ -20,13 +20,14 @@ const C_CHALLENGE_COST = [  0,  20, 40]
 const B_CHALLENGE_COST = [ 55,  70, 85]
 const A_CHALLENGE_COST = [100, 110, 120]
 const S_CHALLENGE_COST = [150, 160]
-const CHALLENGE_COST   = C_CHALLENGE_COST.concat(B_CHALLENGE_COST)
-                                         .concat(A_CHALLENGE_COST)
-                                         .concat(S_CHALLENGE_COST)
+const CHALLENGE_COST   = [ ].concat(C_CHALLENGE_COST)
+                            .concat(B_CHALLENGE_COST)
+                            .concat(A_CHALLENGE_COST)
+                            .concat(S_CHALLENGE_COST)
 
 const MEDAL_MAP = {
-    'none': 0,
-    'gold': 1,
+    'none':   0,
+    'gold':   1,
     'sliver': 2,
 }
 
