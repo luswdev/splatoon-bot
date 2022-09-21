@@ -47,17 +47,17 @@
                         <div class="card-dashed mx-4"></div>
                         <div class="row result-boxs mx-5 mt-4 round-18 justify-content-center">
                             <div v-for="(res, ridx) in results" class="col-10 col-sm-8 col-md-6 col-lg-3 m-1 result-tag text-start px-1">
-                                <span :class="res.win ? 'win' : 'lose'" @click="next_state(ridx)">
+                                <span class="clickable" :class="res.win ? 'win' : 'lose'" @click="next_state(ridx)">
                                     {{ res.win ? 'WIN' : 'LOSE' }}
                                 </span>
                                 <div class="d-inline-block float-end">
-                                    <img v-for="(m, midx) in res.medals" class="medal"
+                                    <img v-for="(m, midx) in res.medals" class="medal clickable"
                                         :src="'/splatoon/img/anarchy-' + get_medal_str(m) + '.png'"
                                         :alt="get_medal_str(m)" :class="get_medal_str(m)"
                                         @click="next_medal(ridx, midx)">
                                 </div>
                             </div>
-                            <div v-if="!is_done" class="col-10 col-sm-8 col-md-6 col-lg-3 my-1 result-tag text-center px-1 add-result" @click="add_result_entry">
+                            <div v-if="!is_done" class="col-10 col-sm-8 col-md-6 col-lg-3 my-1 result-tag text-center px-1 add-result clickable" @click="add_result_entry">
                                 <span>+</span>
                             </div>
                         </div>
