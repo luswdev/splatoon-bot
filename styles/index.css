@@ -38,7 +38,7 @@ footer.splatoon3 a {
 }
 
 footer.splatoon3 a:hover {
-    color: #6949ED;
+    color: var(--sp3-primary-1);
 }
 
 .clickable {
@@ -141,7 +141,7 @@ footer.splatoon3 a:hover {
     height: 29px;
     top: -28px;
     left: 0;
-    background-color: #f02d7d;
+    background-color: var(--league);
     padding-left: 0;
     padding-right: 0;
     padding-bottom: 0;
@@ -198,7 +198,7 @@ table thead th {
     font-size: 1.75rem;
     left: 47.5%;
     top: 0.425rem;
-    color: #CDF523;
+    color: var(--sp2-primary);
 }
 
 .info-card {
@@ -255,7 +255,7 @@ table thead th {
 
 .battle-table th,
 .battle-table td {
-    border-color: #BC59E9 !important;
+    border-color: var(--private) !important;
 }
 
 .battle-table tbody td {
@@ -341,7 +341,7 @@ table thead th {
 .anarchy-card .dropdown-center.rank button {
     background-color: transparent;
     border: none;
-    color: #F4FF0A;
+    color: var(--sp3-primary-2);
     box-shadow: none;
 }
 
@@ -359,13 +359,13 @@ table thead th {
 }
 
 .anarchy-card .dropdown-center.rank .dropdown-menu .dropdown-item:hover {
-    background-color: #6949ED;
+    background-color: var(--sp3-primary-1);
     color: #fff;
 }
 
 .anarchy-card .dropdown-center.rank .dropdown-menu .dropdown-item.selecting-rank {
     background-color: #131313;
-    color: #F4FF0A;
+    color: var(--sp3-primary-2);
 }
 
 .anarchy-card .card-dashed {
@@ -392,12 +392,18 @@ table thead th {
     background-color: transparent;
 }
 
+.anarchy-card .add-result:hover {
+    border-color: var(--sp3-primary-1) !important;
+    color: var(--sp3-primary-1);
+    background-color: transparent;
+}
+
 .anarchy-card .win {
-    color: #F6FE54;
+    color: var(--sp3-primary-2);
 }
 
 .anarchy-card .lose {
-    color: #6949ED;
+    color: var(--sp3-primary-1);
 }
 
 .anarchy-card span.total {
@@ -420,7 +426,7 @@ table thead th {
 }
 
 .btn-sp3:focus {
-    background-color: #6949ED;
+    background-color: var(--sp3-primary-1);
     color: #fff;
 }
 

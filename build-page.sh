@@ -10,6 +10,7 @@ uglifyjs  ./scripts/anarchy-const.js -o ./scripts/anarchy-const.min.js
 uglifyjs  ./scripts/cookies.js -o ./scripts/cookies.min.js
 uglifycss ./styles/font.css > ./styles/font.min.css
 uglifycss ./styles/img.css > ./styles/img.min.css
+uglifycss ./styles/color.css > ./styles/color.min.css
 uglifycss ./styles/index.css > ./styles/index.min.css
 
 cur=$(date +%s)

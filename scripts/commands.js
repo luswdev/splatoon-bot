@@ -2,7 +2,7 @@ const commands = [
     {
         title: 'Random Weapon',
         icon: 'fa-bomb',
-        color: '#19d719',
+        color: 'var(--regular)',
         usage: '?rw',
         features: [
             'Random choose map from 139 different weapons.',
@@ -13,7 +13,7 @@ const commands = [
     {
         title: 'Random Maps',
         icon: 'fa-map',
-        color: '#f54910',
+        color: 'var(--ranked)',
         usage: '?rm',
         features: [
             'Random choose map from 23 different maps.',
@@ -24,7 +24,7 @@ const commands = [
     {
         title: 'Help Manual',
         icon: 'fa-book',
-        color: '#f02d7d',
+        color: 'var(--league)',
         usage: '?help',
         features: [
             'Show manual in Discord.'
