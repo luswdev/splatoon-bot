@@ -19,3 +19,7 @@
 .font-reset {
     font-family: 'Roboto', sans-serif;
 }
+
+.fa-reset::before {
+    content: "\e066";
+}

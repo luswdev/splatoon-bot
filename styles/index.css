@@ -359,8 +359,13 @@ table thead th {
 }
 
 .anarchy-card .dropdown-center.rank .dropdown-menu .dropdown-item:hover {
-    background-color: #131313;
+    background-color: #6949ED;
     color: #fff;
+}
+
+.anarchy-card .dropdown-center.rank .dropdown-menu .dropdown-item.selecting-rank {
+    background-color: #131313;
+    color: #F4FF0A;
 }
 
 .anarchy-card .card-dashed {

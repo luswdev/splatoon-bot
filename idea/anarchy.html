@@ -41,7 +41,9 @@
                                 {{ranking_str}}
                             </button>
                             <ul class="dropdown-menu">
-                                <li v-for="rank in rank_list" class="dropdown-item splatoon-style-2 text-center" @click="update_ranking(rank)">{{rank}}</li>
+                                <li v-for="rank in rank_list" class="dropdown-item splatoon-style-2 text-center"
+                                    :class="ranking_str == rank ? 'selecting-rank' : 'clickable'"
+                                    @click="update_ranking(rank)">{{rank}}</li>
                             </ul>
                         </div>
                         <div class="card-dashed mx-4"></div>
@@ -71,6 +73,7 @@
                     </div>
                     <div class="text-center mt-3">
                         <button type="button" class="btn btn-sp3 px-4 splatoon-style-2 round-18" @click="reset_results($event)">
+                            <i class="splatoon-style-1 fas fa-reset pe-1"></i>
                             Reset
                         </button>
                     </div>
@@ -80,7 +83,7 @@
     </main>
     <footer class="splatoon3">
         <div class="footer-inner container py-3 text-white-50 text-center">
-            &copy; 2022 v0.1.1 LuSkywalker.
+            &copy; 2022 v0.1.2 LuSkywalker.
             <a href="https://github.com/luswdev/SplatoonBot" class="text-decoration-none">
                 <i class="fab fa-github"></i> 
             </a>
