@@ -1,0 +1,28 @@
+{
+  "name": "spl3",
+  "version": "2.0.0",
+  "description": "Splatoon 3 Discord Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luswdev/splatoon-bot.git"
+  },
+  "keywords": [
+    "Splatoon"
+  ],
+  "author": "LuSkywalker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luswdev/splatoon-bot/issues"
+  },
+  "homepage": "https://github.com/luswdev/splatoon-bot#readme",
+  "dependencies": {
+    "discord.js": "^14.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.25.0"
+  }
+}
