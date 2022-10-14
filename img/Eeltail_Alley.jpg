@@ -1,1 +1,6 @@
-error code: 1005
+--2022-10-15 04:51:45--  https://cdn.wikimg.net/en/splatoonwiki/images/thumb/8/84/S3_promo_screenshot_Eeltail_Alley_00.jpg/800px-S3_promo_screenshot_Eeltail_Alley_00.jpg
+Resolving cdn.wikimg.net (cdn.wikimg.net)... 2606:4700:3033::6815:2869, 2606:4700:3034::ac43:b986, 172.67.185.134, ...
+Connecting to cdn.wikimg.net (cdn.wikimg.net)|2606:4700:3033::6815:2869|:443... connected.
+HTTP request sent, awaiting response... 403 Forbidden
+2022-10-15 04:51:45 ERROR 403: Forbidden.
+
