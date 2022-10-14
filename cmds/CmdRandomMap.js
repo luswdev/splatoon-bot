@@ -18,8 +18,8 @@ class CmdRandomMap extends CmdBase {
             .setDescription(`${Object.values(mapList.zh)[1]}\n` +
                             `${Object.values(mapList.en)[1]}\n` +
                             `${Object.values(mapList.jp)[1]}\n`)
+            .setImage(`${this.imgUrlBase}${Object.values(mapList.img)[1]}`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
-            .setThumbnail(`${this.imgUrlBase}${Object.values(mapList.img)[1]}`)
             .setTimestamp()
 
         _interaction.reply({ embeds: [mapEmbed] })
