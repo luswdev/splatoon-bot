@@ -26,7 +26,7 @@ class CmdList {
     parseCmd (_cmdName, _interaction) {
         this.cmds.forEach( (cmd) => {
             if (_cmdName == cmd.cmdKey) {
-                console.log(`[${__filename}] inner: ${cmd.cmdKey}`)
+                console.log(`[${__filename}] inner command: ${cmd.cmdKey}`)
                 return cmd.doCmd(_interaction)
             }
         })
