@@ -1,9 +1,2 @@
-vendor/
-log/
-src/bot.php
-src/splatnet-config.php
-*.json
-*.html
-*/*.min.*
-!idea/*
-!composer.json
+bot.php
+splatnet-config.php
