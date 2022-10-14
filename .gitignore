@@ -1,7 +1,6 @@
 vendor/
 log/
-src/bot.php
-src/splatnet-config.php
+src/
 *.json
 *.html
 */*.min.*
