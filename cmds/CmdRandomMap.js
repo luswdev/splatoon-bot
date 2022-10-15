@@ -2,23 +2,28 @@
 
 const { EmbedBuilder } = require('discord.js');
 const CmdBase = require('./CmdBase.js')
-const mapList = require('../data/map.js')
+const { randomMap, randomColor } = require('../data/database.js')
 
 class CmdRandomMap extends CmdBase {
 
     constructor () {
         super('rm', 'Random pick a map')
+
+        this.randomMap = randomMap
+        this.randomColor = randomColor
+
+        this.imgUrlBase = 'https://raw.githubusercontent.com/luswdev/splatoon-bot/bot-v2/img/map/'
     }
 
     doCmd (_interaction) {
-        console.log(`${this.imgUrlBase}${Object.values(mapList.img)[1]}`)
+        const map = this.randomMap()
         const mapEmbed = new EmbedBuilder()
-            .setColor(0x0099FF)
+            .setColor(this.randomColor())
             .setTitle('Random Map!!')
-            .setDescription(`${Object.values(mapList.zh)[1]}\n` +
-                            `${Object.values(mapList.en)[1]}\n` +
-                            `${Object.values(mapList.jp)[1]}\n`)
-            .setImage(`${this.imgUrlBase}${Object.values(mapList.img)[1]}`)
+            .setDescription(`${map.zh}\n` +
+                            `${map.en}\n` +
+                            `${map.jp}\n`)
+            .setImage(`${this.imgUrlBase}${map.img}`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()
 
