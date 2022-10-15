@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "cmd": "node deployCmds.js"
+    "cmd": "node deployCmds.js",
+    "release": "pkg index.js -o release/spl3",
+    "install": "sudo cp release/spl3 /usr/bin/",
+    "clean": "rm release/*"
   },
   "repository": {
     "type": "git",
