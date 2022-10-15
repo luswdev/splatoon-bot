@@ -1,3 +1,4 @@
+'use strict'
 
 const weaponListEn = [
     'Sploosh-o-matic',

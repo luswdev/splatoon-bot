@@ -11,9 +11,9 @@ SplatoonBot is a simple bot for Splatoon 2.
 ?rw
 ```
 
-- Random choose map from 139 different weapons.
-- Include all hero weapons and Octo Expansion weapon.
-- Support English, Japanese, and Traditional Chinese (unofficial).
+- Random choose map from 55 different weapons.
+- Include hero weapons.
+- Support English, Japanese, and Traditional Chinese.
 
 ### Random Maps
 
@@ -23,9 +23,9 @@ SplatoonBot is a simple bot for Splatoon 2.
 ?rm
 ```
 
-- Random choose map from 23 different maps.
+- Random choose map from 12 different maps.
 - **Not** include splatfest maps.
-- Support English, Japanese, and Traditional Chinese (unofficial).
+- Support English, Japanese, and Traditional Chinese.
 
 ### Help Manual
 
@@ -37,8 +37,11 @@ SplatoonBot is a simple bot for Splatoon 2.
 
 - Show manual in Discord.
 
-
 ## Version Log
+
+### 2021/10/21 v2.0.1
+- Change PHP to Node.js
+- Update Splatoon 3
 
 ### 2021/10/21 v1.0.0
 - First release
