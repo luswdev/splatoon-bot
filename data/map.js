@@ -60,12 +60,28 @@ const mapListImg = [
     'Wahoo_World.jpg',
 ]
 
+const mapListColor = [
+    0xd99a8f,
+    0x5165ea,
+    0xabcece,
+    0x8e7f64,
+    0x4e4635,
+    0x879097,
+    0x8129c9,
+    0x7a98c0,
+    0xc44f42,
+    0x596486,
+    0xe5a488,
+    0xb7cfde,
+]
+
 const mapList = {
     en: mapListEn,
     jp: mapListJp,
     zh: mapListZh,
     img: mapListImg,
-    cnt: mapListEn.length
+    color: mapListColor,
+    cnt: mapListEn.length,
 }
 
 module.exports = mapList

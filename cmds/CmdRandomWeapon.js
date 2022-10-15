@@ -3,7 +3,7 @@
 const { EmbedBuilder } = require('discord.js');
 
 const CmdBase = require('./CmdBase.js')
-const { randomWeapon, randomColor } = require('../data/database.js')
+const { randomWeapon } = require('../data/database.js')
 
 class CmdRandomWeapon extends CmdBase {
 
@@ -11,15 +11,13 @@ class CmdRandomWeapon extends CmdBase {
         super('rw', 'Random pick a weapon')
 
         this.randomWeapon = randomWeapon
-        this.randomColor = randomColor
-
         this.imgUrlBase = 'https://leanny.github.io/splat3/images/weapon_flat/'
     }
 
     doCmd (_interaction) {
         const weapon = this.randomWeapon()
         const weaponEmbed = new EmbedBuilder()
-            .setColor(this.randomColor())
+            .setColor(weapon.color)
             .setTitle('Random weapon!!')
             .setDescription(`${weapon.zh}\n` +
                             `${weapon.en}\n` +

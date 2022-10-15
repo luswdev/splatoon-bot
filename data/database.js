@@ -36,6 +36,7 @@ class Database {
             jp:  _list.jp[listIdx],
             zh:  _list.zh[listIdx],
             img: _list.img[listIdx],
+            color: _list.color[listIdx],
         }
         return listRes
     }
@@ -51,12 +52,4 @@ module.exports.randomMap = () => {
 module.exports.randomWeapon = () => {
     const ret = database.randomList(database.weaponList)
     return ret
-}
-
-module.exports.randomColor = () => {
-    const r = database.random(0xFF)
-    const g = database.random(0xFF)
-    const b = database.random(0xFF)
-
-    return ((r << 16) | (g << 8) | b)
 }

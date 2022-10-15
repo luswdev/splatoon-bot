@@ -2,7 +2,7 @@
 
 const { EmbedBuilder } = require('discord.js');
 const CmdBase = require('./CmdBase.js')
-const { randomMap, randomColor } = require('../data/database.js')
+const { randomMap } = require('../data/database.js')
 
 class CmdRandomMap extends CmdBase {
 
@@ -10,15 +10,13 @@ class CmdRandomMap extends CmdBase {
         super('rm', 'Random pick a map')
 
         this.randomMap = randomMap
-        this.randomColor = randomColor
-
         this.imgUrlBase = 'https://raw.githubusercontent.com/luswdev/splatoon-bot/bot-v2/img/map/'
     }
 
     doCmd (_interaction) {
         const map = this.randomMap()
         const mapEmbed = new EmbedBuilder()
-            .setColor(this.randomColor())
+            .setColor(map.color)
             .setTitle('Random Map!!')
             .setDescription(`${map.zh}\n` +
                             `${map.en}\n` +

@@ -11,10 +11,14 @@ class CmdBotInfo extends CmdBase {
 
     doCmd (_interaction) {
         const infoEmbed = new EmbedBuilder()
-            .setColor(0x0099FF)
+            .setColor(0xCAF023)
             .setTitle('Help Manual')
             .setDescription(`A sample bot for Splatoon 3\n` +
                             `Visit website: https://lusw.dev/splatoon`)
+            .addFields(
+                { name: '/rw', value: 'Random Weapon', inline: true },
+                { name: '/rm', value: 'Random Map', inline: true },
+            )
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL() })
             .setTimestamp()
 
