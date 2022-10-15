@@ -1,6 +1,8 @@
 'use strict'
 
 const { EmbedBuilder } = require('discord.js');
+const { version } = require('../package.json');
+
 const CmdBase = require('./CmdBase.js')
 
 class CmdBotInfo extends CmdBase {
@@ -18,6 +20,7 @@ class CmdBotInfo extends CmdBase {
             .addFields(
                 { name: '/rw', value: 'Random Weapon', inline: true },
                 { name: '/rm', value: 'Random Map', inline: true },
+                { name: 'version', value: version },
             )
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL() })
             .setTimestamp()
