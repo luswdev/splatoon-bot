@@ -3,29 +3,28 @@ const commands = [
         title: 'Random Weapon',
         icon: 'fa-bomb',
         color: 'var(--regular)',
-        usage: '?rw',
+        usage: '/rw',
         features: [
-            'Random choose map from 139 different weapons.',
-            'Include all hero weapons and Octo Expansion weapon.',
-            'Support English, Japanese, and Traditional Chinese (unofficial).'
+            'Random choose map from 55 different weapons.',
+            'Include hero weapon.',
+            'Support English, Japanese, and Traditional Chinese.'
         ]
     },
     {
         title: 'Random Maps',
         icon: 'fa-map',
         color: 'var(--ranked)',
-        usage: '?rm',
+        usage: '/rm',
         features: [
-            'Random choose map from 23 different maps.',
-            'Not include splatfest maps.',
-            'Support English, Japanese, and Traditional Chinese (unofficial).'
+            'Random choose map from 12 different maps.',
+            'Support English, Japanese, and Traditional Chinese.'
         ]
     },
     {
         title: 'Help Manual',
         icon: 'fa-book',
         color: 'var(--league)',
-        usage: '?help',
+        usage: '/help',
         features: [
             'Show manual in Discord.'
         ]
