@@ -4,7 +4,8 @@
   "description": "Splatoon 3 Discord Bot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "cmd": "node deployCmds.js"
   },
   "repository": {
     "type": "git",
