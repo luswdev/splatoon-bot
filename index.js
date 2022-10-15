@@ -9,6 +9,8 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 
 client.once('ready', () => {
     console.log(`[${__filename}] bot ready`)
+    module.exports.clientName = client.user.username
+    module.exports.clientIcon = client.user.displayAvatarURL()
 })
 
 client.on('interactionCreate', async interaction => {

@@ -12,7 +12,7 @@ SplatoonBot is a simple bot for Splatoon 3.
 ```
 
 - Random choose map from 55 different weapons.
-- Include hero weapons.
+- Include hero weapon.
 - Support English, Japanese, and Traditional Chinese.
 
 ### Random Maps
@@ -24,7 +24,6 @@ SplatoonBot is a simple bot for Splatoon 3.
 ```
 
 - Random choose map from 12 different maps.
-- **Not** include splatfest maps.
 - Support English, Japanese, and Traditional Chinese.
 
 ### Help Manual
