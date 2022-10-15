@@ -18,11 +18,11 @@ class CmdRandomWeapon extends CmdBase {
         const weapon = this.randomWeapon()
         const weaponEmbed = new EmbedBuilder()
             .setColor(weapon.color)
-            .setTitle('Random weapon!!')
+            .setTitle(':crossed_swords: Random weapon!!')
             .setDescription(`${weapon.zh}\n` +
                             `${weapon.en}\n` +
                             `${weapon.jp}\n`)
-            .setImage(`${this.imgUrlBase}${weapon.img}`)
+            .setThumbnail(`${this.imgUrlBase}${weapon.img}`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()
 
