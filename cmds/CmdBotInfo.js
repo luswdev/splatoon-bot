@@ -28,7 +28,6 @@ class CmdBotInfo extends CmdBase {
                 { name: 'Version', value: version },
             )
             .setFooter({ text: `${client.clientName} | A sample bot for Splatoon 3`, iconURL: client.clientIcon })
-            .setTimestamp()
 
         _interaction.reply({ embeds: [infoEmbed] })
     }

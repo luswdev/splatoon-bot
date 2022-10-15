@@ -1,6 +1,6 @@
 'use strict'
 
-const { Client, GatewayIntentBits } = require('discord.js')
+const { Client, GatewayIntentBits, ActivityType } = require('discord.js')
 const { token } = require('./config.json')
 
 const { parseCmd } = require('./cmds/CmdList.js')
@@ -11,6 +11,8 @@ client.once('ready', () => {
     console.log(`[${__filename}] bot ready`)
     module.exports.clientName = client.user.username
     module.exports.clientIcon = client.user.displayAvatarURL()
+
+    client.user.setActivity('Splatoon 3', { type: ActivityType.Playing });
 })
 
 client.on('interactionCreate', async interaction => {
