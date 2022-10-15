@@ -1,5 +1,5 @@
 # SplatoonBot
-SplatoonBot is a simple bot for Splatoon 2.
+SplatoonBot is a simple bot for Splatoon 3.
 
 ## Manual
 
