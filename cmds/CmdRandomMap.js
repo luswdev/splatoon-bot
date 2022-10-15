@@ -17,10 +17,13 @@ class CmdRandomMap extends CmdBase {
         const map = this.randomMap()
         const mapEmbed = new EmbedBuilder()
             .setColor(map.color)
-            .setTitle(':map: Random Map!!')
-            .setDescription(`${map.zh}\n` +
-                            `${map.en}\n` +
-                            `${map.jp}\n`)
+            .setTitle(':map: Your random map')
+            .setURL(this.infoUrl(map.en))
+            .addFields(
+                { name: '場地', value: map.zh},
+                { name: 'Stage', value: map.en},
+                { name: 'ステージ', value: map.jp},
+            )
             .setThumbnail(`${this.imgUrlBase}${map.img}`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()

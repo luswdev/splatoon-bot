@@ -18,10 +18,13 @@ class CmdRandomWeapon extends CmdBase {
         const weapon = this.randomWeapon()
         const weaponEmbed = new EmbedBuilder()
             .setColor(weapon.color)
-            .setTitle(':crossed_swords: Random weapon!!')
-            .setDescription(`${weapon.zh}\n` +
-                            `${weapon.en}\n` +
-                            `${weapon.jp}\n`)
+            .setTitle(':crossed_swords: Your random weapon')
+            .setURL(this.infoUrl(weapon.en))
+            .addFields(
+                { name: '武器', value: weapon.zh},
+                { name: 'Weapon', value: weapon.en},
+                { name: 'ブキ', value: weapon.jp},
+            )
             .setThumbnail(`${this.imgUrlBase}${weapon.img}`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()
