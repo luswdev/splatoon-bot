@@ -34,7 +34,7 @@
         <div class="main-inner container my-4">
             <div class="row row-cols-1 g-4 d-flex justify-content-center">
                 <div class="col">
-                    <div class="card my-3 border-0 round-32 squid-card squid-card-hook squid-card-hook-mask" style="background-color: #f02d7d;">
+                    <div class="card my-3 border-0 round-32 squid-card squid-card-hook squid-card-hook-mask" style="background-color: var(--league);">
                         <div class="card-body">
                             <img src="/splatoon/img/top-rank-bg.png" alt="mask" class="top-rank-mask position-absolute">
                             <h1 class="splatoon-style-1 card-title mb-3 text-center position-absolute top-rank">
@@ -60,14 +60,14 @@
                                                     {{splatnet.user.level.num}}
                                                 </div>
                                             </td>
-                                            <td v-else-if="index == 1 && splatnet.user.level.star > 0" style="font-size: .6rem; color: #f02d7d;">
+                                            <td v-else-if="index == 1 && splatnet.user.level.star > 0" style="font-size: .6rem; color: var(--league);">
                                                 &#9733;{{splatnet.user.level.star}}
                                             </td>
                                             <td v-else></td>
                                             <td :class="index == 3 ? 'pb-2' : ''">
                                                 <span style="font-size: .8rem;">{{m.mode}}</span>
                                                 <span class="splatoon-style-1 ps-1" :style="m.rank == 'X' ? 'color: #f02d7d;' : ''">{{m.rank}}</span>
-                                                <span class="splatoon-style-1" style="color: #f02d7d; font-size: .6rem;">{{m.sp}}</span>
+                                                <span class="splatoon-style-1" style="color: var(--league); font-size: .6rem;">{{m.sp}}</span>
                                             </td>
                                             <td v-if="index==0" class="px-3 fs-5">
                                                 <div style="max-height: 1rem;">
@@ -81,8 +81,8 @@
                             </div>
                         </div>
                     </div>
-                    <h3 class="splatoon-style-1 mb-0 ms-3 mt-4" style="color: #CDF523">Last 50 Battles</h3>
-                    <div class="card mb-3 border-0 round-32 squid-card" style="background-color: #A41FE1;">
+                    <h3 class="splatoon-style-1 mb-0 ms-3 mt-4" style="color: var(--sp2-primary);">Last 50 Battles</h3>
+                    <div class="card mb-3 border-0 round-32 squid-card" style="background-color:  var(--private);">
                         <div class="card-body">
                             <table class="mx-auto my-2 lh-sm text-center battle-table">
                                 <thead>
@@ -118,8 +118,8 @@
                             </div>
                         </div>
                     </div>
-                    <h3 class="splatoon-style-1 mb-0 ms-3 mt-4" style="color: #E1562B">X Rank Leaderboard</h3>
-                    <div class="card mb-3 border-0 round-32 squid-card" style="background-color: #E1562B;">
+                    <h3 class="splatoon-style-1 mb-0 ms-3 mt-4" style="color: var(--x-ranked);">X Rank Leaderboard</h3>
+                    <div class="card mb-3 border-0 round-32 squid-card" style="background-color: var(--x-ranked);">
                         <div class="card-body">
                             <div v-for="(m, index) in splatnet.rank" class="x-row round-32 py-1 my-1 d-flex align-items-center">
                                 <div class="x-mode ps-3">
@@ -250,7 +250,7 @@
         <div class="footer-inner container py-3 text-white-50">
             This website is not affiliated with Nintendo. All product names, logos, and brands are property of their respective owners.
             <hr class="m-1">
-            &copy; 2022 LuSkywalker v1.0.1 |
+            &copy; 2022 LuSkywalker v1.0.2 |
             <a href="https://github.com/luswdev/SplatoonBot" class="text-decoration-none">
                 <i class="fab fa-github"></i> 
                 Source code

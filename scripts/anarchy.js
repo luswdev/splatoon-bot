@@ -7,7 +7,8 @@ const app = {
             results: [],
             total_pt: 0,
             actually_pt: 0,
-            is_done: false
+            is_done: false,
+            is_share: false,
         }
     },
     methods: {
@@ -26,7 +27,9 @@ const app = {
                          .find(key => MEDAL_MAP[key] === _medal)
         },
         check_done: function () {
-            if (this.get_wins_loses_cnt(true) >= MAX_WIN) {
+            if (this.is_share) {
+                this.is_done = true
+            } else if (this.get_wins_loses_cnt(true) >= MAX_WIN) {
                 this.is_done = true
             } else if (this.get_wins_loses_cnt(false) >= MAX_LOSE) {
                 this.is_done = true
@@ -81,12 +84,63 @@ const app = {
             this.actually_pt -= CHALLENGE_COST[rank_idx]
         },
         reset_results: function (_e) {
-            this.results = []
+            if (this.is_share) {
+                window.location.href = '/splatoon/anarchy'
+            }
+
+            this.share_result()
+
+            // this.results = []
             this.check_done()
             setTimeout( () => {
                 _e.target.blur()
             }, 500)
         },
+        share_result: function () {
+            let res_url = ''
+            let win_seq = 0
+
+            res_url += this.rank_list.findIndex((r) => r == this.ranking_str).toString(16)
+            res_url += this.results.length.toString(16)
+            this.results.forEach( (res, idx) => {
+                win_seq |= (res.win << idx)
+                
+                let gold = res.medals.filter(med => med === MEDAL_MAP['gold']).length
+                let sliver = res.medals.filter(med => med === MEDAL_MAP['sliver']).length
+
+                let medal = gold << 2 | sliver
+
+                res_url += medal.toString(16)
+
+                // cnt += res.medals.filter(med => med === MEDAL_MAP[_medal_type]).length
+            })
+            res_url += win_seq.toString(16)
+
+            console.log(res_url)
+            return res_url
+        },
+        output_share: function (_r) {
+            this.update_ranking(this.rank_list[parseInt(_r[0], 16)])
+
+            let result_cnt = parseInt(_r[1], 16)
+            for (let i = 0; i < result_cnt; ++i) {
+                let gold = (parseInt(_r[2 + i], 16) >> 2) & 0x03
+                let sliver = parseInt(_r[2 + i], 16) & 0x03
+                let result_row = {
+                    win: parseInt(_r[2 + result_cnt], 16) & (1 << i),
+                    medals: [0, 0, 0]
+                }
+                let medal_idx = 0
+                while (gold--) {
+                    result_row.medals[medal_idx++] = MEDAL_MAP['gold']
+                }
+                while (sliver--) {
+                    result_row.medals[medal_idx++] = MEDAL_MAP['sliver']
+                }
+                this.results.push(result_row)
+                this.check_done()
+            }
+        }
     },
     watch: {
         results: {
@@ -103,6 +157,15 @@ const app = {
         },
     },
     mounted: function () {
+        let get_idx = window.location.href.indexOf('?r=')
+        let share_data = ''
+        if (get_idx > -1) {
+            share_data = window.location.href.substring(get_idx + 3)
+            this.is_share = true
+            this.output_share(share_data)
+            return
+        }
+
         let last_rank = cookies.get(RANK_COOKIES_NAME)
         if (last_rank === '') {
             last_rank = this.rank_list[0]
