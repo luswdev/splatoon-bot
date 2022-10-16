@@ -9,9 +9,6 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 
 client.once('ready', () => {
     console.log(`[${__filename}] bot ready`)
-    module.exports.clientName = client.user.username
-    module.exports.clientIcon = client.user.displayAvatarURL()
-
     client.user.setActivity('Splatoon 3', { type: ActivityType.Playing });
 })
 
@@ -22,7 +19,7 @@ client.on('interactionCreate', async interaction => {
     const { commandName } = interaction
 
     console.log(`[${__filename}] parsing command: ${commandName}`)
-    await parseCmd(commandName, interaction)
+    await parseCmd(commandName, interaction, client)
 
     console.log(`[${__filename}] end of ${commandName}`)
 })

@@ -5,16 +5,13 @@ const { version } = require('../package.json');
 
 const CmdBase = require('./CmdBase.js')
 
-const client = require('../index.js')
-
 class CmdBotInfo extends CmdBase {
 
     constructor () {
         super('help', 'Bot information')
     }
 
-    doCmd (_interaction) {
-        console.log(client.clientIcon)
+    doCmd (_interaction, _client) {
         const infoEmbed = new EmbedBuilder()
             .setColor(0xCAF023)
             .setThumbnail('https://github.com/luswdev/splatoon-bot/blob/doc-page/img/bot-icon.png?raw=true')
@@ -27,7 +24,7 @@ class CmdBotInfo extends CmdBase {
                 { name: '/rm', value: 'Random Map', inline: true },
                 { name: 'Version', value: version },
             )
-            .setFooter({ text: `${client.clientName} | A sample bot for Splatoon 3`, iconURL: client.clientIcon })
+            .setFooter({ text: `${_client.user.username} | A sample bot for Splatoon 3`, iconURL: _client.user.displayAvatarURL() })
 
         _interaction.reply({ embeds: [infoEmbed] })
     }

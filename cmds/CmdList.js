@@ -23,11 +23,11 @@ class CmdList {
         )
     }
 
-    parseCmd (_cmdName, _interaction) {
+    parseCmd (_cmdName, _interaction, _client) {
         this.cmds.forEach( (cmd) => {
             if (_cmdName == cmd.cmdKey) {
                 console.log(`[${__filename}] inner command: ${cmd.cmdKey}`)
-                return cmd.doCmd(_interaction)
+                return cmd.doCmd(_interaction, _client)
             }
         })
     }
@@ -43,8 +43,8 @@ cmds.installCmd(cmdRw)
 cmds.installCmd(cmdRm)
 cmds.installCmd(cmdInfo)
 
-module.exports.parseCmd = (_cmdName, _interaction) => {
-    cmds.parseCmd(_cmdName, _interaction)
+module.exports.parseCmd = (_cmdName, _interaction, _client) => {
+    cmds.parseCmd(_cmdName, _interaction, _client)
 }
 
 module.exports.getCmdsJson = () => {
