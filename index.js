@@ -9,7 +9,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 
 client.once('ready', () => {
     console.log(`[${__filename}] bot ready`)
-    client.user.setActivity('Splatoon 3', { type: ActivityType.Playing });
+    client.user.setActivity('Splatoon 3', { type: ActivityType.Playing })
 })
 
 client.on('interactionCreate', async interaction => {
