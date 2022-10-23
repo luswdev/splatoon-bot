@@ -29,6 +29,8 @@ class CmdRandomWeapon extends CmdBase {
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()
 
+        this.mysql.saveResult(this.cmdKey, weapon.en, _interaction.user.id)
+
         _interaction.reply({ embeds: [weaponEmbed] })
     }
 }

@@ -1,7 +1,7 @@
 'use strict'
 
-const mapList = require('../data/map.js')
-const weaponList = require('../data/weapon.js')
+const mapList = require('./map.js')
+const weaponList = require('./weapon.js')
 
 class Database {
 
