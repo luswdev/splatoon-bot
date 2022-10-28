@@ -4,16 +4,9 @@ const mysql = require('mysql')
 
 class ConnDB {
 
-    constructor (_host, _user, _password, _database, _table) {
-        this.conn = mysql.createConnection({
-            host     : _host,
-            user     : _user,
-            password : _password,
-            database : _database,
-        })
-        this.table = _table
-
-        this.conn.connect()
+    constructor (_config) {
+        this.conn = mysql.createPool(_config)
+        this.table = _config.table
     }
 
     saveResult (_cmd, _res, _user) {

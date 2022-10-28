@@ -10,7 +10,7 @@ class CmdBase {
         this.cmdInfo = _info
         this.infoUrlBase = 'https://splatoonwiki.org/wiki/'
 
-        this.mysql = new ConnDB(db.host, db.user, db.password, db.database, db.table)
+        this.mysql = new ConnDB(db)
     }
 
     infoUrl(_name) {
