@@ -1,3 +1,5 @@
+Redirect 403 /splatoon/src/config.json
+
 RewriteEngine On
 RewriteBase /splatoon
 RewriteRule ^about$ about.html [NC,L]
