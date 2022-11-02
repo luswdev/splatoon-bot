@@ -39,7 +39,10 @@ SplatoonBot is a simple bot for Splatoon 3.
 
 ## Version Log
 
-### 2021/10/21 v2.0.1
+### 2022/10/23 v2.1.0
+- Store result to database
+
+### 2022/10/16 v2.0.1
 - Change PHP to Node.js
 - Update Splatoon 3
 
