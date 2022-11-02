@@ -13,7 +13,7 @@ class CmdBotInfo extends CmdBase {
 
     doCmd (_interaction, _client) {
         const infoEmbed = new EmbedBuilder()
-            .setColor(0xCAF023)
+            .setColor(0xB3FDDF)
             .setThumbnail('https://github.com/luswdev/splatoon-bot/blob/doc-page/img/bot-icon.png?raw=true')
             .setTitle(':information_source: Help Manual')
             .setURL('https://lusw.dev/splatoon')
