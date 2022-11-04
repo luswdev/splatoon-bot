@@ -7,7 +7,7 @@ const { randomMap } = require('../data/database.js')
 class CmdRandomMap extends CmdBase {
 
     constructor () {
-        super('rm', 'Random pick a map')
+        super('rm', '隨機地圖 Random pick a map')
 
         this.randomMap = randomMap
         this.imgUrlBase = 'https://raw.githubusercontent.com/luswdev/splatoon-bot/bot-v2/img/map/'

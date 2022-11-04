@@ -17,14 +17,14 @@ class CmdBotInfo extends CmdBase {
             .setThumbnail('https://github.com/luswdev/splatoon-bot/blob/doc-page/img/bot-icon.png?raw=true')
             .setTitle(':information_source: Help Manual')
             .setURL('https://lusw.dev/splatoon')
-            .setDescription(`A sample bot for Splatoon 3\n` +
+            .setDescription(`A simple bot for Splatoon 3\n` +
                             `Visit website: https://lusw.dev/splatoon`)
             .addFields(
-                { name: '/rw', value: 'Random Weapon', inline: true },
-                { name: '/rm', value: 'Random Map', inline: true },
+                { name: '/rw', value: '隨機武器！\nRandom Weapon!', inline: true },
+                { name: '/rm', value: '隨機地圖！\nRandom Map!', inline: true },
                 { name: 'Version', value: version },
             )
-            .setFooter({ text: `${_client.user.username} | A sample bot for Splatoon 3`, iconURL: _client.user.displayAvatarURL() })
+            .setFooter({ text: `${_client.user.username} | A simple bot for Splatoon 3`, iconURL: _client.user.displayAvatarURL() })
 
         _interaction.reply({ embeds: [infoEmbed] })
     }
