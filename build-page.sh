@@ -28,7 +28,7 @@ TOTAL_LENS=$((${#JS_LIST[@]}+${#CSS_LIST[@]}+${#HTML_LIST[@]}))
 CURR_POS=0
 
 get_precent() {
-    PERCENT=$((($CURR_POS*100)/$TOTAL_LENS))
+    local PERCENT=$((($CURR_POS*100)/$TOTAL_LENS))
     CURR_POS=$(($CURR_POS+1))
     return $PERCENT
 }
