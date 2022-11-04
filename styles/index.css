@@ -436,3 +436,25 @@ table thead th {
 .btn-sp3:focus {
     box-shadow: none;
 }
+
+.btn-dc {
+    background-color: var(--sp3-primary-1);
+    color: #fff;
+}
+
+.btn-dc:hover {
+    background-color: var(--sp3-primary-2);
+    color: #000;
+}
+
+.btn-dc:focus {
+    background-color: var(--sp3-primary-2);
+    color: #000;
+}
+
+.btn-dc,
+.btn-dc:hover,
+.btn-dc:active,
+.btn-dc:focus {
+    box-shadow: none;
+}
