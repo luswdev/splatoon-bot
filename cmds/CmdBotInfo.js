@@ -8,7 +8,7 @@ const CmdBase = require('./CmdBase.js')
 class CmdBotInfo extends CmdBase {
 
     constructor () {
-        super('help', 'Bot information')
+        super('help', '指令幫助 Bot information')
     }
 
     doCmd (_interaction, _client) {
@@ -17,7 +17,8 @@ class CmdBotInfo extends CmdBase {
             .setThumbnail('https://github.com/luswdev/splatoon-bot/blob/doc-page/img/bot-icon.png?raw=true')
             .setTitle(':information_source: Help Manual')
             .setURL('https://lusw.dev/splatoon')
-            .setDescription(`A simple bot for Splatoon 3\n` +
+            .setDescription(`專門為斯普拉遁 3 的機器人啦\n` +
+                            `A simple bot for Splatoon 3\n` +
                             `Visit website: https://lusw.dev/splatoon`)
             .addFields(
                 { name: '/rw', value: '隨機武器！\nRandom Weapon!', inline: true },
