@@ -5,7 +5,9 @@ const app = {
             commands: commands,
             hover_index: -1,
             copied: false,
-            last_copied_index: -1
+            last_copied_index: -1,
+            user_lang: '',
+            tkey: tstrings,
         }
     },
     methods: {
@@ -30,6 +32,20 @@ const app = {
                 tooltip.hide()
                 tooltip.disable()
             }, 1500)
+        },
+        get_font_by_lang: function (type) {
+            if (this.user_lang.indexOf('zh') != -1) {
+                return `splatoon-style-${type}-zh-tw`
+            } else {
+                return `splatoon-style-${type}`
+            }
+        },
+        get_tstring: function (key, index) {
+            if (this.user_lang.indexOf('zh') != -1) {
+                return index == undefined ? this.tkey['zh'][key] : this.tkey['zh'][key][index]
+            } else {
+                return index == undefined ? this.tkey['en'][key] : this.tkey['en'][key][index]
+            } 
         }
     },
     watch: {
@@ -47,6 +63,7 @@ const app = {
                 trigger : 'manual'
             });
         })
+        this.user_lang = navigator.language || navigator.userLanguage; 
     }
 }
 

@@ -34,16 +34,19 @@
         </nav>
     </header>
 
-    <main class="flex-grow-1 flex-shrink-0 splatoon-style-2" id="app">
-        <div class="main-inner container my-4">
+    <main class="flex-grow-1 flex-shrink-0" id="app">
+        <div class="main-inner container my-4" :class="get_font_by_lang(2)">
             <div class="intro-box text-center">
                 <h3>
-                    <span class="splatoon-style-1">SplatoonBot</span> is a simple bot for <span class="splatoon-style-1">Splatoon 3</span>.
+                    <span :class="get_font_by_lang(1)">
+                        {{get_tstring('info')}}
+                    </span>
                 </h3>
                 <div class="my-4">
-                    <a :href="invite_url" type="button" class="btn btn-dc shadow-none round-32" target="_blank" onmousedown="event.preventDefault()">
+                    <a :href="invite_url" type="button" class="btn btn-dc shadow-none round-32"
+                        target="_blank" onmousedown="event.preventDefault()">
                         <i class="fab fa-discord me-1"></i>
-                        Add to Discord server
+                        {{get_tstring('dc_btn')}}
                     </a>
                 </div>
             </div>
@@ -58,18 +61,18 @@
                             <i class="fas fa-check" v-show="hover_index == index && copied == true"></i>
                         </button>
                         <div class="card-body">
-                            <h2 class="splatoon-style-1 card-title mb-3">
+                            <h2 class="card-title mb-3" :class="get_font_by_lang(1)">
                                 <i :class="set_icon(cmd.icon)"></i>
-                                {{cmd.title}}
+                                {{get_tstring(cmd.usage)}}
                             </h2>
                             <p class="card-text">
-                                <span class="fs-4 text-white d-inline-block keyword keyword-mask">Usage: <code class="text-white">{{cmd.usage}}</code></span>
+                                <span class="fs-4 text-white d-inline-block keyword keyword-mask">{{get_tstring('usage')}}: <code class="text-white">/{{cmd.usage}}</code></span>
                             </p>
                         </div>
                         <ul class="list-group list-group-flush mx-3 mb-4 round-12">
-                            <li v-for="feature in cmd.features" class="list-group-item d-inline-flex text-white">
+                            <li v-for="feature, idx in cmd.features" class="list-group-item d-inline-flex text-white">
                                 <span class="squid-icon me-3 h-100 align-self-center"><span class="fa fa-squid splatoon-style-1"></span></span>
-                                {{feature}}
+                                {{get_tstring(`${cmd.usage}_info`, idx)}}
                             </li>
                         </ul>
                     </div>
@@ -94,6 +97,7 @@
         </div>
     </footer>
 
+    <script src="/splatoon/scripts/i18n.js?v={BUILD_TIMESTAMP}"></script>
     <script src="/splatoon/scripts/commands.js?v={BUILD_TIMESTAMP}"></script>
     <script src="/splatoon/scripts/main.js?v={BUILD_TIMESTAMP}"></script>
 </body>

@@ -3,7 +3,7 @@ const commands = [
         title: 'Random Weapon',
         icon: 'fa-bomb',
         color: 'var(--regular)',
-        usage: '/rw',
+        usage: 'rw',
         features: [
             'Random choose map from 55 different weapons.',
             'Include hero weapon.',
@@ -14,7 +14,7 @@ const commands = [
         title: 'Random Maps',
         icon: 'fa-map',
         color: 'var(--ranked)',
-        usage: '/rm',
+        usage: 'rm',
         features: [
             'Random choose map from 12 different maps.',
             'Support English, Japanese, and Traditional Chinese.'
@@ -24,7 +24,7 @@ const commands = [
         title: 'Help Manual',
         icon: 'fa-book',
         color: 'var(--league)',
-        usage: '/help',
+        usage: 'help',
         features: [
             'Show manual in Discord.'
         ]
