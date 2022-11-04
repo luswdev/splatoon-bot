@@ -1,29 +1,61 @@
 #! /usr/bin/bash
 
-# minify css and js
-uglifyjs  ./scripts/main.js -o ./scripts/main.min.js
-uglifyjs  ./scripts/ga.js -o ./scripts/ga.min.js
-uglifyjs  ./scripts/commands.js -o ./scripts/commands.min.js
-uglifyjs  ./scripts/splatnet.js -o ./scripts/splatnet.min.js
-uglifyjs  ./scripts/anarchy.js -o ./scripts/anarchy.min.js
-uglifyjs  ./scripts/anarchy-const.js -o ./scripts/anarchy-const.min.js
-uglifyjs  ./scripts/cookies.js -o ./scripts/cookies.min.js
-uglifycss ./styles/font.css > ./styles/font.min.css
-uglifycss ./styles/img.css > ./styles/img.min.css
-uglifycss ./styles/color.css > ./styles/color.min.css
-uglifycss ./styles/index.css > ./styles/index.min.css
+JS_LIST=(
+    main
+    i18n
+    ga
+    commands
+    splatnet
+    anarchy
+    anarchy-const
+    cookies
+)
+
+CSS_LIST=(
+    font
+    img
+    color
+    index
+)
+
+HTML_LIST=(
+    index
+    about
+    anarchy
+)
+
+TOTAL_LENS=$((${#JS_LIST[@]}+${#CSS_LIST[@]}+${#HTML_LIST[@]}))
+CURR_POS=0
+
+get_precent() {
+    PERCENT=$((($CURR_POS*100)/$TOTAL_LENS))
+    CURR_POS=$(($CURR_POS+1))
+    return $PERCENT
+}
+
+# minify js
+for js in "${JS_LIST[@]}"; do
+get_precent
+echo "[$?%] minify $js.js"
+uglifyjs ./scripts/$js.js -o ./scripts/$js.min.js
+done
+
+#minify css
+for css in "${CSS_LIST[@]}"; do
+get_precent
+echo "[$?%] minify $css.css"
+uglifycss ./styles/$css.css > ./styles/$css.min.css
+done
 
 cur=$(date +%s)
 
 # prevent cache
+for html in "${HTML_LIST[@]}"; do
+get_precent
+echo "[$?%] update version tag of $html.html"
 sed -e "s/js?v={BUILD_TIMESTAMP}/min.js?v=${cur}/g" \
     -e "s/css?v={BUILD_TIMESTAMP}/min.css?v=${cur}/g" \
-    idea/index.html > index.html
+    idea/$html.html > $html.html
+done
 
-sed -e "s/js?v={BUILD_TIMESTAMP}/min.js?v=${cur}/g" \
-    -e "s/css?v={BUILD_TIMESTAMP}/min.css?v=${cur}/g" \
-    idea/about.html > about.html
-
-sed -e "s/js?v={BUILD_TIMESTAMP}/min.js?v=${cur}/g" \
-    -e "s/css?v={BUILD_TIMESTAMP}/min.css?v=${cur}/g" \
-    idea/anarchy.html > anarchy.html
+echo "[$((($CURR_POS*100)/$TOTAL_LENS))%] done"
