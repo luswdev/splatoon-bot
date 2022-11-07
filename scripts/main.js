@@ -42,10 +42,10 @@ const app = {
         },
         get_tstring: function (key, index) {
             if (this.user_lang.indexOf('zh') != -1) {
-                return index == undefined ? this.tkey['zh'][key] : this.tkey['zh'][key][index]
+                return index == undefined ? (this.tkey['zh'][key] ?? key) : (this.tkey['zh'][key][index] ?? key)
             } else {
-                return index == undefined ? this.tkey['en'][key] : this.tkey['en'][key][index]
-            } 
+                return index == undefined ? (this.tkey['en'][key] ?? key) : (this.tkey['en'][key][index] ?? key)
+            }
         }
     },
     watch: {
@@ -63,8 +63,28 @@ const app = {
                 trigger : 'manual'
             });
         })
-        this.user_lang = navigator.language || navigator.userLanguage; 
+        this.user_lang = navigator.language || navigator.userLanguage;
     }
 }
 
-Vue.createApp(app).mount('#app')
+const appVm = Vue.createApp(app).mount('#app')
+const footer = {
+    data() {
+        return {
+            links: footer_links,
+            version: '',
+            author: '',
+        }
+    },
+    methods: {
+        get_tstring: appVm.get_tstring,
+    },
+    mounted: function () {
+        axios.get('/splatoon/src/package.json').then( (res) => {
+            this.version = res.data.version
+            this.author = res.data.author
+        })
+    }
+}
+
+Vue.createApp(footer).mount('#footer')

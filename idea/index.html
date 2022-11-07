@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <link rel="icon" href="/splatoon/img/bot-icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -22,7 +23,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4V7RWXWH1"></script>
     <script src="/splatoon/scripts/ga.js?v={BUILD_TIMESTAMP}"></script>
 </head>
-<body class="min-vh-100 d-flex flex-column text-white"></body>
+<body class="min-vh-100 d-flex flex-column text-white">
     <header>
         <nav class="navbar navbar-expand flex-column flex-md-row py-3">
             <div class="container splatoon-style-1">
@@ -81,24 +82,25 @@
         </div>
     </main>
 
-    <footer>
+    <footer id="footer">
         <div class="footer-inner container py-3 text-white-50">
             This website is not affiliated with Nintendo. All product names, logos, and brands are property of their respective owners.
             <hr class="m-1">
-            &copy; 2022 LuSkywalker v2.1.3 |
-            <a href="https://github.com/luswdev/SplatoonBot" class="text-decoration-none">
-                <i class="fab fa-github"></i> 
-                Source code
-            </a> | 
-            <a href="https://twitter.com/luswdev" class="text-decoration-none">
-                <i class="fab fa-twitter"></i>
-                Author
-            </a>
+            &copy; {{new Date().getFullYear()}} {{author}} v{{version}}
+            <div v-for="link in links"class="d-inline-block">
+                |
+                <a :href="link.url" class="text-decoration-none" target="_blank">
+                    <i :class="link.icon"></i> 
+                    {{get_tstring(link.title)}}
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>&nbsp;
+            </div>
         </div>
     </footer>
 
     <script src="/splatoon/scripts/i18n.js?v={BUILD_TIMESTAMP}"></script>
     <script src="/splatoon/scripts/commands.js?v={BUILD_TIMESTAMP}"></script>
+    <script src="/splatoon/scripts/links.js?v={BUILD_TIMESTAMP}"></script>
     <script src="/splatoon/scripts/main.js?v={BUILD_TIMESTAMP}"></script>
 </body>
 </html>

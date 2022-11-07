@@ -17,7 +17,9 @@ const tstrings = {
         help: 'Help Manual',
         help_info: [
             'Show manual in Discord.'
-        ]
+        ],
+        author: 'Author',
+        source_code: 'Source code'
     },
     zh: {
         info: 'SplatoonBot 是專為斯普拉遁 3 所打造的機器人',
@@ -37,6 +39,8 @@ const tstrings = {
         help: '指令幫助',
         help_info: [
             '在 Discord 中顯示指令提示'
-        ]
+        ],
+        author: '作者',
+        source_code: '原始碼'
     }
 }

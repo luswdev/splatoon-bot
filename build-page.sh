@@ -3,6 +3,7 @@
 JS_LIST=(
     main
     i18n
+    links
     ga
     commands
     splatnet
