@@ -3,6 +3,16 @@ const header_links = [
 
 const footer_links = [
     {
+        "icon": "",
+        "title": "Privacy Policy",
+        "url": "/splatoon/privacy"
+    },
+    {
+        "icon": "",
+        "title": "Terms of Service",
+        "url": "/splatoon/terms"
+    },
+    {
         "icon": "fab fa-github",
         "title": "source_code",
         "url": "https://github.com/luswdev/SplatoonBot"
@@ -11,11 +21,6 @@ const footer_links = [
         "icon": "fab fa-twitter",
         "title": "author",
         "url": "https://twitter.com/luswdev"
-    },
-    {
-        "icon": "",
-        "title": "top.gg",
-        "url": "https://top.gg/bot/898993695418908702/vote"
     },
     {
         "icon": "",

@@ -21,6 +21,8 @@ CSS_LIST=(
 
 HTML_LIST=(
     index
+    privacy
+    terms
     about
     anarchy
 )

@@ -2,6 +2,10 @@ Redirect 403 /splatoon/src/config.json
 
 RewriteEngine On
 RewriteBase /splatoon
+RewriteRule ^privacy$ privacy.html [NC,L]
+RewriteRule ^privacy/$ privacy.html [NC,L]
+RewriteRule ^terms$ terms.html [NC,L]
+RewriteRule ^terms/$ terms.html [NC,L]
 RewriteRule ^about$ about.html [NC,L]
 RewriteRule ^about/$ about.html [NC,L]
 RewriteRule ^anarchy$ anarchy.html [NC,L]
