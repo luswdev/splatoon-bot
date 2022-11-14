@@ -1,7 +1,7 @@
 'use strict'
 
 const { Client, GatewayIntentBits, ActivityType } = require('discord.js')
-const { token } = require('./config.json')
+const { bot } = require('./config.json')
 
 const { parseCmd } = require('./cmds/CmdList.js')
 
@@ -24,4 +24,4 @@ client.on('interactionCreate', async interaction => {
     console.log(`[${__filename}] end of ${commandName}`)
 })
 
-client.login(token)
+client.login(bot.token)
