@@ -24,6 +24,11 @@ const footer_links = [
     },
     {
         "icon": "",
+        "title": "Top.gg",
+        "url": "https://top.gg/bot/898993695418908702/vote"
+    },
+    {
+        "icon": "",
         "title": "DiscordTW",
         "url": "https://discordservers.tw/bots/898993695418908702"
     },
