@@ -1,6 +1,6 @@
 'use strict'
 
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { version } = require('../package.json');
 
 const CmdBase = require('./CmdBase.js')
@@ -16,7 +16,6 @@ class CmdBotInfo extends CmdBase {
             .setColor(0xB3FDDF)
             .setThumbnail('https://github.com/luswdev/splatoon-bot/blob/doc-page/img/bot-icon.png?raw=true')
             .setTitle(':information_source: Help Manual')
-            .setURL('https://lusw.dev/splatoon')
             .setDescription(`專門為斯普拉遁 3 的機器人啦\n` +
                             `A simple bot for Splatoon 3\n` +
                             `Visit website: https://lusw.dev/splatoon`)
@@ -27,7 +26,14 @@ class CmdBotInfo extends CmdBase {
             )
             .setFooter({ text: `${_client.user.username} | A simple bot for Splatoon 3`, iconURL: _client.user.displayAvatarURL() })
 
-        _interaction.reply({ embeds: [infoEmbed] })
+        const row = new ActionRowBuilder()
+            .addComponents( new ButtonBuilder()
+                .setURL('https://lusw.dev/splatoon')
+                .setLabel('Information')
+                .setStyle(ButtonStyle.Link),
+            )
+
+        _interaction.reply({ embeds: [infoEmbed], components: [row] })
     }
 }
 

@@ -1,6 +1,6 @@
 'use strict'
 
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const CmdBase = require('./CmdBase.js')
 const { randomMap } = require('../data/database.js')
 
@@ -18,7 +18,6 @@ class CmdRandomMap extends CmdBase {
         const mapEmbed = new EmbedBuilder()
             .setColor(map.color)
             .setTitle(':map: Your random map')
-            .setURL(this.infoUrl(map.en))
             .addFields(
                 { name: '場地', value: map.zh},
                 { name: 'Stage', value: map.en},
@@ -28,9 +27,16 @@ class CmdRandomMap extends CmdBase {
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()
 
+        const row = new ActionRowBuilder()
+            .addComponents( new ButtonBuilder()
+                .setURL(this.infoUrl(map.en))
+                .setLabel('Inkipedia')
+                .setStyle(ButtonStyle.Link),
+            )
+
         this.mysql.saveResult(this.cmdKey, map.en, _interaction.user.id)
 
-        _interaction.reply({ embeds: [mapEmbed] })
+        _interaction.reply({ embeds: [mapEmbed], components: [row] })
     }
 }
 

@@ -1,6 +1,6 @@
 'use strict'
 
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 const CmdBase = require('./CmdBase.js')
 const { randomWeapon } = require('../data/database.js')
@@ -19,7 +19,6 @@ class CmdRandomWeapon extends CmdBase {
         const weaponEmbed = new EmbedBuilder()
             .setColor(weapon.color)
             .setTitle(':crossed_swords: Your random weapon')
-            .setURL(this.infoUrl(weapon.en))
             .addFields(
                 { name: '武器', value: weapon.zh},
                 { name: 'Weapon', value: weapon.en},
@@ -29,9 +28,16 @@ class CmdRandomWeapon extends CmdBase {
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()
 
+        const row = new ActionRowBuilder()
+            .addComponents( new ButtonBuilder()
+                .setURL(this.infoUrl(weapon.en))
+                .setLabel('Inkipedia')
+                .setStyle(ButtonStyle.Link),
+            )
+
         this.mysql.saveResult(this.cmdKey, weapon.en, _interaction.user.id)
 
-        _interaction.reply({ embeds: [weaponEmbed] })
+        _interaction.reply({ embeds: [weaponEmbed], components: [row] })
     }
 }
 

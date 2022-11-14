@@ -38,6 +38,9 @@ SplatoonBot is a simple bot for Splatoon 3.
 
 ## Version Log
 
+### 2022/11/14 v2.1.4
+- Add link button to embedded reply
+
 ### 2022/10/23 v2.1.0
 - Store result to database
 
