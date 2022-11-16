@@ -30,7 +30,8 @@ class CmdBotInfo extends CmdBase {
             .addComponents( new ButtonBuilder()
                 .setURL('https://lusw.dev/splatoon')
                 .setLabel('Information')
-                .setStyle(ButtonStyle.Link),
+                .setStyle(ButtonStyle.Link)
+                .setEmoji('<:splatoonbot:1042279520759185478>'),
             )
 
         _interaction.reply({ embeds: [infoEmbed], components: [row] })

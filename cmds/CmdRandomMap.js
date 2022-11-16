@@ -31,7 +31,8 @@ class CmdRandomMap extends CmdBase {
             .addComponents( new ButtonBuilder()
                 .setURL(this.infoUrl(map.en))
                 .setLabel('Inkipedia')
-                .setStyle(ButtonStyle.Link),
+                .setStyle(ButtonStyle.Link)
+                .setEmoji('<:Squid:1021583273828306974>'),
             )
 
         this.mysql.saveResult(this.cmdKey, map.en, _interaction.user.id)
