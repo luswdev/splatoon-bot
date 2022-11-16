@@ -1,5 +1,7 @@
 'use strict'
 
+const { log } = require('../../pkg/log.js')
+
 class MiddleWare {
 
     constructor (_key) {
@@ -8,10 +10,10 @@ class MiddleWare {
 
     auth() {
         return async (_req, _res, _next) => {
-            console.log(`[${__filename}] key: ${_req.headers.authorization}`)
+            log.write(`key: ${_req.headers.authorization}`)
 
             if (_req.headers.authorization !== this.key) {
-                console.log(`[${__filename}] auth fail`)
+                log.write('auth fail')
                 return _res.status(403).json({ error: "Unauthorized" })
             }
 

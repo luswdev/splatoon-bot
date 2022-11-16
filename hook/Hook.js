@@ -8,6 +8,8 @@ const MiddleWareDcTW = require('./middleware/MiddleWareDcTW.js')
 const MiddleWareDcLs = require('./middleware/MiddleWareDcLs.js')
 const { hook } = require('../config.json')
 
+const { log } = require('../pkg/log.js')
+
 class Hook {
 
     constructor () {
@@ -58,14 +60,14 @@ class Hook {
         this.app.post('/dcls',  this.middleware.dcls.auth(),  this.send())
 
         this.app.listen(this.port, () => {
-            console.log(`[${__filename}] start listening at ${this.port}`)
+            log.write(`start listening at ${this.port}`)
         })
     }
 
     send () {
         return (req, res) => {
             if (!req.vote || !req.vote.user) {
-                console.log(`[${__filename}] cannot read req.vote.user`)
+                log.write('cannot read req.vote.user')
                 return res.status(403).json({ error: "null vote body" })
             }
 
@@ -82,14 +84,14 @@ class Hook {
     }
 
     formatEmbed (_log, _client) {
-        console.log(`[${__filename}] parsing ${_log}`)
+        log.write(`parsing ${_log}`)
 
-        let log = JSON.parse(_log)
+        let res = JSON.parse(_log)
 
         let embed = new EmbedBuilder()
             .setColor(0xB3FDDF)
             .setTitle(':star2: Thanks for voting!')
-            .setDescription(`<@${log.user}> vote at ${log.from}`)
+            .setDescription(`<@${res.user}> vote at ${res.from}`)
             .setFooter({ text: `${_client.user.username} | A simple bot for Splatoon 3`, iconURL: _client.user.displayAvatarURL()})
             .setTimestamp()
 
