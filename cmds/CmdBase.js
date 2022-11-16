@@ -1,6 +1,6 @@
 'use strict'
 
-const ConnDB = require('../data/mysql.js')
+const ConnDB = require('../pkg/mysql.js')
 const { db } = require('../config.json')
 
 class CmdBase {

@@ -2,6 +2,8 @@
 
 const mysql = require('mysql')
 
+const { log } = require('../pkg/log.js')
+
 class ConnDB {
 
     constructor (_config) {
@@ -13,10 +15,10 @@ class ConnDB {
         let query = this.conn.query(`INSERT INTO ${this.table} (user_id, command, result) VALUES (?, ?, ?)`, [_user, _cmd, _res])
         query
             .on('error', (err) => {
-                console.log(`[${__filename}] cannot save result, error: `, err)
+                log.write(`cannot save result, error: ${err}`)
             })
             .on('end', () => {
-                console.log(`[${__filename}] save result end`)
+                log.write('save result end')
             })
     }
 }
