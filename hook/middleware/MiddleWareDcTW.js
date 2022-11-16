@@ -10,7 +10,7 @@ class MiddleWareDcTW extends MiddleWare {
 
     parser(_req, _res) {
         return {
-            from: 'DiscordTW',
+            from: 'dctw',
             user: _req.body.user.id,
         }
     }

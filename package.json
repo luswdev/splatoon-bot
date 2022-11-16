@@ -1,6 +1,6 @@
 {
   "name": "spl3",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Splatoon 3 Discord Bot",
   "main": "index.js",
   "scripts": {

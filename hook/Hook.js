@@ -6,7 +6,9 @@ const { WebhookClient, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyl
 const MiddleWareTopgg = require('./middleware/MiddleWareTopgg.js')
 const MiddleWareDcTW = require('./middleware/MiddleWareDcTW.js')
 const MiddleWareDcLs = require('./middleware/MiddleWareDcLs.js')
-const { hook } = require('../config.json')
+
+const ConnDB = require('../pkg/mysql.js')
+const { hook, db} = require('../config.json')
 
 const { log } = require('../pkg/log.js')
 
@@ -24,31 +26,49 @@ class Hook {
             dcls: new MiddleWareDcLs(hook.dcls),
         }
 
-        this.url = {
-            topgg: 'https://top.gg/bot/898993695418908702/vote',
-            dctw: 'https://discordservers.tw/bots/898993695418908702',
-            dcls: 'https://discordbotlist.com/bots/splatoonbot'
+        this.info = {
+            topgg: {
+                url: 'https://top.gg/bot/898993695418908702/vote',
+                title: 'Top.gg',
+                icon: '<:topgg:1042278038831902770>',
+            },
+            dctw: {
+                url:'https://discordservers.tw/bots/898993695418908702',
+                title: 'DiscordTW',
+                icon: '<:dctw:1042279725952946216>',
+            },
+            dcls: {
+                url: 'https://discordbotlist.com/bots/splatoonbot',
+                title: 'DiscordBotList',
+                icon: '<:discordlist:1042496781705027654>',
+            },
+        }
+
+        this.title = {
+
         }
 
         this.rows = new ActionRowBuilder()
             .addComponents( new ButtonBuilder()
-                .setURL(this.url.topgg)
-                .setLabel('Top.gg')
+                .setURL(this.info.topgg.url)
+                .setLabel(this.info.topgg.title)
                 .setStyle(ButtonStyle.Link)
-                .setEmoji('<:topgg:1042278038831902770>'),
+                .setEmoji(this.info.topgg.icon),
             )
             .addComponents( new ButtonBuilder()
-                .setURL(this.url.dctw)
-                .setLabel('DiscordTW')
+                .setURL(this.info.dctw.url)
+                .setLabel(this.info.dctw.title)
                 .setStyle(ButtonStyle.Link)
-                .setEmoji('<:dctw:1042279725952946216>'),
+                .setEmoji(this.info.dctw.icon),
             )
             .addComponents( new ButtonBuilder()
-                .setURL(this.url.dcls)
-                .setLabel('DiscordBotList')
+                .setURL(this.info.dcls.url)
+                .setLabel(this.info.dcls.title)
                 .setStyle(ButtonStyle.Link)
-                .setEmoji('<:discordbotlist:720681545425223680>'),
+                .setEmoji(this.info.dcls.icon),
             )
+
+        this.mysql = new ConnDB(db)
     }
 
     connect () {
@@ -65,18 +85,20 @@ class Hook {
     }
 
     send () {
-        return (req, res) => {
+        return async (req, res) => {
             if (!req.vote || !req.vote.user) {
                 log.write('cannot read req.vote.user')
                 return res.status(403).json({ error: "null vote body" })
             }
 
+            const cnt = await this.mysql.voteHistory(req.vote.user, req.vote.from)
+
             const reply = req.vote
-            const str = JSON.stringify(reply)
+            reply['cnt'] = cnt
 
             this.webhookClient.send({
                 username: 'vote_agent',
-                content: str
+                content: JSON.stringify(reply)
             })
 
             res.json(reply)
@@ -91,8 +113,14 @@ class Hook {
         let embed = new EmbedBuilder()
             .setColor(0xB3FDDF)
             .setTitle(':star2: Thanks for voting!')
-            .setDescription(`<@${res.user}> vote at ${res.from}`)
-            .setFooter({ text: `${_client.user.username} | A simple bot for Splatoon 3`, iconURL: _client.user.displayAvatarURL()})
+            .setDescription(`<@${res.user}> voted on ${this.info[res.from].icon} [${this.info[res.from].title}](${this.info[res.from].url})\n\n` +
+                            `You have voted \`${res.cnt}\` times!`)
+            .addFields(
+                { name: `${this.info.topgg.icon} ${this.info.topgg.title}`, value: `Vote on [${this.info.topgg.title}](${this.info.topgg.url}) every 12 hours!`, inline: true },
+                { name: `${this.info.dctw.icon} ${this.info.dctw.title}`,   value: `Vote on [${this.info.dctw.title}](${this.info.dctw.url}) every 24 hours!`,   inline: true },
+                { name: `${this.info.dcls.icon} ${this.info.dcls.title}`,   value: `Vote on [${this.info.dcls.title}](${this.info.dcls.url}) every 12 hours!`,   inline: true },
+            )
+            .setFooter({ text: `Vote for us | ${_client.user.username}`, iconURL: _client.user.displayAvatarURL()})
             .setTimestamp()
 
         return embed

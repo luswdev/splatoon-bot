@@ -10,7 +10,7 @@ class MiddleWareDcLs extends MiddleWare {
 
     parser(_req, _res) {
         return {
-            from: 'DiscordBotList',
+            from: 'dcls',
             user: _req.body.id,
         }
     }

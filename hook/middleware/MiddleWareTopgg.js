@@ -10,7 +10,7 @@ class MiddleWareTopgg extends MiddleWare {
 
     parser(_req, _res) {
         return {
-            from: 'Top.gg',
+            from: 'topgg',
             user: _req.body.user,
         }
     }
