@@ -96,22 +96,24 @@ class Hook {
             const reply = req.vote
             reply['cnt'] = cnt
 
+            let embed = this.formatEmbed(reply)
+
             this.webhookClient.send({
-                username: 'vote_agent',
-                content: JSON.stringify(reply)
+                username: 'Vote Agent 3',
+                embeds: [embed]
             })
 
             res.json(reply)
         }
     }
 
-    formatEmbed (_log, _client) {
-        log.write(`parsing ${_log}`)
+    formatEmbed (_log) {
+        log.write(`parsing ${JSON.stringify(_log)}`)
 
-        let res = JSON.parse(_log)
+        let res = _log
 
         let embed = new EmbedBuilder()
-            .setColor(0xB3FDDF)
+            .setColor(0xFFC8D0)
             .setTitle(':star2: Thanks for voting!')
             .setDescription(`<@${res.user}> voted on ${this.info[res.from].icon} [${this.info[res.from].title}](${this.info[res.from].url})\n\n` +
                             `You have voted \`${res.cnt}\` times!`)
@@ -120,7 +122,7 @@ class Hook {
                 { name: `${this.info.dctw.icon} ${this.info.dctw.title}`,   value: `Vote on [${this.info.dctw.title}](${this.info.dctw.url}) every 24 hours!`,   inline: true },
                 { name: `${this.info.dcls.icon} ${this.info.dcls.title}`,   value: `Vote on [${this.info.dcls.title}](${this.info.dcls.url}) every 12 hours!`,   inline: true },
             )
-            .setFooter({ text: `Vote for us | ${_client.user.username}`, iconURL: _client.user.displayAvatarURL()})
+            .setFooter({ text: `Vote for us | SplatoonBot`, iconURL: `https://cdn.discordapp.com/avatars/${hook.id}/${hook.avatar}.webp`})
             .setTimestamp()
 
         return embed

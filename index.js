@@ -8,7 +8,7 @@ const Hook = require('./hook/Hook.js')
 
 const { log } = require('./pkg/log.js')
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent ] })
+const client = new Client({ intents: [GatewayIntentBits.Guilds ] })
 
 const hooks = new Hook()
 
@@ -30,17 +30,6 @@ client.on('interactionCreate', async interaction => {
     await parseCmd(commandName, interaction, client)
 
     log.write(`end of ${commandName}`)
-})
-
-client.on('messageCreate', (msg) => {
-    if (msg.webhookId != hook.id) return
-
-    let embed = hooks.formatEmbed(msg.content, client)
-    let rows = hooks.rows
-
-    client.channels.cache.get(hook.vote_channel).send({ embeds: [embed], components: [rows] })
-
-    log.write('end of vote')
 })
 
 client.login(bot.token)
