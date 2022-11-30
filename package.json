@@ -3,10 +3,11 @@
   "version": "2.3.0",
   "description": "Splatoon 3 Discord Bot",
   "main": "index.js",
+  "bin": "index.js",
   "scripts": {
     "start": "node index.js",
     "cmd": "node deployCmds.js",
-    "release": "pkg index.js -t node16-linux-x64 -o release/spl3",
+    "release": "pkg index.js -t node16-linux-x64 -o release/spl3 -c package.json",
     "install": "sudo cp release/spl3 /usr/bin/",
     "clean": "rm -rf release/* build"
   },
@@ -31,5 +32,8 @@
   },
   "devDependencies": {
     "eslint": "^8.25.0"
+  },
+  "pkg": {
+    "assets": "data/**/*.json"
   }
 }
