@@ -1,7 +1,7 @@
 'use strict'
 
-const mapList = require('./map.js')
-const weaponList = require('./weapon.js')
+const mapList = require('./maps/maps.js')
+const weaponList = require('./weapons/weapons.js')
 
 class Database {
 
@@ -29,15 +29,21 @@ class Database {
         return slist[idx]
     }
 
+    // randomList (_list) {
+    //     const listIdx = database.random(_list.cnt)
+    //     const listRes = {
+    //         en:  _list.en[listIdx],
+    //         jp:  _list.jp[listIdx],
+    //         zh:  _list.zh[listIdx],
+    //         img: _list.img[listIdx],
+    //         color: _list.color[listIdx],
+    //     }
+    //     return listRes
+    // }
+
     randomList (_list) {
-        const listIdx = database.random(_list.cnt)
-        const listRes = {
-            en:  _list.en[listIdx],
-            jp:  _list.jp[listIdx],
-            zh:  _list.zh[listIdx],
-            img: _list.img[listIdx],
-            color: _list.color[listIdx],
-        }
+        const listIdx = database.random(_list.length)
+        const listRes = _list[listIdx]
         return listRes
     }
 }

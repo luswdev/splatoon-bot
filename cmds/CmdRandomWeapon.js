@@ -20,9 +20,9 @@ class CmdRandomWeapon extends CmdBase {
             .setColor(weapon.color)
             .setTitle(':crossed_swords: Your random weapon')
             .addFields(
-                { name: '武器', value: weapon.zh},
+                { name: '武器', value: weapon.zhTW},
                 { name: 'Weapon', value: weapon.en},
-                { name: 'ブキ', value: weapon.jp},
+                { name: 'ブキ', value: weapon.ja},
             )
             .setThumbnail(`${this.imgUrlBase}${weapon.img}`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})

@@ -19,9 +19,9 @@ class CmdRandomMap extends CmdBase {
             .setColor(map.color)
             .setTitle(':map: Your random map')
             .addFields(
-                { name: '場地', value: map.zh},
+                { name: '場地', value: map.zhTW},
                 { name: 'Stage', value: map.en},
-                { name: 'ステージ', value: map.jp},
+                { name: 'ステージ', value: map.ja},
             )
             .setThumbnail(`${this.imgUrlBase}${map.img}`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
