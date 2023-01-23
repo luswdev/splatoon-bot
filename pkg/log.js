@@ -7,33 +7,38 @@ class Log {
     }
 
     write (_str) {
-        console.log(`[${this.getCallerFile()}] ${_str}`)
+        console.log(`${this.getCallerFile()}: ${_str}`)
     }
 
     getCallerFile() {
-        let filename
+        let filePath
 
         let pst = Error.prepareStackTrace
         Error.prepareStackTrace = function (err, stack) { return stack; }
         try {
             var err = new Error()
-            var callerfile
-            var currentfile
+            var callerFile
+            var currentFile
 
-            currentfile = err.stack.shift().getFileName()
+            currentFile = err.stack.shift().getFileName()
 
             while (err.stack.length) {
-                callerfile = err.stack.shift().getFileName()
+                callerFile = err.stack.shift().getFileName()
 
-                if(currentfile !== callerfile) {
-                    filename = callerfile
+                if(currentFile !== callerFile) {
+                    filePath = callerFile
                     break
                 }
             }
         } catch (err) {}
         Error.prepareStackTrace = pst
 
-        return filename
+        let folders = filePath.split("/")
+        let fileName = folders[folders.length - 1]
+        let fileNameExt = fileName.split(".")
+        let file = fileNameExt[0]
+
+        return file
     }
 }
 
