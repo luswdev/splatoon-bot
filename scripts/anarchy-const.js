@@ -18,8 +18,8 @@ const WIN_BASE_PT   = [
 
 const C_CHALLENGE_COST = [  0,  20, 40]
 const B_CHALLENGE_COST = [ 55,  70, 85]
-const A_CHALLENGE_COST = [100, 110, 120]
-const S_CHALLENGE_COST = [150, 160]
+const A_CHALLENGE_COST = [110, 120, 130]
+const S_CHALLENGE_COST = [170, 180]
 const CHALLENGE_COST   = [ ].concat(C_CHALLENGE_COST)
                             .concat(B_CHALLENGE_COST)
                             .concat(A_CHALLENGE_COST)

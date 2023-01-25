@@ -90,7 +90,7 @@ const app = {
 
             this.share_result()
 
-            // this.results = []
+            this.results = []
             this.check_done()
             setTimeout( () => {
                 _e.target.blur()
