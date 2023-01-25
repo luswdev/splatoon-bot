@@ -8,36 +8,52 @@ SplatoonBot is a simple bot for Splatoon 3.
 - usage:
 
 ```bash
-?rw
+/rw
 ```
 
-- Random choose map from 55 different weapons.
+- Random choose a weapon from 68 different weapons.
 - Include hero weapon.
-- Support English, Japanese, and Traditional Chinese.
+- Support all language in Splatoon 3.
+
+### Random Private Battle Weapons
+
+- usage:
+
+```bash
+/rt
+```
+
+- Random choose 8 weapons from 68 different weapons.
+- Include hero weapon.
+- Support all language in Splatoon 3.
 
 ### Random Maps
 
 - usage:
 
 ```bash
-?rm
+/rm
 ```
 
-- Random choose map from 12 different maps.
-- Support English, Japanese, and Traditional Chinese.
+- Random choose a map from 12 different maps.
+- Support all language in Splatoon 3.
 
 ### Help Manual
 
 - usage:
 
 ```bash
-?help
+/help
 ```
 
 - Show manual in Discord.
 
-
 ## Version Log
+
+### 2023/01/25 v2.2.3
+- Update for Splatoon 3 v2.0.0
+- More language support
+- New command: /rt
 
 ### 2022/11/14 v2.1.4
 - Add link button to embedded reply
