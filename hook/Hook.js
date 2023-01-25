@@ -8,7 +8,7 @@ const MiddleWareDcTW = require('./middleware/MiddleWareDcTW.js')
 const MiddleWareDcLs = require('./middleware/MiddleWareDcLs.js')
 
 const ConnDB = require('../pkg/mysql.js')
-const { hook, db} = require('../config.json')
+const { hook, db } = require('../config.json')
 
 const { log } = require('../pkg/log.js')
 
