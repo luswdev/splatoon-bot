@@ -4,6 +4,7 @@ const { SlashCommandBuilder } = require('discord.js')
 
 const CmdRandomWeapon = require('./CmdRandomWeapon.js')
 const CmdRandomMap = require('./CmdRandomMap.js')
+const CmdRandomTeam = require('./CmdRandomTeam.js')
 const CmdBotInfo = require('./CmdBotInfo.js')
 
 const { log } = require('../pkg/log.js')
@@ -48,12 +49,14 @@ class CmdList {
 
 const cmdRw = new CmdRandomWeapon()
 const cmdRm = new CmdRandomMap()
+const cmdRt = new CmdRandomTeam()
 const cmdInfo = new CmdBotInfo()
 
 const cmds = new CmdList()
 
 cmds.installCmd(cmdRw)
 cmds.installCmd(cmdRm)
+cmds.installCmd(cmdRt)
 cmds.installCmd(cmdInfo)
 
 module.exports.parseCmd = (_cmdName, _interaction, _client) => {

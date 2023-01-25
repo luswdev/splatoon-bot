@@ -8,7 +8,7 @@ const arrJson = fs.readdirSync(__dirname)
 arrJson.forEach(file => {
     if (file.indexOf('.json') != -1) {
         let obj = JSON.parse(fs.readFileSync(`${__dirname}/${file}`, 'utf8'))
-        if (obj.img !== "") {
+        if (obj.icon !== "") {
             weaponList.push(obj)
         }
     }
