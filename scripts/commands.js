@@ -5,9 +5,20 @@ const commands = [
         color: 'var(--regular)',
         usage: 'rw',
         features: [
-            'Random choose map from 55 different weapons.',
+            'Random choose weapon from 68 different weapons.',
             'Include hero weapon.',
-            'Support English, Japanese, and Traditional Chinese.'
+            'Support all language in Splatoon 3.'
+        ]
+    },
+    {
+        title: 'Random Private Battle Weapons',
+        icon: 'fa-sync-alt',
+        color: 'var(--private)',
+        usage: 'rt',
+        features: [
+            'Random choose 8 weapons from 68 different weapons.',
+            'Include hero weapon.',
+            'Support all language in Splatoon 3.'
         ]
     },
     {
@@ -16,14 +27,14 @@ const commands = [
         color: 'var(--ranked)',
         usage: 'rm',
         features: [
-            'Random choose map from 12 different maps.',
-            'Support English, Japanese, and Traditional Chinese.'
+            'Random choose map from 14 different maps.',
+            'Support all language in Splatoon 3.'
         ]
     },
     {
         title: 'Help Manual',
         icon: 'fa-book',
-        color: 'var(--league)',
+        color: 'var(--x-match)',
         usage: 'help',
         features: [
             'Show manual in Discord.'

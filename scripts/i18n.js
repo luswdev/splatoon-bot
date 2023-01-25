@@ -5,14 +5,20 @@ const tstrings = {
         usage: 'Usage',
         rw: 'Random Weapon',
         rw_info: [
-            'Random choose map from 55 different weapons.',
+            'Random choose weapon from 68 different weapons.',
             'Include hero weapon.',
-            'Support English, Japanese, and Traditional Chinese.'
+            'Support all language in Splatoon 3.'
         ],
         rm: 'Random Map',
         rm_info: [
-            'Random choose map from 12 different maps.',
-            'Support English, Japanese, and Traditional Chinese.',
+            'Random choose map from 14 different maps.',
+            'Support all language in Splatoon 3.',
+        ],
+        rt: 'Random Private Battle Weapons',
+        rt_info: [
+            'Random choose 8 weapons from 68 different weapons.',
+            'Include hero weapon.',
+            'Support all language in Splatoon 3.',
         ],
         help: 'Help Manual',
         help_info: [
@@ -27,14 +33,20 @@ const tstrings = {
         usage: '指令',
         rw: '隨機武器',
         rw_info: [
-            '在 55 種武器中隨機抽選 1 個',
+            '在 68 種武器中隨機抽選 1 個',
             '包含英雄武器',
-            '支援英文、日文及正體中文'
+            '支援所有語言'
         ],
         rm: '隨機地圖',
         rm_info: [
-            '在 12 張地圖中隨機抽選 1 個',
-            '支援英文、日文及正體中文'
+            '在 14 張地圖中隨機抽選 1 個',
+            '支援所有語言'
+        ],
+        rt: '隨機私房武器組',
+        rt_info: [
+            '在 68 種武器中隨機抽選 8 個',
+            '包含英雄武器',
+            '支援所有語言'
         ],
         help: '指令幫助',
         help_info: [
