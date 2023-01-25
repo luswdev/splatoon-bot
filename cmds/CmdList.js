@@ -33,6 +33,17 @@ class CmdList {
             }
         })
     }
+
+    parseSelect(_selected, _interaction) {
+        log.write(`option: ${_selected.lang}`)
+
+        this.cmds.forEach( (cmd) => {
+            if (_selected.cmd == cmd.cmdKey) {
+                log.write(`inner command: ${cmd.cmdKey}`)
+                return cmd.updateLang(_selected, _interaction)
+            }
+        })
+    }
 }
 
 const cmdRw = new CmdRandomWeapon()
@@ -47,6 +58,10 @@ cmds.installCmd(cmdInfo)
 
 module.exports.parseCmd = (_cmdName, _interaction, _client) => {
     cmds.parseCmd(_cmdName, _interaction, _client)
+}
+
+module.exports.parseSelect = (_selected, _interaction) => {
+    cmds.parseSelect(_selected, _interaction)
 }
 
 module.exports.getCmdsJson = () => {

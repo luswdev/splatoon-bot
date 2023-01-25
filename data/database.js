@@ -1,5 +1,7 @@
 'use strict'
 
+const _ = require('lodash');
+
 const mapList = require('./maps/maps.js')
 const weaponList = require('./weapons/weapons.js')
 
@@ -10,36 +12,12 @@ class Database {
         this.weaponList = weaponList
     }
 
-    shuffle (_list) {
-        for (let i = _list.length - 1; i > 0; --i) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [_list[i], _list[j]] = [_list[j], _list[i]];
-        }
-        return _list;
-    }
-
-    randomIdx (_range) {
-        return Math.floor(Math.random() * Math.floor(_range))
-    }
-
     random (_range) {
-        const list = Array.from(Array(_range).keys())
-        const slist = this.shuffle(list)
-        const idx = this.randomIdx(_range)
+        const list = _.range(_range)
+        const slist = _.shuffle(list)
+        const idx = _.random(_range - 1)
         return slist[idx]
     }
-
-    // randomList (_list) {
-    //     const listIdx = database.random(_list.cnt)
-    //     const listRes = {
-    //         en:  _list.en[listIdx],
-    //         jp:  _list.jp[listIdx],
-    //         zh:  _list.zh[listIdx],
-    //         img: _list.img[listIdx],
-    //         color: _list.color[listIdx],
-    //     }
-    //     return listRes
-    // }
 
     randomList (_list) {
         const listIdx = database.random(_list.length)
@@ -57,5 +35,25 @@ module.exports.randomMap = () => {
 
 module.exports.randomWeapon = () => {
     const ret = database.randomList(database.weaponList)
+    return ret
+}
+
+module.exports.weaponIdx = (weapon) => {
+    const ret = database.weaponList.indexOf(weapon)
+    return ret
+}
+
+module.exports.mapIdx = (map) => {
+    const ret = database.mapList.indexOf(map)
+    return ret
+}
+
+module.exports.getWeapon = (idx) => {
+    const ret = database.weaponList[idx]
+    return ret
+}
+
+module.exports.getMap = (idx) => {
+    const ret = database.mapList[idx]
     return ret
 }

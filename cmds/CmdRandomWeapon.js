@@ -1,9 +1,9 @@
 'use strict'
 
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require('discord.js');
 
 const CmdBase = require('./CmdBase.js')
-const { randomWeapon } = require('../data/database.js')
+const { randomWeapon, weaponIdx, getWeapon } = require('../data/database.js')
 
 class CmdRandomWeapon extends CmdBase {
 
@@ -16,29 +16,47 @@ class CmdRandomWeapon extends CmdBase {
 
     doCmd (_interaction) {
         const weapon = this.randomWeapon()
-        const weaponEmbed = new EmbedBuilder()
-            .setColor(weapon.color)
-            .setTitle(':crossed_swords: Your random weapon')
-            .addFields(
-                { name: '武器', value: weapon.zhTW},
-                { name: 'Weapon', value: weapon.en},
-                { name: 'ブキ', value: weapon.ja},
-            )
-            .setThumbnail(`${this.imgUrlBase}${weapon.img}`)
+        const reply = this.buildMessage(weapon, 'en', _interaction)
+
+        this.mysql.saveResult(this.cmdKey, weapon.en, _interaction.user.id)
+
+        _interaction.reply(reply)
+    }
+
+    updateLang (_option, _interaction) {
+        const weapon = getWeapon(_option.res)
+        const reply = this.buildMessage(weapon, _option.lang, _interaction)
+        _interaction.update(reply)
+    }
+
+    buildMessage (_weapon, _lang, _interaction) {
+        const embed = new EmbedBuilder()
+            .setColor(_weapon.color)
+            .setTitle(`${_weapon.icon} Random Weapon!`)
+            .setDescription(`${_weapon[_lang]}`)
+            .setThumbnail(`${this.imgUrlBase}${_weapon.img}`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()
 
         const row = new ActionRowBuilder()
-            .addComponents( new ButtonBuilder()
-                .setURL(this.infoUrl(weapon.en))
-                .setLabel('Inkipedia')
-                .setStyle(ButtonStyle.Link)
-                .setEmoji('<:Squid:1021583273828306974>'),
-            )
+        const selected = new StringSelectMenuBuilder()
+            .setCustomId('select')
+            .setPlaceholder('Choose Language')
 
-        this.mysql.saveResult(this.cmdKey, weapon.en, _interaction.user.id)
+        this.langs.forEach( (e) => {
+            selected.addOptions([
+                new StringSelectMenuOptionBuilder()
+                    .setDefault(e.key === _lang)
+                    .setEmoji(e.emoji)
+                    .setDescription(e.name)
+                    .setLabel(e.name)
+                    .setValue(`{"lang": "${e.key}", "cmd": "${this.cmdKey}", "res": "${weaponIdx(_weapon)}"}`),
+            ])
+        })
 
-        _interaction.reply({ embeds: [weaponEmbed], components: [row] })
+        row.addComponents(selected)
+
+        return { embeds: [embed], components: [row] }
     }
 }
 
