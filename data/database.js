@@ -4,12 +4,16 @@ const _ = require('lodash');
 
 const mapList = require('./maps/maps.js')
 const weaponList = require('./weapons/weapons.js')
+const modeList = require('./modes/modes.js')
+const matchList = require('./matches/matches.js')
 
 class Database {
 
     constructor () {
         this.mapList = mapList
         this.weaponList = weaponList
+        this.modeList = modeList
+        this.matchList = matchList
     }
 
     random (_range) {
@@ -53,7 +57,22 @@ module.exports.getWeapon = (idx) => {
     return ret
 }
 
-module.exports.getMap = (idx) => {
-    const ret = database.mapList[idx]
+module.exports.getMap = (tar) => {
+    let ret
+    if (typeof(tar) == "string") {
+        ret = database.mapList.find( (e) => e.en == tar)
+    } else {
+        ret = database.mapList[tar]
+    }
+    return ret
+}
+
+module.exports.getMode = (name) => {
+    const ret = database.modeList.find( (e) => e.en == name)
+    return ret
+}
+
+module.exports.getMatch = (name) => {
+    const ret = database.matchList.find( (e) => e.en == name)
     return ret
 }

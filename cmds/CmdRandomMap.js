@@ -23,7 +23,7 @@ class CmdRandomMap extends CmdBase {
     }
 
     updateLang (_option, _interaction) {
-        const map = getMap(_option.res)
+        const map = getMap(parseInt(_option.res))
         const reply = this.buildMessage(map, _option.lang, _interaction)
         _interaction.update(reply)
     }

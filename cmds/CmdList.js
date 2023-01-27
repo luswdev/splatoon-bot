@@ -1,10 +1,11 @@
 'use strict'
 
-const { SlashCommandBuilder } = require('discord.js')
+const { SlashCommandBuilder, SlashCommandIntegerOption } = require('discord.js')
 
 const CmdRandomWeapon = require('./CmdRandomWeapon.js')
 const CmdRandomMap = require('./CmdRandomMap.js')
 const CmdRandomTeam = require('./CmdRandomTeam.js')
+const CmdRotation = require('./CmdRotation.js')
 const CmdBotInfo = require('./CmdBotInfo.js')
 
 const { log } = require('../pkg/log.js')
@@ -19,37 +20,52 @@ class CmdList {
     installCmd (_cmd) {
         log.write(`installing command: ${_cmd.cmdKey}`)
         this.cmds.push(_cmd)
-        this.cmdsBuilder.push(
-            new SlashCommandBuilder()
-                .setName(_cmd.cmdKey)
-                .setDescription(_cmd.cmdInfo)
-        )
+
+        const scb = new SlashCommandBuilder()
+            .setName(_cmd.cmdKey)
+            .setDescription(_cmd.cmdInfo)
+
+        _cmd.options.forEach( (opt) => {
+            if (opt.type == 'integer') {
+                scb.addIntegerOption(new SlashCommandIntegerOption()
+                        .setName(opt.name)
+                        .setDescription(opt.info)
+                        .setAutocomplete(true)
+                        .setMinValue(opt.min)
+                        .setMaxValue(opt.max))
+            }
+        })
+
+        this.cmdsBuilder.push(scb)
     }
 
-    parseCmd (_cmdName, _interaction, _client) {
-        this.cmds.forEach( (cmd) => {
+    async parseCmd (_cmdName, _interaction, _client) {
+        for (let cmd of this.cmds) {
             if (_cmdName == cmd.cmdKey) {
                 log.write(`inner command: ${cmd.cmdKey}`)
-                return cmd.doCmd(_interaction, _client)
+                await cmd.doCmd(_interaction, _client)
+                break
             }
-        })
+        }
     }
 
-    parseSelect(_selected, _interaction) {
+    async parseSelect(_selected, _interaction) {
         log.write(`option: ${_selected.lang}`)
 
-        this.cmds.forEach( (cmd) => {
+        for (let cmd of this.cmds) {
             if (_selected.cmd == cmd.cmdKey) {
                 log.write(`inner command: ${cmd.cmdKey}`)
-                return cmd.updateLang(_selected, _interaction)
+                await cmd.updateLang(_selected, _interaction)
+                break
             }
-        })
+        }
     }
 }
 
 const cmdRw = new CmdRandomWeapon()
 const cmdRm = new CmdRandomMap()
 const cmdRt = new CmdRandomTeam()
+const cmdRot = new CmdRotation()
 const cmdInfo = new CmdBotInfo()
 
 const cmds = new CmdList()
@@ -57,6 +73,7 @@ const cmds = new CmdList()
 cmds.installCmd(cmdRw)
 cmds.installCmd(cmdRm)
 cmds.installCmd(cmdRt)
+cmds.installCmd(cmdRot)
 cmds.installCmd(cmdInfo)
 
 module.exports.parseCmd = (_cmdName, _interaction, _client) => {

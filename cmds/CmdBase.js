@@ -5,7 +5,7 @@ const { db } = require('../config.json')
 
 class CmdBase {
 
-    constructor (_key = '', _info = '') {
+    constructor (_key = '', _info = '', _options = []) {
         this.cmdKey = _key
         this.cmdInfo = _info
         this.infoUrlBase = 'https://splatoonwiki.org/wiki/'
@@ -27,6 +27,8 @@ class CmdBase {
             { emoji: '🇳🇱', name: 'Nederlands', key: 'nl' },
             { emoji: '🇷🇺', name: 'Русский', key: 'ru' },
         ]
+
+        this.options = _options
     }
 
     infoUrl(_name) {
