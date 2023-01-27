@@ -14,7 +14,7 @@ class MiddleWare {
 
             if (_req.headers.authorization !== this.key) {
                 log.write('auth fail')
-                return _res.status(403).json({ error: "Unauthorized" })
+                return _res.status(403).json({ error: 'Unauthorized' })
             }
 
             const response = await this.parser(_req, _res)

@@ -1,6 +1,6 @@
 'use strict'
 
-const MiddleWare = require("./MiddleWare.js");
+const MiddleWare = require('./MiddleWare.js')
 
 class MiddleWareTopgg extends MiddleWare {
 
