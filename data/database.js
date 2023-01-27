@@ -1,19 +1,36 @@
 'use strict'
 
 const _ = require('lodash');
+const fs = require('fs')
 
-const mapList = require('./maps/maps.js')
-const weaponList = require('./weapons/weapons.js')
-const modeList = require('./modes/modes.js')
-const matchList = require('./matches/matches.js')
+const { log } = require('../pkg/log.js')
 
 class Database {
 
     constructor () {
-        this.mapList = mapList
-        this.weaponList = weaponList
-        this.modeList = modeList
-        this.matchList = matchList
+        this.mapList = this.buildList('maps')
+        this.weaponList = this.buildList('weapons')
+        this.modeList = this.buildList('modes')
+        this.matchList = this.buildList('matches')
+    }
+
+    buildList (_path) {
+        let list = []
+
+        const arrJson = fs.readdirSync(`${__dirname}/${_path}`)
+        arrJson.forEach(file => {
+            if (file.indexOf('.json') != -1) {
+                let obj = JSON.parse(fs.readFileSync(`${__dirname}/${_path}/${file}`, 'utf8'))
+                if (obj.en !== '') {
+                    list.push(obj)
+                }
+            }
+        })
+
+        log.write(`load ${_path}: ${list.length}`)
+        log.write(`skip empty ${_path}: ${arrJson.length - list.length - 1}`)
+
+        return list
     }
 
     random (_range) {
