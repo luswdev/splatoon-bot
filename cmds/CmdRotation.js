@@ -1,8 +1,8 @@
 'use strict'
 
-const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require('discord.js')
+const { EmbedBuilder } = require('discord.js')
 const axios = require('axios')
-const fs = require('fs')
+const { mkdirSync, writeFileSync } = require('fs')
 const { createCanvas, loadImage } = require('canvas')
 
 const CmdBase = require('./CmdBase.js')
@@ -15,8 +15,8 @@ class CmdRotation extends CmdBase {
 
         this.imgUrlBase = 'https://raw.githubusercontent.com/luswdev/splatoon-bot/bot-v2/img/map/'
 
-        fs.mkdirSync("/tmp/spl3/", { recursive: true });
-        fs.mkdirSync("/tmp/spl3/img", { recursive: true });
+        mkdirSync("/tmp/spl3/", { recursive: true });
+        mkdirSync("/tmp/spl3/img", { recursive: true });
     }
 
     async doCmd (_interaction) {
@@ -107,7 +107,7 @@ class CmdRotation extends CmdBase {
         ctx.drawImage(map1Img, 0, 0, 500, 500)
         ctx.drawImage(map2Img, 500, 0, 500, 500)
 
-        fs.writeFileSync(_outPath, canvas.toBuffer())
+        writeFileSync(_outPath, canvas.toBuffer())
     }
 
     async buildEmbed(_rotation, _match, _lang, _interaction) {
@@ -151,23 +151,7 @@ class CmdRotation extends CmdBase {
         attachments.push(`/tmp/spl3/img/Anarchy Battle (Open).png`)
         attachments.push(`/tmp/spl3/img/X Battle.png`)
 
-        const row = new ActionRowBuilder()
-        const selected = new StringSelectMenuBuilder()
-            .setCustomId('select')
-            .setPlaceholder('Choose Language')
-
-        this.langs.forEach( (e) => {
-            selected.addOptions([
-                new StringSelectMenuOptionBuilder()
-                    .setDefault(e.key === _lang)
-                    .setEmoji(e.emoji)
-                    .setDescription(e.name)
-                    .setLabel(e.name)
-                    .setValue(`{"lang": "${e.key}", "cmd": "${this.cmdKey}", "rotation": ${_rotation}}`),
-            ])
-        })
-
-        row.addComponents(selected)
+        const row = this.buildLangSelect({rotation: _rotation}, _lang)
 
         return { embeds: embeds, components: [row], files: attachments }
     }

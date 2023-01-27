@@ -1,6 +1,6 @@
 'use strict'
 
-const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require('discord.js');
+const { EmbedBuilder } = require('discord.js')
 
 const CmdBase = require('./CmdBase.js')
 const { randomWeapon, weaponIdx, getWeapon } = require('../data/database.js')
@@ -38,23 +38,7 @@ class CmdRandomWeapon extends CmdBase {
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()
 
-        const row = new ActionRowBuilder()
-        const selected = new StringSelectMenuBuilder()
-            .setCustomId('select')
-            .setPlaceholder('Choose Language')
-
-        this.langs.forEach( (e) => {
-            selected.addOptions([
-                new StringSelectMenuOptionBuilder()
-                    .setDefault(e.key === _lang)
-                    .setEmoji(e.emoji)
-                    .setDescription(e.name)
-                    .setLabel(e.name)
-                    .setValue(`{"lang": "${e.key}", "cmd": "${this.cmdKey}", "res": "${weaponIdx(_weapon)}"}`),
-            ])
-        })
-
-        row.addComponents(selected)
+        const row = this.buildLangSelect({res: weaponIdx(_weapon)}, _lang)
 
         return { embeds: [embed], components: [row] }
     }

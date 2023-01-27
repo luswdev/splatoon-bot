@@ -1,6 +1,6 @@
 'use strict'
 
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
 const { version } = require('../package.json');
 
 const CmdBase = require('./CmdBase.js')
@@ -14,7 +14,7 @@ class CmdBotInfo extends CmdBase {
     doCmd (_interaction, _client) {
         const infoEmbed = new EmbedBuilder()
             .setColor(0xB3FDDF)
-            .setThumbnail('https://github.com/luswdev/splatoon-bot/blob/doc-page/img/bot-icon.png?raw=true')
+            .setThumbnail(_client.user.displayAvatarURL())
             .setTitle(':information_source: Help Manual')
             .setDescription(`專門為斯普拉遁 3 的機器人啦\n` +
                             `A simple bot for Splatoon 3\n` +

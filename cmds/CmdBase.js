@@ -1,5 +1,7 @@
 'use strict'
 
+const { ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require('discord.js')
+
 const ConnDB = require('../pkg/mysql.js')
 const { db } = require('../config.json')
 
@@ -31,13 +33,31 @@ class CmdBase {
         this.options = _options
     }
 
-    infoUrl(_name) {
-        if (typeof(_name) !== 'string') {
-            return ''
-        }
+    buildLangSelect (_otherVal, _curLang) {
+        const row = new ActionRowBuilder()
+        const selected = new StringSelectMenuBuilder()
+            .setCustomId('select')
+            .setPlaceholder('Choose Language')
 
-        let replaceSpace = _name.replace(' ', '_')
-        return this.infoUrlBase + encodeURI(replaceSpace)
+        for (let lang of this.langs) {
+            const baseVal = {
+                lang: lang.key,
+                cmd: this.cmdKey,
+            }
+            const val = {...baseVal, ..._otherVal}
+
+            selected.addOptions([
+                new StringSelectMenuOptionBuilder()
+                    .setDefault(lang.key === _curLang)
+                    .setEmoji(lang.emoji)
+                    .setDescription(lang.name)
+                    .setLabel(lang.name)
+                    .setValue(JSON.stringify(val)),
+            ])
+        }
+        row.addComponents(selected)
+
+        return row
     }
 }
 

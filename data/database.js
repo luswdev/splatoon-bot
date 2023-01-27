@@ -1,7 +1,7 @@
 'use strict'
 
-const _ = require('lodash');
-const fs = require('fs')
+const _ = require('lodash')
+const { readdirSync, readFileSync } = require('fs')
 
 const { log } = require('../pkg/log.js')
 
@@ -17,15 +17,15 @@ class Database {
     buildList (_path) {
         let list = []
 
-        const arrJson = fs.readdirSync(`${__dirname}/${_path}`)
-        arrJson.forEach(file => {
-            if (file.indexOf('.json') != -1) {
-                let obj = JSON.parse(fs.readFileSync(`${__dirname}/${_path}/${file}`, 'utf8'))
+        const arrJson = readdirSync(`${__dirname}/${_path}`)
+        for (let file of arrJson) {
+            if (file.indexOf('.json') !== -1) {
+                let obj = JSON.parse(readFileSync(`${__dirname}/${_path}/${file}`, 'utf8'))
                 if (obj.en !== '') {
                     list.push(obj)
                 }
             }
-        })
+        }
 
         log.write(`load ${_path}: ${list.length}`)
         log.write(`skip empty ${_path}: ${arrJson.length - list.length - 1}`)

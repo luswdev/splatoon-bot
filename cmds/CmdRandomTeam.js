@@ -1,7 +1,7 @@
 'use strict'
 
-const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require('discord.js');
-const _ = require('lodash');
+const { EmbedBuilder } = require('discord.js')
+const _ = require('lodash')
 
 const CmdBase = require('./CmdBase.js')
 const { randomWeapon, getWeapon, weaponIdx } = require('../data/database.js')
@@ -42,27 +42,15 @@ class CmdRandomTeam extends CmdBase {
                                 `${_weapons[2 + i * 4].icon} ${_weapons[2 + i * 4][_lang]}\n` +
                                 `${_weapons[3 + i * 4].icon} ${_weapons[3 + i * 4][_lang]}`)
                 .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
-                .setThumbnail("https://cdn.wikimg.net/en/splatoonwiki/images/6/60/Mode_Icon_Private_Battle_2.png")
+                .setThumbnail('https://cdn.wikimg.net/en/splatoonwiki/images/6/60/Mode_Icon_Private_Battle_2.png')
                 .setTimestamp()
         }
 
-        const row = new ActionRowBuilder()
-        const selected = new StringSelectMenuBuilder()
-            .setCustomId('select')
-            .setPlaceholder('Choose Language')
-
-        this.langs.forEach( (e) => {
-            selected.addOptions([
-                new StringSelectMenuOptionBuilder()
-                    .setDefault(e.key === _lang)
-                    .setEmoji(e.emoji)
-                    .setDescription(e.name)
-                    .setLabel(e.name)
-                    .setValue(`{"lang": "${e.key}", "cmd": "${this.cmdKey}", "res": ["${weaponIdx(_weapons[0])}", "${weaponIdx(_weapons[1])}", "${weaponIdx(_weapons[2])}", "${weaponIdx(_weapons[3])}", "${weaponIdx(_weapons[4])}", "${weaponIdx(_weapons[5])}", "${weaponIdx(_weapons[6])}", "${weaponIdx(_weapons[7])}"]}`),
-            ])
-        })
-
-        row.addComponents(selected)
+        let val = {res: []}
+        for (let weapon of _weapons) {
+            val.res.push(weaponIdx(weapon))
+        }
+        const row = this.buildLangSelect(val, _lang)
 
         return { embeds: embeds, components: [row] }
     }
