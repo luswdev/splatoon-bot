@@ -11,7 +11,7 @@ const { getMap, getMode, getMatch } = require('../data/database.js')
 class CmdRotation extends CmdBase {
 
     constructor () {
-        super('rot', '查看現在的地圖 get current maps', [{type: 'integer', name: 'rotation', info: '第幾輪模式 Which Rotation?', min: 0, max:11}])
+        super('rot', '查看現在的地圖 get current maps rotation', [{type: 'integer', name: 'rotation', info: '第幾輪模式 Which Rotation?', min: 0, max:11}])
 
         this.imgUrlBase = 'https://raw.githubusercontent.com/luswdev/splatoon-bot/bot-v2/img/map/'
 

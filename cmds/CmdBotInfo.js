@@ -20,9 +20,10 @@ class CmdBotInfo extends CmdBase {
                             `A simple bot for Splatoon 3\n` +
                             `Visit website: https://lusw.dev/splatoon`)
             .addFields(
-                { name: '/rw', value: '隨機武器！\nRandom pick a weapon!', inline: true },
-                { name: '/rm', value: '隨機地圖！\nRandom pick a map!', inline: true },
-                { name: '/rt', value: '隨機私房武器組\nRandom pick full teams of weapons in Private Battle!', inline: true },
+                { name: '/rw', value: '隨機武器！\nRandom pick a weapon!\ntry it: </rw:1068585446088642612>', inline: true },
+                { name: '/rm', value: '隨機地圖！\nRandom pick a map!\ntry it: </rm:1068585605602230323>', inline: true },
+                { name: '/rt', value: '隨機私房武器組\nRandom pick full teams of weapons in Private Battle!\ntry it: </rt:1068585665610125422>', inline: true },
+                { name: '/rot', value: '查看現在的地圖\nGet current maps rotation!\ntry it: </rot:1068530389884358726>', inline: true },
                 { name: 'Version', value: version },
             )
             .setFooter({ text: `${_client.user.username} | A simple bot for Splatoon 3`, iconURL: _client.user.displayAvatarURL() })
