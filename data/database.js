@@ -76,7 +76,7 @@ module.exports.getWeapon = (idx) => {
 
 module.exports.getMap = (tar) => {
     let ret
-    if (typeof(tar) == "string") {
+    if (typeof(tar) == 'string') {
         ret = database.mapList.find( (e) => e.en == tar)
     } else {
         ret = database.mapList[tar]

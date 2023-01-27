@@ -15,8 +15,8 @@ class CmdRotation extends CmdBase {
 
         this.imgUrlBase = 'https://raw.githubusercontent.com/luswdev/splatoon-bot/bot-v2/img/map/'
 
-        mkdirSync("/tmp/spl3/", { recursive: true });
-        mkdirSync("/tmp/spl3/img", { recursive: true });
+        mkdirSync('/tmp/spl3/', { recursive: true });
+        mkdirSync('/tmp/spl3/img', { recursive: true });
     }
 
     async doCmd (_interaction) {
@@ -140,16 +140,16 @@ class CmdRotation extends CmdBase {
         const rotation = await this.fetchRotation(_rotation)
 
         const embeds = []
-        embeds.push(await this.buildEmbed(rotation.regular, "Regular Battle", _lang, _interaction))
-        embeds.push(await this.buildEmbed(rotation.anarchy[0], "Anarchy Battle (Series)", _lang, _interaction))
-        embeds.push(await this.buildEmbed(rotation.anarchy[1], "Anarchy Battle (Open)", _lang, _interaction))
-        embeds.push(await this.buildEmbed(rotation.x_match, "X Battle", _lang, _interaction))
+        embeds.push(await this.buildEmbed(rotation.regular, 'Regular Battle', _lang, _interaction))
+        embeds.push(await this.buildEmbed(rotation.anarchy[0], 'Anarchy Battle (Series)', _lang, _interaction))
+        embeds.push(await this.buildEmbed(rotation.anarchy[1], 'Anarchy Battle (Open)', _lang, _interaction))
+        embeds.push(await this.buildEmbed(rotation.x_match, 'X Battle', _lang, _interaction))
 
         const attachments = []
-        attachments.push(`/tmp/spl3/img/Regular Battle.png`)
-        attachments.push(`/tmp/spl3/img/Anarchy Battle (Series).png`)
-        attachments.push(`/tmp/spl3/img/Anarchy Battle (Open).png`)
-        attachments.push(`/tmp/spl3/img/X Battle.png`)
+        attachments.push('/tmp/spl3/img/Regular Battle.png')
+        attachments.push('/tmp/spl3/img/Anarchy Battle (Series).png')
+        attachments.push('/tmp/spl3/img/Anarchy Battle (Open).png')
+        attachments.push('/tmp/spl3/img/X Battle.png')
 
         const row = this.buildLangSelect({rotation: _rotation}, _lang)
 

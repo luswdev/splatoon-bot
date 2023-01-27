@@ -33,9 +33,9 @@ class Log {
         } catch (err) {}
         Error.prepareStackTrace = pst
 
-        let folders = filePath.split("/")
+        let folders = filePath.split('/')
         let fileName = folders[folders.length - 1]
-        let fileNameExt = fileName.split(".")
+        let fileNameExt = fileName.split('.')
         let file = fileNameExt[0]
 
         return file
