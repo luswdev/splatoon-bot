@@ -1,6 +1,6 @@
 'use strict'
 
-const { EmbedBuilder } = require('discord.js')
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
 const axios = require('axios')
 const { mkdirSync, writeFileSync } = require('fs')
 const { createCanvas, loadImage } = require('canvas')
@@ -153,7 +153,15 @@ class CmdRotation extends CmdBase {
 
         const row = this.buildLangSelect({rotation: _rotation}, _lang)
 
-        return { embeds: embeds, components: [row], files: attachments }
+        const link = new ActionRowBuilder()
+            .addComponents( new ButtonBuilder()
+                .setURL('https://splatoon3.ink')
+                .setLabel('More Information')
+                .setStyle(ButtonStyle.Link)
+                .setEmoji('<:squidgreen:568201618974048279>'),
+            )
+
+        return { embeds: embeds, components: [row, link], files: attachments }
     }
 }
 
