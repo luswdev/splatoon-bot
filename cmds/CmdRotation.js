@@ -15,17 +15,17 @@ class CmdRotation extends CmdBase {
         this.dataPath = '/tmp/spl3/rotation.json'
     }
 
-    doCmd (_interaction) {
+    async doCmd (_interaction) {
         const rotation = _interaction.options.getInteger('rotation') ?? 0
         const lang = this.locale2Lang(_interaction.locale) ?? 'en'
         const reply = this.buildMessage(lang, rotation, _interaction)
-        _interaction.reply(reply)
+        await _interaction.reply(reply)
     }
 
-    updateLang (_option, _interaction) {
+    async updateLang (_option, _interaction) {
         const rotation = _option.rotation
         const reply = this.buildMessage(_option.lang, rotation, _interaction)
-        _interaction.update(reply)
+        await _interaction.update(reply)
     }
 
     fetchRotation (_idx) {

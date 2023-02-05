@@ -11,7 +11,7 @@ class CmdBotInfo extends CmdBase {
         super('help', '指令幫助 Bot information')
     }
 
-    doCmd (_interaction, _client) {
+    async doCmd (_interaction, _client) {
         const infoEmbed = new EmbedBuilder()
             .setColor(0xB3FDDF)
             .setThumbnail(_client.user.displayAvatarURL())
@@ -36,7 +36,7 @@ class CmdBotInfo extends CmdBase {
                 .setEmoji('<:splatoonbot:1042279520759185478>'),
             )
 
-        _interaction.reply({ embeds: [infoEmbed], components: [row] })
+        await _interaction.reply({ embeds: [infoEmbed], components: [row] })
     }
 }
 
