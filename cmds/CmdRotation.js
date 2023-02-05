@@ -17,7 +17,8 @@ class CmdRotation extends CmdBase {
 
     doCmd (_interaction) {
         const rotation = _interaction.options.getInteger('rotation') ?? 0
-        const reply = this.buildMessage('en', rotation, _interaction)
+        const lang = this.locale2Lang(_interaction.locale) ?? 'en'
+        const reply = this.buildMessage(lang, rotation, _interaction)
         _interaction.reply(reply)
     }
 

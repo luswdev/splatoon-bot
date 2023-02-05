@@ -17,7 +17,8 @@ class CmdRandomTeam extends CmdBase {
 
     doCmd (_interaction) {
         const weapons = _.times(8, () => this.randomWeapon())
-        const reply = this.buildMessage(weapons, 'en', _interaction)
+        const lang = this.locale2Lang(_interaction.locale) ?? 'en'
+        const reply = this.buildMessage(weapons, lang, _interaction)
         _interaction.reply(reply)
     }
 

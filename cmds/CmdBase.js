@@ -33,6 +33,43 @@ class CmdBase {
         this.options = _options
     }
 
+    locale2Lang (_locale) {
+        const localeTable = [
+            { locale: 'da', key: 'en' },
+            { locale: 'de', key: 'de' },
+            { locale: 'en-GB', key: 'en' },
+            { locale: 'en-US', key: 'en' },
+            { locale: 'es-ES', key: 'esE' },
+            { locale: 'fr', key: 'frE' },
+            { locale: 'hr', key: 'en' },
+            { locale: 'it', key: 'it' },
+            { locale: 'lt', key: 'en' },
+            { locale: 'hu', key: 'en' },
+            { locale: 'nl', key: 'nl' },
+            { locale: 'no', key: 'en' },
+            { locale: 'pl', key: 'en' },
+            { locale: 'pt-BR', key: 'en' },
+            { locale: 'ro', key: 'en' },
+            { locale: 'fi', key: 'en' },
+            { locale: 'sv-SE', key: 'en' },
+            { locale: 'vi', key: 'en' },
+            { locale: 'tr', key: 'en' },
+            { locale: 'cs', key: 'en' },
+            { locale: 'el', key: 'en' },
+            { locale: 'bg', key: 'en' },
+            { locale: 'ru', key: 'ru' },
+            { locale: 'uk', key: 'en' },
+            { locale: 'hi', key: 'en' },
+            { locale: 'th', key: 'en' },
+            { locale: 'zh-CN', key: 'zhCN' },
+            { locale: 'ja', key: 'ja' },
+            { locale: 'zh-TW', key: 'zhTW' },
+            { locale: 'ko', key: 'ko' },
+        ]
+
+        return localeTable.filter( (entry) => { return entry.locale === _locale })[0].key
+    }
+
     buildLangSelect (_otherVal, _curLang) {
         const row = new ActionRowBuilder()
         const selected = new StringSelectMenuBuilder()

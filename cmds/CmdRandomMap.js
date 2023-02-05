@@ -15,7 +15,8 @@ class CmdRandomMap extends CmdBase {
 
     doCmd (_interaction) {
         const map = this.randomMap()
-        const reply = this.buildMessage(map, 'en', _interaction)
+        const lang = this.locale2Lang(_interaction.locale) ?? 'en'
+        const reply = this.buildMessage(map, lang, _interaction)
 
         this.mysql.saveResult(this.cmdKey, map.en, _interaction.user.id)
 

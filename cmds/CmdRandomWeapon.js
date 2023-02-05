@@ -16,7 +16,8 @@ class CmdRandomWeapon extends CmdBase {
 
     doCmd (_interaction) {
         const weapon = this.randomWeapon()
-        const reply = this.buildMessage(weapon, 'en', _interaction)
+        const lang = this.locale2Lang(_interaction.locale) ?? 'en'
+        const reply = this.buildMessage(weapon, lang, _interaction)
 
         this.mysql.saveResult(this.cmdKey, weapon.en, _interaction.user.id)
 
