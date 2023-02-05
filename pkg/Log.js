@@ -35,7 +35,7 @@ class Log {
 
         let folders = filePath.split('/')
         let fileName = folders[folders.length - 1]
-        let fileNameExt = fileName.split('.')
+        let fileNameExt = fileName.split('.js')
         let file = fileNameExt[0]
 
         return file

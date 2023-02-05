@@ -5,7 +5,7 @@ const { bot } = require('./config.json')
 
 const { getCmdsJson } = require('./cmds/CmdList.js')
 
-const { log } = require('./pkg/log.js')
+const { log } = require('./pkg/Log.js')
 
 const commands = getCmdsJson()
 

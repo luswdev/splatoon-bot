@@ -2,7 +2,7 @@
 
 const { EmbedBuilder } = require('discord.js')
 const CmdBase = require('./CmdBase.js')
-const { randomMap, mapIdx, getMap } = require('../data/database.js')
+const { randomMap, mapIdx, getMap } = require('../data/Database.js')
 
 class CmdRandomMap extends CmdBase {
 

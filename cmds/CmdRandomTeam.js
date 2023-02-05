@@ -4,8 +4,7 @@ const { EmbedBuilder } = require('discord.js')
 const _ = require('lodash')
 
 const CmdBase = require('./CmdBase.js')
-const { randomWeapon, getWeapon, weaponIdx } = require('../data/database.js')
-const { log } = require('../pkg/log.js')
+const { randomWeapon, getWeapon, weaponIdx } = require('../data/Database.js')
 
 class CmdRandomTeam extends CmdBase {
 

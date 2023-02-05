@@ -8,7 +8,7 @@ const CmdRandomTeam = require('./CmdRandomTeam.js')
 const CmdRotation = require('./CmdRotation.js')
 const CmdBotInfo = require('./CmdBotInfo.js')
 
-const { log } = require('../pkg/log.js')
+const { log } = require('../pkg/Log.js')
 
 class CmdList {
 

@@ -2,7 +2,7 @@
 
 const { ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require('discord.js')
 
-const ConnDB = require('../pkg/mysql.js')
+const ConnDB = require('../pkg/ConnDB.js')
 const { db } = require('../config.json')
 
 class CmdBase {

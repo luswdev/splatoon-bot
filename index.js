@@ -5,8 +5,9 @@ const { bot } = require('./config.json')
 
 const { parseCmd, parseSelect } = require('./cmds/CmdList.js')
 const Hook = require('./hook/Hook.js')
+const { splatoon3InkScheduler } = require('./pkg/Splatoon3Ink.js')
 
-const { log } = require('./pkg/log.js')
+const { log } = require('./pkg/Log.js')
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 
@@ -17,6 +18,8 @@ client.once('ready', () => {
     client.user.setActivity('Splatoon 3', { type: ActivityType.Playing })
 
     hooks.connect()
+
+    splatoon3InkScheduler()
 })
 
 client.on('interactionCreate', async interaction => {

@@ -3,7 +3,7 @@
 const _ = require('lodash')
 const { readdirSync, readFileSync } = require('fs')
 
-const { log } = require('../pkg/log.js')
+const { log } = require('../pkg/Log.js')
 
 class Database {
 

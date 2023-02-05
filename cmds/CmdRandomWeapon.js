@@ -3,7 +3,7 @@
 const { EmbedBuilder } = require('discord.js')
 
 const CmdBase = require('./CmdBase.js')
-const { randomWeapon, weaponIdx, getWeapon } = require('../data/database.js')
+const { randomWeapon, weaponIdx, getWeapon } = require('../data/Database.js')
 
 class CmdRandomWeapon extends CmdBase {
 
