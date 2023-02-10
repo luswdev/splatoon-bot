@@ -100,11 +100,13 @@
             "details": {
                 "zh": [
                     "顯示現在及 24 小時內的所有模式",
-                    "支援所有語言"
+                    "支援所有語言",
+                    "資料來源: [Splatoon3.ink](https://splatoon3.ink)"
                 ],
                 "en": [
                     "Show current and within 24 hours stages rotation",
-                    "Support all language in Splatoon 3."
+                    "Support all language in Splatoon 3.",
+                    "Data from: [Splatoon3.ink](https://splatoon3.ink)"
                 ]
             },
             "examples": [
@@ -130,12 +132,12 @@
                 },
                 {
                     "zh": {
-                        "info": "查看下 n 輪的地圖及模式",
-                        "cmd": "/rot n"
+                        "info": "查看下 `n` 輪的地圖及模式",
+                        "cmd": "/rot `n`"
                     },
                     "en": {
-                        "info": "Get next n matchs and stages rotation",
-                        "cmd": "/rot n"
+                        "info": "Get next `n` matchs and stages rotation",
+                        "cmd": "/rot `n`"
                     }
                 }
             ]
@@ -149,11 +151,13 @@
             "details": {
                 "zh": [
                     "顯示現在及未來 4 輪的鮭魚跑地圖及武器組",
-                    "支援所有語言"
+                    "支援所有語言",
+                    "資料來源: [Splatoon3.ink](https://splatoon3.ink)"
                 ],
                 "en": [
                     "Show current and future 4 rotation of Salmon Run stage and weapon set",
-                    "Support all language in Splatoon 3."
+                    "Support all language in Splatoon 3.",
+                    "Data from: [Splatoon3.ink](https://splatoon3.ink)"
                 ]
             },
             "examples": [
@@ -179,12 +183,12 @@
                 },
                 {
                     "zh": {
-                        "info": "查看下 n 輪的鮭魚跑地圖及武器組",
-                        "cmd": "/sr n"
+                        "info": "查看下 `n` 輪的鮭魚跑地圖及武器組",
+                        "cmd": "/sr `n`"
                     },
                     "en": {
-                        "info": "Get next n Salmon Run stage and weapon set",
-                        "cmd": "/sr n"
+                        "info": "Get next `n` Salmon Run stage and weapon set",
+                        "cmd": "/sr `n`"
                     }
                 }
             ]
@@ -216,12 +220,12 @@
                 },
                 {
                     "zh": {
-                            "info": "查看指令說明",
+                            "info": "查看 `指令` 說明",
                             "cmd": "/help `cmd`"
                     },
                     "en": {
-                        "info": "Get specific command information",
-                        "cmd": "/help ``cmd`` "
+                        "info": "Get specific `command` information",
+                        "cmd": "/help `cmd` "
                     }
                 }
             ]
