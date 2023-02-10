@@ -1,6 +1,6 @@
 'use strict'
 
-const { Client, GatewayIntentBits, ActivityType } = require('discord.js')
+const { Client, GatewayIntentBits, ActivityType, Collection } = require('discord.js')
 const { bot } = require('./config.json')
 
 const { parseCmd, parseSelect } = require('./cmds/CmdList.js')
@@ -13,13 +13,16 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 
 const hooks = new Hook()
 
-client.once('ready', () => {
+client.once('ready', async () => {
     log.write('bot ready')
     client.user.setActivity('Splatoon 3', { type: ActivityType.Playing })
 
     hooks.connect()
 
     splatoon3InkScheduler()
+
+    client.commands = new Collection()
+    client.commands = await client.application.commands.fetch()
 })
 
 client.on('interactionCreate', async interaction => {

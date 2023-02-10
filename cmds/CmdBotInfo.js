@@ -70,6 +70,7 @@ class CmdBotInfo extends CmdBase {
 
         for (let cmd of cmds) {
             if (cmd.value === _cmd) {
+                let command = _client.commands.toJSON().find( (c) => c.name === cmd.value );
                 isCmd = true
 
                 let description = ''
@@ -84,10 +85,11 @@ class CmdBotInfo extends CmdBase {
                 args = args.substring(0, args.length - 1)
                 let usage = cmd.arguments.length ? `[${args}]` : ''
 
+                let cmdRaw = `</${command.name}:${command.id}>`
                 let examples = ''
                 for (let i = 0; i < cmd.examples.length; ++i) {
                     examples += `${i + 1}. ${cmd.examples[i][_lang].info}\n`
-                    examples += `\`\`\`${cmd.examples[i][_lang].cmd} \`\`\`\n`
+                    examples += `${cmd.examples[i][_lang].cmd.replace(command.name, cmdRaw)} \n\n`
                 }
 
                 infoEmbed.setTitle(`${cmd.icon} | ${cmd.value}`)
@@ -95,7 +97,6 @@ class CmdBotInfo extends CmdBase {
                     .addFields(
                         { name: `${_lang == 'zh' ? '用法' : 'Usage'}`, value: `\`\`\`/${cmd.value} ${usage}\`\`\`` },
                         { name: `${_lang == 'zh' ? '範例' : 'Example'}`, value: `${examples}` },
-                        { name: `${_lang == 'zh' ? '試一下' : 'Try It'}`, value: `</${cmd.value}:${cmd.raw}>` },
                     )
                 break;
             }
