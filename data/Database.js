@@ -8,12 +8,13 @@ const { log } = require('../pkg/Log.js')
 class Database {
 
     constructor () {
-        this.mapList = this.buildList('maps')
-        this.weaponList = this.buildList('weapons')
-        this.modeList = this.buildList('modes')
-        this.matchList = this.buildList('matches')
-        this.salmonList = this.buildList('salmon_run')
-        this.labelList = this.buildList('labels')
+        this.dataList = {}
+        this.buildList('maps')
+        this.buildList('weapons')
+        this.buildList('modes')
+        this.buildList('matches')
+        this.buildList('salmon_run')
+        this.buildList('labels')
     }
 
     buildList (_path) {
@@ -32,7 +33,9 @@ class Database {
         log.write(`load ${_path}: ${list.length}`)
         log.write(`skip empty ${_path}: ${arrJson.length - list.length - 1}`)
 
-        return list
+        let obj = {}
+        obj[_path] = list
+        this.dataList = {...this.dataList, ...obj}
     }
 
     random (_range) {
@@ -47,66 +50,63 @@ class Database {
         const listRes = _list[listIdx]
         return listRes
     }
+
+    getListIdx (_target, _list) {
+        const ret = database.dataList[_list].indexOf(_target)
+        return ret
+    }
+
+    getListObject (_target, _list) {
+        let ret
+        if (typeof(_target) == 'string') {
+            ret = database.dataList[_list].find( (e) => e.en == _target)
+        } else {
+            ret = database.dataList[_list][_target]
+        }
+        return ret
+    }
 }
 
 const database = new Database()
 
 module.exports.randomMap = () => {
-    const ret = database.randomList(database.mapList)
+    const ret = database.randomList(database.dataList['maps'])
     return ret
 }
 
 module.exports.randomWeapon = () => {
-    const ret = database.randomList(database.weaponList)
+    const ret = database.randomList(database.dataList['weapons'])
     return ret
 }
 
 module.exports.weaponIdx = (weapon) => {
-    const ret = database.weaponList.indexOf(weapon)
-    return ret
+    return database.getListIdx(weapon, 'weapons')
 }
 
 module.exports.mapIdx = (map) => {
-    const ret = database.mapList.indexOf(map)
-    return ret
+    return database.getListIdx(map, 'maps')
 }
 
 module.exports.getWeapon = (tar) => {
-    let ret
-    if (typeof(tar) == 'string') {
-        ret = database.weaponList.find( (e) => e.en == tar)
-    } else {
-        ret = database.weaponList[idx]
-    }
-    return ret
+    return database.getListObject(tar, 'weapons')
 }
 
 module.exports.getMap = (tar) => {
-    let ret
-    if (typeof(tar) == 'string') {
-        ret = database.mapList.find( (e) => e.en == tar)
-    } else {
-        ret = database.mapList[tar]
-    }
-    return ret
+    return database.getListObject(tar, 'maps')
 }
 
-module.exports.getMode = (name) => {
-    const ret = database.modeList.find( (e) => e.en == name)
-    return ret
+module.exports.getMode = (tar) => {
+    return database.getListObject(tar, 'modes')
 }
 
-module.exports.getMatch = (name) => {
-    const ret = database.matchList.find( (e) => e.en == name)
-    return ret
+module.exports.getMatch = (tar) => {
+    return database.getListObject(tar, 'matches')
 }
 
-module.exports.getSalmon = (name) => {
-    const ret = database.salmonList.find( (e) => e.en == name)
-    return ret
+module.exports.getSalmon = (tar) => {
+    return database.getListObject(tar, 'salmon_run')
 }
 
-module.exports.getLabel = (name) => {
-    const ret = database.labelList.find( (e) => e.en == name)
-    return ret
+module.exports.getLabel = (tar) => {
+    return database.getListObject(tar, 'labels')
 }
