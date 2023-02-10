@@ -35,8 +35,8 @@ client.on('interactionCreate', async interaction => {
     } else if (interaction.isStringSelectMenu()) {
         const selected = JSON.parse(interaction.values[0])
 
-        log.write(`command ${selected.cmd} change language to ${selected.lang}`)
-        await parseSelect(selected, interaction)
+        log.write(`command ${selected.cmd} call select: ${JSON.stringify(selected)}`)
+        await parseSelect(selected, interaction, client)
     }
 })
 

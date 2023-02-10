@@ -1,0 +1,230 @@
+{
+    "cmds": [
+        {
+            "info": "隨機武器 Random pick a weapon",
+            "value": "rw",
+            "arguments": [],
+            "icon": "⚔️",
+            "raw": "1073647340449173645",
+            "details": {
+                "zh": [
+                    "在 68 種武器中隨機抽選 1 個",
+                    "包含英雄武器",
+                    "支援所有語言"
+                ],
+                "en": [
+                    "Random choose weapon from 68 different weapons.",
+                    "Include hero weapon.",
+                    "Support all language in Splatoon 3."
+                ]
+            },
+            "examples": [
+                {
+                    "zh": {
+                        "info": "取得隨機武器",
+                        "cmd": "/rw"
+                    },
+                    "en": {
+                        "info": "Get a random weapon",
+                        "cmd": "/rw"
+                    }
+                }
+            ]
+        },
+        {
+            "info": "隨機地圖 Random pick a map",
+            "value": "rm",
+            "arguments": [],
+            "icon": "🗺️",
+            "raw": "1073647402357104670",
+            "details": {
+                "zh": [
+                    "在 14 張地圖中隨機抽選 1 個",
+                    "支援所有語言"
+                ],
+                "en": [
+                    "Random choose map from 14 different maps.",
+                    "Support all language in Splatoon 3."
+                ]
+            },
+            "examples": [
+                {
+                    "zh": {
+                        "info": "取得隨機地圖",
+                        "cmd": "/rm"
+                    },
+                    "en": {
+                        "info": "Get a random map",
+                        "cmd": "/rw"
+                    }
+                }
+            ]
+        },
+        {
+            "info": "隨機私房武器組 Random pick full teams of weapons in Private Battle",
+            "value": "rt",
+            "arguments": [],
+            "icon": "<:private:1073642241828081686>",
+            "raw": "1073647435190108212",
+            "details": {
+                "zh": [
+                    "在 68 種武器中隨機抽選 8 個",
+                    "包含英雄武器",
+                    "支援所有語言"
+                ],
+                "en": [
+                    "Random choose 8 weapons from 68 different weapons.",
+                    "Include hero weapon.",
+                    "Support all language in Splatoon 3."
+                ]
+            },
+            "examples": [
+                {
+                    "zh": {
+                        "info": "取得 2 組隨機武器，共 8 把",
+                        "cmd": "/rt"
+                    },
+                    "en": {
+                        "info": "Get 2 set of randoms, total 8 weapons",
+                        "cmd": "/rt"
+                    }
+                }
+            ]
+        },
+        {
+            "info": "查看現在的地圖 Get current stages rotation",
+            "value": "rot",
+            "arguments": ["rotation"],
+            "icon": "<:regular:1068232344193994852>",
+            "raw": "1073647490735276153",
+            "details": {
+                "zh": [
+                    "顯示現在及 24 小時內的所有模式",
+                    "支援所有語言"
+                ],
+                "en": [
+                    "Show current and within 24 hours stages rotation",
+                    "Support all language in Splatoon 3."
+                ]
+            },
+            "examples": [
+                {
+                    "zh": {
+                        "info": "查看現在的地圖及模式",
+                        "cmd": "/rot"
+                    },
+                    "en": {
+                        "info": "Get current matchs and stages rotation",
+                        "cmd": "/rot"
+                    }
+                },
+                {
+                    "zh": {
+                        "info": "查看下一輪的地圖及模式",
+                        "cmd": "/rot 1"
+                    },
+                    "en": {
+                        "info": "Get next matchs and stages rotation",
+                        "cmd": "/rot 1"
+                    }
+                },
+                {
+                    "zh": {
+                        "info": "查看下 n 輪的地圖及模式",
+                        "cmd": "/rot n"
+                    },
+                    "en": {
+                        "info": "Get next n matchs and stages rotation",
+                        "cmd": "/rot n"
+                    }
+                }
+            ]
+        },
+        {
+            "info": "查看現在的鮭魚跑模式 Get current Salmon Run rotation",
+            "value": "sr",
+            "arguments": ["rotation"],
+            "icon": "<:salmon_run:1073600987723464786>",
+            "raw": "1073647576710140065",
+            "details": {
+                "zh": [
+                    "顯示現在及未來 4 輪的鮭魚跑地圖及武器組",
+                    "支援所有語言"
+                ],
+                "en": [
+                    "Show current and future 4 rotation of Salmon Run stage and weapon set",
+                    "Support all language in Splatoon 3."
+                ]
+            },
+            "examples": [
+                {
+                    "zh": {
+                        "info": "查看現在的鮭魚跑地圖及武器組",
+                        "cmd": "/sr"
+                    },
+                    "en": {
+                        "info": "Get current Salmon Run stage and weapon set",
+                        "cmd": "/sr"
+                    }
+                },
+                {
+                    "zh": {
+                        "info": "查看下一輪的鮭魚跑地圖及武器組",
+                        "cmd": "/sr 1"
+                    },
+                    "en": {
+                        "info": "Get next Salmon Run stage and weapon set",
+                        "cmd": "/sr 1"
+                    }
+                },
+                {
+                    "zh": {
+                        "info": "查看下 n 輪的鮭魚跑地圖及武器組",
+                        "cmd": "/sr n"
+                    },
+                    "en": {
+                        "info": "Get next n Salmon Run stage and weapon set",
+                        "cmd": "/sr n"
+                    }
+                }
+            ]
+        },
+        {
+            "info": "指令幫助 Bot information",
+            "value": "help",
+            "arguments": ["command"],
+            "icon": "ℹ️",
+            "raw": "1073647638039244912",
+            "details": {
+                "zh": [
+                    "顯示指令提示"
+                ],
+                "en": [
+                    "Show this manual."
+                ]
+            },
+            "examples": [
+                {
+                    "zh": {
+                        "info": "查看機器人資訊",
+                        "cmd": "/help"
+                    },
+                    "en": {
+                        "info": "Get bot information",
+                        "cmd": "/help"
+                    }
+                },
+                {
+                    "zh": {
+                            "info": "查看指令說明",
+                            "cmd": "/help `cmd`"
+                    },
+                    "en": {
+                        "info": "Get specific command information",
+                        "cmd": "/help ``cmd`` "
+                    }
+                }
+            ]
+        }
+    ]
+}

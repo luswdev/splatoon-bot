@@ -1,42 +1,125 @@
 'use strict'
 
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require('discord.js')
 const { version } = require('../package.json');
+const { cmds } = require('./cmds.json');
 
 const CmdBase = require('./CmdBase.js')
 
 class CmdBotInfo extends CmdBase {
 
     constructor () {
-        super('help', '指令幫助 Bot information')
+        let choices = []
+        for (let cmd of cmds) {
+            choices.push({name: cmd.info, value: cmd.value})
+        }
+
+        let help = cmds.find( (e) => e.value === 'help')
+        super(help.value, help.info, [{ type: 'string', name: 'command', info: '要查詢的指令 Which command?', choices: choices }])
+
+        this.choices = choices
+        this.homeURL = 'https://lusw.dev/splatoon'
     }
 
     async doCmd (_interaction, _client) {
+        const cmd = _interaction.options.getString('command') ?? ''
+        const lang = _interaction.locale.indexOf('zh') != -1 ? 'zh' : 'en'
+        const reply = this.buildMessage(cmd, lang, _client)
+        await _interaction.reply(reply)
+    }
+
+    async updateLang (_option, _interaction, _client) {
+        const cmd = _option.res
+        const lang = _interaction.locale.indexOf('zh') != -1 ? 'zh' : 'en'
+        const reply = this.buildMessage(cmd, lang, _client)
+        await _interaction.reply(reply)
+    }
+
+    buildCmdSelect (_curCmd) {
+        const row = new ActionRowBuilder()
+        const selected = new StringSelectMenuBuilder()
+            .setCustomId('select')
+            .setPlaceholder('要查詢的指令 Which command?')
+
+        for (let cmd of cmds) {
+            const val = {
+                cmd: this.cmdKey,
+                res: cmd.value,
+            }
+
+            selected.addOptions([
+                new StringSelectMenuOptionBuilder()
+                    .setDefault(cmd.value === _curCmd)
+                    .setDescription(cmd.info)
+                    .setEmoji(cmd.icon)
+                    .setLabel(cmd.value)
+                    .setValue(JSON.stringify(val)),
+            ])
+        }
+        row.addComponents(selected)
+
+        return row
+    }
+
+    buildMessage (_cmd, _lang, _client) {
+        let isCmd = false
         const infoEmbed = new EmbedBuilder()
+            .setAuthor({ name: _client.user.username, iconURL: _client.user.displayAvatarURL(), url: this.homeURL})
             .setColor(0xB3FDDF)
             .setThumbnail(_client.user.displayAvatarURL())
-            .setTitle(':information_source: Help Manual')
-            .setDescription(`專門為斯普拉遁 3 的機器人啦\n` +
-                            `A simple bot for Splatoon 3\n` +
-                            `Visit website: https://lusw.dev/splatoon`)
-            .addFields(
-                { name: '/rw', value: '隨機武器！\nRandom pick a weapon!\ntry it: </rw:1068585446088642612>', inline: true },
-                { name: '/rm', value: '隨機地圖！\nRandom pick a map!\ntry it: </rm:1068585605602230323>', inline: true },
-                { name: '/rt', value: '隨機私房武器組\nRandom pick full teams of weapons in Private Battle!\ntry it: </rt:1068585665610125422>', inline: true },
-                { name: '/rot', value: '查看現在的地圖\nGet current maps rotation!\ntry it: </rot:1068530389884358726>', inline: true },
-                { name: 'Version', value: version },
-            )
-            .setFooter({ text: `${_client.user.username} | A simple bot for Splatoon 3`, iconURL: _client.user.displayAvatarURL() })
+            .setFooter({ text: `A simple bot for Splatoon 3`, iconURL: _client.user.displayAvatarURL() })
+
+        for (let cmd of cmds) {
+            if (cmd.value === _cmd) {
+                isCmd = true
+
+                let description = ''
+                for (let line of cmd.details[_lang]) {
+                    description += `- ${line}\n`
+                }
+
+                let args = ''
+                for (let arg of cmd.arguments) {
+                    args += `${arg} `
+                }
+                args = args.substring(0, args.length - 1)
+                let usage = cmd.arguments.length ? `[${args}]` : ''
+
+                let examples = ''
+                for (let i = 0; i < cmd.examples.length; ++i) {
+                    examples += `${i + 1}. ${cmd.examples[i][_lang].info}\n`
+                    examples += `\`\`\`${cmd.examples[i][_lang].cmd} \`\`\`\n`
+                }
+
+                infoEmbed.setTitle(`${cmd.icon} | ${cmd.value}`)
+                    .setDescription(description)
+                    .addFields(
+                        { name: `${_lang == 'zh' ? '用法' : 'Usage'}`, value: `\`\`\`/${cmd.value} ${usage}\`\`\`` },
+                        { name: `${_lang == 'zh' ? '範例' : 'Example'}`, value: `${examples}` },
+                        { name: `${_lang == 'zh' ? '試一下' : 'Try It'}`, value: `</${cmd.value}:${cmd.raw}>` },
+                    )
+                break;
+            }
+        }
+
+        if (!isCmd) {
+            infoEmbed.setTitle(':information_source: | Help Manual')
+                .setDescription(`專門為斯普拉遁 3 的機器人啦\n` +
+                                `A simple bot for Splatoon 3\n` +
+                                `Visit website: ${this.homeURL}`)
+        }
 
         const row = new ActionRowBuilder()
             .addComponents( new ButtonBuilder()
-                .setURL('https://lusw.dev/splatoon')
+                .setURL(this.homeURL)
                 .setLabel('Information')
                 .setStyle(ButtonStyle.Link)
                 .setEmoji('<:splatoonbot:1042279520759185478>'),
             )
 
-        await _interaction.reply({ embeds: [infoEmbed], components: [row] })
+        const list = this.buildCmdSelect(_cmd)
+
+        return { embeds: [infoEmbed], components: [list, row], ephemeral: isCmd}
     }
 }
 

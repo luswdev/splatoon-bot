@@ -1,6 +1,6 @@
 'use strict'
 
-const { SlashCommandBuilder, SlashCommandIntegerOption } = require('discord.js')
+const { SlashCommandBuilder, SlashCommandIntegerOption, SlashCommandStringOption } = require('discord.js')
 
 const CmdRandomWeapon = require('./CmdRandomWeapon.js')
 const CmdRandomMap = require('./CmdRandomMap.js')
@@ -34,6 +34,15 @@ class CmdList {
                         .setAutocomplete(true)
                         .setMinValue(opt.min)
                         .setMaxValue(opt.max))
+            } else if (opt.type == 'string') {
+                let strOption = new SlashCommandStringOption()
+                strOption.setName(opt.name)
+                    .setDescription(opt.info)
+
+                for (let choice of opt.choices) {
+                    strOption.addChoices(choice)
+                }
+                scb.addStringOption(strOption);
             }
         })
 
@@ -50,13 +59,13 @@ class CmdList {
         }
     }
 
-    async parseSelect(_selected, _interaction) {
-        log.write(`option: ${_selected.lang}`)
+    async parseSelect(_selected, _interaction, _client) {
+        log.write(`option: ${JSON.stringify(_selected)}`)
 
         for (let cmd of this.cmds) {
             if (_selected.cmd == cmd.cmdKey) {
                 log.write(`inner command: ${cmd.cmdKey}`)
-                await cmd.updateLang(_selected, _interaction)
+                await cmd.updateLang(_selected, _interaction, _client)
                 break
             }
         }
@@ -83,8 +92,8 @@ module.exports.parseCmd = (_cmdName, _interaction, _client) => {
     cmds.parseCmd(_cmdName, _interaction, _client)
 }
 
-module.exports.parseSelect = (_selected, _interaction) => {
-    cmds.parseSelect(_selected, _interaction)
+module.exports.parseSelect = (_selected, _interaction, _client) => {
+    cmds.parseSelect(_selected, _interaction, _client)
 }
 
 module.exports.getCmdsJson = () => {
