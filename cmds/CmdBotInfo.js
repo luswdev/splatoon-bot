@@ -106,16 +106,17 @@ class CmdBotInfo extends CmdBase {
             let description = ''
             if (_lang == 'zh') {
                 description += `專門為斯普拉遁 3 的機器人啦\n`
-                description += `去看看：${this.homeURL}\n\n`
-                description += `:arrow_down: 查看更多指令說明`
+                description += `去看看：${this.homeURL}`
             } else {
                 description += `A simple bot for Splatoon 3\n`
-                description += `Visit website: ${this.homeURL}\n\n`
-                description += `:arrow_down: For more command information`
+                description += `Visit website: ${this.homeURL}`
             }
 
             infoEmbed.setTitle(':information_source: | Help Manual')
                 .setDescription(description)
+                .addFields(
+                    { name: `${_lang == 'zh' ? '版本' : 'Version'}`, value: version },
+                )
         }
 
         const row = new ActionRowBuilder()
