@@ -113,7 +113,7 @@ class CmdBotInfo extends CmdBase {
                 description += `Visit website: ${this.homeURL}\n\n`
                 description += `:arrow_down: For more command information`
             }
- s
+
             infoEmbed.setTitle(':information_source: | Help Manual')
                 .setDescription(description)
         }
