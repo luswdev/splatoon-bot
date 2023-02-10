@@ -220,8 +220,8 @@
                 },
                 {
                     "zh": {
-                            "info": "查看 `指令` 說明",
-                            "cmd": "/help `cmd`"
+                        "info": "查看 `指令` 說明",
+                        "cmd": "/help `cmd`"
                     },
                     "en": {
                         "info": "Get specific `command` information",
