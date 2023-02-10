@@ -32,9 +32,7 @@ class Splatoon3Ink {
         }
     }
 
-    async parseRotation (_idx, isFest) {
-        log.write(`parse #${_idx} ${isFest ? 'is' : 'not'} fest`)
-
+    async parseBattle (_idx, isFest) {
         let rotation = []
 
         const matchObject = [
@@ -99,13 +97,44 @@ class Splatoon3Ink {
         writeFileSync(imgOutPath, canvas.toBuffer())
     }
 
+    parseSalmonRun (_set) {
+        const period = {
+            start: _set.startTime,
+            ends:  _set.endTime
+        }
+
+        let weapons = []
+        for (let weapon of _set.setting.weapons) {
+            weapons.push(weapon.name)
+        }
+
+        let rotation = {
+            match: 'Salmon Run Next Wave',
+            period: period,
+            map: _set.setting.coopStage.name,
+            weapons: weapons
+        }
+
+        return rotation
+    }
+
     async buildRotations () {
         await this.fetchRotation()
 
-        let rotations = []
-        for (let i = 0; i < rotationData.regularSchedules.nodes.length; ++i) {
+        let battles = []
+        for (let i = 0; i < this.rotationData.regularSchedules.nodes.length; ++i) {
             let isFest = (this.rotationData.regularSchedules.nodes[i].festMatchSetting !== null)
-            rotations.push(await this.parseRotation(i, isFest))
+            battles.push(await this.parseBattle(i, isFest))
+        }
+
+        let salmonRuns = []
+        for (let set of this.rotationData.coopGroupingSchedule.regularSchedules.nodes) {
+            salmonRuns.push(this.parseSalmonRun(set))
+        }
+
+        let rotations = {
+            battles: battles,
+            salmonRuns: salmonRuns,
         }
 
         writeFileSync(`${this.dataOut}rotation.json`, JSON.stringify(rotations, (k, v) => v === undefined ? null : v))

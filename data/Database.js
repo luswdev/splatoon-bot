@@ -12,6 +12,8 @@ class Database {
         this.weaponList = this.buildList('weapons')
         this.modeList = this.buildList('modes')
         this.matchList = this.buildList('matches')
+        this.salmonList = this.buildList('salmon_run')
+        this.labelList = this.buildList('labels')
     }
 
     buildList (_path) {
@@ -69,8 +71,13 @@ module.exports.mapIdx = (map) => {
     return ret
 }
 
-module.exports.getWeapon = (idx) => {
-    const ret = database.weaponList[idx]
+module.exports.getWeapon = (tar) => {
+    let ret
+    if (typeof(tar) == 'string') {
+        ret = database.weaponList.find( (e) => e.en == tar)
+    } else {
+        ret = database.weaponList[idx]
+    }
     return ret
 }
 
@@ -91,5 +98,15 @@ module.exports.getMode = (name) => {
 
 module.exports.getMatch = (name) => {
     const ret = database.matchList.find( (e) => e.en == name)
+    return ret
+}
+
+module.exports.getSalmon = (name) => {
+    const ret = database.salmonList.find( (e) => e.en == name)
+    return ret
+}
+
+module.exports.getLabel = (name) => {
+    const ret = database.labelList.find( (e) => e.en == name)
     return ret
 }

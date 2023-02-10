@@ -4,14 +4,14 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const { readFileSync } = require('fs')
 
 const CmdBase = require('./CmdBase.js')
-const { getMap, getMode, getMatch } = require('../data/Database.js')
+const { getSalmon, getMatch, getWeapon, getLabel } = require('../data/Database.js')
 
-class CmdRotation extends CmdBase {
+class CmdSalmonRun extends CmdBase {
 
     constructor () {
-        super('rot', '查看現在的地圖 get current maps rotation', [{type: 'integer', name: 'rotation', info: '第幾輪模式 Which Rotation?', min: 0, max:11}])
+        super('sr', '查看現在的鮭魚跑模式 get current Salmon Run rotation', [{type: 'integer', name: 'rotation', info: '第幾輪模式 Which Rotation?', min: 0, max: 4}])
 
-        this.imgPath = '/tmp/spl3/img/'
+        this.imgPath = 'https://splatoon3.ink/assets/splatnet/stage_img/icon/high_resolution/'
         this.dataPath = '/tmp/spl3/rotation.json'
     }
 
@@ -31,26 +31,29 @@ class CmdRotation extends CmdBase {
     fetchRotation (_idx) {
         const rotationStr = readFileSync(this.dataPath, {encoding:'utf8', flag:'r'})
         const rotation = JSON.parse(rotationStr)
-        return rotation.battles[_idx]
+        return rotation.salmonRuns[_idx]
     }
 
     buildEmbed(_rotation, _idx, _lang, _interaction) {
-        const mode = getMode(_rotation.mode)
         const match = getMatch(_rotation.match)
-        const map1 = getMap(_rotation.maps[0])
-        const map2 = getMap(_rotation.maps[1])
+        const map = getSalmon(_rotation.map)
+        let weapons = ''
+        for (let weapon of _rotation.weapons) {
+            let weaponData = getWeapon(weapon)
+            weapons += `${weaponData.icon} ${weaponData[_lang]}\n`
+        }
 
         const start = new Date(_rotation.period.start).getTime() / 1000
         const ends = new Date(_rotation.period.ends).getTime() / 1000
-
         const embed = new EmbedBuilder()
             .setColor(match.color)
             .setTitle(`${match.icon} ${match[_lang]}`)
             .setDescription(`<t:${start}> ~ <t:${ends}>`)
             .addFields(
-                { name: `${mode.icon} ${mode[_lang]}`, value: `${map1[_lang]} :arrow_left: :arrow_right: ${map2[_lang]}` },
+                { name: getLabel('Weapon')[_lang], value: weapons },
+                { name: getLabel('Stage')[_lang],  value: map[_lang] },
             )
-            .setImage(`attachment://${match.en.replaceAll(' ', '_').replaceAll('(', '').replaceAll(')', '')}_${_idx}.png`)
+            .setImage(`${this.imgPath}/${map.img}`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()
 
@@ -62,18 +65,13 @@ class CmdRotation extends CmdBase {
         const attachments = []
         const rotation = this.fetchRotation(_rotation)
 
-        for (let i = 0; i < rotation.length; ++i) {
-            if (rotation[i].mode !== null) {
-                embeds.push(this.buildEmbed(rotation[i], _rotation, _lang, _interaction))
-                attachments.push(`${this.imgPath}${rotation[i].match}_${_rotation}.png`)
-            }
-        }
+        embeds.push(this.buildEmbed(rotation, _rotation, _lang, _interaction))
 
         const row = this.buildLangSelect({rotation: _rotation}, _lang)
 
         const link = new ActionRowBuilder()
             .addComponents( new ButtonBuilder()
-                .setURL('https://splatoon3.ink')
+                .setURL('https://splatoon3.ink/salmonrun')
                 .setLabel('More Information')
                 .setStyle(ButtonStyle.Link)
                 .setEmoji('<:squidgreen:568201618974048279>'),
@@ -83,4 +81,4 @@ class CmdRotation extends CmdBase {
     }
 }
 
-module.exports = CmdRotation
+module.exports = CmdSalmonRun
