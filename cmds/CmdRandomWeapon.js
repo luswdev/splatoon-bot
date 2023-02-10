@@ -24,7 +24,7 @@ class CmdRandomWeapon extends CmdBase {
         await _interaction.reply(reply)
     }
 
-    async updateLang (_option, _interaction) {
+    async doSelect (_option, _interaction) {
         const weapon = getWeapon(_option.res)
         const reply = this.buildMessage(weapon, _option.lang, _interaction)
         await _interaction.update(reply)

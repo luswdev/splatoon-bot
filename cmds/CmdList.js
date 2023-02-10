@@ -65,7 +65,7 @@ class CmdList {
         for (let cmd of this.cmds) {
             if (_selected.cmd == cmd.cmdKey) {
                 log.write(`inner command: ${cmd.cmdKey}`)
-                await cmd.updateLang(_selected, _interaction, _client)
+                await cmd.doSelect(_selected, _interaction, _client)
                 break
             }
         }

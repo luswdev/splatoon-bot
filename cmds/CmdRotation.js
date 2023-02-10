@@ -22,7 +22,7 @@ class CmdRotation extends CmdBase {
         await _interaction.reply(reply)
     }
 
-    async updateLang (_option, _interaction) {
+    async doSelect (_option, _interaction) {
         const rotation = _option.rotation
         const reply = this.buildMessage(_option.lang, rotation, _interaction)
         await _interaction.update(reply)

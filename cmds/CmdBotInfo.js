@@ -28,7 +28,7 @@ class CmdBotInfo extends CmdBase {
         await _interaction.reply(reply)
     }
 
-    async updateLang (_option, _interaction, _client) {
+    async doSelect (_option, _interaction, _client) {
         const cmd = _option.res
         const lang = _interaction.locale.indexOf('zh') != -1 ? 'zh' : 'en'
         const reply = this.buildMessage(cmd, lang, _client)

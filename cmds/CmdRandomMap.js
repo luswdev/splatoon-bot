@@ -23,7 +23,7 @@ class CmdRandomMap extends CmdBase {
         await _interaction.reply(reply)
     }
 
-    async updateLang (_option, _interaction) {
+    async doSelect (_option, _interaction) {
         const map = getMap(parseInt(_option.res))
         const reply = this.buildMessage(map, _option.lang, _interaction)
         await _interaction.update(reply)

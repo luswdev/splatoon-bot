@@ -22,12 +22,11 @@ class CmdRandomTeam extends CmdBase {
         await _interaction.reply(reply)
     }
 
-    async updateLang (_option, _interaction) {
+    async doSelect (_option, _interaction) {
         const weapons = _.times(8, (i) => getWeapon(_option.res[i]))
         const reply = this.buildMessage(weapons, _option.lang, _interaction)
         await _interaction.update(reply)
     }
-
 
     buildMessage (_weapons, _lang, _interaction) {
         let embeds = []
