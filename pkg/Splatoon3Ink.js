@@ -32,21 +32,25 @@ class Splatoon3Ink {
         }
     }
 
-    async parseRotation (_idx) {
+    async parseRotation (_idx, isFest) {
+        log.write(`parse #${_idx} ${isFest ? 'is' : 'not'} fest`)
+
         let rotation = []
 
         const matchObject = [
-            this.rotationData.regularSchedules.nodes[_idx].regularMatchSetting,
-            this.rotationData.bankaraSchedules.nodes[_idx].bankaraMatchSettings[0],
-            this.rotationData.bankaraSchedules.nodes[_idx].bankaraMatchSettings[1],
-            this.rotationData.xSchedules.nodes[_idx].xMatchSetting
+            isFest ? undefined : this.rotationData.regularSchedules.nodes[_idx].regularMatchSetting,
+            isFest ? undefined : this.rotationData.bankaraSchedules.nodes[_idx].bankaraMatchSettings[0],
+            isFest ? undefined : this.rotationData.bankaraSchedules.nodes[_idx].bankaraMatchSettings[1],
+            isFest ? undefined : this.rotationData.xSchedules.nodes[_idx].xMatchSetting,
+            isFest ? this.rotationData.festSchedules.nodes[_idx].festMatchSetting : undefined,
         ]
 
         const matchName = [
             'Regular Battle',
             'Anarchy Battle (Series)',
             'Anarchy Battle (Open)',
-            'X Battle'
+            'X Battle',
+            'Splatfest'
         ]
 
         const period = {
@@ -55,16 +59,23 @@ class Splatoon3Ink {
         }
 
         for (let i = 0; i < matchObject.length; ++i) {
-            let maps = [ matchObject[i].vsStages[0].name, matchObject[i].vsStages[1].name ]
-            let mode = matchObject[i].vsRule.name
+            let maps, mode
+            if (matchObject[i] === undefined) {
+                maps = [ undefined, undefined ]
+                mode = undefined
+            } else {
+                maps = [ matchObject[i].vsStages[0].name, matchObject[i].vsStages[1].name ]
+                mode = matchObject[i].vsRule.name
+
+                await this.createImg(maps, matchName[i], _idx)
+            }
+
             rotation.push({
                 match: matchName[i],
                 period: period,
                 maps: maps,
                 mode: mode
             })
-
-            await this.createImg(maps, matchName[i], _idx)
         }
 
         return rotation
@@ -92,12 +103,18 @@ class Splatoon3Ink {
         await this.fetchRotation()
 
         let rotations = []
-        for (let i = 0; i < 12; ++i) {
-            rotations.push(await this.parseRotation(i))
+        for (let i = 0; i < rotationData.regularSchedules.nodes.length; ++i) {
+            let isFest = (this.rotationData.regularSchedules.nodes[i].festMatchSetting !== null)
+            rotations.push(await this.parseRotation(i, isFest))
         }
 
-        writeFileSync(`${this.dataOut}rotation.json`, JSON.stringify(rotations))
+        writeFileSync(`${this.dataOut}rotation.json`, JSON.stringify(rotations, (k, v) => v === undefined ? null : v))
     }
+}
+
+module.exports.runFetch = () => {
+    let splatoon3Ink = new Splatoon3Ink()
+    splatoon3Ink.buildRotations()
 }
 
 module.exports.splatoon3InkScheduler = () => {
