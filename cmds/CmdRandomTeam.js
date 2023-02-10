@@ -9,7 +9,7 @@ const { randomWeapon, getWeapon, weaponIdx } = require('../data/Database.js')
 class CmdRandomTeam extends CmdBase {
 
     constructor () {
-        super('rt', '隨機私房武器組 Random pick full teams of weapons in Private Battle')
+        super('rt')
 
         this.randomWeapon = randomWeapon
         this.imgUrlBase = 'https://leanny.github.io/splat3/images/weapon_flat/'

@@ -140,6 +140,15 @@
                         "cmd": "/rot `n`"
                     }
                 }
+            ],
+            "options": [
+                {
+                    "type": "integer",
+                    "name": "rotation",
+                    "info": "第幾輪模式 Which Rotation?",
+                    "min": 0,
+                    "max":11
+                }
             ]
         },
         {
@@ -190,6 +199,15 @@
                         "info": "Get next `n` Salmon Run stage and weapon set",
                         "cmd": "/sr `n`"
                     }
+                }
+            ],
+            "options": [
+                {
+                    "type": "integer",
+                    "name": "rotation",
+                    "info": "第幾輪模式 Which Rotation?",
+                    "min": 0,
+                    "max": 4
                 }
             ]
         },

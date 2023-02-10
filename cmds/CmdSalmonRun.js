@@ -9,7 +9,7 @@ const { getSalmon, getMatch, getWeapon, getLabel } = require('../data/Database.j
 class CmdSalmonRun extends CmdBase {
 
     constructor () {
-        super('sr', '查看現在的鮭魚跑模式 get current Salmon Run rotation', [{type: 'integer', name: 'rotation', info: '第幾輪模式 Which Rotation?', min: 0, max: 4}])
+        super('sr')
 
         this.imgPath = 'https://splatoon3.ink/assets/splatnet/stage_img/icon/high_resolution/'
         this.dataPath = '/tmp/spl3/rotation.json'

@@ -8,7 +8,7 @@ const { randomWeapon, weaponIdx, getWeapon } = require('../data/Database.js')
 class CmdRandomWeapon extends CmdBase {
 
     constructor () {
-        super('rw', '隨機武器 Random pick a weapon')
+        super('rw')
 
         this.randomWeapon = randomWeapon
         this.imgUrlBase = 'https://leanny.github.io/splat3/images/weapon_flat/'

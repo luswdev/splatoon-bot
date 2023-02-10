@@ -5,11 +5,15 @@ const { ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder
 const ConnDB = require('../pkg/ConnDB.js')
 const { db } = require('../config.json')
 
+const { cmds } = require('./cmds.json');
+
 class CmdBase {
 
-    constructor (_key = '', _info = '', _options = []) {
-        this.cmdKey = _key
-        this.cmdInfo = _info
+    constructor (_key = '', _options = undefined) {
+        let cmd = cmds.find( (e) => e.value === _key)
+
+        this.cmdKey = cmd.value
+        this.cmdInfo = cmd.info
         this.infoUrlBase = 'https://splatoonwiki.org/wiki/'
 
         this.mysql = new ConnDB(db)
@@ -30,7 +34,7 @@ class CmdBase {
             { emoji: '🇷🇺', name: 'Русский', key: 'ru' },
         ]
 
-        this.options = _options
+        this.options = _options ?? cmd.options ?? []
     }
 
     locale2Lang (_locale) {
