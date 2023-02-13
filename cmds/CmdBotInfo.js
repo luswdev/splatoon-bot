@@ -70,27 +70,14 @@ class CmdBotInfo extends CmdBase {
 
         for (let cmd of cmds) {
             if (cmd.value === _cmd) {
-                let command = _client.commands.toJSON().find( (c) => c.name === cmd.value );
+                let rawCmd = _client.commands.toJSON().find( (c) => c.name === cmd.value );
                 isCmd = true
 
-                let description = ''
-                for (let line of cmd.details[_lang]) {
-                    description += `- ${line}\n`
-                }
-
-                let args = ''
-                for (let arg of cmd.arguments) {
-                    args += `${arg} `
-                }
-                args = args.substring(0, args.length - 1)
-                let usage = cmd.arguments.length ? `[${args}]` : ''
-
-                let cmdRaw = `</${command.name}:${command.id}>`
-                let examples = ''
-                for (let i = 0; i < cmd.examples.length; ++i) {
-                    examples += `${i + 1}. ${cmd.examples[i][_lang].info}\n`
-                    examples += `${cmd.examples[i][_lang].cmd.replace(command.name, cmdRaw)} \n\n`
-                }
+                let description = cmd.details[_lang].map( (line) => `<:dot:1073790424520601600> ${line}` ).join('\n')
+                let usage = cmd.arguments.length ? `[${cmd.arguments.join(' ')}]` : ''
+                let cmdID = `</${rawCmd.name}:${rawCmd.id}>`
+                let examples = cmd.examples.map( (elem, i) => `${i + 1}. ${elem[_lang].info}\n` +
+                                                `${elem[_lang].cmd.replace(rawCmd.name, cmdID)} \n`).join('\n')
 
                 infoEmbed.setTitle(`${cmd.icon} | ${cmd.value}`)
                     .setDescription(description)
