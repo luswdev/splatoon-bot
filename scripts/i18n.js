@@ -20,6 +20,18 @@ const tstrings = {
             'Include hero weapon.',
             'Support all language in Splatoon 3.',
         ],
+        rot: 'Stage Rotation',
+        rot_info: [
+            'Show current and within 24 hours stages rotation',
+            'Support all language in Splatoon 3.',
+            'Data from: <a href="https://splatoon3.ink" target="_blank">Splatoon3.ink</a>'
+        ],
+        sr: 'Salmon Run Rotation',
+        sr_info: [
+            'Show current and future 4 rotation of Salmon Run stage and weapon set',
+            'Support all language in Splatoon 3.',
+            'Data from: <a href="https://splatoon3.ink" target="_blank">Splatoon3.ink</a>'
+        ],
         help: 'Help Manual',
         help_info: [
             'Show manual in Discord.'
@@ -47,6 +59,18 @@ const tstrings = {
             '在 68 種武器中隨機抽選 8 個',
             '包含英雄武器',
             '支援所有語言'
+        ],
+        rot: '地圖與模式查詢',
+        rot_info: [
+            '顯示現在及 24 小時內的所有模式',
+            '支援所有語言',
+            '資料來源: <a href="https://splatoon3.ink" target="_blank">Splatoon3.ink</a>'
+        ],
+        sr: '鮭魚跑地圖武器查詢',
+        sr_info: [
+            '顯示現在及未來 4 輪的鮭魚跑地圖及武器組',
+            '支援所有語言',
+            '資料來源: <a href="https://splatoon3.ink" target="_blank">Splatoon3.ink</a>'
         ],
         help: '指令幫助',
         help_info: [

@@ -24,7 +24,7 @@ const commands = [
     {
         title: 'Random Maps',
         icon: 'fa-map',
-        color: 'var(--ranked)',
+        color: 'var(--league)',
         usage: 'rm',
         features: [
             'Random choose map from 14 different maps.',
@@ -32,9 +32,31 @@ const commands = [
         ]
     },
     {
+        title: 'Current Stage Rotation',
+        icon: 'fa-clock',
+        color: 'var(--x-match)',
+        usage: 'rot',
+        features: [
+            "顯示現在及 24 小時內的所有模式",
+            "支援所有語言",
+            "資料來源: [Splatoon3.ink](https://splatoon3.ink)"
+        ]
+    },
+    {
+        title: 'Current Salmon Run Rotation',
+        icon: 'fa-briefcase',
+        color: 'var(--salmon-run)',
+        usage: 'sr',
+        features: [
+            'Show current and future 4 rotation of Salmon Run stage and weapon set',
+            'Support all language in Splatoon 3.',
+            'Data from: [Splatoon3.ink](https://splatoon3.ink)'
+        ]
+    },
+    {
         title: 'Help Manual',
         icon: 'fa-book',
-        color: 'var(--x-match)',
+        color: 'var(--normal-spl3)',
         usage: 'help',
         features: [
             'Show manual in Discord.'

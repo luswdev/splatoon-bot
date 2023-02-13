@@ -162,6 +162,16 @@ footer.splatoon3 a:hover {
     content: "\e065";
 }
 
+.squid-card a {
+    color: var(--sp3-primary-2);
+    text-decoration: none;
+}
+
+.squid-card a:hover {
+    color: var(--sp3-primary-1);
+    text-decoration: none;
+}
+
 .rank-table {
     background-color: rgba(0, 0, 0, .6);
 }
