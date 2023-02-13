@@ -91,17 +91,22 @@ class CmdBotInfo extends CmdBase {
 
         if (!isCmd) {
             let description = ''
+            let links = ''
             if (_lang == 'zh') {
                 description += `專門為斯普拉遁 3 的機器人啦\n`
-                description += `去看看：${this.homeURL}`
+                description += `去看看：[主頁](${this.homeURL})`
+                links += `[隱私權聲明](${this.homeURL}/privacy)\ `
+                links += `[服務條款](${this.homeURL}/terms)`
             } else {
                 description += `A simple bot for Splatoon 3\n`
-                description += `Visit website: ${this.homeURL}`
+                description += `Visit website: [Home Page](${this.homeURL})`
+                links += `[Privacy Policy](${this.homeURL}/privacy)\ `
+                links += `[Terms of Service](${this.homeURL}/terms)`
             }
 
-            infoEmbed.setTitle(':information_source: | Help Manual')
-                .setDescription(description)
+            infoEmbed.setDescription(description)
                 .addFields(
+                    { name: `${_lang == 'zh' ? '相關連結' : 'External Link'}`, value: links },
                     { name: `${_lang == 'zh' ? '版本' : 'Version'}`, value: version },
                 )
         }
