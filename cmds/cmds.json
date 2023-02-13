@@ -233,11 +233,11 @@
                 {
                     "zh": {
                         "info": "查看 `指令` 說明",
-                        "cmd": "help `cmd`"
+                        "cmd": "help `指令`"
                     },
                     "en": {
                         "info": "Get specific `command` information",
-                        "cmd": "help `cmd` "
+                        "cmd": "help `command`"
                     }
                 }
             ]
