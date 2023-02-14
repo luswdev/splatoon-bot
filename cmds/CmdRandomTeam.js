@@ -41,7 +41,7 @@ class CmdRandomTeam extends CmdBase {
                                 `${_weapons[2 + i * 4].icon} ${_weapons[2 + i * 4][_lang]}\n` +
                                 `${_weapons[3 + i * 4].icon} ${_weapons[3 + i * 4][_lang]}`)
                 .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
-                .setThumbnail('https://cdn.wikimg.net/en/splatoonwiki/images/6/60/Mode_Icon_Private_Battle_2.png')
+                .setThumbnail(this.cmdData.thumbnail)
                 .setTimestamp()
         }
 

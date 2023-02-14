@@ -35,6 +35,7 @@ class CmdBase {
         ]
 
         this.options = _options ?? cmd.options ?? []
+        this.cmdData = cmd
     }
 
     locale2Lang (_locale) {

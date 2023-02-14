@@ -4,7 +4,8 @@
             "info": "隨機武器 Random pick a weapon",
             "value": "rw",
             "arguments": [],
-            "icon": "⚔️",
+            "icon": "<:Sheldon:1075050347120308355>",
+            "thumbnail": "https://cdn.wikimg.net/en/splatoonwiki/images/c/cb/S3_Icon_Ammo_Knights.png",
             "details": {
                 "zh": [
                     "在 68 種武器中隨機抽選 1 個",
@@ -34,7 +35,8 @@
             "info": "隨機地圖 Random pick a map",
             "value": "rm",
             "arguments": [],
-            "icon": "🗺️",
+            "icon": "<:judd:1075051716313108480>",
+            "thumbnail": "https://cdn.wikimg.net/en/splatoonwiki/images/3/3d/S3_Icon_Judd.png",
             "details": {
                 "zh": [
                     "在 14 張地圖中隨機抽選 1 個",
@@ -63,6 +65,7 @@
             "value": "rt",
             "arguments": [],
             "icon": "<:private:1073642241828081686>",
+            "thumbnail": "https://cdn.wikimg.net/en/splatoonwiki/images/6/60/Mode_Icon_Private_Battle_2.png",
             "details": {
                 "zh": [
                     "在 68 種武器中隨機抽選 8 個",
@@ -93,6 +96,7 @@
             "value": "rot",
             "arguments": ["rotation"],
             "icon": "<:regular:1068232344193994852>",
+            "thumbnail": "https://cdn.wikimg.net/en/splatoonwiki/images/c/c1/Deep_Cut_logo.png",
             "details": {
                 "zh": [
                     "顯示現在及 24 小時內的所有模式",
@@ -152,6 +156,7 @@
             "value": "sr",
             "arguments": ["rotation"],
             "icon": "<:salmon_run:1073600987723464786>",
+            "thumbnail": "https://cdn.wikimg.net/en/splatoonwiki/images/b/b3/S3_Icon_Mr_Grizz.png",
             "details": {
                 "zh": [
                     "顯示現在及未來 4 輪的鮭魚跑地圖及武器組",
@@ -210,7 +215,8 @@
             "info": "指令幫助 Bot information",
             "value": "help",
             "arguments": ["command"],
-            "icon": "ℹ️",
+            "icon": "<:Unknown:1075054253464375327>",
+            "thumbnail": "",
             "details": {
                 "zh": [
                     "顯示指令提示"

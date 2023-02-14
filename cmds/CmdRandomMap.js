@@ -32,7 +32,7 @@ class CmdRandomMap extends CmdBase {
     buildMessage (_map, _lang, _interaction) {
         const embed = new EmbedBuilder()
             .setColor(_map.color)
-            .setTitle(':map: Random Map!')
+            .setTitle(`${this.cmdData.icon} Random Map!`)
             .setDescription(`${_map[_lang]}`)
             .setThumbnail(`${this.imgUrlBase}${_map.img}`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})

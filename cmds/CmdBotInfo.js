@@ -85,6 +85,10 @@ class CmdBotInfo extends CmdBase {
                         { name: `${_lang == 'zh' ? '用法' : 'Usage'}`, value: `\`\`\`/${cmd.value} ${usage}\`\`\`` },
                         { name: `${_lang == 'zh' ? '範例' : 'Example'}`, value: `${examples}` },
                     )
+
+                if (cmd.thumbnail !== '') {
+                    infoEmbed.setThumbnail(cmd.thumbnail)
+                }
                 break;
             }
         }
