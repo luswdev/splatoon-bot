@@ -105,7 +105,11 @@ class Splatoon3Ink {
 
         let weapons = []
         for (let weapon of _set.setting.weapons) {
-            weapons.push(weapon.name)
+            if (weapon.name === 'Random') {
+                weapons.push(`${weapon.name}_${weapon.__splatoon3ink_id}`)
+            } else {
+                weapons.push(weapon.name)
+            }
         }
 
         let rotation = {

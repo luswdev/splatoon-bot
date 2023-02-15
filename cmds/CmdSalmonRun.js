@@ -13,6 +13,11 @@ class CmdSalmonRun extends CmdBase {
 
         this.imgPath = 'https://splatoon3.ink/assets/splatnet/stage_img/icon/high_resolution/'
         this.dataPath = '/tmp/spl3/rotation.json'
+
+        this.randomWeapon = {
+            normal: '<:Coop_Random:1075466256469196801>',
+            rare: '<:salmon_rare:1075463948075274281>'
+        }
     }
 
     async doCmd (_interaction) {
@@ -39,8 +44,14 @@ class CmdSalmonRun extends CmdBase {
         const map = getSalmon(_rotation.map)
         let weapons = ''
         for (let weapon of _rotation.weapons) {
-            let weaponData = getWeapon(weapon)
-            weapons += `${weaponData.icon} ${weaponData[_lang]}\n`
+            if (weapon === 'Random_edcfecb7e8acd1a7') {
+                weapons += `${this.randomWeapon.rare}\n`
+            } else if (weapon.indexOf('Random') != -1) {    // TODO: compare with correct id
+                weapons += `${this.randomWeapon.normal}\n`
+            } else {
+                let weaponData = getWeapon(weapon)
+                weapons += `${weaponData.icon} ${weaponData[_lang]}\n`
+            }
         }
 
         const start = new Date(_rotation.period.start).getTime() / 1000
