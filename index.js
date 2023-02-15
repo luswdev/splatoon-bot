@@ -23,6 +23,8 @@ client.once('ready', async () => {
 
     client.commands = new Collection()
     client.commands = await client.application.commands.fetch()
+
+    client.startTimestamp = Date.now()
 })
 
 client.on('interactionCreate', async interaction => {

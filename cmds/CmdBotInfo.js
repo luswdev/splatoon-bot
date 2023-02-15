@@ -94,24 +94,25 @@ class CmdBotInfo extends CmdBase {
         }
 
         if (!isCmd) {
+            const inviteURL = 'https://discord.gg/zkaGSn7Wtr'
             let description = ''
-            let links = ''
             if (_lang == 'zh') {
-                description += `專門為斯普拉遁 3 的機器人啦\n`
-                description += `去看看：[主頁](${this.homeURL})`
-                links += `[隱私權聲明](${this.homeURL}/privacy)\ `
-                links += `[服務條款](${this.homeURL}/terms)`
+                description += `專門為斯普拉遁 3 的機器人啦\n\n`
+                description += `請點擊下方選單查看個別指令說明，或至 [主頁](${this.homeURL}) 查看完整文件\n\n`
+                description += `使用此機器人即表示你同意 [隱私權聲明](${this.homeURL}/privacy)\ `
+                description += `及 [服務條款](${this.homeURL}/terms)\n\n`
+                description += `有任何其他疑問，請至 [伺服器](${inviteURL}) 詢問開發者`
             } else {
-                description += `A simple bot for Splatoon 3\n`
-                description += `Visit website: [Home Page](${this.homeURL})`
-                links += `[Privacy Policy](${this.homeURL}/privacy)\ `
-                links += `[Terms of Service](${this.homeURL}/terms)`
+                description += `A simple bot for Splatoon 3\n\n`
+                description += `Please click select menu to see command information, or visit [Home Page](${this.homeURL}) to check out full document\n\n`
+                description += `By using this bot, we assume you agree our [Privacy Policy](${this.homeURL}/privacy)\ `
+                description += `and [Terms of Service](${this.homeURL}/terms)\n\n`
+                description += `With others question, please ask to developer at [server](${inviteURL})`
             }
 
             infoEmbed.setDescription(description)
                 .addFields(
-                    { name: `${_lang == 'zh' ? '相關連結' : 'External Link'}`, value: links },
-                    { name: `${_lang == 'zh' ? '版本' : 'Version'}`, value: version },
+                    { name: `${_lang == 'zh' ? '版本' : 'Version'}`, value: `${version} (<t:${Math.floor(_client.startTimestamp / 1000)}>)` },
                 )
         }
 
@@ -125,7 +126,7 @@ class CmdBotInfo extends CmdBase {
 
         const list = this.buildCmdSelect(_cmd)
 
-        return { embeds: [infoEmbed], components: [list, row], ephemeral: isCmd}
+        return { embeds: [infoEmbed], components: [list, row], ephemeral: isCmd }
     }
 }
 
