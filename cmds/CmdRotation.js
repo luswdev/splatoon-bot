@@ -46,7 +46,7 @@ class CmdRotation extends CmdBase {
         const embed = new EmbedBuilder()
             .setColor(match.color)
             .setTitle(`${match.icon} ${match[_lang]}`)
-            .setDescription(`<t:${start}> ~ <t:${ends}>`)
+            .setDescription(`<t:${start}> ~ <t:${ends}> (<t:${ends}:R>)`)
             .addFields(
                 { name: `${mode.icon} ${mode[_lang]}`, value: `${map1[_lang]} :arrow_left: :arrow_right: ${map2[_lang]}` },
             )
