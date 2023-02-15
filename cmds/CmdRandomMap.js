@@ -2,7 +2,7 @@
 
 const { EmbedBuilder } = require('discord.js')
 const CmdBase = require('./CmdBase.js')
-const { randomMap, mapIdx, getMap } = require('../data/Database.js')
+const { randomMap, mapIdx, getMap, getLabel } = require('../data/Database.js')
 
 class CmdRandomMap extends CmdBase {
 
@@ -32,7 +32,7 @@ class CmdRandomMap extends CmdBase {
     buildMessage (_map, _lang, _interaction) {
         const embed = new EmbedBuilder()
             .setColor(_map.color)
-            .setTitle(`${this.cmdData.icon} Random Map!`)
+            .setTitle(`${this.cmdData.icon} ${getLabel('Random')[_lang]} ${getLabel('Stage')[_lang]}!`)
             .setDescription(`${_map[_lang]}`)
             .setThumbnail(`${this.imgUrlBase}${_map.img}`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})

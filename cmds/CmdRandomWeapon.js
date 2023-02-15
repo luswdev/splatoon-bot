@@ -3,7 +3,7 @@
 const { EmbedBuilder } = require('discord.js')
 
 const CmdBase = require('./CmdBase.js')
-const { randomWeapon, weaponIdx, getWeapon } = require('../data/Database.js')
+const { randomWeapon, weaponIdx, getWeapon, getLabel } = require('../data/Database.js')
 
 class CmdRandomWeapon extends CmdBase {
 
@@ -33,7 +33,7 @@ class CmdRandomWeapon extends CmdBase {
     buildMessage (_weapon, _lang, _interaction) {
         const embed = new EmbedBuilder()
             .setColor(_weapon.color)
-            .setTitle(`${_weapon.icon} Random Weapon!`)
+            .setTitle(`${_weapon.icon} ${getLabel('Random')[_lang]} ${getLabel('Weapon')[_lang]}!`)
             .setDescription(`${_weapon[_lang]}`)
             .setThumbnail(`${this.imgUrlBase}${_weapon.img}`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
