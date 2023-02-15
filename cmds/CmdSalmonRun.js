@@ -44,10 +44,14 @@ class CmdSalmonRun extends CmdBase {
         const map = getSalmon(_rotation.map)
         let weapons = ''
         for (let weapon of _rotation.weapons) {
-            if (weapon === 'Random_edcfecb7e8acd1a7') {
-                weapons += `${this.randomWeapon.rare}\n`
-            } else if (weapon.indexOf('Random') != -1) {    // TODO: compare with correct id
-                weapons += `${this.randomWeapon.normal}\n`
+            if (weapon.indexOf('Random') !== -1) {
+                let random = getLabel('Random');
+                if (weapon === 'Random_edcfecb7e8acd1a7') {
+                    weapons += `${this.randomWeapon.rare}`
+                } else {
+                    weapons += `${this.randomWeapon.normal}`
+                }
+                weapons += ` ${random[_lang]}\n`
             } else {
                 let weaponData = getWeapon(weapon)
                 weapons += `${weaponData.icon} ${weaponData[_lang]}\n`
