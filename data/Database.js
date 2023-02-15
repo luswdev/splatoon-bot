@@ -15,6 +15,7 @@ class Database {
         this.buildList('matches')
         this.buildList('salmon_run')
         this.buildList('labels')
+        this.buildList('rare_weapons')
     }
 
     buildList (_path) {
