@@ -2,6 +2,7 @@
 
 const _ = require('lodash')
 const { readdirSync, readFileSync } = require('fs')
+const { join } = require('path')
 
 const { log } = require('../pkg/Log.js')
 
@@ -9,13 +10,14 @@ class Database {
 
     constructor () {
         this.dataList = {}
-        this.buildList('maps')
-        this.buildList('weapons')
-        this.buildList('modes')
-        this.buildList('matches')
-        this.buildList('salmon_run')
-        this.buildList('labels')
-        this.buildList('rare_weapons')
+
+        const dataList = readdirSync(join(__dirname, "./"), { withFileTypes: true })
+            .filter( (dir) => dir.isDirectory())
+            .map( (dir) => dir.name)
+
+        dataList.forEach( (data) => {
+            this.buildList(data)
+        })
     }
 
     buildList (_path) {
