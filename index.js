@@ -14,25 +14,31 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 
 client.events = readdirSync(join(__dirname, "./events"))
 for (let event of client.events) {
-    const eventModule = require(`./events/${event}`);
+    if (event.indexOf('Base') !== -1 || event.indexOf('.json') !== -1) {
+        continue
+    }
+
+    const eventModule = require(`./events/${event}`)
 
     if (typeof eventModule !== "function") {
         log.write(`bad event: ${event}, skipped`)
         continue
     }
 
-    client.on(event.split(".")[0], (...args) => eventModule(client, ...args))
-    log.write(`installed event: ${event}`)
+    const eventClass = new eventModule()
+    client.on(eventClass.name, (...args) => eventClass.eventCallback(client, ...args))
+
+    log.write(`installed event: ${eventClass.name}`)
 }
 
 client.cmdList = new CmdList()
 const commands = readdirSync(join(__dirname, "./commands"))
 for (let cmd of commands) {
-    if (cmd === 'CmdList.js' || cmd === 'CmdBase.js' || cmd.indexOf('.json') !== -1) {
+    if (cmd.indexOf('Base') !== -1  || cmd.indexOf('.json') !== -1) {
         continue
     }
 
-    const cmdModule = require(`./commands/${cmd}`);
+    const cmdModule = require(`./commands/${cmd}`)
 
     if (typeof cmdModule !== "function") {
         log.write(`bad command: ${cmd}, skipped`)
