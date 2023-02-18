@@ -88,7 +88,7 @@ class Hook {
         return async (req, res) => {
             if (!req.vote || !req.vote.user) {
                 log.write('cannot read req.vote.user')
-                return res.status(403).json({ error: "null vote body" })
+                return res.status(403).json({ error: 'null vote body' })
             }
 
             const cnt = await this.mysql.voteHistory(req.vote.user, req.vote.from)

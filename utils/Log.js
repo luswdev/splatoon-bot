@@ -14,7 +14,7 @@ class Log {
         let filePath
 
         let pst = Error.prepareStackTrace
-        Error.prepareStackTrace = function (err, stack) { return stack; }
+        Error.prepareStackTrace = function (err, stack) { return stack }
         try {
             var err = new Error()
             var callerFile

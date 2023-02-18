@@ -8,11 +8,11 @@ const { bot } = require('config.json')
 const CmdList = require('utils/CmdList.js')
 
 const { log } = require('utils/Log.js')
-const depolyCmd = require('utils/deployCmds.js')
+const deployCmd = require('utils/deployCmds.js')
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 
-client.events = readdirSync(join(__dirname, "./events"))
+client.events = readdirSync(join(__dirname, './events'))
 for (let event of client.events) {
     if (event.indexOf('Base') !== -1 || event.indexOf('.json') !== -1) {
         continue
@@ -20,7 +20,7 @@ for (let event of client.events) {
 
     const eventModule = require(`./events/${event}`)
 
-    if (typeof eventModule !== "function") {
+    if (typeof eventModule !== 'function') {
         log.write(`bad event: ${event}, skipped`)
         continue
     }
@@ -32,7 +32,7 @@ for (let event of client.events) {
 }
 
 client.cmdList = new CmdList()
-const commands = readdirSync(join(__dirname, "./commands"))
+const commands = readdirSync(join(__dirname, './commands'))
 for (let cmd of commands) {
     if (cmd.indexOf('Base') !== -1  || cmd.indexOf('.json') !== -1) {
         continue
@@ -40,7 +40,7 @@ for (let cmd of commands) {
 
     const cmdModule = require(`./commands/${cmd}`)
 
-    if (typeof cmdModule !== "function") {
+    if (typeof cmdModule !== 'function') {
         log.write(`bad command: ${cmd}, skipped`)
         continue
     }
@@ -49,6 +49,6 @@ for (let cmd of commands) {
     client.cmdList.installCmd(cmdClass)
 }
 
-depolyCmd(client.cmdList.cmdsBuilder.map(command => command.toJSON()))
+deployCmd(client.cmdList.cmdsBuilder.map(command => command.toJSON()))
 
 client.login(bot.token)

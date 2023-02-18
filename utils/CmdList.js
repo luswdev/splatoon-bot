@@ -35,7 +35,7 @@ class CmdList {
                 for (let choice of opt.choices) {
                     strOption.addChoices(choice)
                 }
-                scb.addStringOption(strOption);
+                scb.addStringOption(strOption)
             }
         }
 

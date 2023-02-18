@@ -1,8 +1,8 @@
 'use strict'
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require('discord.js')
-const { version } = require('package.json');
-const { cmds } = require('commands/cmds.json');
+const { version } = require('package.json')
+const { cmds } = require('commands/cmds.json')
 
 const CmdBase = require('commands/CmdBase.js')
 
@@ -70,7 +70,7 @@ class CmdBotInfo extends CmdBase {
 
         for (let cmd of cmds) {
             if (cmd.value === _cmd) {
-                let rawCmd = _client.commands.toJSON().find( (c) => c.name === cmd.value );
+                let rawCmd = _client.commands.toJSON().find( (c) => c.name === cmd.value )
                 isCmd = true
 
                 let description = cmd.details[_lang].map( (line) => `<:dot:1073790424520601600> ${line}` ).join('\n')
@@ -89,7 +89,7 @@ class CmdBotInfo extends CmdBase {
                 if (cmd.thumbnail !== '') {
                     infoEmbed.setThumbnail(cmd.thumbnail)
                 }
-                break;
+                break
             }
         }
 

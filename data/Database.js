@@ -11,7 +11,7 @@ class Database {
     constructor () {
         this.dataList = {}
 
-        const dataList = readdirSync(join(__dirname, "./"), { withFileTypes: true })
+        const dataList = readdirSync(join(__dirname, './'), { withFileTypes: true })
             .filter( (dir) => dir.isDirectory() )
 
         for (let data of dataList) {

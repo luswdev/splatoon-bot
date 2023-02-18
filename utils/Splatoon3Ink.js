@@ -17,7 +17,7 @@ class Splatoon3Ink {
         this.imgSrc = `${__dirname}/../img/map/`
         this.rotationData = undefined
 
-        mkdirSync(this.imgOut, { recursive: true });
+        mkdirSync(this.imgOut, { recursive: true })
     }
 
     async fetchRotation (_rotation) {
@@ -88,8 +88,8 @@ class Splatoon3Ink {
         const canvas = createCanvas(1000, 500)
         const ctx = canvas.getContext('2d')
 
-        const map1Img = await loadImage(`${this.imgSrc}${map1.img}`);
-        const map2Img = await loadImage(`${this.imgSrc}${map2.img}`);
+        const map1Img = await loadImage(`${this.imgSrc}${map1.img}`)
+        const map2Img = await loadImage(`${this.imgSrc}${map2.img}`)
         
         ctx.drawImage(map1Img, 0, 0, 500, 500)
         ctx.drawImage(map2Img, 500, 0, 500, 500)
