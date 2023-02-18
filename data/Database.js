@@ -59,7 +59,7 @@ class Database {
     }
 
     getListObject (_target, _list) {
-        let ret
+        let ret = undefined
         if (typeof(_target) == 'string') {
             ret = database.dataList[_list].find( (e) => e.en == _target)
         } else {
