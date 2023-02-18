@@ -1,10 +1,10 @@
 const { ActivityType, Collection } = require('discord.js')
 
-const Hook = require('../hook/Hook.js')
+const Hook = require('hook/Hook.js')
 
-const { splatoon3InkScheduler } = require('../pkg/Splatoon3Ink.js')
-const BotInfo = require('../pkg/BotInfo.js')
-const { log } = require('../pkg/Log.js')
+const { splatoon3InkScheduler } = require('utils/Splatoon3Ink.js')
+const BotInfo = require('utils/BotInfo.js')
+const { log } = require('utils/Log.js')
 
 module.exports = async (_client) => {
     log.write('bot ready')

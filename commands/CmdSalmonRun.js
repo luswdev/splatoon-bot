@@ -3,8 +3,8 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
 const { readFileSync } = require('fs')
 
-const CmdBase = require('./CmdBase.js')
-const database = require('../data/Database.js')
+const CmdBase = require('commands/CmdBase.js')
+const database = require('data/Database.js')
 
 class CmdSalmonRun extends CmdBase {
 

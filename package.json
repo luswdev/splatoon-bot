@@ -5,8 +5,8 @@
   "main": "index.js",
   "bin": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "cmd": "node deployCmds.js"
+    "start": "NODE_PATH=. node index.js",
+    "fetch": "NODE_PATH=. node -e 'require(\"utils/Splatoon3Ink.js\").runFetch()'"
   },
   "repository": {
     "type": "git",

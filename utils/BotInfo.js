@@ -2,7 +2,7 @@
 
 const schedule = require('node-schedule')
 
-const { log } = require('./Log.js')
+const { log } = require('utils/Log.js')
 
 class BotInfo {
 

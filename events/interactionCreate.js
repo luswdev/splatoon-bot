@@ -1,7 +1,7 @@
-const { db } = require('../config.json')
+const { db } = require('config.json')
 
-const { log } = require('../pkg/Log.js')
-const ConnDB = require('../pkg/ConnDB.js')
+const { log } = require('utils/Log.js')
+const ConnDB = require('utils/ConnDB.js')
 
 const mysql = new ConnDB(db)
 

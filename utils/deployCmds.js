@@ -1,9 +1,9 @@
 'use strict'
 
 const { REST, Routes } = require('discord.js')
-const { bot } = require('../config.json')
+const { bot } = require('config.json')
 
-const { log } = require('./Log.js')
+const { log } = require('utils/Log.js')
 
 module.exports = async (_commands) => {
     const rest = new REST({ version: '10' }).setToken(bot.token)

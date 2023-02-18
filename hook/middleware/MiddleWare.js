@@ -1,6 +1,6 @@
 'use strict'
 
-const { log } = require('../../pkg/Log.js')
+const { log } = require('utils/Log.js')
 
 class MiddleWare {
 

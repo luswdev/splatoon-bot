@@ -5,8 +5,8 @@ const axios = require('axios')
 const { mkdirSync, writeFileSync } = require('fs')
 const { createCanvas, loadImage } = require('canvas')
 
-const database = require('../data/Database.js')
-const { log } = require('./Log.js')
+const database = require('data/Database.js')
+const { log } = require('utils/Log.js')
 
 class Splatoon3Ink {
 

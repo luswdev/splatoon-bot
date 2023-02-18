@@ -4,11 +4,11 @@ const { Client, GatewayIntentBits } = require('discord.js')
 const { readdirSync } = require('fs')
 const { join } = require('path')
 
-const { bot } = require('./config.json')
-const CmdList = require('./cmds/CmdList.js')
+const { bot } = require('config.json')
+const CmdList = require('commands/CmdList.js')
 
-const { log } = require('./pkg/Log.js')
-const depolyCmd = require('./pkg/deployCmds.js')
+const { log } = require('utils/Log.js')
+const depolyCmd = require('utils/deployCmds.js')
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 
@@ -26,13 +26,13 @@ for (let event of client.events) {
 }
 
 client.cmdList = new CmdList()
-const commands = readdirSync(join(__dirname, "./cmds"))
+const commands = readdirSync(join(__dirname, "./commands"))
 for (let cmd of commands) {
     if (cmd === 'CmdList.js' || cmd === 'CmdBase.js' || cmd.indexOf('.json') !== -1) {
         continue
     }
 
-    const cmdModule = require(`./cmds/${cmd}`);
+    const cmdModule = require(`./commands/${cmd}`);
 
     if (typeof cmdModule !== "function") {
         log.write(`bad command: ${cmd}, skipped`)
