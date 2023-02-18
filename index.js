@@ -25,7 +25,12 @@ for (let event of client.events) {
     }
 
     const eventClass = new eventModule()
-    client.on(eventClass.name, (...args) => eventClass.eventCallback(client, ...args))
+    client.on(eventClass.name, (...args) => {
+        eventClass.eventCallback(client, ...args)
+            .catch( (err) => {
+                log.write(eventClass.name, 'catch error:', err)
+            })
+    })
 
     log.write('installed event:', eventClass.name)
 }

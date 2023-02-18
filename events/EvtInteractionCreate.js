@@ -15,25 +15,25 @@ class EvtInteractionCreate extends EvtBase {
     }
 
     async eventCallback (_client, _interaction) {
-        log.write('get interaction from:', _interaction.user.username, 'type:', _interaction.type)
+        log.write('get interaction from:', _interaction.user.username)
 
+        let command = ''
+        let reply = undefined
         if (_interaction.isChatInputCommand()) {
-            const { commandName } = _interaction
+            command  = _interaction.commandName
 
-            log.write('parsing command:', commandName)
-            mysql.saveInteraction(commandName, _interaction.user.id, _interaction.type)
+            log.write('parsing command:', command)
+            mysql.saveInteraction(command, _interaction.user.id, _interaction.type)
 
             await _interaction.deferReply()
 
-            let reply = _client.cmdList.parseCmd(commandName, _interaction, _client)
-            await _interaction.editReply(reply)
-
-            log.write('end of', commandName)
+            reply = _client.cmdList.parseCmd(command, _interaction, _client)
         } else if (_interaction.isStringSelectMenu()) {
             const selected = JSON.parse(_interaction.values[0])
+            command = selected.cmd
 
             log.write('parsing select:', selected)
-            mysql.saveInteraction(selected.cmd, _interaction.user.id, _interaction.type)
+            mysql.saveInteraction(command, _interaction.user.id, _interaction.type)
 
             if (selected.cmd === 'help') {
                 await _interaction.deferReply( { ephemeral: true } )
@@ -41,12 +41,14 @@ class EvtInteractionCreate extends EvtBase {
                 await _interaction.deferUpdate()
             }
 
-            let reply = _client.cmdList.parseSelect(selected, _interaction, _client)
-
-            await _interaction.editReply(reply)
-
-            log.write('end of', selected.cmd)
+            reply = _client.cmdList.parseSelect(selected, _interaction, _client)
+        } else {
+            log.write('unhandled interaction:', _interaction.type)
+            return
         }
+
+        await _interaction.editReply(reply)
+        log.write('end of', command)
     }
 }
 
