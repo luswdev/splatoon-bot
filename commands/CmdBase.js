@@ -18,7 +18,8 @@ class CmdBase {
     }
 
     locale2Lang (_locale) {
-        return i18n.filter( (entry) => { return entry.locale.indexOf(_locale) !== -1 })[0].key
+        const lang = i18n.filter( (entry) => { return entry.locale.indexOf(_locale) !== -1 })[0]
+        return lang ? lang.key : undefined
     }
 
     buildLangSelect (_otherVal, _curLang) {
