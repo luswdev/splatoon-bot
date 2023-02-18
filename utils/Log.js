@@ -6,8 +6,8 @@ class Log {
 
     }
 
-    write (_str) {
-        console.log(`${this.getCallerFile()}: ${_str}`)
+    write (..._args) {
+        console.log(`${this.getCallerFile()}:`, ..._args)
     }
 
     getCallerFile() {
