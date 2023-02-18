@@ -134,7 +134,7 @@ class CmdBotInfo extends CmdBase {
 
         const list = this.buildCmdSelect(_cmd)
 
-        return { embeds: [infoEmbed], components: [list, row] }
+        return { embeds: [infoEmbed], components: [list, row], ephemeral: isCmd }
     }
 }
 

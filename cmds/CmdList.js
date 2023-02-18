@@ -59,8 +59,6 @@ class CmdList {
     }
 
     parseSelect(_selected, _interaction, _client) {
-        log.write(`option: ${JSON.stringify(_selected)}`)
-
         for (let cmd of this.cmds) {
             if (_selected.cmd == cmd.cmdKey) {
                 log.write(`inner command: ${cmd.cmdKey}`)

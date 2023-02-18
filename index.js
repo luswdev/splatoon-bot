@@ -38,26 +38,31 @@ client.on('interactionCreate', async interaction => {
     log.write(`get interaction from: ${interaction.user.username ?? ''}, type: ${interaction.type}`)
 
     if (interaction.isChatInputCommand()) {
-        await interaction.deferReply()
-
         const { commandName } = interaction
 
         log.write(`parsing command: ${commandName}`)
         mysql.saveInteraction(commandName, interaction.user.id, interaction.type)
+
+        await interaction.deferReply()
 
         let reply = parseCmd(commandName, interaction, client)
         await interaction.editReply(reply)
 
         log.write(`end of ${commandName}`)
     } else if (interaction.isStringSelectMenu()) {
-        await interaction.deferUpdate()
-
         const selected = JSON.parse(interaction.values[0])
 
         log.write(`command ${selected.cmd} call select: ${JSON.stringify(selected)}`)
         mysql.saveInteraction(selected.cmd, interaction.user.id, interaction.type)
 
-        let reply =  parseSelect(selected, interaction, client)
+        if (selected.cmd === 'help') {
+            await interaction.deferReply( { ephemeral: true } )
+        } else {
+            await interaction.deferUpdate()
+        }
+
+        let reply = parseSelect(selected, interaction, client)
+
         await interaction.editReply(reply)
 
         log.write(`end of ${selected.cmd}`)
