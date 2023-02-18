@@ -12,12 +12,11 @@ class Database {
         this.dataList = {}
 
         const dataList = readdirSync(join(__dirname, "./"), { withFileTypes: true })
-            .filter( (dir) => dir.isDirectory())
-            .map( (dir) => dir.name)
+            .filter( (dir) => dir.isDirectory() )
 
-        dataList.forEach( (data) => {
-            this.buildList(data)
-        })
+        for (let data of dataList) {
+            this.buildList(data.name)
+        }
     }
 
     buildList (_path) {

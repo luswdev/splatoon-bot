@@ -19,7 +19,7 @@ class CmdList {
             .setName(_cmd.cmdKey)
             .setDescription(_cmd.cmdInfo)
 
-        _cmd.options.forEach( (opt) => {
+        for (let opt of _cmd.options) {
             if (opt.type == 'integer') {
                 scb.addIntegerOption(new SlashCommandIntegerOption()
                         .setName(opt.name)
@@ -37,7 +37,7 @@ class CmdList {
                 }
                 scb.addStringOption(strOption);
             }
-        })
+        }
 
         this.cmdsBuilder.push(scb)
     }

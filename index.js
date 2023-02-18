@@ -13,35 +13,35 @@ const depolyCmd = require('./pkg/deployCmds.js')
 const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 
 client.events = readdirSync(join(__dirname, "./events"))
-client.events.forEach( (event) => {
+for (let event of client.events) {
     const eventModule = require(`./events/${event}`);
 
     if (typeof eventModule !== "function") {
         log.write(`bad event: ${event}, skipped`)
-        return
+        continue
     }
 
     client.on(event.split(".")[0], (...args) => eventModule(client, ...args))
     log.write(`installed event: ${event}`)
-})
+}
 
 client.cmdList = new CmdList()
-const supports = readdirSync(join(__dirname, "./cmds"))
-supports.forEach( (cmd) => {
+const commands = readdirSync(join(__dirname, "./cmds"))
+for (let cmd of commands) {
     if (cmd === 'CmdList.js' || cmd === 'CmdBase.js' || cmd.indexOf('.json') !== -1) {
-        return
+        continue
     }
 
     const cmdModule = require(`./cmds/${cmd}`);
 
     if (typeof cmdModule !== "function") {
         log.write(`bad command: ${cmd}, skipped`)
-        return
+        continue
     }
 
     const cmdClass = new cmdModule()
     client.cmdList.installCmd(cmdClass)
-})
+}
 
 depolyCmd(client.cmdList.cmdsBuilder.map(command => command.toJSON()))
 
