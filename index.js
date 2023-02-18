@@ -5,7 +5,7 @@ const { readdirSync } = require('fs')
 const { join } = require('path')
 
 const { bot } = require('config.json')
-const CmdList = require('commands/CmdList.js')
+const CmdList = require('utils/CmdList.js')
 
 const { log } = require('utils/Log.js')
 const depolyCmd = require('utils/deployCmds.js')
