@@ -4,7 +4,7 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const { readFileSync } = require('fs')
 
 const CmdBase = require('./CmdBase.js')
-const { getMap, getMode, getMatch } = require('../data/Database.js')
+const database = require('../data/Database.js')
 
 class CmdRotation extends CmdBase {
 
@@ -35,10 +35,10 @@ class CmdRotation extends CmdBase {
     }
 
     buildEmbed(_rotation, _idx, _lang, _interaction) {
-        const mode = getMode(_rotation.mode)
-        const match = getMatch(_rotation.match)
-        const map1 = getMap(_rotation.maps[0])
-        const map2 = getMap(_rotation.maps[1])
+        const mode =  database.getListObject(_rotation.mode,    'modes')
+        const match = database.getListObject(_rotation.match,   'matches')
+        const map1 =  database.getListObject(_rotation.maps[0], 'maps')
+        const map2 =  database.getListObject(_rotation.maps[1], 'maps')
 
         const start = new Date(_rotation.period.start).getTime() / 1000
         const ends = new Date(_rotation.period.ends).getTime() / 1000

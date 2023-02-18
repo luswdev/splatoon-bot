@@ -4,7 +4,7 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const { readFileSync } = require('fs')
 
 const CmdBase = require('./CmdBase.js')
-const { getSalmon, getMatch, getWeapon, getLabel } = require('../data/Database.js')
+const database = require('../data/Database.js')
 
 class CmdSalmonRun extends CmdBase {
 
@@ -40,12 +40,12 @@ class CmdSalmonRun extends CmdBase {
     }
 
     buildEmbed(_rotation, _idx, _lang, _interaction) {
-        const match = getMatch(_rotation.match)
-        const map = getSalmon(_rotation.map)
+        const match = database.getListObject(_rotation.match, 'matches')
+        const map   = database.getListObject(_rotation.map,   'salmon_run')
         let weapons = ''
         for (let weapon of _rotation.weapons) {
             if (weapon.indexOf('Random') !== -1) {
-                let random = getLabel('Random');
+                let random = database.getListObject('Random', 'labels')
                 if (weapon === 'Random_edcfecb7e8acd1a7') {
                     weapons += `${this.randomWeapon.rare}`
                 } else {
@@ -53,7 +53,7 @@ class CmdSalmonRun extends CmdBase {
                 }
                 weapons += ` ${random[_lang]}\n`
             } else {
-                let weaponData = getWeapon(weapon)
+                let weaponData = database.getListObject(weapon, 'weapons')
                 weapons += `${weaponData.icon} ${weaponData[_lang]}\n`
             }
         }
@@ -65,8 +65,8 @@ class CmdSalmonRun extends CmdBase {
             .setTitle(`${match.icon} ${match[_lang]}`)
             .setDescription(`<t:${start}> ~ <t:${ends}> (<t:${ends}:R>)`)
             .addFields(
-                { name: getLabel('Weapon')[_lang], value: weapons },
-                { name: getLabel('Stage')[_lang],  value: map[_lang] },
+                { name: database.getListObject('Weapon', 'labels')[_lang], value: weapons },
+                { name: database.getListObject('Stage',  'labels')[_lang], value: map[_lang] },
             )
             .setImage(`${this.imgPath}/${map.img}`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})

@@ -4,26 +4,25 @@ const { EmbedBuilder } = require('discord.js')
 const _ = require('lodash')
 
 const CmdBase = require('./CmdBase.js')
-const { randomWeapon, getWeapon, weaponIdx } = require('../data/Database.js')
+const database = require('../data/Database.js')
 
 class CmdRandomTeam extends CmdBase {
 
     constructor () {
         super('rt')
 
-        this.randomWeapon = randomWeapon
         this.imgUrlBase = 'https://leanny.github.io/splat3/images/weapon_flat/'
     }
 
     doCmd (_interaction) {
-        const weapons = _.times(8, () => this.randomWeapon())
+        const weapons = _.times(8, () => database.randomList(database.dataList['weapons']))
         const lang = this.locale2Lang(_interaction.locale) ?? 'en'
         const reply = this.buildMessage(weapons, lang, _interaction)
         return reply
     }
 
     doSelect (_option, _interaction) {
-        const weapons = _.times(8, (i) => getWeapon(_option.res[i]))
+        const weapons = _.times(8, (i) => database.getListObject(_option.res[i], 'weapons'))
         const reply = this.buildMessage(weapons, _option.lang, _interaction)
         return reply
     }
@@ -45,9 +44,9 @@ class CmdRandomTeam extends CmdBase {
                 .setTimestamp()
         }
 
-        let val = {res: []}
+        let val = { res: [] }
         for (let weapon of _weapons) {
-            val.res.push(weaponIdx(weapon))
+            val.res.push(database.getListIdx(weapon, 'weapons'))
         }
         const row = this.buildLangSelect(val, _lang)
 

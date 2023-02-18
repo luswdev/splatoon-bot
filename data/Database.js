@@ -71,45 +71,4 @@ class Database {
 }
 
 const database = new Database()
-
-module.exports.randomMap = () => {
-    const ret = database.randomList(database.dataList['maps'])
-    return ret
-}
-
-module.exports.randomWeapon = () => {
-    const ret = database.randomList(database.dataList['weapons'])
-    return ret
-}
-
-module.exports.weaponIdx = (weapon) => {
-    return database.getListIdx(weapon, 'weapons')
-}
-
-module.exports.mapIdx = (map) => {
-    return database.getListIdx(map, 'maps')
-}
-
-module.exports.getWeapon = (tar) => {
-    return database.getListObject(tar, 'weapons')
-}
-
-module.exports.getMap = (tar) => {
-    return database.getListObject(tar, 'maps')
-}
-
-module.exports.getMode = (tar) => {
-    return database.getListObject(tar, 'modes')
-}
-
-module.exports.getMatch = (tar) => {
-    return database.getListObject(tar, 'matches')
-}
-
-module.exports.getSalmon = (tar) => {
-    return database.getListObject(tar, 'salmon_run')
-}
-
-module.exports.getLabel = (tar) => {
-    return database.getListObject(tar, 'labels')
-}
+module.exports = database

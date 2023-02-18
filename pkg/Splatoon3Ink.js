@@ -5,7 +5,7 @@ const axios = require('axios')
 const { mkdirSync, writeFileSync } = require('fs')
 const { createCanvas, loadImage } = require('canvas')
 
-const { getMap } = require('../data/Database.js')
+const database = require('../data/Database.js')
 const { log } = require('./Log.js')
 
 class Splatoon3Ink {
@@ -82,8 +82,8 @@ class Splatoon3Ink {
     async createImg (_maps, _match, _idx) {
         const imgOutPath = `${this.imgOut}${_match}_${_idx}.png`
     
-        const map1 = getMap(_maps[0])
-        const map2 = getMap(_maps[1])
+        const map1 = database.getListObject(_maps[0], 'maps')
+        const map2 = database.getListObject(_maps[1], 'maps')
 
         const canvas = createCanvas(1000, 500)
         const ctx = canvas.getContext('2d')
