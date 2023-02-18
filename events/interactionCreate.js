@@ -1,4 +1,3 @@
-const { parseCmd, parseSelect } = require('../cmds/CmdList.js')
 const { db } = require('../config.json')
 
 const { log } = require('../pkg/Log.js')
@@ -17,7 +16,7 @@ module.exports = async (_client, _interaction) => {
 
         await _interaction.deferReply()
 
-        let reply = parseCmd(commandName, _interaction, _client)
+        let reply = _client.cmdList.parseCmd(commandName, _interaction, _client)
         await _interaction.editReply(reply)
 
         log.write(`end of ${commandName}`)
@@ -33,7 +32,7 @@ module.exports = async (_client, _interaction) => {
             await _interaction.deferUpdate()
         }
 
-        let reply = parseSelect(selected, _interaction, _client)
+        let reply = _client.cmdList.parseSelect(selected, _interaction, _client)
 
         await _interaction.editReply(reply)
 

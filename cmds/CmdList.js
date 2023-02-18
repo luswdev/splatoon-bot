@@ -2,13 +2,6 @@
 
 const { SlashCommandBuilder, SlashCommandIntegerOption, SlashCommandStringOption } = require('discord.js')
 
-const CmdRandomWeapon = require('./CmdRandomWeapon.js')
-const CmdRandomMap = require('./CmdRandomMap.js')
-const CmdRandomTeam = require('./CmdRandomTeam.js')
-const CmdRotation = require('./CmdRotation.js')
-const CmdBotInfo = require('./CmdBotInfo.js')
-const CmdSalmonRun = require('./CmdSalmonRun.js')
-
 const { log } = require('../pkg/Log.js')
 
 class CmdList {
@@ -68,31 +61,8 @@ class CmdList {
     }
 }
 
-const cmdRw = new CmdRandomWeapon()
-const cmdRm = new CmdRandomMap()
-const cmdRt = new CmdRandomTeam()
-const cmdRot = new CmdRotation()
-const cmdSr = new CmdSalmonRun()
-const cmdInfo = new CmdBotInfo()
+module.exports = CmdList
 
-const cmds = new CmdList()
-
-cmds.installCmd(cmdRw)
-cmds.installCmd(cmdRm)
-cmds.installCmd(cmdRt)
-cmds.installCmd(cmdRot)
-cmds.installCmd(cmdSr)
-cmds.installCmd(cmdInfo)
-
-module.exports.parseCmd = (_cmdName, _interaction, _client) => {
-    let reply = cmds.parseCmd(_cmdName, _interaction, _client)
-    return reply
-}
-
-module.exports.parseSelect = (_selected, _interaction, _client) => {
-    return cmds.parseSelect(_selected, _interaction, _client)
-}
-
-module.exports.getCmdsJson = () => {
-    return cmds.cmdsBuilder.map(command => command.toJSON())
-}
+// module.exports.getCmdsJson = () => {
+//     return cmds.cmdsBuilder.map(command => command.toJSON())
+// }
