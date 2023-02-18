@@ -23,12 +23,12 @@ class Splatoon3Ink {
     async fetchRotation (_rotation) {
         try {
             const url = 'schedules.json'
-            log.write(`fetching ${this.apiBase}${url}`)
+            log.write('fetching', this.apiBase + url)
 
             const res = await axios.get(`${this.apiBase}${url}`)
             this.rotationData = res.data.data
         } catch (err) {
-            console.log(err)
+            log.write('fetching failed:', err)
         }
     }
 
@@ -153,7 +153,7 @@ module.exports.runFetch = () => {
 module.exports.splatoon3InkScheduler = () => {
     let splatoon3Ink = new Splatoon3Ink()
 
-    log.write(`start fetch ${splatoon3Ink.apiBase} every 2 hours`)
+    log.write('start fetch', splatoon3Ink.apiBase, 'every 2 hours')
     schedule.scheduleJob('1 */2 * * *', () => {
         splatoon3Ink.buildRotations()
     })

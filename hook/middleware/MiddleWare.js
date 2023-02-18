@@ -10,7 +10,7 @@ class MiddleWare {
 
     auth() {
         return async (_req, _res, _next) => {
-            log.write(`key: ${_req.headers.authorization}`)
+            log.write('key:', _req.headers.authorization)
 
             if (_req.headers.authorization !== this.key) {
                 log.write('auth fail')

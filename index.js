@@ -19,16 +19,15 @@ for (let event of client.events) {
     }
 
     const eventModule = require(`./events/${event}`)
-
     if (typeof eventModule !== 'function') {
-        log.write(`bad event: ${event}, skipped`)
+        log.write('skip bad event:', event)
         continue
     }
 
     const eventClass = new eventModule()
     client.on(eventClass.name, (...args) => eventClass.eventCallback(client, ...args))
 
-    log.write(`installed event: ${eventClass.name}`)
+    log.write('installed event:', eventClass.name)
 }
 
 client.cmdList = new CmdList()
@@ -39,9 +38,8 @@ for (let cmd of commands) {
     }
 
     const cmdModule = require(`./commands/${cmd}`)
-
     if (typeof cmdModule !== 'function') {
-        log.write(`bad command: ${cmd}, skipped`)
+        log.write('skip bad command:',  cmd)
         continue
     }
 

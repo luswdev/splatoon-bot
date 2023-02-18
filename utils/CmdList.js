@@ -12,7 +12,7 @@ class CmdList {
     }
 
     installCmd (_cmd) {
-        log.write(`installing command: ${_cmd.cmdKey}`)
+        log.write('installing command:', _cmd.cmdKey)
         this.cmds.push(_cmd)
 
         const scb = new SlashCommandBuilder()
@@ -45,7 +45,7 @@ class CmdList {
     parseCmd (_cmdName, _interaction, _client) {
         for (let cmd of this.cmds) {
             if (_cmdName == cmd.cmdKey) {
-                log.write(`inner command: ${cmd.cmdKey}`)
+                log.write('inner command:', cmd.cmdKey)
                 return cmd.doCmd(_interaction, _client)
             }
         }
@@ -54,7 +54,7 @@ class CmdList {
     parseSelect(_selected, _interaction, _client) {
         for (let cmd of this.cmds) {
             if (_selected.cmd == cmd.cmdKey) {
-                log.write(`inner command: ${cmd.cmdKey}`)
+                log.write('inner command:', cmd.cmdKey)
                 return cmd.doSelect(_selected, _interaction, _client)
             }
         }

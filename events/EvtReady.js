@@ -16,7 +16,6 @@ class EvtReady extends EvtBase {
     }
 
     async eventCallback (_client) {
-        log.write('bot ready')
         _client.user.setActivity('Splatoon 3', { type: ActivityType.Playing })
 
         const hooks = new Hook()
@@ -32,6 +31,8 @@ class EvtReady extends EvtBase {
 
         _client.botInfo.update()
         _client.botInfo.schedule()
+
+        log.write('bot ready')
     }
 }
 

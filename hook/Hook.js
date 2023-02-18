@@ -80,7 +80,7 @@ class Hook {
         this.app.post('/dcls',  this.middleware.dcls.auth(),  this.send())
 
         this.app.listen(this.port, () => {
-            log.write(`start listening at ${this.port}`)
+            log.write('start listening at', this.port)
         })
     }
 
@@ -108,7 +108,7 @@ class Hook {
     }
 
     formatEmbed (_log) {
-        log.write(`parsing ${JSON.stringify(_log)}`)
+        log.write('parsing', _log)
 
         let res = _log
 

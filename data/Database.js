@@ -32,8 +32,7 @@ class Database {
             }
         }
 
-        log.write(`load ${_path}: ${list.length}`)
-        log.write(`skip empty ${_path}: ${arrJson.length - list.length - 1}`)
+        log.write('load', list.length, _path, '/ skip empty:', arrJson.length - list.length - 1)
 
         let obj = {}
         obj[_path] = list
