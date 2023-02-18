@@ -20,18 +20,18 @@ class CmdBotInfo extends CmdBase {
         this.homeURL = 'https://lusw.dev/splatoon'
     }
 
-    async doCmd (_interaction, _client) {
+    doCmd (_interaction, _client) {
         const cmd = _interaction.options.getString('command') ?? ''
         const lang = _interaction.locale.indexOf('zh') != -1 ? 'zh' : 'en'
         const reply = this.buildMessage(cmd, lang, _client)
-        await _interaction.reply(reply)
+        return reply
     }
 
-    async doSelect (_option, _interaction, _client) {
+    doSelect (_option, _interaction, _client) {
         const cmd = _option.res
         const lang = _interaction.locale.indexOf('zh') != -1 ? 'zh' : 'en'
         const reply = this.buildMessage(cmd, lang, _client)
-        await _interaction.reply(reply)
+        return reply
     }
 
     buildCmdSelect (_curCmd) {

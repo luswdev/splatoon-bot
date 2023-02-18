@@ -15,17 +15,17 @@ class CmdRandomTeam extends CmdBase {
         this.imgUrlBase = 'https://leanny.github.io/splat3/images/weapon_flat/'
     }
 
-    async doCmd (_interaction) {
+    doCmd (_interaction) {
         const weapons = _.times(8, () => this.randomWeapon())
         const lang = this.locale2Lang(_interaction.locale) ?? 'en'
         const reply = this.buildMessage(weapons, lang, _interaction)
-        await _interaction.reply(reply)
+        return reply
     }
 
-    async doSelect (_option, _interaction) {
+    doSelect (_option, _interaction) {
         const weapons = _.times(8, (i) => getWeapon(_option.res[i]))
         const reply = this.buildMessage(weapons, _option.lang, _interaction)
-        await _interaction.update(reply)
+        return reply
     }
 
     buildMessage (_weapons, _lang, _interaction) {

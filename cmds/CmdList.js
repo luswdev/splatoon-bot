@@ -49,24 +49,22 @@ class CmdList {
         this.cmdsBuilder.push(scb)
     }
 
-    async parseCmd (_cmdName, _interaction, _client) {
+    parseCmd (_cmdName, _interaction, _client) {
         for (let cmd of this.cmds) {
             if (_cmdName == cmd.cmdKey) {
                 log.write(`inner command: ${cmd.cmdKey}`)
-                await cmd.doCmd(_interaction, _client)
-                break
+                return cmd.doCmd(_interaction, _client)
             }
         }
     }
 
-    async parseSelect(_selected, _interaction, _client) {
+    parseSelect(_selected, _interaction, _client) {
         log.write(`option: ${JSON.stringify(_selected)}`)
 
         for (let cmd of this.cmds) {
             if (_selected.cmd == cmd.cmdKey) {
                 log.write(`inner command: ${cmd.cmdKey}`)
-                await cmd.doSelect(_selected, _interaction, _client)
-                break
+                return cmd.doSelect(_selected, _interaction, _client)
             }
         }
     }
@@ -89,11 +87,12 @@ cmds.installCmd(cmdSr)
 cmds.installCmd(cmdInfo)
 
 module.exports.parseCmd = (_cmdName, _interaction, _client) => {
-    cmds.parseCmd(_cmdName, _interaction, _client)
+    let reply = cmds.parseCmd(_cmdName, _interaction, _client)
+    return reply
 }
 
 module.exports.parseSelect = (_selected, _interaction, _client) => {
-    cmds.parseSelect(_selected, _interaction, _client)
+    return cmds.parseSelect(_selected, _interaction, _client)
 }
 
 module.exports.getCmdsJson = () => {

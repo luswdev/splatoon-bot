@@ -2,9 +2,6 @@
 
 const { ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require('discord.js')
 
-const ConnDB = require('../pkg/ConnDB.js')
-const { db } = require('../config.json')
-
 const { cmds } = require('./cmds.json');
 
 class CmdBase {
@@ -14,9 +11,6 @@ class CmdBase {
 
         this.cmdKey = cmd.value
         this.cmdInfo = cmd.info
-        this.infoUrlBase = 'https://splatoonwiki.org/wiki/'
-
-        this.mysql = new ConnDB(db)
 
         this.langs = [
             { emoji: '🇹🇼', name: '正體中文', key: 'zhTW' },

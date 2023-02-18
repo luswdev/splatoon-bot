@@ -14,26 +14,23 @@ class CmdRandomWeapon extends CmdBase {
         this.imgUrlBase = 'https://leanny.github.io/splat3/images/weapon_flat/'
     }
 
-    async doCmd (_interaction) {
+    doCmd (_interaction) {
         const weapon = this.randomWeapon()
         const lang = this.locale2Lang(_interaction.locale) ?? 'en'
         const reply = this.buildMessage(weapon, lang, _interaction)
-
-        this.mysql.saveResult(this.cmdKey, weapon.en, _interaction.user.id)
-
-        await _interaction.reply(reply)
+        return reply
     }
 
-    async doSelect (_option, _interaction) {
+    doSelect (_option, _interaction) {
         const weapon = getWeapon(_option.res)
         const reply = this.buildMessage(weapon, _option.lang, _interaction)
-        await _interaction.update(reply)
+        return reply
     }
 
     buildMessage (_weapon, _lang, _interaction) {
         const embed = new EmbedBuilder()
             .setColor(_weapon.color)
-            .setTitle(`${_weapon.icon} ${getLabel('Random')[_lang]} ${getLabel('Weapon')[_lang]}!`)
+            .setTitle(`${this.cmdData.icon} ${getLabel('Random')[_lang]} ${getLabel('Weapon')[_lang]}!`)
             .setDescription(`${_weapon[_lang]}`)
             .setThumbnail(`${this.imgUrlBase}${_weapon.img}`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})

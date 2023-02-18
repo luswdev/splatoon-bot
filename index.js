@@ -31,17 +31,25 @@ client.on('interactionCreate', async interaction => {
     log.write(`get interaction from: ${interaction.user.username ?? ''}`)
 
     if (interaction.isChatInputCommand()) {
+        await interaction.deferReply()
+
         const { commandName } = interaction
 
         log.write(`parsing command: ${commandName}`)
-        await parseCmd(commandName, interaction, client)
+        let reply = parseCmd(commandName, interaction, client)
+        await interaction.editReply(reply)
 
         log.write(`end of ${commandName}`)
     } else if (interaction.isStringSelectMenu()) {
+        await interaction.deferUpdate()
+
         const selected = JSON.parse(interaction.values[0])
 
         log.write(`command ${selected.cmd} call select: ${JSON.stringify(selected)}`)
-        await parseSelect(selected, interaction, client)
+        let reply =  parseSelect(selected, interaction, client)
+        await interaction.editReply(reply)
+
+        log.write(`end of ${selected.cmd}`)
     }
 })
 

@@ -13,20 +13,17 @@ class CmdRandomMap extends CmdBase {
         this.imgUrlBase = 'https://raw.githubusercontent.com/luswdev/splatoon-bot/bot-v2/img/map/'
     }
 
-    async doCmd (_interaction) {
+    doCmd (_interaction) {
         const map = this.randomMap()
         const lang = this.locale2Lang(_interaction.locale) ?? 'en'
         const reply = this.buildMessage(map, lang, _interaction)
-
-        this.mysql.saveResult(this.cmdKey, map.en, _interaction.user.id)
-
-        await _interaction.reply(reply)
+        return reply
     }
 
-    async doSelect (_option, _interaction) {
+    doSelect (_option, _interaction) {
         const map = getMap(parseInt(_option.res))
         const reply = this.buildMessage(map, _option.lang, _interaction)
-        await _interaction.update(reply)
+        return reply
     }
 
     buildMessage (_map, _lang, _interaction) {
