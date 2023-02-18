@@ -9,6 +9,7 @@ const { splatoon3InkScheduler } = require('./pkg/Splatoon3Ink.js')
 
 const { log } = require('./pkg/Log.js')
 const ConnDB = require('./pkg/ConnDB.js')
+const BotInfo = require('./pkg/BotInfo.js')
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] })
 
@@ -27,6 +28,10 @@ client.once('ready', async () => {
     client.commands = await client.application.commands.fetch()
 
     client.startTimestamp = Date.now()
+    client.botInfo = new BotInfo(client)
+
+    client.botInfo.update()
+    client.botInfo.schedule()
 })
 
 client.on('interactionCreate', async interaction => {
