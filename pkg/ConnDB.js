@@ -12,8 +12,8 @@ class ConnDB {
         this.voteTable = _config.vote_table
     }
 
-    saveResult (_cmd, _res, _user) {
-        let query = this.conn.query(`INSERT INTO ${this.cmdTable} (user_id, command, result) VALUES (?, ?, ?)`, [_user, _cmd, _res])
+    saveInteraction (_cmd, _user, _interaction) {
+        let query = this.conn.query(`INSERT INTO ${this.cmdTable} (user_id, command, interaction) VALUES (?, ?, ?)`, [_user, _cmd, _interaction])
         query
             .on('error', (err) => {
                 log.write(`cannot save result, error: ${err}`)
