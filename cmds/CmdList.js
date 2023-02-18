@@ -62,7 +62,3 @@ class CmdList {
 }
 
 module.exports = CmdList
-
-// module.exports.getCmdsJson = () => {
-//     return cmds.cmdsBuilder.map(command => command.toJSON())
-// }
