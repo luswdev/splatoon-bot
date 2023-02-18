@@ -2,7 +2,7 @@
 
 const { ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require('discord.js')
 
-const { cmds } = require('commands/cmds.json')
+const cmds = require('commands/cmds.json')
 const i18n = require('commands/i18n.json')
 
 class CmdBase {

@@ -2,8 +2,8 @@
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require('discord.js')
 const { version } = require('package.json')
-const { cmds } = require('commands/cmds.json')
 
+const cmds = require('commands/cmds.json')
 const CmdBase = require('commands/CmdBase.js')
 
 class CmdBotInfo extends CmdBase {
