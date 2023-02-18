@@ -63,7 +63,7 @@ class CmdSalmonRun extends CmdBase {
         const embed = new EmbedBuilder()
             .setColor(match.color)
             .setTitle(`${match.icon} ${match[_lang]}`)
-            .setDescription(`<t:${start}> ~ <t:${ends}> <t:${ends}:R>`)
+            .setDescription(`<t:${start}> ~ <t:${ends}> (<t:${ends}:R>)`)
             .addFields(
                 { name: getLabel('Weapon')[_lang], value: weapons },
                 { name: getLabel('Stage')[_lang],  value: map[_lang] },
