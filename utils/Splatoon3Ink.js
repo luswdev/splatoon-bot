@@ -98,7 +98,7 @@ class Splatoon3Ink {
         writeFileSync(imgOutPath, canvas.toBuffer())
     }
 
-    parseSalmonRun (_set) {
+    parseSalmonRun (_isBigRun, _set) {
         const period = {
             start: _set.startTime,
             ends:  _set.endTime
@@ -115,6 +115,7 @@ class Splatoon3Ink {
 
         let rotation = {
             match: 'Salmon Run Next Wave',
+            bigRun: _isBigRun,
             period: period,
             map: _set.setting.coopStage.name,
             weapons: weapons
@@ -134,8 +135,14 @@ class Splatoon3Ink {
 
         let salmonRuns = []
         for (let set of this.rotationData.coopGroupingSchedule.regularSchedules.nodes) {
-            salmonRuns.push(this.parseSalmonRun(set))
+            salmonRuns.push(this.parseSalmonRun(false, set))
         }
+
+        for (let set of this.rotationData.coopGroupingSchedule.bigRunSchedules.nodes) {
+            salmonRuns.push(this.parseSalmonRun(true, set))
+        }
+
+        salmonRuns.sort((r1, r2) => new Date(r1.period.start) - new Date(r2.period.start))
 
         let rotations = {
             battles: battles,

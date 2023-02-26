@@ -53,8 +53,15 @@ class CmdSalmonRun extends CmdBase {
     }
 
     getImage (_rotation) {
-        let map = database.getListObject(_rotation.map, 'salmon_run')
-        let thumb = findImg('salmon_run', map.en)
+        let map, thumb
+        if (_rotation.bigRun) {
+            map = database.getListObject(_rotation.map, 'maps')
+            thumb = findImg('maps', map.en)
+        } else {
+            map = database.getListObject(_rotation.map, 'salmon_run')
+            thumb = findImg('salmon_run', map.en)
+        }
+
         return {...map, thumb: thumb}
     }
 
@@ -98,9 +105,10 @@ class CmdSalmonRun extends CmdBase {
     buildMessage (_lang, _rotation, _interaction) {
         const embeds = []
         const rotation = this.fetchRotation(_rotation)
-        const thumb = this.getImage(rotation).thumb
+        let thumb = []
 
         if (rotation) {
+            thumb.push(this.getImage(rotation).thumb)
             embeds.push(this.buildEmbed(rotation, _rotation, _lang, _interaction))
         } else {
             embeds.push(this.defaultEmbed(_lang, _interaction))
@@ -116,7 +124,7 @@ class CmdSalmonRun extends CmdBase {
                 .setEmoji('<:squidgreen:568201618974048279>'),
             )
 
-        return { embeds: embeds, components: [row, link], files: [thumb] }
+        return { embeds: embeds, components: [row, link], files: thumb }
     }
 }
 
