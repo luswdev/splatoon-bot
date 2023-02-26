@@ -36,7 +36,19 @@ class CmdSalmonRun extends CmdBase {
     fetchRotation (_idx) {
         const rotationStr = readFileSync(this.dataPath, {encoding:'utf8', flag:'r'})
         const rotation = JSON.parse(rotationStr)
-        return rotation.salmonRuns[_idx]
+        return rotation.salmonRuns[_idx] ?? undefined
+    }
+
+    defaultEmbed (_lang, _interaction) {
+        const match = database.getListObject('Salmon Run Next Wave', 'matches')
+        const embed = new EmbedBuilder()
+            .setColor(match.color)
+            .setTitle(`${match.icon} ${match[_lang]}`)
+            .setDescription(`No ${match[_lang]} now.`)
+            .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
+            .setTimestamp()
+
+        return embed
     }
 
     buildEmbed(_rotation, _idx, _lang, _interaction) {
@@ -80,7 +92,11 @@ class CmdSalmonRun extends CmdBase {
         const attachments = []
         const rotation = this.fetchRotation(_rotation)
 
-        embeds.push(this.buildEmbed(rotation, _rotation, _lang, _interaction))
+        if (rotation) {
+            embeds.push(this.buildEmbed(rotation, _rotation, _lang, _interaction))
+        } else {
+            embeds.push(this.defaultEmbed(_lang, _interaction))
+        }
 
         const row = this.buildLangSelect({rotation: _rotation}, _lang)
 
