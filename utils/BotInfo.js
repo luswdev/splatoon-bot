@@ -23,7 +23,7 @@ class BotInfo {
 
     schedule () {
         log.write('start fetch bot info every 5:00')
-        schedule.scheduleJob('* 5 * * *', () => {
+        schedule.scheduleJob('0 5 * * *', () => {
             this.update()
         })
     }
