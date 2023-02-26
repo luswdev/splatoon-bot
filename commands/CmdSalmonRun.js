@@ -2,16 +2,17 @@
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
 const { readFileSync } = require('fs')
+const { basename } = require('path')
 
 const CmdBase = require('commands/CmdBase.js')
 const database = require('data/Database.js')
+const { findImg } = require('utils/ImgFinder.js')
 
 class CmdSalmonRun extends CmdBase {
 
     constructor () {
         super('sr')
 
-        this.imgPath = 'https://splatoon3.ink/assets/splatnet/stage_img/icon/high_resolution/'
         this.dataPath = '/tmp/spl3/rotation.json'
 
         this.randomWeapon = {
@@ -51,9 +52,16 @@ class CmdSalmonRun extends CmdBase {
         return embed
     }
 
+    getImage (_rotation) {
+        let map = database.getListObject(_rotation.map, 'salmon_run')
+        let thumb = findImg('salmon_run', map.en)
+        return {...map, thumb: thumb}
+    }
+
     buildEmbed(_rotation, _idx, _lang, _interaction) {
         const match = database.getListObject(_rotation.match, 'matches')
-        const map   = database.getListObject(_rotation.map,   'salmon_run')
+        let map = this.getImage(_rotation)
+
         let weapons = ''
         for (let weapon of _rotation.weapons) {
             if (weapon.indexOf('Random') !== -1) {
@@ -80,7 +88,7 @@ class CmdSalmonRun extends CmdBase {
                 { name: database.getListObject('Weapon', 'labels')[_lang], value: weapons },
                 { name: database.getListObject('Stage',  'labels')[_lang], value: map[_lang] },
             )
-            .setImage(`${this.imgPath}/${map.img}`)
+            .setImage(`attachment://${basename(map.thumb)}`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()
 
@@ -89,8 +97,8 @@ class CmdSalmonRun extends CmdBase {
 
     buildMessage (_lang, _rotation, _interaction) {
         const embeds = []
-        const attachments = []
         const rotation = this.fetchRotation(_rotation)
+        const thumb = this.getImage(rotation).thumb
 
         if (rotation) {
             embeds.push(this.buildEmbed(rotation, _rotation, _lang, _interaction))
@@ -108,7 +116,7 @@ class CmdSalmonRun extends CmdBase {
                 .setEmoji('<:squidgreen:568201618974048279>'),
             )
 
-        return { embeds: embeds, components: [row, link], files: attachments }
+        return { embeds: embeds, components: [row, link], files: [thumb] }
     }
 }
 
