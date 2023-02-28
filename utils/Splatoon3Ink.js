@@ -115,7 +115,7 @@ class Splatoon3Ink {
         }
 
         let rotation = {
-            match: 'Salmon Run Next Wave',
+            match: _isBigRun ? 'Big Run' : 'Salmon Run Next Wave',
             bigRun: _isBigRun,
             period: period,
             map: _set.setting.coopStage.name,

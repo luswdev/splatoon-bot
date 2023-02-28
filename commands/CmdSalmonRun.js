@@ -16,7 +16,7 @@ class CmdSalmonRun extends CmdBase {
         this.dataPath = '/tmp/spl3/rotation.json'
 
         this.randomWeapon = {
-            normal: '<:Coop_Random:1075466256469196801>',
+            normal: '<:salmon_rand:1080105843455971349>',
             rare: '<:salmon_rare:1075463948075274281>'
         }
     }
