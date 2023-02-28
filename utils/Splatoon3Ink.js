@@ -4,6 +4,7 @@ const schedule = require('node-schedule')
 const axios = require('axios')
 const { mkdirSync, writeFileSync } = require('fs')
 const { createCanvas, loadImage } = require('canvas')
+const { join } = require('path')
 
 const database = require('data/Database.js')
 const { log } = require('utils/Log.js')
@@ -89,8 +90,8 @@ class Splatoon3Ink {
         const canvas = createCanvas(1000, 500)
         const ctx = canvas.getContext('2d')
 
-        const map1Img = await loadImage(findImg('maps_small', map1.en))
-        const map2Img = await loadImage(findImg('maps_small', map2.en))
+        const map1Img = await loadImage(map1 ? findImg('maps_small', map1.en) : `${join('images', 'maps_small', 'Unknown')}.png`)
+        const map2Img = await loadImage(map2 ? findImg('maps_small', map2.en) : `${join('images', 'maps_small', 'Unknown')}.png`)
         
         ctx.drawImage(map1Img, 0, 0, 500, 500)
         ctx.drawImage(map2Img, 500, 0, 500, 500)

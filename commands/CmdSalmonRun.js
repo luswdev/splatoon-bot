@@ -2,7 +2,7 @@
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
 const { readFileSync } = require('fs')
-const { basename } = require('path')
+const { basename, join } = require('path')
 
 const CmdBase = require('commands/CmdBase.js')
 const database = require('data/Database.js')
@@ -56,10 +56,10 @@ class CmdSalmonRun extends CmdBase {
         let map, thumb
         if (_rotation.bigRun) {
             map = database.getListObject(_rotation.map, 'maps')
-            thumb = findImg('maps', map.en)
+            thumb = map ? findImg('maps', map.en) : `${join('images', 'maps', 'Unknown')}.png`
         } else {
             map = database.getListObject(_rotation.map, 'salmon_run')
-            thumb = findImg('salmon_run', map.en)
+            thumb = map ? findImg('salmon_run', map.en) : `${join('images', 'maps', 'Unknown')}.png`
         }
 
         return {...map, thumb: thumb}
@@ -93,7 +93,7 @@ class CmdSalmonRun extends CmdBase {
             .setDescription(`<t:${start}> ~ <t:${ends}> (<t:${ends}:R>)`)
             .addFields(
                 { name: database.getListObject('Weapon', 'labels')[_lang], value: weapons },
-                { name: database.getListObject('Stage',  'labels')[_lang], value: map[_lang] },
+                { name: database.getListObject('Stage',  'labels')[_lang], value: map[_lang] ?? 'Unknown' },
             )
             .setImage(`attachment://${basename(map.thumb)}`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
