@@ -5,6 +5,7 @@ const { readdirSync, readFileSync } = require('fs')
 const { join } = require('path')
 
 const { log } = require('utils/Log.js')
+const dummy = require('data/dummy.json')
 
 class Database {
 
@@ -60,7 +61,7 @@ class Database {
     getListObject (_target, _list) {
         let ret = undefined
         if (typeof(_target) == 'string') {
-            ret = database.dataList[_list].find( (e) => e.en == _target)
+            ret = database.dataList[_list].find( (e) => e.en == _target) ?? dummy
         } else {
             ret = database.dataList[_list][_target]
         }

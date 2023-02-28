@@ -48,7 +48,7 @@ class CmdRotation extends CmdBase {
             .setTitle(`${match.icon} ${match[_lang]}`)
             .setDescription(`<t:${start}> ~ <t:${ends}> (<t:${ends}:R>)`)
             .addFields(
-                { name: `${mode.icon} ${mode[_lang]}`, value: `${map1 ? map1[_lang] : 'Unknown'} :arrow_left: :arrow_right: ${map2 ? map2[_lang] : 'Unknown'}` },
+                { name: `${mode.icon} ${mode[_lang]}`, value: `${map1[_lang]} :arrow_left: :arrow_right: ${map2[_lang]}` },
             )
             .setImage(`attachment://${match.en.replaceAll(' ', '_').replaceAll('(', '').replaceAll(')', '')}_${_idx}.png`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})

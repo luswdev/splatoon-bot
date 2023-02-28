@@ -2,7 +2,7 @@
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
 const { readFileSync } = require('fs')
-const { basename, join } = require('path')
+const { basename } = require('path')
 
 const CmdBase = require('commands/CmdBase.js')
 const database = require('data/Database.js')
@@ -56,10 +56,10 @@ class CmdSalmonRun extends CmdBase {
         let map, thumb
         if (_rotation.bigRun) {
             map = database.getListObject(_rotation.map, 'maps')
-            thumb = map ? findImg('maps', map.en) : `${join('images', 'maps', 'Unknown')}.png`
+            thumb = findImg('maps', map.en)
         } else {
             map = database.getListObject(_rotation.map, 'salmon_run')
-            thumb = map ? findImg('salmon_run', map.en) : `${join('images', 'maps', 'Unknown')}.png`
+            thumb = findImg('salmon_run', map.en)
         }
 
         return {...map, thumb: thumb}
