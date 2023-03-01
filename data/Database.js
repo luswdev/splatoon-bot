@@ -1,6 +1,6 @@
 'use strict'
 
-const _ = require('lodash')
+const MersenneTwister = require('mersenne-twister');
 const { readdirSync, readFileSync } = require('fs')
 const { join } = require('path')
 
@@ -11,6 +11,7 @@ class Database {
 
     constructor () {
         this.dataList = {}
+        this.twister = new MersenneTwister()
 
         const dataList = readdirSync(join(__dirname, './'), { withFileTypes: true })
             .filter( (dir) => dir.isDirectory() )
@@ -40,15 +41,12 @@ class Database {
         this.dataList = {...this.dataList, ...obj}
     }
 
-    random (_range) {
-        const list = _.range(_range)
-        const slist = _.shuffle(list)
-        const idx = _.random(_range - 1)
-        return slist[idx]
+    initRandom () {
+        this.twister.init_seed(Date.now())
     }
 
     randomList (_list) {
-        const listIdx = database.random(_list.length)
+        const listIdx = Math.floor(this.twister.random() * Math.floor(_list.length))
         const listRes = _list[listIdx]
         return listRes
     }

@@ -14,6 +14,7 @@ class CmdRandomMap extends CmdBase {
     }
 
     doCmd (_interaction) {
+        database.initRandom()
         const map = database.randomList(database.dataList['maps'])
         const lang = this.locale2Lang(_interaction.locale) ?? 'en'
         const reply = this.buildMessage(map, lang, _interaction)

@@ -14,6 +14,7 @@ class CmdRandomWeapon extends CmdBase {
     }
 
     doCmd (_interaction) {
+        database.initRandom()
         const weapon = database.randomList(database.dataList['weapons'])
         const lang = this.locale2Lang(_interaction.locale) ?? 'en'
         const reply = this.buildMessage(weapon, lang, _interaction)

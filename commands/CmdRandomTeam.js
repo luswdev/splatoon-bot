@@ -1,7 +1,6 @@
 'use strict'
 
 const { EmbedBuilder } = require('discord.js')
-const _ = require('lodash')
 
 const CmdBase = require('commands/CmdBase.js')
 const database = require('data/Database.js')
@@ -15,14 +14,15 @@ class CmdRandomTeam extends CmdBase {
     }
 
     doCmd (_interaction) {
-        const weapons = _.times(8, () => database.randomList(database.dataList['weapons']))
+        database.initRandom()
+        const weapons = Array.apply(null, Array(8)).map( () => database.randomList(database.dataList['weapons']))
         const lang = this.locale2Lang(_interaction.locale) ?? 'en'
         const reply = this.buildMessage(weapons, lang, _interaction)
         return reply
     }
 
     doSelect (_option, _interaction) {
-        const weapons = _.times(8, (i) => database.getListObject(_option.res[i], 'weapons'))
+        const weapons = _option.res.map( (e) => database.getListObject(e, 'weapons'))
         const reply = this.buildMessage(weapons, _option.lang, _interaction)
         return reply
     }

@@ -26,10 +26,9 @@
     "canvas": "^2.11.0",
     "discord.js": "^14.6.0",
     "express": "^4.18.2",
-    "lodash": "^4.17.21",
+    "mersenne-twister": "^1.1.0",
     "mysql": "^2.18.1",
-    "node-schedule": "^2.1.1",
-    "pkg": "^5.8.0"
+    "node-schedule": "^2.1.1"
   },
   "devDependencies": {
     "eslint": "^8.25.0"
