@@ -118,6 +118,7 @@ class Splatoon3Ink {
             bigRun: _isBigRun,
             period: period,
             map: _set.setting.coopStage.name,
+            boss: _set.__splatoon3ink_king_salmonid_guess,
             weapons: weapons
         }
 

@@ -68,6 +68,7 @@ class CmdSalmonRun extends CmdBase {
     buildEmbed(_rotation, _idx, _lang, _interaction) {
         const match = database.getListObject(_rotation.match, 'matches')
         let map = this.getImage(_rotation)
+        let bossThumb = findImg('boss', _rotation.boss)
 
         let weapons = ''
         for (let weapon of _rotation.weapons) {
@@ -95,6 +96,7 @@ class CmdSalmonRun extends CmdBase {
                 { name: database.getListObject('Weapon', 'labels')[_lang], value: weapons },
                 { name: database.getListObject('Stage',  'labels')[_lang], value: map[_lang] ?? 'Unknown' },
             )
+            .setThumbnail(`attachment://${basename(bossThumb)}`)
             .setImage(`attachment://${basename(map.thumb)}`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()
@@ -109,6 +111,7 @@ class CmdSalmonRun extends CmdBase {
 
         if (rotation) {
             thumb.push(this.getImage(rotation).thumb)
+            thumb.push(findImg('boss', rotation.boss))
             embeds.push(this.buildEmbed(rotation, _rotation, _lang, _interaction))
         } else {
             embeds.push(this.defaultEmbed(_lang, _interaction))
