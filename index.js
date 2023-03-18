@@ -29,6 +29,7 @@ for (let event of client.events) {
         eventClass.eventCallback(client, ...args)
             .catch( (err) => {
                 log.write(eventClass.name, 'catch error:', err)
+                client.errHandler.send(err)
             })
     })
 
