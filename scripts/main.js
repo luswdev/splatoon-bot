@@ -66,8 +66,21 @@ const app = {
         this.user_lang = navigator.language || navigator.userLanguage;
     }
 }
-
 const appVm = Vue.createApp(app).mount('#app')
+
+const header = {
+    data() {
+        return {
+            links: header_links,
+        }
+    },
+    methods: {
+        get_tstring: appVm.get_tstring,
+        get_font_by_lang: appVm.get_font_by_lang,
+    }
+}
+const headerVm = Vue.createApp(header).mount('#header')
+
 const footer = {
     data() {
         return {

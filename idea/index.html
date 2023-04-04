@@ -24,13 +24,20 @@
     <script src="/splatoon/scripts/ga.js?v={BUILD_TIMESTAMP}"></script>
 </head>
 <body class="min-vh-100 d-flex flex-column text-white">
-    <header>
+    <header id="header">
         <nav class="navbar navbar-expand flex-column flex-md-row py-3">
-            <div class="container splatoon-style-1">
+            <div class="container splatoon-style-1 flex-column flex-md-row">
                 <span class="navbar-brand mb-0 h1 mr-0 mr-md-2 fs-1">
                     <i class="fas fa-robot"></i>
                     SplatoonBot
                 </span>
+                <ul class="nav justify-content-md-end justify-content-center">
+                    <li v-for="link in links" class="nav-item">
+                        <a class="nav-link active btn btn-clear round-32 shadow-none" :class="get_font_by_lang(2)" aria-current="page" :href="link.url">
+                            {{get_tstring(link.title)}}
+                        </a>
+                    </li>
+                </ul>
             </div>
         </nav>
     </header>

@@ -36,6 +36,7 @@ const tstrings = {
         help_info: [
             'Show manual in Discord.'
         ],
+        anarchy_calculator: 'Anarchy Calculator',
         author: 'Author',
         source_code: 'Source code'
     },
@@ -76,6 +77,7 @@ const tstrings = {
         help_info: [
             '在 Discord 中顯示指令提示'
         ],
+        anarchy_calculator: '真格計算機',
         author: '作者',
         source_code: '原始碼'
     }

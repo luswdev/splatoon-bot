@@ -1,4 +1,9 @@
 const header_links = [
+    {
+        "icon": "",
+        "title": "anarchy_calculator",
+        "url": "/splatoon/anarchy"
+    },
 ]
 
 const footer_links = [
