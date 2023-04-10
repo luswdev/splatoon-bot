@@ -6,6 +6,7 @@
   "bin": "index.js",
   "scripts": {
     "start": "NODE_PATH=. node index.js",
+    "update": "NODE_PATH=. node -e 'require(\"utils/BotInfo.js\").runFetch()'",
     "fetch": "NODE_PATH=. node -e 'require(\"utils/Splatoon3Ink.js\").runFetch()'"
   },
   "repository": {
@@ -22,6 +23,7 @@
   },
   "homepage": "https://github.com/luswdev/splatoon-bot#readme",
   "dependencies": {
+    "@top-gg/sdk": "^3.1.4",
     "axios": "0.27.2",
     "canvas": "^2.11.0",
     "discord.js": "^14.9.0",
