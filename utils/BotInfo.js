@@ -1,16 +1,13 @@
 'use strict'
 
 const schedule = require('node-schedule')
-const Topgg = require('@top-gg/sdk')
 
 const { log } = require('utils/Log.js')
-const { hook } = require('config.json')
 
 class BotInfo {
 
     constructor (_client) {
         this.client = _client
-        this.TopggApi = new Topgg.Api(`${hook.topgg_token}`);
     }
 
     update () {
@@ -22,9 +19,7 @@ class BotInfo {
             this.memberCnt = totalGuildsMembers.reduce( (total, current) => total + current, this.client.users.cache.size)
             log.write('current served', this.memberCnt, 'users')
 
-            this.TopggApi.postStats({
-                serverCount: this.serverCnt,
-            })
+            this.client.hooks.postStat(this.serverCnt)
         })
     }
 

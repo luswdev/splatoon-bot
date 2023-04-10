@@ -23,8 +23,8 @@ class EvtReady extends EvtBase {
 
         _client.user.setActivity('Splatoon 3', { type: ActivityType.Playing })
 
-        const hooks = new Hook()
-        hooks.connect()
+        _client.hooks = new Hook()
+        _client.hooks.connect()
 
         splatoon3InkScheduler()
 

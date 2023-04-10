@@ -1,6 +1,7 @@
 'use strict'
 
 const express = require('express')
+const https = require('https')
 const { WebhookClient, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
 
 const MiddleWareTopgg = require('hook/middleware/MiddleWareTopgg.js')
@@ -21,7 +22,7 @@ class Hook {
         this.port = 3000
 
         this.middleware = {
-            topgg: new MiddleWareTopgg(hook.topgg),
+            topgg: new MiddleWareTopgg(hook.topgg, hook.topgg_token),
             dctw: new MiddleWareDcTW(hook.dctw),
             dcls: new MiddleWareDcLs(hook.dcls),
         }
@@ -126,6 +127,31 @@ class Hook {
             .setTimestamp()
 
         return embed
+    }
+
+    postStat(_count) {
+        let payload = this.middleware.topgg.postStat(_count)
+        let options = {
+            method: payload.method,
+            hostname: payload.hostname,
+            path: payload.path,
+            headers: payload.headers
+        }
+
+        let url = `https://${payload.hostname}${payload.path}`
+        let req = https.request(url, options, (res) => {
+            log.write(url, 'retCode:', res.statusCode)
+            res.on('data', (d) => {
+                log.write(url, 'return:', d.toString())
+            })
+        })
+
+        req.on('error', (e) => {
+            log.write(url, 'error:', e)
+        })
+
+        req.write(JSON.stringify(payload.body))
+        req.end()
     }
 }
 
