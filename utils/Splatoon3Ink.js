@@ -17,6 +17,7 @@ class Splatoon3Ink {
         this.imgOut = '/tmp/spl3/img/'
         this.imgSrc = `${__dirname}/../img/map/`
         this.rotationData = undefined
+        this.salmonType = Object.freeze({ 'salmonRun': 'Salmon Run Next Wave', 'bigRun': 'Big Run', 'teamContest': 'Eggstra Work' })
 
         mkdirSync(this.imgOut, { recursive: true })
     }
@@ -98,7 +99,7 @@ class Splatoon3Ink {
         writeFileSync(imgOutPath, canvas.toBuffer())
     }
 
-    parseSalmonRun (_isBigRun, _set) {
+    parseSalmonRun (_type, _set) {
         const period = {
             start: _set.startTime,
             ends:  _set.endTime
@@ -114,8 +115,8 @@ class Splatoon3Ink {
         }
 
         let rotation = {
-            match: _isBigRun ? 'Big Run' : 'Salmon Run Next Wave',
-            bigRun: _isBigRun,
+            match: _type,
+            bigRun: _type == this.salmonType.bigRun,
             period: period,
             map: _set.setting.coopStage.name,
             boss: _set.__splatoon3ink_king_salmonid_guess,
@@ -136,18 +137,24 @@ class Splatoon3Ink {
 
         let salmonRuns = []
         for (let set of this.rotationData.coopGroupingSchedule.regularSchedules.nodes) {
-            salmonRuns.push(this.parseSalmonRun(false, set))
+            salmonRuns.push(this.parseSalmonRun(this.salmonType.salmonRun, set))
         }
 
         for (let set of this.rotationData.coopGroupingSchedule.bigRunSchedules.nodes) {
-            salmonRuns.push(this.parseSalmonRun(true, set))
+            salmonRuns.push(this.parseSalmonRun(this.salmonType.bigRun, set))
         }
 
         salmonRuns.sort((r1, r2) => new Date(r1.period.start) - new Date(r2.period.start))
 
+        let teamContests = []
+        for (let set of this.rotationData.coopGroupingSchedule.teamContestSchedules.nodes) {
+            teamContests.push(this.parseSalmonRun(this.salmonType.teamContest, set))
+        }
+
         let rotations = {
             battles: battles,
             salmonRuns: salmonRuns,
+            teamContests: teamContests,
         }
 
         writeFileSync(`${this.dataOut}rotation.json`, JSON.stringify(rotations, (k, v) => v === undefined ? null : v))

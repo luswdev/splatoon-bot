@@ -37,7 +37,9 @@ class CmdSalmonRun extends CmdBase {
     fetchRotation (_idx) {
         const rotationStr = readFileSync(this.dataPath, {encoding:'utf8', flag:'r'})
         const rotation = JSON.parse(rotationStr)
-        return rotation.salmonRuns[_idx] ?? undefined
+        const salmon = rotation.salmonRuns[_idx] ?? undefined
+        const team = rotation.teamContests[0] ?? undefined  // always get idx 0
+        return { salmon: salmon, team: team }
     }
 
     defaultEmbed (_lang, _interaction) {
@@ -64,6 +66,18 @@ class CmdSalmonRun extends CmdBase {
 
         return {...map, thumb: thumb}
     }
+
+    checkTeamContestInPeriod(_team, _salmon) {
+        if (!_team || !_salmon) {
+            return false
+        }
+
+        const teamEnd = new Date(_team.period.ends).getTime()
+        const salmonStart = new Date(_salmon.period.start).getTime()
+
+        return (teamEnd >= salmonStart)
+    }
+
 
     buildEmbed(_rotation, _idx, _lang, _interaction) {
         const match = database.getListObject(_rotation.match, 'matches')
@@ -96,10 +110,13 @@ class CmdSalmonRun extends CmdBase {
                 { name: database.getListObject('Weapon', 'labels')[_lang], value: weapons },
                 { name: database.getListObject('Stage',  'labels')[_lang], value: map[_lang] ?? 'Unknown' },
             )
-            .setThumbnail(`attachment://${basename(bossThumb)}`)
             .setImage(`attachment://${basename(map.thumb)}`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()
+
+        if (bossThumb.indexOf('Unknown') === -1) {
+            embed.setThumbnail(`attachment://${basename(bossThumb)}`)
+        }
 
         return embed
     }
@@ -109,12 +126,17 @@ class CmdSalmonRun extends CmdBase {
         const rotation = this.fetchRotation(_rotation)
         let thumb = []
 
-        if (rotation) {
-            thumb.push(this.getImage(rotation).thumb)
-            thumb.push(findImg('boss', rotation.boss))
-            embeds.push(this.buildEmbed(rotation, _rotation, _lang, _interaction))
+        if (rotation.salmon) {
+            thumb.push(this.getImage(rotation.salmon).thumb)
+            thumb.push(findImg('boss', rotation.salmon.boss))
+            embeds.push(this.buildEmbed(rotation.salmon, _rotation, _lang, _interaction))
         } else {
             embeds.push(this.defaultEmbed(_lang, _interaction))
+        }
+
+        if (rotation.team && this.checkTeamContestInPeriod(rotation.team, rotation.salmon)) {
+            thumb.push(this.getImage(rotation.team).thumb)
+            embeds.push(this.buildEmbed(rotation.team, _rotation, _lang, _interaction))
         }
 
         const row = this.buildLangSelect({rotation: _rotation}, _lang)
