@@ -11,6 +11,7 @@ const { splatoon3InkScheduler } = require('utils/Splatoon3Ink.js')
 const BotInfo = require('utils/BotInfo.js')
 const { log } = require('utils/Log.js')
 const ErrorHandler = require('../utils/ErrorHandler')
+const Analytics = require('utils/Analytics.js')
 
 class EvtReady extends EvtBase {
 
@@ -36,6 +37,10 @@ class EvtReady extends EvtBase {
 
         _client.botInfo.update()
         _client.botInfo.schedule()
+
+        _client.analytics = new Analytics(_client, bot.debug)
+        _client.analytics.report()
+        _client.analytics.schedule()
 
         log.write('bot ready')
     }

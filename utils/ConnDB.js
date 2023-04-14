@@ -68,6 +68,34 @@ class ConnDB {
                 })
         })
     }
+
+    getCmdUsage(_cmd = '', _total = false) {
+        return new Promise( (resolve, reject) => {
+            let query
+            if (_cmd == '' && _total) {
+                query = `SELECT COUNT(*) AS count FROM ${this.cmdTable}`
+            } else if (_cmd == '') {
+                query = `SELECT COUNT(*) AS count FROM ${this.cmdTable} WHERE DATE(recorded) = DATE(DATE_ADD(now(), INTERVAL -1 DAY))`
+            } else if (_total) {
+                query = `SELECT COUNT(*) AS count FROM ${this.cmdTable} WHERE command='${_cmd}'`
+            } else {
+                query = `SELECT COUNT(*) AS count FROM ${this.cmdTable} WHERE command='${_cmd}' AND DATE(recorded) = DATE(DATE_ADD(now(), INTERVAL -1 DAY))`
+            }
+            this.conn.query(query, (err, ret) => {
+                if (err) {
+                    log.write('cannot command usage:', _cmd, 'error:', err)
+                    reject(-1)
+                }
+
+                if (ret.length !== 0) {
+                    log.write('end of get command usage:', _cmd)
+                    resolve(ret[0].count)
+                } else {
+                    resolve(0)
+                }
+            })
+        })
+    }
 }
 
 module.exports = ConnDB

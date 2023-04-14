@@ -8,6 +8,8 @@ class BotInfo {
 
     constructor (_client) {
         this.client = _client
+        this.serverCnt = 0
+        this.memberCnt = 0
     }
 
     update () {
