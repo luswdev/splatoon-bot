@@ -120,7 +120,7 @@ class CmdBotInfo extends CmdBase {
             infoEmbed.setDescription(description)
                 .addFields(
                     { name: `📊 ${_lang == 'zh' ? '系統資訊' : 'System Information'}`, value: botInfo },
-                    { name: `⚙ ${_lang == 'zh' ? '版本' : 'Version'}`, value: `${version} (<t:${Math.floor(_client.startTimestamp / 1000)}>)` },
+                    { name: `<:cogwheel:1095072752274247841>  ${_lang == 'zh' ? '版本' : 'Version'}`, value: `${version} (<t:${Math.floor(_client.startTimestamp / 1000)}>)` },
                 )
         }
 
