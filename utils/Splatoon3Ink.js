@@ -4,6 +4,7 @@ const schedule = require('node-schedule')
 const axios = require('axios')
 const { mkdirSync, writeFileSync } = require('fs')
 const { createCanvas, loadImage } = require('canvas')
+const looksSame = require('looks-same')
 
 const database = require('data/Database.js')
 const { log } = require('utils/Log.js')
@@ -99,7 +100,12 @@ class Splatoon3Ink {
         writeFileSync(imgOutPath, canvas.toBuffer())
     }
 
-    parseSalmonRun (_type, _set) {
+    async downloadImg (_url, _path) {
+        const res = await axios.get(_url, {responseType: 'stream'})
+        res.data.pipe(fs.createWriteStream(_path))
+    }
+
+    async parseSalmonRun (_type, _set) {
         const period = {
             start: _set.startTime,
             ends:  _set.endTime
@@ -107,8 +113,14 @@ class Splatoon3Ink {
 
         let weapons = []
         for (let weapon of _set.setting.weapons) {
-            if (weapon.name === 'Random') {
-                weapons.push(`${weapon.name}_${weapon.__splatoon3ink_id}`)
+            if (weapon.name.indexOf('Random') !== -1) {
+                const tmpImgPath = `${this.imgOut}${weapon.__splatoon3ink_id}.png`
+                log.write(weapon.image.url, typeof(weapon.image.url))
+                await this.downloadImg(weapon.image.url, tmpImgPath)
+
+                const comp = await looksSame(findImg('salmon_run', 'RareRandom'), tmpImgPath)
+                log.write(comp)
+                weapons.push(`${comp.equal ? 'Rare' : ''}${weapon.name}`)
             } else {
                 weapons.push(weapon.name)
             }
@@ -137,18 +149,18 @@ class Splatoon3Ink {
 
         let salmonRuns = []
         for (let set of this.rotationData.coopGroupingSchedule.regularSchedules.nodes) {
-            salmonRuns.push(this.parseSalmonRun(this.salmonType.salmonRun, set))
+            salmonRuns.push(await this.parseSalmonRun(this.salmonType.salmonRun, set))
         }
 
         for (let set of this.rotationData.coopGroupingSchedule.bigRunSchedules.nodes) {
-            salmonRuns.push(this.parseSalmonRun(this.salmonType.bigRun, set))
+            salmonRuns.push(await this.parseSalmonRun(this.salmonType.bigRun, set))
         }
 
         salmonRuns.sort((r1, r2) => new Date(r1.period.start) - new Date(r2.period.start))
 
         let teamContests = []
         for (let set of this.rotationData.coopGroupingSchedule.teamContestSchedules.nodes) {
-            teamContests.push(this.parseSalmonRun(this.salmonType.teamContest, set))
+            teamContests.push(await this.parseSalmonRun(this.salmonType.teamContest, set))
         }
 
         let rotations = {

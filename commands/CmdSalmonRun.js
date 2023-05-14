@@ -88,7 +88,7 @@ class CmdSalmonRun extends CmdBase {
         for (let weapon of _rotation.weapons) {
             if (weapon.indexOf('Random') !== -1) {
                 let random = database.getListObject('Random', 'labels')
-                if (weapon === 'Random_edcfecb7e8acd1a7') {
+                if (weapon === 'RareRandom') {
                     weapons += `${this.randomWeapon.rare}`
                 } else {
                     weapons += `${this.randomWeapon.normal}`
