@@ -10,6 +10,7 @@ class ConnDB {
         this.conn = mysql.createPool(_config)
         this.cmdTable = _config.cmd_table
         this.voteTable = _config.vote_table
+        this.infoTable = _config.info_table
     }
 
     saveInteraction (_cmd, _user, _interaction) {
@@ -95,6 +96,17 @@ class ConnDB {
                 }
             })
         })
+    }
+
+    saveBotInfo (_servers, _users) {
+        let query = this.conn.query(`INSERT INTO ${this.infoTable} (servers, users) VALUES (?, ?)`, [_servers, _users])
+        query
+            .on('error', (err) => {
+                log.write('cannot save info, error:', err)
+            })
+            .on('end', () => {
+                log.write('save info end')
+            })
     }
 }
 

@@ -2,7 +2,9 @@
 
 const schedule = require('node-schedule')
 
+const ConnDB = require('utils/ConnDB.js')
 const { log } = require('utils/Log.js')
+const { db } = require('config.json')
 
 class BotInfo {
 
@@ -10,6 +12,8 @@ class BotInfo {
         this.client = _client
         this.serverCnt = 0
         this.memberCnt = 0
+
+        this.mysql = new ConnDB(db)
     }
 
     update () {
@@ -22,6 +26,7 @@ class BotInfo {
             log.write('current served', this.memberCnt, 'users')
 
             this.client.hooks.postStat(this.serverCnt)
+            this.mysql.saveBotInfo(this.serverCnt, this.memberCnt)
         })
     }
 
