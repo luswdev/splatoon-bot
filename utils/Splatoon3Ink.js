@@ -2,7 +2,7 @@
 
 const schedule = require('node-schedule')
 const axios = require('axios')
-const { mkdirSync, writeFileSync } = require('fs')
+const { mkdirSync, writeFileSync, createWriteStream } = require('fs')
 const { createCanvas, loadImage } = require('canvas')
 const looksSame = require('looks-same')
 
@@ -102,7 +102,7 @@ class Splatoon3Ink {
 
     async downloadImg (_url, _path) {
         const res = await axios.get(_url, {responseType: 'stream'})
-        res.data.pipe(fs.createWriteStream(_path))
+        res.data.pipe(createWriteStream(_path))
     }
 
     async parseSalmonRun (_type, _set) {
@@ -119,7 +119,6 @@ class Splatoon3Ink {
                 await this.downloadImg(weapon.image.url, tmpImgPath)
 
                 const comp = await looksSame(findImg('salmon_run', 'RareRandom'), tmpImgPath)
-                log.write(comp)
                 weapons.push(`${comp.equal ? 'Rare' : ''}${weapon.name}`)
             } else {
                 weapons.push(weapon.name)
