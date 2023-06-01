@@ -115,7 +115,6 @@ class Splatoon3Ink {
         for (let weapon of _set.setting.weapons) {
             if (weapon.name.indexOf('Random') !== -1) {
                 const tmpImgPath = `${this.imgOut}${weapon.__splatoon3ink_id}.png`
-                log.write(weapon.image.url, typeof(weapon.image.url))
                 await this.downloadImg(weapon.image.url, tmpImgPath)
 
                 const comp = await looksSame(findImg('salmon_run', 'RareRandom'), tmpImgPath)
