@@ -59,7 +59,9 @@ class CmdRotation extends CmdBase {
             const start = new Date(period.start).getTime() / 1000
             const ends = new Date(period.ends).getTime() / 1000
 
-            periodString += `<t:${start}> ~ <t:${ends}> (<t:${ends}:R>)\n`
+            if ((Date.now() / 1000) < ends) {
+                periodString += `<t:${start}> ~ <t:${ends}> (<t:${ends}:R>)\n`
+            }
         }
 
         const timeLable = database.getListObject('Time', 'labels')
