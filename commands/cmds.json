@@ -151,6 +151,66 @@
         ]
     },
     {
+        "info": "查看現在的活動比賽 Get current Challenge rotation",
+        "value": "evt",
+        "arguments": ["rotation"],
+        "icon": "<:Challenge:1115651445740544022> ",
+        "thumbnail": "https://cdn.wikimg.net/en/splatoonwiki/images/thumb/7/7e/S3_Icon_Challenge.svg/2048px-S3_Icon_Challenge.svg.png",
+        "details": {
+            "zh": [
+                "顯示近期的活動比賽場地、規則與時間",
+                "支援所有語言",
+                "資料來源: [Splatoon3.ink](https://splatoon3.ink)"
+            ],
+            "en": [
+                "Show recent Challenge stage, rule and schedule",
+                "Support all language in Splatoon 3.",
+                "Data from: [Splatoon3.ink](https://splatoon3.ink)"
+            ]
+        },
+        "examples": [
+            {
+                "zh": {
+                    "info": "查看當前（或即將發生的）活動比賽場地、規則與時間",
+                    "cmd": "evt"
+                },
+                "en": {
+                    "info": "Get lately Challenge stage, rule and schedule",
+                    "cmd": "evt"
+                }
+            },
+            {
+                "zh": {
+                    "info": "查看下一輪的活動比賽場地、規則與時間",
+                    "cmd": "evt `1`"
+                },
+                "en": {
+                    "info": "Get next Challenge stage, rule and schedule",
+                    "cmd": "evt `1`"
+                }
+            },
+            {
+                "zh": {
+                    "info": "查看下 `n` 活動比賽場地、規則與時間",
+                    "cmd": "evt `n`"
+                },
+                "en": {
+                    "info": "Get next `n` Challenge stage, rule and schedule",
+                    "cmd": "evt `n`"
+                }
+            }
+        ],
+        "options": [
+            {
+                "type": "integer",
+                "name": "rotation",
+                "info": "第幾輪模式 Which Rotation?",
+                "min": 0,
+                "max": 4
+            }
+        ]
+    },
+    {
         "info": "查看現在的鮭魚跑模式 Get current Salmon Run rotation",
         "value": "sr",
         "arguments": ["rotation"],
