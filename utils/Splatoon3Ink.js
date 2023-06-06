@@ -9,6 +9,7 @@ const looksSame = require('looks-same')
 const database = require('data/Database.js')
 const { log } = require('utils/Log.js')
 const { findImg } = require('utils/ImgFinder.js')
+const { toUSVString } = require('util')
 
 class Splatoon3Ink {
 
@@ -82,6 +83,36 @@ class Splatoon3Ink {
         return rotation
     }
 
+    async parseEvent (_idx) {
+        const eventSchedules = this.rotationData.eventSchedules.nodes
+
+        let maps = [ eventSchedules[_idx].leagueMatchSetting.vsStages[0].name, eventSchedules[_idx].leagueMatchSetting.vsStages[1].name ]
+        let mode = eventSchedules[_idx].leagueMatchSetting.vsRule.name
+        let rule = eventSchedules[_idx].leagueMatchSetting.leagueMatchEvent.name
+        let desc = eventSchedules[_idx].leagueMatchSetting.leagueMatchEvent.desc
+
+        await this.createImg(maps, 'Challenge', _idx)
+
+        let periods = []
+        for (let period of eventSchedules[_idx].timePeriods) {
+            periods.push({
+                start: period.startTime,
+                ends:  period.endTime
+            })
+        }
+
+        let rotation = {
+            match: 'Challenge',
+            periods: periods,
+            maps: maps,
+            mode: mode,
+            rule: rule,
+            rule_desc: desc
+        }
+
+        return rotation
+    }
+
     async createImg (_maps, _match, _idx) {
         const imgOutPath = `${this.imgOut}${_match}_${_idx}.png`
     
@@ -145,6 +176,11 @@ class Splatoon3Ink {
             battles.push(await this.parseBattle(i, isFest))
         }
 
+        let events = []
+        for (let i = 0; i < this.rotationData.eventSchedules.nodes.length; ++i) {
+            events.push(await this.parseEvent(i))
+        }
+
         let salmonRuns = []
         for (let set of this.rotationData.coopGroupingSchedule.regularSchedules.nodes) {
             salmonRuns.push(await this.parseSalmonRun(this.salmonType.salmonRun, set))
@@ -163,6 +199,7 @@ class Splatoon3Ink {
 
         let rotations = {
             battles: battles,
+            events: events,
             salmonRuns: salmonRuns,
             teamContests: teamContests,
         }
