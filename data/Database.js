@@ -59,11 +59,23 @@ class Database {
     getListObject (_target, _list) {
         let ret = undefined
         if (typeof(_target) == 'string') {
-            ret = database.dataList[_list].find( (e) => e.en == _target) ?? dummy
+            ret = database.dataList[_list].find( (e) => e.en == _target) ?? this.dummyObject(_target, _list)
         } else {
             ret = database.dataList[_list][_target]
         }
         return ret
+    }
+
+    dummyObject (_target, _list) {
+        let tmpDummy = {...dummy}
+
+        for (let d in tmpDummy) {
+            if (d !== 'icon' && d !== 'color') {
+                tmpDummy[d] += `_${_list}_${_target}`
+            }
+        }
+
+        return tmpDummy
     }
 }
 
