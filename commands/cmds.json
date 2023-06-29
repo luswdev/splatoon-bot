@@ -7,12 +7,12 @@
         "thumbnail": "https://cdn.wikimg.net/en/splatoonwiki/images/c/cb/S3_Icon_Ammo_Knights.png",
         "details": {
             "zh": [
-                "在 80 種武器中隨機抽選 1 個",
+                "在所有武器中隨機抽選 1 個",
                 "包含英雄武器",
                 "支援所有語言"
             ],
             "en": [
-                "Random choose weapon from 80 different weapons.",
+                "Random choose weapon from all different weapons.",
                 "Include hero weapon.",
                 "Support all language in Splatoon 3."
             ]
@@ -38,11 +38,11 @@
         "thumbnail": "https://cdn.wikimg.net/en/splatoonwiki/images/3/3d/S3_Icon_Judd.png",
         "details": {
             "zh": [
-                "在 16 張地圖中隨機抽選 1 個",
+                "在所有地圖中隨機抽選 1 個",
                 "支援所有語言"
             ],
             "en": [
-                "Random choose map from 16 different maps.",
+                "Random choose map from all different maps.",
                 "Support all language in Splatoon 3."
             ]
         },
@@ -67,12 +67,12 @@
         "thumbnail": "https://cdn.wikimg.net/en/splatoonwiki/images/6/60/Mode_Icon_Private_Battle_2.png",
         "details": {
             "zh": [
-                "在 80 種武器中隨機抽選 8 個",
+                "在所有武器中隨機抽選 8 個",
                 "包含英雄武器",
                 "支援所有語言"
             ],
             "en": [
-                "Random choose 8 weapons from 80 different weapons.",
+                "Random choose 8 weapons from all different weapons.",
                 "Include hero weapon.",
                 "Support all language in Splatoon 3."
             ]
