@@ -143,7 +143,9 @@
         "Saber_Bear_Coop": "Éclatana M. Ours Cie",
         "Shelter_Bear_Coop": "Para-encre M. Ours Cie",
         "Slosher_Bear_Coop": "Seauceur M. Ours Cie",
-        "Stringer_Bear_Coop": "Transperceur M. Ours Cie"
+        "Stringer_Bear_Coop": "Transperceur M. Ours Cie",
+        "Random_Coop": "Aléatoire",
+        "Random_Bear_Coop": "Aléatoire"
     },
     "CoopStage": {
         "Shakedent": "Centrale Anguilla",

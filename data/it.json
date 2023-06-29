@@ -143,7 +143,9 @@
         "Saber_Bear_Coop": "Lama Ursus",
         "Shelter_Bear_Coop": "Sparasole Ursus",
         "Slosher_Bear_Coop": "Secchiostro Ursus",
-        "Stringer_Bear_Coop": "Calamarco Ursus"
+        "Stringer_Bear_Coop": "Calamarco Ursus",
+        "Random_Coop": "Casuale",
+        "Random_Bear_Coop": "Casuale"
     },
     "CoopStage": {
         "Shakedent": "Centrale Anguilla Elettrica",

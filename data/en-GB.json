@@ -150,7 +150,9 @@
         "Shakehighway": "Jammin' Salmon Junction",
         "Shakeship": "Marooner's Bay",
         "Shakespiral": "Sockeye Station",
-        "Shakeup": "Spawning Grounds"
+        "Shakeup": "Spawning Grounds",
+        "Random_Coop": "Random",
+        "Random_Bear_Coop": "Random"
     },
     "EventMatch": {
         "EventMatch_DeepFog_Manual": "Can you use the fog cover to your advantage?\n-  The stage will be shrouded in fog through the battle.\n-  However, the density of the fog will change as the battle goes on!",

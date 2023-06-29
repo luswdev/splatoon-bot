@@ -143,7 +143,9 @@
         "Saber_Bear_Coop": "Beer & Co-zwieper",
         "Shelter_Bear_Coop": "Beer & Co-plenzer",
         "Slosher_Bear_Coop": "Beer & Co-morser",
-        "Stringer_Bear_Coop": "Beer & Co-spanner"
+        "Stringer_Bear_Coop": "Beer & Co-spanner",
+        "Random_Coop": "Willekeurig",
+        "Random_Bear_Coop": "Willekeurig"
     },
     "CoopStage": {
         "Shakedent": "Kwikwi-krachtcentrale",

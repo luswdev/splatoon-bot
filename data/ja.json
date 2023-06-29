@@ -143,7 +143,9 @@
         "Saber_Bear_Coop": "クマサン印のワイパー",
         "Shelter_Bear_Coop": "クマサン印のシェルター",
         "Slosher_Bear_Coop": "クマサン印のスロッシャー",
-        "Stringer_Bear_Coop": "クマサン印のストリンガー"
+        "Stringer_Bear_Coop": "クマサン印のストリンガー",
+        "Random_Coop": "ランダム",
+        "Random_Bear_Coop": "ランダム"
     },
     "CoopStage": {
         "Shakedent": "ムニ・エール海洋発電所",

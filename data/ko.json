@@ -143,7 +143,9 @@
         "Saber_Bear_Coop": "Mr. 베어표 와이퍼",
         "Shelter_Bear_Coop": "Mr. 베어표 셸터",
         "Slosher_Bear_Coop": "Mr. 베어표 슬로셔",
-        "Stringer_Bear_Coop": "Mr. 베어표 스트링거"
+        "Stringer_Bear_Coop": "Mr. 베어표 스트링거",
+        "Random_Coop": "랜덤",
+        "Random_Bear_Coop": "랜덤"
     },
     "CoopStage": {
         "Shakedent": "뫼니 엘 해양 발전소",

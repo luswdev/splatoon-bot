@@ -143,7 +143,9 @@
         "Saber_Bear_Coop": "Grizzco Splatana",
         "Shelter_Bear_Coop": "Grizzco Brella",
         "Slosher_Bear_Coop": "Grizzco Slosher",
-        "Stringer_Bear_Coop": "Grizzco Stringer"
+        "Stringer_Bear_Coop": "Grizzco Stringer",
+        "Random_Coop": "Random",
+        "Random_Bear_Coop": "Random"
     },
     "CoopStage": {
         "Shakedent": "Gone Fission Hydroplant",

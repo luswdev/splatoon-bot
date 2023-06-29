@@ -143,7 +143,9 @@
         "Saber_Bear_Coop": "Сплат-катана «Потапыч Inc.»",
         "Shelter_Bear_Coop": "Зонтган «Потапыч Inc.»",
         "Slosher_Bear_Coop": "Ведроган «Потапыч Inc.»",
-        "Stringer_Bear_Coop": "Тетиватор «Потапыч Inc.»"
+        "Stringer_Bear_Coop": "Тетиватор «Потапыч Inc.»",
+        "Random_Coop": "Случайное",
+        "Random_Bear_Coop": "Случайное"
     },
     "CoopStage": {
         "Shakedent": "ГЭС-комплекс «Лом»",

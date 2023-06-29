@@ -143,7 +143,9 @@
         "Saber_Bear_Coop": "熊先生印章刮水刀",
         "Shelter_Bear_Coop": "熊先生印章防空伞",
         "Slosher_Bear_Coop": "熊先生印章泼桶",
-        "Stringer_Bear_Coop": "熊先生印章猎鱼弓"
+        "Stringer_Bear_Coop": "熊先生印章猎鱼弓",
+        "Random_Coop": "随机",
+        "Random_Bear_Coop": "随机"
     },
     "CoopStage": {
         "Shakedent": "麦年海洋发电所",

@@ -143,7 +143,9 @@
         "Saber_Bear_Coop": "Azotintador Don Oso",
         "Shelter_Bear_Coop": "Paratintas Don Oso",
         "Slosher_Bear_Coop": "Derramatic Don Oso",
-        "Stringer_Bear_Coop": "Arcromatizador Don Oso"
+        "Stringer_Bear_Coop": "Arcromatizador Don Oso",
+        "Random_Coop": "Al azar",
+        "Random_Bear_Coop": "Al azar"
     },
     "CoopStage": {
         "Shakedent": "Hidrocentral Rebosante",
