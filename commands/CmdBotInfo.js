@@ -14,7 +14,7 @@ class CmdBotInfo extends CmdBase {
             choices.push({name: cmd.info, value: cmd.value})
         }
 
-        super('help', [{ type: 'string', name: 'command', info: '要查詢的指令 Which command?', choices: choices }])
+        super('help', [{ type: 'string', name: 'command', info: '要查詢的指令 Which command', choices: choices }])
 
         this.choices = choices
         this.homeURL = 'https://lusw.dev/splatoon'
