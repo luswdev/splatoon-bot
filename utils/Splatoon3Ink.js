@@ -14,8 +14,8 @@ class Splatoon3Ink {
 
     constructor () {
         this.apiBase = 'https://splatoon3.ink/data/'
-        this.dataOut = '/tmp/spl3/'
-        this.imgOut = '/tmp/spl3/img/'
+        this.dataOut = `/tmp/spl3/`
+        this.imgOut = `/tmp/spl3/img/`
         this.imgSrc = `${__dirname}/../img/map/`
         this.rotationData = undefined
         this.salmonType = Object.freeze({ 'salmonRun': 'Coop', 'bigRun': 'CoopBigRun', 'teamContest': 'CoopTeamContest' })
@@ -118,6 +118,27 @@ class Splatoon3Ink {
         return rotation
     }
 
+    roundedImage (_img, _x, _y, _w, _h, _r, _ctx) {
+        _ctx.save()
+
+        _ctx.beginPath()
+        _ctx.moveTo(_x + _r, _y)
+        _ctx.lineTo(_x + _w - _r, _y)
+        _ctx.quadraticCurveTo(_x + _w, _y, _x + _w, _y + _r)
+        _ctx.lineTo(_x + _w, _y + _h - _r)
+        _ctx.quadraticCurveTo(_x + _w, _y + _h, _x + _w - _r, _y + _h)
+        _ctx.lineTo(_x + _r, _y + _h)
+        _ctx.quadraticCurveTo(_x, _y + _h, _x, _y + _h - _r)
+        _ctx.lineTo(_x, _y + _r)
+        _ctx.quadraticCurveTo(_x, _y, _x + _r, _y)
+        _ctx.closePath()
+
+        _ctx.clip()
+        _ctx.drawImage(_img, _x, _y, _w, _h)
+
+        _ctx.restore()
+    }
+
     async createImg (_maps, _match, _idx) {
         const imgOutPath = `${this.imgOut}${_match}_${_idx}.png`
 
@@ -126,9 +147,9 @@ class Splatoon3Ink {
 
         const map1Img = await loadImage(findImg('maps_small', _maps[0]) )
         const map2Img = await loadImage(findImg('maps_small', _maps[1]) )
-        
-        ctx.drawImage(map1Img, 0, 0, 500, 500)
-        ctx.drawImage(map2Img, 500, 0, 500, 500)
+
+        this.roundedImage(map1Img, 5, 5, 495, 495, 10, ctx)
+        this.roundedImage(map2Img, 505, 5, 495, 495, 10, ctx)
 
         writeFileSync(imgOutPath, canvas.toBuffer())
     }
