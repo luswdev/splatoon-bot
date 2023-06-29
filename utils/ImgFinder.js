@@ -15,7 +15,7 @@ class ImgFinder {
             return ''
         }
 
-        let regex = /[-'_.& +]/ig
+        let regex = /[-'.& +]/ig
         let imgName = _name ? _name.replaceAll(regex, '') : 'Unknown'
 
         return `${join('images', _category, imgName)}.png`

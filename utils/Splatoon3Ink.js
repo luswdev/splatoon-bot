@@ -6,10 +6,9 @@ const { mkdirSync, writeFileSync, createWriteStream } = require('fs')
 const { createCanvas, loadImage } = require('canvas')
 const looksSame = require('looks-same')
 
-const database = require('data/Database.js')
+const database = require('utils/Database.js')
 const { log } = require('utils/Log.js')
 const { findImg } = require('utils/ImgFinder.js')
-const { toUSVString } = require('util')
 
 class Splatoon3Ink {
 
@@ -19,7 +18,7 @@ class Splatoon3Ink {
         this.imgOut = '/tmp/spl3/img/'
         this.imgSrc = `${__dirname}/../img/map/`
         this.rotationData = undefined
-        this.salmonType = Object.freeze({ 'salmonRun': 'Salmon Run Next Wave', 'bigRun': 'Big Run', 'teamContest': 'Eggstra Work' })
+        this.salmonType = Object.freeze({ 'salmonRun': 'Coop', 'bigRun': 'CoopBigRun', 'teamContest': 'CoopTeamContest' })
 
         mkdirSync(this.imgOut, { recursive: true })
     }
@@ -48,11 +47,11 @@ class Splatoon3Ink {
         ]
 
         const matchName = [
-            'Regular Battle',
-            'Anarchy Battle (Series)',
-            'Anarchy Battle (Open)',
-            'X Battle',
-            'Splatfest'
+            'Regular',
+            'Bankara',
+            'BankaraOpen',
+            'XMatch',
+            'Fest'
         ]
 
         const period = {
@@ -61,13 +60,14 @@ class Splatoon3Ink {
         }
 
         for (let i = 0; i < matchObject.length; ++i) {
-            let maps, mode
+            let maps = [], mode
             if (matchObject[i] === undefined) {
                 maps = [ undefined, undefined ]
                 mode = undefined
             } else {
-                maps = [ matchObject[i].vsStages[0].name, matchObject[i].vsStages[1].name ]
-                mode = matchObject[i].vsRule.name
+                maps[0] = database.getListKey('VSStage', matchObject[i].vsStages[0].name)
+                maps[1] = database.getListKey('VSStage', matchObject[i].vsStages[1].name)
+                mode = database.getListKey('VSRule',matchObject[i].vsRule.name)
 
                 await this.createImg(maps, matchName[i], _idx)
             }
@@ -84,17 +84,23 @@ class Splatoon3Ink {
     }
 
     async parseEvent (_idx) {
-        const eventSchedules = this.rotationData.eventSchedules.nodes
+        const eventSchedules = this.rotationData.eventSchedules.nodes[_idx]
 
-        let maps = [ eventSchedules[_idx].leagueMatchSetting.vsStages[0].name, eventSchedules[_idx].leagueMatchSetting.vsStages[1].name ]
-        let mode = eventSchedules[_idx].leagueMatchSetting.vsRule.name
-        let rule = eventSchedules[_idx].leagueMatchSetting.leagueMatchEvent.name
-        let desc = eventSchedules[_idx].leagueMatchSetting.leagueMatchEvent.desc
+        let maps = [
+            database.getListKey('VSStage', eventSchedules.leagueMatchSetting.vsStages[0].name),
+            database.getListKey('VSStage', eventSchedules.leagueMatchSetting.vsStages[1].name)
+        ]
 
-        await this.createImg(maps, 'Challenge', _idx)
+        let mode = database.getListKey('VSRule', eventSchedules.leagueMatchSetting.vsRule.name)
+        let rule = database.getListKey('EventMatch', eventSchedules.leagueMatchSetting.leagueMatchEvent.name)
+        if (rule.indexOf('_Title') !== -1) {
+            rule = rule.replace('_Title', '')
+        }
+
+        await this.createImg(maps, 'League', _idx)
 
         let periods = []
-        for (let period of eventSchedules[_idx].timePeriods) {
+        for (let period of eventSchedules.timePeriods) {
             periods.push({
                 start: period.startTime,
                 ends:  period.endTime
@@ -102,12 +108,11 @@ class Splatoon3Ink {
         }
 
         let rotation = {
-            match: 'Challenge',
+            match: 'League',
             periods: periods,
             maps: maps,
             mode: mode,
-            rule: rule,
-            rule_desc: desc
+            rule: rule
         }
 
         return rotation
@@ -115,15 +120,12 @@ class Splatoon3Ink {
 
     async createImg (_maps, _match, _idx) {
         const imgOutPath = `${this.imgOut}${_match}_${_idx}.png`
-    
-        const map1 = database.getListObject(_maps[0], 'maps')
-        const map2 = database.getListObject(_maps[1], 'maps')
 
         const canvas = createCanvas(1000, 500)
         const ctx = canvas.getContext('2d')
 
-        const map1Img = await loadImage(findImg('maps_small', map1.en) )
-        const map2Img = await loadImage(findImg('maps_small', map2.en) )
+        const map1Img = await loadImage(findImg('maps_small', _maps[0]) )
+        const map2Img = await loadImage(findImg('maps_small', _maps[1]) )
         
         ctx.drawImage(map1Img, 0, 0, 500, 500)
         ctx.drawImage(map2Img, 500, 0, 500, 500)
@@ -149,17 +151,19 @@ class Splatoon3Ink {
                 await this.downloadImg(weapon.image.url, tmpImgPath)
 
                 const comp = await looksSame(findImg('salmon_run', 'RareRandom'), tmpImgPath)
-                weapons.push(`${comp.equal ? 'Rare' : ''}${weapon.name}`)
+                weapons.push(`Random_${comp.equal ? 'Bear' : ''}_Coop`) // Random_Coop or Random_Bear_Coop
             } else {
-                weapons.push(weapon.name)
+                weapons.push(database.getListKey('MainWeapon', weapon.name))
             }
         }
+
+        let map = database.getListKey('CoopStage', _set.setting.coopStage.name)
 
         let rotation = {
             match: _type,
             bigRun: _type == this.salmonType.bigRun,
             period: period,
-            map: _set.setting.coopStage.name,
+            map: map,
             boss: _set.__splatoon3ink_king_salmonid_guess,
             weapons: weapons
         }

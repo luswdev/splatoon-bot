@@ -19,7 +19,7 @@ class CmdBase {
 
     locale2Lang (_locale) {
         const lang = i18n.filter( (entry) => { return entry.locale.indexOf(_locale) !== -1 })[0]
-        return lang ? lang.key : undefined
+        return lang ? lang.locale : undefined
     }
 
     buildLangSelect (_otherVal, _curLang) {
@@ -30,14 +30,14 @@ class CmdBase {
 
         for (let lang of i18n) {
             const baseVal = {
-                lang: lang.key,
+                lang: lang.locale,
                 cmd: this.cmdKey,
             }
             const val = {...baseVal, ..._otherVal}
 
             selected.addOptions([
                 new StringSelectMenuOptionBuilder()
-                    .setDefault(lang.key === _curLang)
+                    .setDefault(lang.locale === _curLang)
                     .setEmoji(lang.emoji)
                     .setDescription(lang.name)
                     .setLabel(lang.name)

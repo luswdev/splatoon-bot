@@ -5,7 +5,7 @@ const { readFileSync } = require('fs')
 const { basename } = require('path')
 
 const CmdBase = require('commands/CmdBase.js')
-const database = require('data/Database.js')
+const database = require('utils/Database.js')
 const { findImg } = require('utils/ImgFinder.js')
 
 class CmdSalmonRun extends CmdBase {
@@ -14,16 +14,11 @@ class CmdSalmonRun extends CmdBase {
         super('sr')
 
         this.dataPath = '/tmp/spl3/rotation.json'
-
-        this.randomWeapon = {
-            normal: '<:salmon_rand:1080105843455971349>',
-            rare: '<:salmon_rare:1075463948075274281>'
-        }
     }
 
     doCmd (_interaction) {
         const rotation = _interaction.options.getInteger('rotation') ?? 0
-        const lang = this.locale2Lang(_interaction.locale) ?? 'en'
+        const lang = this.locale2Lang(_interaction.locale) ?? 'en-US'
         const reply = this.buildMessage(lang, rotation, _interaction)
         return reply
     }
@@ -43,7 +38,7 @@ class CmdSalmonRun extends CmdBase {
     }
 
     defaultEmbed (_lang, _interaction) {
-        const match = database.getListObject('Salmon Run Next Wave', 'matches')
+        const match = database.getListObject('Match', 'Coop')
         const embed = new EmbedBuilder()
             .setColor(match.color)
             .setTitle(`${match.icon} ${match[_lang]}`)
@@ -57,11 +52,11 @@ class CmdSalmonRun extends CmdBase {
     getImage (_rotation) {
         let map, thumb
         if (_rotation.bigRun) {
-            map = database.getListObject(_rotation.map, 'maps')
-            thumb = findImg('maps', map.en)
+            map = database.getListObject('VSStage', _rotation.map)
+            thumb = findImg('maps', _rotation.map)
         } else {
-            map = database.getListObject(_rotation.map, 'salmon_run')
-            thumb = findImg('salmon_run', map.en)
+            map = database.getListObject('CoopStage', _rotation.map)
+            thumb = findImg('salmon_run', _rotation.map)
         }
 
         return {...map, thumb: thumb}
@@ -80,23 +75,18 @@ class CmdSalmonRun extends CmdBase {
 
 
     buildEmbed(_rotation, _idx, _lang, _interaction) {
-        const match = database.getListObject(_rotation.match, 'matches')
+        const match = database.getListObject('Match', _rotation.match)
         let map = this.getImage(_rotation)
         let bossThumb = findImg('boss', _rotation.boss)
 
         let weapons = ''
         for (let weapon of _rotation.weapons) {
             if (weapon.indexOf('Random') !== -1) {
-                let random = database.getListObject('Random', 'labels')
-                if (weapon === 'RareRandom') {
-                    weapons += `${this.randomWeapon.rare}`
-                } else {
-                    weapons += `${this.randomWeapon.normal}`
-                }
-                weapons += ` ${random[_lang]}\n`
+                const weaponObj = database.getListObject('CoopWeapon', weapon)
+                weapons += `${weaponObj.icon} ${weaponObj[_lang]}\n`
             } else {
-                let weaponData = database.getListObject(weapon, 'weapons')
-                weapons += `${weaponData.icon} ${weaponData[_lang]}\n`
+                const weaponObj = database.getListObject('MainWeapon', weapon)
+                weapons += `${weaponObj.icon} ${weaponObj[_lang]}\n`
             }
         }
 
@@ -107,8 +97,8 @@ class CmdSalmonRun extends CmdBase {
             .setTitle(`${match.icon} ${match[_lang]}`)
             .setDescription(`<t:${start}> ~ <t:${ends}> (<t:${ends}:R>)`)
             .addFields(
-                { name: database.getListObject('Weapon', 'labels')[_lang], value: weapons },
-                { name: database.getListObject('Stage',  'labels')[_lang], value: map[_lang] ?? 'Unknown' },
+                { name: database.getListObject('Label', 'Weapon')[_lang], value: weapons },
+                { name: database.getListObject('Label', 'Stage')[_lang], value: map[_lang] },
             )
             .setImage(`attachment://${basename(map.thumb)}`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})

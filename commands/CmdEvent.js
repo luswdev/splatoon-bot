@@ -4,7 +4,7 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const { readFileSync } = require('fs')
 
 const CmdBase = require('commands/CmdBase.js')
-const database = require('data/Database.js')
+const database = require('utils/Database.js')
 
 class CmdRotation extends CmdBase {
 
@@ -17,7 +17,7 @@ class CmdRotation extends CmdBase {
 
     doCmd (_interaction) {
         const rotation = _interaction.options.getInteger('rotation') ?? 0
-        const lang = this.locale2Lang(_interaction.locale) ?? 'en'
+        const lang = this.locale2Lang(_interaction.locale) ?? 'en-US'
         const reply = this.buildMessage(lang, rotation, _interaction)
         return reply
     }
@@ -35,7 +35,7 @@ class CmdRotation extends CmdBase {
     }
 
     defaultEmbed (_lang, _interaction) {
-        const match = database.getListObject('Challenge', 'matches')
+        const match = database.getListObject('Match', 'League')
         const embed = new EmbedBuilder()
             .setColor(match.color)
             .setTitle(`${match.icon} ${match[_lang]}`)
@@ -47,12 +47,13 @@ class CmdRotation extends CmdBase {
     }
 
     buildEmbed(_rotation, _idx, _lang, _interaction) {
-        const mode =  database.getListObject(_rotation.mode,     'modes')
-        const match = database.getListObject(_rotation.match,    'matches')
-        const rule = database.getListObject(_rotation.rule,      'rules')
-        const desc = database.getListObject(_rotation.rule_desc, 'rule_descriptions')
-        const map1 =  database.getListObject(_rotation.maps[0],  'maps')
-        const map2 =  database.getListObject(_rotation.maps[1],  'maps')
+        const mode =      database.getListObject('VSRule',     _rotation.mode)
+        const match =     database.getListObject('Match',      _rotation.match)
+        const rule_main = database.getListObject('EventMatch', `${_rotation.rule}_Title`)
+        const rule_sub =  database.getListObject('EventMatch', `${_rotation.rule}_Subtitle`)
+        const rule_desc = database.getListObject('EventMatch', `${_rotation.rule}_Manual`)
+        const map1 =      database.getListObject('VSStage',    _rotation.maps[0])
+        const map2 =      database.getListObject('VSStage',    _rotation.maps[1])
 
         let periodString = ''
         for (let period of _rotation.periods) {
@@ -64,22 +65,27 @@ class CmdRotation extends CmdBase {
             }
         }
 
-        const timeLable = database.getListObject('Time', 'labels')
+        const timeLable = database.getListObject('Label', 'Time')
+        const manual = database.getListObject('Label', 'Manual')
         const embed = new EmbedBuilder()
             .setColor(match.color)
-            .setTitle(`${match.icon} ${rule[_lang]}`)
-            .setDescription(desc[_lang])
+            .setTitle(`${match.icon} ${rule_main[_lang]}`)
+            .setDescription(`> ${rule_sub[_lang]}`)
             .addFields(
                 {
                     name: `${mode.icon} ${mode[_lang]}`,
                     value: `${map1[_lang]} :arrow_left: :arrow_right: ${map2[_lang]}\n`
                 },
                 {
-                    name: `${timeLable[_lang]}`,
+                    name: timeLable[_lang],
                     value: periodString
                 },
+                {
+                    name: manual[_lang],
+                    value: rule_desc[_lang]
+                },
             )
-            .setImage(`attachment://${match.en.replaceAll(' ', '_').replaceAll('(', '').replaceAll(')', '')}_${_idx}.png`)
+            .setImage(`attachment://${_rotation.match}_${_idx}.png`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()
 

@@ -2,79 +2,71 @@
     {
         "emoji": "🇹🇼",
         "name": "正體中文",
-        "key": "zhTW",
         "locale": "zh-TW"
     },
     {
         "emoji": "🇨🇳",
         "name": "简体中文",
-        "key": "zhCN",
         "locale": "zh-CN"
     },
     {
         "emoji": "🇯🇵",
         "name": "日本語",
-        "key": "ja",
         "locale": "ja"
     },
     {
         "emoji": "🇰🇷",
         "name": "한국어",
-        "key": "ko",
         "locale": "ko"
     },
     {
         "emoji": "🇺🇸",
-        "name": "English",
-        "key": "en",
-        "locale": "en"
+        "name": "English (US)",
+        "locale": "en-US"
+    },
+    {
+        "emoji": "🇬🇧",
+        "name": "English (GB)",
+        "locale": "en-GB"
     },
     {
         "emoji": "🇩🇪",
         "name": "Deutsch",
-        "key": "de",
         "locale": "de"
     },
     {
         "emoji": "🇪🇸",
         "name": "Español (ES)",
-        "key": "esE",
         "locale": "es-ES"
     },
     {
         "emoji": "🇲🇽",
         "name": "Español (MX)",
-        "key": "esA",
         "locale": "es-MX"
     },
     {
         "emoji": "🇫🇷",
         "name": "Français (FR)",
-        "key": "frE",
         "locale": "fr"
     },
     {
         "emoji": "🇨🇦",
         "name": "Français (CA)",
-        "key": "frA",
         "locale": "fr-CA"
     },
     {
         "emoji": "🇮🇹",
         "name": "Italiano",
-        "key": "it",
         "locale": "it"
     },
     {
         "emoji": "🇳🇱",
         "name": "Nederlands",
-        "key": "nl",
         "locale": "nl"
     },
     {
         "emoji": "🇷🇺",
         "name": "Русский",
-        "key": "ru",
         "locale": "ru"
     }
 ]

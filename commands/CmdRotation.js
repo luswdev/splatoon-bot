@@ -4,7 +4,7 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const { readFileSync } = require('fs')
 
 const CmdBase = require('commands/CmdBase.js')
-const database = require('data/Database.js')
+const database = require('utils/Database.js')
 
 class CmdRotation extends CmdBase {
 
@@ -17,7 +17,7 @@ class CmdRotation extends CmdBase {
 
     doCmd (_interaction) {
         const rotation = _interaction.options.getInteger('rotation') ?? 0
-        const lang = this.locale2Lang(_interaction.locale) ?? 'en'
+        const lang = this.locale2Lang(_interaction.locale) ?? 'en-US'
         const reply = this.buildMessage(lang, rotation, _interaction)
         return reply
     }
@@ -35,10 +35,10 @@ class CmdRotation extends CmdBase {
     }
 
     buildEmbed(_rotation, _idx, _lang, _interaction) {
-        const mode =  database.getListObject(_rotation.mode,    'modes')
-        const match = database.getListObject(_rotation.match,   'matches')
-        const map1 =  database.getListObject(_rotation.maps[0], 'maps')
-        const map2 =  database.getListObject(_rotation.maps[1], 'maps')
+        const mode =  database.getListObject('VSRule',  _rotation.mode)
+        const match = database.getListObject('Match',   _rotation.match)
+        const map1 =  database.getListObject('VSStage', _rotation.maps[0])
+        const map2 =  database.getListObject('VSStage', _rotation.maps[1])
 
         const start = new Date(_rotation.period.start).getTime() / 1000
         const ends = new Date(_rotation.period.ends).getTime() / 1000
@@ -50,7 +50,7 @@ class CmdRotation extends CmdBase {
             .addFields(
                 { name: `${mode.icon} ${mode[_lang]}`, value: `${map1[_lang]} :arrow_left: :arrow_right: ${map2[_lang]}` },
             )
-            .setImage(`attachment://${match.en.replaceAll(' ', '_').replaceAll('(', '').replaceAll(')', '')}_${_idx}.png`)
+            .setImage(`attachment://${_rotation.match}_${_idx}.png`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()
 
