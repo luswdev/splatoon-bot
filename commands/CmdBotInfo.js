@@ -73,11 +73,11 @@ class CmdBotInfo extends CmdBase {
                 let rawCmd = _client.commands.toJSON().find( (c) => c.name === cmd.value )
                 isCmd = true
 
-                let description = cmd.details[_lang].map( (line) => `<:dot:1073790424520601600> ${line}` ).join('\n')
+                let description = cmd.details[_lang].map( (line) => `- ${line}` ).join('\n')
                 let usage = cmd.arguments.length ? `[${cmd.arguments.join(' ')}]` : ''
                 let cmdID = `</${rawCmd.name}:${rawCmd.id}>`
                 let examples = cmd.examples.map( (elem, i) => `${i + 1}. ${elem[_lang].info}\n` +
-                                                `${elem[_lang].cmd.replace(rawCmd.name, cmdID)} \n`).join('\n')
+                                                `> ${elem[_lang].cmd.replace(rawCmd.name, cmdID)} \n`).join('\n')
 
                 infoEmbed.setTitle(`${cmd.icon} | ${cmd.value}`)
                     .setDescription(description)
@@ -98,20 +98,20 @@ class CmdBotInfo extends CmdBase {
             let description = ''
             let botInfo = ''
             if (_lang == 'zh') {
-                description += `專門為斯普拉遁 3 的機器人啦\n\n`
-                description += `<:dot:1073790424520601600> 請點擊下方選單查看個別指令說明，或至 [主頁](${this.homeURL}) 查看完整文件\n`
-                description += `<:dot:1073790424520601600> 使用此機器人即表示你同意 [隱私權聲明](${this.homeURL}/privacy)\ `
+                description += `> 專門為斯普拉遁 3 的機器人啦\n`
+                description += `- 請點擊下方選單查看個別指令說明，或至 [主頁](${this.homeURL}) 查看完整文件\n`
+                description += `- 使用此機器人即表示你同意 [隱私權聲明](${this.homeURL}/privacy)\ `
                 description += `及 [服務條款](${this.homeURL}/terms)\n`
-                description += `<:dot:1073790424520601600> 有任何其他疑問，請至 [支援伺服器](${inviteURL}) 詢問開發者`
+                description += `- 有任何其他疑問，請至 [支援伺服器](${inviteURL}) 詢問開發者`
 
                 botInfo += `\`${_client.botInfo.serverCnt.toLocaleString()}\` 個伺服器\n`
                 botInfo += `\`${_client.botInfo.memberCnt.toLocaleString()}\` 個成員 \n`
             } else {
-                description += `A simple bot for Splatoon 3\n\n`
-                description += `<:dot:1073790424520601600> Please click select menu to see command information, or visit [Home Page](${this.homeURL}) to check out full document\n`
-                description += `<:dot:1073790424520601600> By using this bot, we assume you agree our [Privacy Policy](${this.homeURL}/privacy)\ `
+                description += `> A simple bot for Splatoon 3\n`
+                description += `- Please click select menu to see command information, or visit [Home Page](${this.homeURL}) to check out full document\n`
+                description += `- By using this bot, we assume you agree our [Privacy Policy](${this.homeURL}/privacy)\ `
                 description += `and [Terms of Service](${this.homeURL}/terms)\n`
-                description += `<:dot:1073790424520601600> With others question, please ask to developer at [support server](${inviteURL})`
+                description += `- With others question, please ask to developer at [support server](${inviteURL})`
 
                 botInfo += `\`${_client.botInfo.serverCnt.toLocaleString()}\` servers(s)\n`
                 botInfo += `\`${_client.botInfo.memberCnt.toLocaleString()}\` member(s)\n`
