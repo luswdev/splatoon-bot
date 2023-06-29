@@ -142,14 +142,20 @@ class Splatoon3Ink {
     async createImg (_maps, _match, _idx) {
         const imgOutPath = `${this.imgOut}${_match}_${_idx}.png`
 
-        const canvas = createCanvas(1000, 500)
+        const imgPerSize = 500
+        const canvas = createCanvas(imgPerSize * 2, imgPerSize)
         const ctx = canvas.getContext('2d')
 
-        const map1Img = await loadImage(findImg('maps_small', _maps[0]) )
-        const map2Img = await loadImage(findImg('maps_small', _maps[1]) )
+        const map1Img = await loadImage(findImg('maps_small', _maps[0]))
+        const map2Img = await loadImage(findImg('maps_small', _maps[1]))
 
-        this.roundedImage(map1Img, 5, 5, 495, 495, 10, ctx)
-        this.roundedImage(map2Img, 505, 5, 495, 495, 10, ctx)
+        const padW = 15
+        const innerImgW = imgPerSize - padW / 2
+        const innerImgH = imgPerSize
+        const borderRadius = 10
+
+        this.roundedImage(map1Img, 0, 0, innerImgW, innerImgH, borderRadius, ctx)
+        this.roundedImage(map2Img, imgPerSize + padW / 2, 0, innerImgW, innerImgH, borderRadius, ctx)
 
         writeFileSync(imgOutPath, canvas.toBuffer())
     }
