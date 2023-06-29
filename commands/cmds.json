@@ -91,37 +91,6 @@
         ]
     },
     {
-        "info": "隨機私房武器組 (比賽用) Random pick full teams of weapons in Private Battle (for champion)",
-        "value": "sp",
-        "arguments": [],
-        "icon": "<:private:1073642241828081686>",
-        "thumbnail": "https://cdn.wikimg.net/en/splatoonwiki/images/6/60/Mode_Icon_Private_Battle_2.png",
-        "details": {
-            "zh": [
-                "在所有武器中隨機抽選 4 個",
-                "包含英雄武器",
-                "支援所有語言"
-            ],
-            "en": [
-                "Random choose 4 weapons from all weapons.",
-                "Include hero weapon.",
-                "Support all language in Splatoon 3."
-            ]
-        },
-        "examples": [
-            {
-                "zh": {
-                    "info": "取得 1 組隨機武器，共 4 把",
-                    "cmd": "rt"
-                },
-                "en": {
-                    "info": "Get 1 set of randoms, total 4 weapons",
-                    "cmd": "rt"
-                }
-            }
-        ]
-    },
-    {
         "info": "查看現在的地圖 Get current stages rotation",
         "value": "rot",
         "arguments": ["rotation"],
