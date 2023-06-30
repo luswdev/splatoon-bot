@@ -53,10 +53,10 @@ class CmdSalmonRun extends CmdBase {
         let map, thumb
         if (_rotation.bigRun) {
             map = database.getListObject('VSStage', _rotation.map)
-            thumb = findImg('maps', _rotation.map)
+            thumb = findImg('stage', _rotation.map)
         } else {
             map = database.getListObject('CoopStage', _rotation.map)
-            thumb = findImg('salmon_run', _rotation.map)
+            thumb = findImg('coopStage', _rotation.map)
         }
 
         return {...map, thumb: thumb}
@@ -77,7 +77,7 @@ class CmdSalmonRun extends CmdBase {
     buildEmbed(_rotation, _idx, _lang, _interaction) {
         const match = database.getListObject('Match', _rotation.match)
         let map = this.getImage(_rotation)
-        let bossThumb = findImg('boss', _rotation.boss)
+        let bossThumb = findImg('coopBoss', _rotation.boss)
 
         let weapons = ''
         for (let weapon of _rotation.weapons) {
@@ -118,7 +118,7 @@ class CmdSalmonRun extends CmdBase {
 
         if (rotation.salmon) {
             thumb.push(this.getImage(rotation.salmon).thumb)
-            thumb.push(findImg('boss', rotation.salmon.boss))
+            thumb.push(findImg('coopBoss', rotation.salmon.boss))
             embeds.push(this.buildEmbed(rotation.salmon, _rotation, _lang, _interaction))
         } else {
             embeds.push(this.defaultEmbed(_lang, _interaction))

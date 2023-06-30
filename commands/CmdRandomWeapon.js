@@ -39,7 +39,7 @@ class CmdRandomWeapon extends CmdBase {
 
     buildMessage (_weapon, _lang, _interaction) {
         const weapon = database.getListObject(this.dataCategory, this.weaponList[_weapon])
-        const thumb = findImg('weapons', this.weaponList[_weapon])
+        const thumb = findImg('weapon', this.weaponList[_weapon])
         const embed = new EmbedBuilder()
             .setColor(weapon.color)
             .setTitle(`${this.cmdData.icon} ${database.getListObject('Label', 'Random')[_lang]} ${database.getListObject('Label', 'Weapon')[_lang]}!`)

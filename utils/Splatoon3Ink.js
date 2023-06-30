@@ -118,27 +118,6 @@ class Splatoon3Ink {
         return rotation
     }
 
-    roundedImage (_img, _x, _y, _w, _h, _r, _ctx) {
-        _ctx.save()
-
-        _ctx.beginPath()
-        _ctx.moveTo(_x + _r, _y)
-        _ctx.lineTo(_x + _w - _r, _y)
-        _ctx.quadraticCurveTo(_x + _w, _y, _x + _w, _y + _r)
-        _ctx.lineTo(_x + _w, _y + _h - _r)
-        _ctx.quadraticCurveTo(_x + _w, _y + _h, _x + _w - _r, _y + _h)
-        _ctx.lineTo(_x + _r, _y + _h)
-        _ctx.quadraticCurveTo(_x, _y + _h, _x, _y + _h - _r)
-        _ctx.lineTo(_x, _y + _r)
-        _ctx.quadraticCurveTo(_x, _y, _x + _r, _y)
-        _ctx.closePath()
-
-        _ctx.clip()
-        _ctx.drawImage(_img, _x, _y, _w, _h)
-
-        _ctx.restore()
-    }
-
     async createImg (_maps, _match, _idx) {
         const imgOutPath = `${this.imgOut}${_match}_${_idx}.png`
 
@@ -146,16 +125,15 @@ class Splatoon3Ink {
         const canvas = createCanvas(imgPerSize * 2, imgPerSize)
         const ctx = canvas.getContext('2d')
 
-        const map1Img = await loadImage(findImg('maps_small', _maps[0]))
-        const map2Img = await loadImage(findImg('maps_small', _maps[1]))
+        const map1Img = await loadImage(findImg('stage', _maps[0]))
+        const map2Img = await loadImage(findImg('stage', _maps[1]))
 
         const padW = 15
         const innerImgW = imgPerSize - padW / 2
         const innerImgH = imgPerSize
-        const borderRadius = 10
 
-        this.roundedImage(map1Img, 0, 0, innerImgW, innerImgH, borderRadius, ctx)
-        this.roundedImage(map2Img, imgPerSize + padW / 2, 0, innerImgW, innerImgH, borderRadius, ctx)
+        ctx.drawImage(map1Img, 175, 0, 450, 450, 0, 0, innerImgW, innerImgH)
+        ctx.drawImage(map2Img, 175, 0, 450, 450, imgPerSize + padW / 2, 0, innerImgW, innerImgH)
 
         writeFileSync(imgOutPath, canvas.toBuffer())
     }
@@ -177,7 +155,7 @@ class Splatoon3Ink {
                 const tmpImgPath = `${this.imgOut}${weapon.__splatoon3ink_id}.png`
                 await this.downloadImg(weapon.image.url, tmpImgPath)
 
-                const comp = await looksSame(findImg('salmon_run', 'RareRandom'), tmpImgPath)
+                const comp = await looksSame(findImg('coopWeapon', 'Random_Bear_Coop'), tmpImgPath)
                 weapons.push(`Random_${comp.equal ? 'Bear' : ''}_Coop`) // Random_Coop or Random_Bear_Coop
             } else {
                 weapons.push(database.getListKey('MainWeapon', weapon.name))

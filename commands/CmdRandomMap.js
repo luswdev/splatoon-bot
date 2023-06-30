@@ -39,12 +39,12 @@ class CmdRandomMap extends CmdBase {
 
     buildMessage (_map, _lang, _interaction) {
         const map = database.getListObject(this.dataCategory, this.stageList[_map])
-        const thumb = findImg('maps_small', this.stageList[_map])
+        const thumb = findImg('stage', this.stageList[_map])
         const embed = new EmbedBuilder()
             .setColor(map.color)
             .setTitle(`${this.cmdData.icon} ${database.getListObject('Label', 'Random')[_lang]} ${database.getListObject('Label', 'Stage')[_lang]}!`)
             .setDescription(map[_lang])
-            .setThumbnail(`attachment://${basename(thumb)}`)
+            .setImage(`attachment://${basename(thumb)}`)
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()
 
