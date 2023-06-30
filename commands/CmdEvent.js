@@ -70,7 +70,7 @@ class CmdRotation extends CmdBase {
         const embed = new EmbedBuilder()
             .setColor(match.color)
             .setTitle(`${match.icon} ${rule_main[_lang]}`)
-            .setDescription(`> ${rule_sub[_lang]}`)
+            .setDescription(`**${rule_sub[_lang]}**`)
             .addFields(
                 {
                     name: `${mode.icon} ${mode[_lang]}`,
