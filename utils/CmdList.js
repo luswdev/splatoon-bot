@@ -59,6 +59,15 @@ class CmdList {
             }
         }
     }
+
+    parseButton(_cmdName, _interaction, _client) {
+        for (let cmd of this.cmds) {
+            if (_cmdName == cmd.cmdKey) {
+                log.write('inner command:', cmd.cmdKey)
+                return cmd.doButton(_interaction, _client)
+            }
+        }
+    }
 }
 
 module.exports = CmdList

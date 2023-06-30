@@ -189,6 +189,7 @@
         "Time": "Time",
         "Weapon": "Weapon",
         "Manual": "Rule",
+        "Redo": "Try Again",
         "Dummy": "Unknown"
     }
 }

@@ -42,6 +42,13 @@ class EvtInteractionCreate extends EvtBase {
             }
 
             reply = _client.cmdList.parseSelect(selected, _interaction, _client)
+        } else if (_interaction.isButton()) {
+            log.write('parsing button id:', _interaction.customId)
+            command = _interaction.customId.replace('redo', '').toLowerCase()
+
+            await _interaction.deferUpdate()
+
+            reply = _client.cmdList.parseButton(command, _interaction, _client)
         } else {
             log.write('unhandled interaction:', _interaction.type)
             return

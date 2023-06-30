@@ -1,6 +1,6 @@
 'use strict'
 
-const { EmbedBuilder } = require('discord.js')
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
 const { basename } = require('path')
 
 const CmdBase = require('commands/CmdBase.js')
@@ -37,6 +37,10 @@ class CmdRandomWeapon extends CmdBase {
         return reply
     }
 
+    doButton (_interaction) {
+        return this.doCmd(_interaction)
+    }
+
     buildMessage (_weapon, _lang, _interaction) {
         const weapon = database.getListObject(this.dataCategory, this.weaponList[_weapon])
         const thumb = findImg('weapon', this.weaponList[_weapon])
@@ -48,9 +52,15 @@ class CmdRandomWeapon extends CmdBase {
             .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()
 
-        const row = this.buildLangSelect({res: _weapon}, _lang)
+        const langSelect = this.buildLangSelect({res: _weapon}, _lang)
+        const retry = new ActionRowBuilder()
+            .addComponents( new ButtonBuilder()
+                .setCustomId('redoRW')
+                .setLabel(database.getListObject('Label', 'Redo')[_lang])
+                .setStyle(ButtonStyle.Success),
+            )
 
-        return { embeds: [embed], components: [row], files: [thumb] }
+        return { embeds: [embed], components: [langSelect, retry], files: [thumb] }
     }
 }
 
