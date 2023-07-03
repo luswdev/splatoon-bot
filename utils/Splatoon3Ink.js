@@ -156,7 +156,7 @@ class Splatoon3Ink {
                 await this.downloadImg(weapon.image.url, tmpImgPath)
 
                 const comp = await looksSame(findImg('coopWeapon', 'Random_Bear_Coop'), tmpImgPath)
-                weapons.push(`Random_${comp.equal ? 'Bear' : ''}_Coop`) // Random_Coop or Random_Bear_Coop
+                weapons.push(`Random_${comp.equal ? 'Bear_' : ''}Coop`) // Random_Coop or Random_Bear_Coop
             } else {
                 weapons.push(database.getListKey('MainWeapon', weapon.name))
             }
