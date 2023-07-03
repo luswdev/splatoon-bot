@@ -15,6 +15,8 @@ class CmdBase {
 
         this.options = _options ?? cmd.options ?? []
         this.cmdData = cmd
+
+        this.permission = cmd.permission
     }
 
     locale2Lang (_locale) {

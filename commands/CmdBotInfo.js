@@ -11,6 +11,10 @@ class CmdBotInfo extends CmdBase {
     constructor () {
         let choices = []
         for (let cmd of cmds) {
+            if (cmd.permission) {
+                continue
+            }
+
             choices.push({name: cmd.info, value: cmd.value})
         }
 
@@ -41,6 +45,10 @@ class CmdBotInfo extends CmdBase {
             .setPlaceholder('要查詢的指令 Which command?')
 
         for (let cmd of cmds) {
+            if (cmd.permission) {
+                continue
+            }
+
             const val = {
                 cmd: this.cmdKey,
                 res: cmd.value,

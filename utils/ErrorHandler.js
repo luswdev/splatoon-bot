@@ -18,6 +18,16 @@ class ErrorHandler {
 
         this.channel.send({ embeds: [embed] })
     }
+
+    permissionDeniedMsg (_interaction) {
+        const embed = new EmbedBuilder()
+            .setColor(0xDC2626)
+            .setTitle('❌ Permission Denied')
+            .setDescription('You have no permission to access this command.')
+            .setTimestamp()
+
+        return { embeds: [embed] }
+    }
 }
 
 module.exports = ErrorHandler
