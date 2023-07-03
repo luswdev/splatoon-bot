@@ -21,6 +21,10 @@ class Analytics {
     async report() {
         let report = []
         for (let cmd of cmds) {
+            if (cmd.permission) {
+                continue
+            }
+
             let yesterdayCnt = await mysql.getCmdUsage(cmd.value)
             let totalCnt = await mysql.getCmdUsage(cmd.value, true)
             report.push({
