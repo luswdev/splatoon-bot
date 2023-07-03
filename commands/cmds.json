@@ -306,5 +306,15 @@
                 }
             }
         ]
+    },
+    {
+        "info": "DEBUG ONLY Weapon List",
+        "value": "xrw",
+        "permission": true
+    },
+    {
+        "info": "DEBUG ONLY Stage List",
+        "value": "xrm",
+        "permission": true
     }
 ]
