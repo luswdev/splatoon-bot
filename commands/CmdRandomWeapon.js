@@ -37,8 +37,10 @@ class CmdRandomWeapon extends CmdBase {
         return reply
     }
 
-    doButton (_interaction) {
-        return this.doCmd(_interaction)
+    doButton (_btn, _interaction) {
+        if (_btn.act === 'redo') {
+            return this.doCmd(_interaction)
+        }
     }
 
     buildMessage (_weapon, _lang, _interaction) {
@@ -53,9 +55,11 @@ class CmdRandomWeapon extends CmdBase {
             .setTimestamp()
 
         const langSelect = this.buildLangSelect({res: _weapon}, _lang)
+
+        const btn = {cmd: 'rw', act: 'redo'}
         const retry = new ActionRowBuilder()
             .addComponents( new ButtonBuilder()
-                .setCustomId('redoRW')
+                .setCustomId(JSON.stringify(btn))
                 .setLabel(database.getListObject('Label', 'Redo')[_lang])
                 .setStyle(ButtonStyle.Success),
             )

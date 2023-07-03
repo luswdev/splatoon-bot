@@ -43,12 +43,14 @@ class EvtInteractionCreate extends EvtBase {
 
             reply = _client.cmdList.parseSelect(selected, _interaction, _client)
         } else if (_interaction.isButton()) {
-            log.write('parsing button id:', _interaction.customId)
-            command = _interaction.customId.replace('redo', '').toLowerCase()
+            const btn = JSON.parse(_interaction.customId)
+            command = btn.cmd
+
+            log.write('parsing button:', btn)
 
             await _interaction.deferUpdate()
 
-            reply = _client.cmdList.parseButton(command, _interaction, _client)
+            reply = _client.cmdList.parseButton(btn, _interaction, _client)
         } else {
             log.write('unhandled interaction:', _interaction.type)
             return

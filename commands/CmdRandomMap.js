@@ -37,8 +37,10 @@ class CmdRandomMap extends CmdBase {
         return reply
     }
 
-    doButton (_interaction) {
-        return this.doCmd(_interaction)
+    doButton (_btn, _interaction) {
+        if (_btn.act === 'redo') {
+            return this.doCmd(_interaction)
+        }
     }
 
     buildMessage (_map, _lang, _interaction) {
@@ -53,9 +55,11 @@ class CmdRandomMap extends CmdBase {
             .setTimestamp()
 
         const langSelect = this.buildLangSelect({res: _map}, _lang)
+
+        const btn = {cmd: 'rm', act: 'redo'}
         const retry = new ActionRowBuilder()
             .addComponents( new ButtonBuilder()
-                .setCustomId('redoRM')
+                .setCustomId(JSON.stringify(btn))
                 .setLabel(database.getListObject('Label', 'Redo')[_lang])
                 .setStyle(ButtonStyle.Success),
             )

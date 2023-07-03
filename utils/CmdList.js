@@ -60,11 +60,11 @@ class CmdList {
         }
     }
 
-    parseButton(_cmdName, _interaction, _client) {
+    parseButton(_btn, _interaction, _client) {
         for (let cmd of this.cmds) {
-            if (_cmdName == cmd.cmdKey) {
+            if (_btn.cmd == cmd.cmdKey) {
                 log.write('inner command:', cmd.cmdKey)
-                return cmd.doButton(_interaction, _client)
+                return cmd.doButton(_btn, _interaction, _client)
             }
         }
     }
