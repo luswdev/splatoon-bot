@@ -206,7 +206,7 @@
                 "name": "rotation",
                 "info": "第幾輪模式 Which Rotation",
                 "min": 0,
-                "max": 4
+                "max": 1
             }
         ]
     },

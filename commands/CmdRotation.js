@@ -28,6 +28,13 @@ class CmdRotation extends CmdBase {
         return reply
     }
 
+    doButton (_btn, _interaction) {
+        const lang = _btn.lang
+        const start = parseInt(_btn.res)
+        const reply = this.buildMessage(lang, start, _interaction)
+        return reply
+    }
+
     fetchRotation (_idx) {
         const rotationStr = readFileSync(this.dataPath, {encoding:'utf8', flag:'r'})
         const rotation = JSON.parse(rotationStr)
@@ -69,7 +76,29 @@ class CmdRotation extends CmdBase {
             }
         }
 
-        const row = this.buildLangSelect({rotation: _rotation}, _lang)
+        const langSelect = this.buildLangSelect({rotation: _rotation}, _lang)
+
+        const btnNext =    {cmd: this.cmdKey, res: _rotation + 1, lang: _lang}
+        const btnPrev =    {cmd: this.cmdKey, res: _rotation - 1, lang: _lang}
+        const btnRefresh = {cmd: this.cmdKey, res: _rotation,     lang: _lang}
+        const pager = new ActionRowBuilder()
+            .addComponents( new ButtonBuilder()
+                .setCustomId(JSON.stringify(btnPrev))
+                .setEmoji('<:leftarrow:1127627896094212206>')
+                .setStyle(ButtonStyle.Secondary)
+                .setDisabled(_rotation === 0),
+            )
+            .addComponents( new ButtonBuilder()
+                .setCustomId(JSON.stringify(btnRefresh))
+                .setEmoji('<:reload:1127627899080544356>')
+                .setStyle(ButtonStyle.Secondary),
+            )
+            .addComponents( new ButtonBuilder()
+                .setCustomId(JSON.stringify(btnNext))
+                .setEmoji('<:rightarrow:1127627892692627598>')
+                .setStyle(ButtonStyle.Secondary)
+                .setDisabled(_rotation === (this.options[0].max)),
+            )
 
         const link = new ActionRowBuilder()
             .addComponents( new ButtonBuilder()
@@ -79,7 +108,7 @@ class CmdRotation extends CmdBase {
                 .setEmoji('<:squidgreen:568201618974048279>'),
             )
 
-        return { embeds: embeds, components: [row, link], files: attachments }
+        return { embeds: embeds, components: [langSelect, pager, link], files: attachments }
     }
 }
 
