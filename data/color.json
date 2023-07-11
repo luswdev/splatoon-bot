@@ -115,6 +115,7 @@
     "Match": {
         "Bankara": "#F54910",
         "BankaraOpen": "#F54910",
+        "BankaraTitle": "#F54910",
         "Coop": "#FF5600",
         "CoopBigRun": "#B322FF",
         "CoopPrivate": "#BE8800",

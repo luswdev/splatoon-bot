@@ -151,6 +151,186 @@
         ]
     },
     {
+        "info": "查看現在的一般比賽 Get current regular battle rotation",
+        "value": "regular",
+        "arguments": ["rotation"],
+        "icon": "<:regular:1068232344193994852>",
+        "thumbnail": "https://cdn.wikimg.net/en/splatoonwiki/images/thumb/3/3c/S2_Icon_Regular_Battle_alt.svg/2048px-S2_Icon_Regular_Battle_alt.svg.png",
+        "details": {
+            "zh": [
+                "顯示現在及 24 小時內的一般比賽",
+                "支援所有語言",
+                "資料來源: [Splatoon3.ink](https://splatoon3.ink)"
+            ],
+            "en": [
+                "Show current and within 24 hours regular battle rotation",
+                "Support all language in Splatoon 3.",
+                "Data from: [Splatoon3.ink](https://splatoon3.ink)"
+            ]
+        },
+        "examples": [
+            {
+                "zh": {
+                    "info": "查看現在的地圖及模式",
+                    "cmd": "rot"
+                },
+                "en": {
+                    "info": "Get current matchs and stages rotation",
+                    "cmd": "rot"
+                }
+            },
+            {
+                "zh": {
+                    "info": "查看下一輪的地圖及模式",
+                    "cmd": "rot `1`"
+                },
+                "en": {
+                    "info": "Get next matchs and stages rotation",
+                    "cmd": "rot `1`"
+                }
+            },
+            {
+                "zh": {
+                    "info": "查看下 `n` 輪的地圖及模式",
+                    "cmd": "rot `n`"
+                },
+                "en": {
+                    "info": "Get next `n` matchs and stages rotation",
+                    "cmd": "rot `n`"
+                }
+            }
+        ],
+        "options": [
+            {
+                "type": "integer",
+                "name": "rotation",
+                "info": "第幾輪模式 Which Rotation",
+                "min": 0,
+                "max": 11
+            }
+        ]
+    },
+    {
+        "info": "查看現在的蠻頹比賽 Get current anarchy battle rotation",
+        "value": "bankara",
+        "arguments": ["rotation"],
+        "icon": "<:bankara:1068232359134117919>",
+        "thumbnail": "https://cdn.wikimg.net/en/splatoonwiki/images/1/1a/SplatNet_2_icon_Ranked_Battle.png",
+        "details": {
+            "zh": [
+                "顯示現在及 24 小時內的蠻頹比賽",
+                "支援所有語言",
+                "資料來源: [Splatoon3.ink](https://splatoon3.ink)"
+            ],
+            "en": [
+                "Show current and within 24 hours anarchy battle rotation",
+                "Support all language in Splatoon 3.",
+                "Data from: [Splatoon3.ink](https://splatoon3.ink)"
+            ]
+        },
+        "examples": [
+            {
+                "zh": {
+                    "info": "查看現在的地圖及模式",
+                    "cmd": "rot"
+                },
+                "en": {
+                    "info": "Get current matchs and stages rotation",
+                    "cmd": "rot"
+                }
+            },
+            {
+                "zh": {
+                    "info": "查看下一輪的地圖及模式",
+                    "cmd": "rot `1`"
+                },
+                "en": {
+                    "info": "Get next matchs and stages rotation",
+                    "cmd": "rot `1`"
+                }
+            },
+            {
+                "zh": {
+                    "info": "查看下 `n` 輪的地圖及模式",
+                    "cmd": "rot `n`"
+                },
+                "en": {
+                    "info": "Get next `n` matchs and stages rotation",
+                    "cmd": "rot `n`"
+                }
+            }
+        ],
+        "options": [
+            {
+                "type": "integer",
+                "name": "rotation",
+                "info": "第幾輪模式 Which Rotation",
+                "min": 0,
+                "max": 11
+            }
+        ]
+    },
+    {
+        "info": "查看現在的X比賽 Get current X battle rotation",
+        "value": "xmatch",
+        "arguments": ["rotation"],
+        "icon": "<:x_:1068232347469750332>",
+        "thumbnail": "https://cdn.wikimg.net/en/splatoonwiki/images/thumb/d/d9/S3_Rank_X_Icon.svg/2048px-S3_Rank_X_Icon.svg.png",
+        "details": {
+            "zh": [
+                "顯示現在及 24 小時內的蠻頹比賽",
+                "支援所有語言",
+                "資料來源: [Splatoon3.ink](https://splatoon3.ink)"
+            ],
+            "en": [
+                "Show current and within 24 hours anarchy battle rotation",
+                "Support all language in Splatoon 3.",
+                "Data from: [Splatoon3.ink](https://splatoon3.ink)"
+            ]
+        },
+        "examples": [
+            {
+                "zh": {
+                    "info": "查看現在的地圖及模式",
+                    "cmd": "rot"
+                },
+                "en": {
+                    "info": "Get current matchs and stages rotation",
+                    "cmd": "rot"
+                }
+            },
+            {
+                "zh": {
+                    "info": "查看下一輪的地圖及模式",
+                    "cmd": "rot `1`"
+                },
+                "en": {
+                    "info": "Get next matchs and stages rotation",
+                    "cmd": "rot `1`"
+                }
+            },
+            {
+                "zh": {
+                    "info": "查看下 `n` 輪的地圖及模式",
+                    "cmd": "rot `n`"
+                },
+                "en": {
+                    "info": "Get next `n` matchs and stages rotation",
+                    "cmd": "rot `n`"
+                }
+            }
+        ],
+        "options": [
+            {
+                "type": "integer",
+                "name": "rotation",
+                "info": "第幾輪模式 Which Rotation",
+                "min": 0,
+                "max": 11
+            }
+        ]
+    },
+    {
         "info": "查看現在的活動比賽 Get current Challenge rotation",
         "value": "evt",
         "arguments": ["rotation"],
