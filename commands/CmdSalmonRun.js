@@ -162,9 +162,9 @@ class CmdSalmonRun extends CmdBase {
         const link = new ActionRowBuilder()
             .addComponents( new ButtonBuilder()
                 .setURL('https://splatoon3.ink/salmonrun')
-                .setLabel('More Information')
+                .setLabel('Splatoon3.ink')
                 .setStyle(ButtonStyle.Link)
-                .setEmoji('<:squidgreen:568201618974048279>'),
+                .setEmoji('<:splatoon3ink:1128347285403734126>'),
             )
 
         return { embeds: embeds, components: [langSelect, pager, link], files: thumb }

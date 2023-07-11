@@ -137,10 +137,10 @@ class CmdRotation extends CmdBase {
 
         const link = new ActionRowBuilder()
             .addComponents( new ButtonBuilder()
-                .setURL('https://splatoon3.ink')
-                .setLabel('More Information')
+                .setURL('https://splatoon3.ink/salmonrun')
+                .setLabel('Splatoon3.ink')
                 .setStyle(ButtonStyle.Link)
-                .setEmoji('<:squidgreen:568201618974048279>'),
+                .setEmoji('<:splatoon3ink:1128347285403734126>'),
             )
 
         return { embeds: embeds, components: [langSelect, pager, link], files: attachments }
