@@ -59,13 +59,13 @@ class CmdDebugWeapon extends CmdBase {
         const pager = new ActionRowBuilder()
             .addComponents( new ButtonBuilder()
                 .setCustomId(JSON.stringify(btnPrev))
-                .setLabel('⏪')
+                .setEmoji('<:leftarrow:1127627896094212206>')
                 .setStyle(ButtonStyle.Secondary)
                 .setDisabled(_start === 0),
             )
             .addComponents( new ButtonBuilder()
                 .setCustomId(JSON.stringify(btnNext))
-                .setLabel('⏩')
+                .setEmoji('<:rightarrow:1127627892692627598>')
                 .setStyle(ButtonStyle.Primary)
                 .setDisabled(_start === (this.stageList.length - 1)),
             )
