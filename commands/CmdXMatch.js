@@ -80,7 +80,7 @@ class CmdRotation extends CmdBase {
         const rotation = this.fetchRotation(_rotation).find(rot => rot.match === 'XMatch')
 
         let embeds, attachments = []
-        if (rotation) {
+        if (rotation && rotation.mode !== null) {
             embeds = this.buildEmbed(rotation, _rotation, _lang, _interaction)
             attachments.push(`${this.imgPath}${rotation.match}_${_rotation}.png`)
         } else {

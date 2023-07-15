@@ -82,7 +82,7 @@ class CmdRotation extends CmdBase {
         const rotation = this.fetchRotation(_rotation)
 
         for (let i = 0; i < rotation.length; ++i) {
-            if (rotation[i].match.indexOf('Bankara') !== -1) {
+            if (rotation[i].match.indexOf('Bankara') !== -1 && rotation[i].mode !== null) {
                 embeds.push(this.buildEmbed(rotation[i], _rotation, _lang, _interaction))
                 attachments.push(`${this.imgPath}${rotation[i].match}_${_rotation}.png`)
             }
