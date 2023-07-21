@@ -117,6 +117,7 @@ class Hook {
             const reply = 'ok'
 
             const commits = req.update.data
+            const commitImgBase = 'https://opengraph.githubassets.com/9fb8f195aef3d6f7471c5a1b1d60397650fca42866203645c1974b4a8dea1ff8/luswdev/splatoon-bot/commit/'
 
             let embeds = []
             for (let commit of commits) {
@@ -125,11 +126,11 @@ class Hook {
                 let embed = new EmbedBuilder()
                     .setColor(0x1e2327)
                     .setTitle('<:gh:1131837629281865768> GitHub Notification')
-                    .setDescription(`${commit.message}`)
+                    .setDescription(`[${commit.message}](${commit.url})`)
                     .addFields(
                         { name: 'Branch', value: req.body.ref },
-                        { name: 'Commit', value: commit.url },
                     )
+                    .setImage(`${commitImgBase}${commit.id}`)
                     .setFooter({ text: `Commit by ${commit.committer.name}`, iconURL: `https://github.com/${commit.committer.username}.png`})
                     .setTimestamp(commitTime.getTime())
 
