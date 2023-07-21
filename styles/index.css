@@ -91,7 +91,7 @@ footer.splatoon3 a:hover {
 .squid-card {
     background-image: linear-gradient(180deg, transparent, rgba(36, 36, 36, .1)), var(--squid-card-bg-img);
     background-position: top;
-    background-size: 100% 100%,80px 80px;
+    background-size: contain;
     text-shadow: 1px 1px 0 #000;
 }
 
@@ -125,8 +125,9 @@ footer.splatoon3 a:hover {
 }
 
 .squid-card .list-group-item {
-    background: rgba(0, 0, 0, .7);
+    background: rgba(0, 0, 0, .5);
     border-color: rgba(255, 255, 255, .125);
+    backdrop-filter: blur(4px);
 }
 
 .squid-card .list-group-item .squid-icon {

@@ -78,9 +78,9 @@
                             </p>
                         </div>
                         <ul class="list-group list-group-flush mx-3 mb-4 round-12">
-                            <li v-for="feature, idx in cmd.features" class="list-group-item d-inline-flex text-white">
+                            <li v-for="feature, idx in get_tstring(`${cmd.usage}_info`)" class="list-group-item d-inline-flex text-white">
                                 <span class="squid-icon me-3 h-100 align-self-center"><span class="fa fa-squid splatoon-style-1"></span></span>
-                                <span v-html="get_tstring(`${cmd.usage}_info`, idx)"></span>
+                                <span v-html="feature"></span>
                             </li>
                         </ul>
                     </div>

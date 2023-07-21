@@ -15,7 +15,11 @@ const app = {
             return 'background-color: ' + color + ';'
         },
         set_icon: function (icon) {
-            return 'fas ' + icon
+            if (icon.indexOf('discord') !== -1) {
+                return 'fa-brands ' + icon
+            } else {
+                return 'fas ' + icon
+            }
         },
         copy_cmd: function(cmd) {
             navigator.clipboard.writeText(cmd)
@@ -40,11 +44,11 @@ const app = {
                 return `splatoon-style-${type}`
             }
         },
-        get_tstring: function (key, index) {
+        get_tstring: function (key,) {
             if (this.user_lang.indexOf('zh') != -1) {
-                return index == undefined ? (this.tkey['zh'][key] ?? key) : (this.tkey['zh'][key][index] ?? key)
+                return this.tkey['zh'][key] ?? key
             } else {
-                return index == undefined ? (this.tkey['en'][key] ?? key) : (this.tkey['en'][key][index] ?? key)
+                return this.tkey['en'][key] ?? key
             }
         }
     },
