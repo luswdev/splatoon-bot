@@ -3,50 +3,7 @@ SplatoonBot is a simple bot for Splatoon 3.
 
 ## Manual
 
-### Random Weapon
-
-- Random choose a weapon from 80 different weapons.
-- Include hero weapon.
-- Support all language in Splatoon 3.
-
-#### Usage
-
-```bash
-/rw
-```
-
-### Random Private Battle Weapons
-
-- Random choose 8 weapons from 80 different weapons.
-- Include hero weapon.
-- Support all language in Splatoon 3.
-
-#### Usage
-
-```bash
-/rt
-```
-
-### Random Maps
-
-- Random choose a map from 16 different maps.
-- Support all language in Splatoon 3.
-
-#### Usage
-
-```bash
-/rm
-```
-
-### Help Manual
-
-- Show manual in Discord.
-
-#### Usage
-
-```bash
-/help [command]
-```
+Visit lusw.dev/splatoon/.
 
 ## Version Log
 
