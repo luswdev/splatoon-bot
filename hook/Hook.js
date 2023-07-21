@@ -21,7 +21,7 @@ class Hook {
         this.webhookGitHubClient = new WebhookClient({ id: hook_github.id, token: hook_github.token })
 
         this.app = express()
-        this.port = 3001
+        this.port = 3000
 
         this.middleware = {
             topgg: new MiddleWareTopgg(hook.topgg, hook.topgg_token),
