@@ -66,7 +66,7 @@ class CmdDebugWeapon extends CmdBase {
             .addComponents( new ButtonBuilder()
                 .setCustomId(JSON.stringify(btnNext))
                 .setEmoji('<:rightarrow:1127627892692627598>')
-                .setStyle(ButtonStyle.Primary)
+                .setStyle(ButtonStyle.Secondary)
                 .setDisabled(_start === (this.stageList.length - 1)),
             )
 
