@@ -7,9 +7,10 @@ const { WebhookClient, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyl
 const MiddleWareTopgg = require('hook/middleware/MiddleWareTopgg.js')
 const MiddleWareDcTW = require('hook/middleware/MiddleWareDcTW.js')
 const MiddleWareDcLs = require('hook/middleware/MiddleWareDcLs.js')
+const MiddleWareGitHub = require('hook/middleware/MiddleWareGitHub.js')
 
 const ConnDB = require('utils/ConnDB.js')
-const { hook, db } = require('config.json')
+const { hook, hook_github, db } = require('config.json')
 
 const { log } = require('utils/Log.js')
 
@@ -17,14 +18,16 @@ class Hook {
 
     constructor () {
         this.webhookClient = new WebhookClient({ id: hook.id, token: hook.token })
+        this.webhookGitHubClient = new WebhookClient({ id: hook_github.id, token: hook_github.token })
 
         this.app = express()
-        this.port = 3000
+        this.port = 3001
 
         this.middleware = {
             topgg: new MiddleWareTopgg(hook.topgg, hook.topgg_token),
             dctw: new MiddleWareDcTW(hook.dctw),
             dcls: new MiddleWareDcLs(hook.dcls),
+            github: new MiddleWareGitHub(hook.github),
         }
 
         this.info = {
@@ -79,6 +82,7 @@ class Hook {
         this.app.post('/topgg', this.middleware.topgg.auth(), this.send())
         this.app.post('/dctw',  this.middleware.dctw.auth(),  this.send())
         this.app.post('/dcls',  this.middleware.dcls.auth(),  this.send())
+        this.app.post('/splatoonbotgithub', this.middleware.github.auth(), this.sendGitHub())
 
         this.app.listen(this.port, () => {
             log.write('start listening at', this.port)
@@ -102,6 +106,39 @@ class Hook {
             this.webhookClient.send({
                 username: 'Vote Agent 3',
                 embeds: [embed]
+            })
+
+            res.json(reply)
+        }
+    }
+
+    sendGitHub () {
+        return async (req, res) => {
+            const reply = 'ok'
+
+            const commits = req.update.data
+
+            let embeds = []
+            for (let commit of commits) {
+                const commitTime = new Date(commit.timestamp)
+
+                let embed = new EmbedBuilder()
+                    .setColor(0x1e2327)
+                    .setTitle('<:gh:1131837629281865768> GitHub Notification')
+                    .setDescription(`${commit.message}`)
+                    .addFields(
+                        { name: 'Branch', value: req.body.ref },
+                        { name: 'Commit', value: commit.url },
+                    )
+                    .setFooter({ text: `Commit by ${commit.committer.name}`, iconURL: `https://github.com/${commit.committer.username}.png`})
+                    .setTimestamp(commitTime.getTime())
+
+                embeds.push(embed)
+            }
+
+            this.webhookGitHubClient.send({
+                username: 'GitHub Agent 3',
+                embeds: embeds
             })
 
             res.json(reply)
