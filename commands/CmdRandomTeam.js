@@ -52,7 +52,7 @@ class CmdRandomTeam extends CmdBase {
                                 `${weapons[1 + i * 4].icon} ${weapons[1 + i * 4][_lang]}\n` +
                                 `${weapons[2 + i * 4].icon} ${weapons[2 + i * 4][_lang]}\n` +
                                 `${weapons[3 + i * 4].icon} ${weapons[3 + i * 4][_lang]}`)
-                .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
+                .setFooter({ text: `/${this.cmdKey} (${_interaction.user.username})`, iconURL: _interaction.user.avatarURL()})
                 .setThumbnail(this.cmdData.thumbnail)
                 .setTimestamp()
         }

@@ -27,23 +27,27 @@ class CmdRandomMap extends CmdBase {
         this.random.initRandom()
         const map = this.randomList()
         const lang = this.locale2Lang(_interaction.locale) ?? 'en-US'
-        const reply = this.buildMessage(map, lang, _interaction)
+        const reply = this.buildMessage(map, lang, 1, _interaction)
         return reply
     }
 
     doSelect (_option, _interaction) {
         const map = parseInt(_option.res)
-        const reply = this.buildMessage(map, _option.lang, _interaction)
+        const cnt = parseInt(_option.cnt)
+        const reply = this.buildMessage(map, _option.lang, cnt, _interaction)
         return reply
     }
 
     doButton (_btn, _interaction) {
-        if (_btn.act === 'redo') {
-            return this.doCmd(_interaction)
-        }
+        this.random.initRandom()
+        const map = this.randomList()
+        const lang = _btn.lang
+        const cnt = _btn.cnt
+        const reply = this.buildMessage(map, lang, cnt, _interaction)
+        return reply
     }
 
-    buildMessage (_map, _lang, _interaction) {
+    buildMessage (_map, _lang, _cnt, _interaction) {
         const map = database.getListObject(this.dataCategory, this.stageList[_map])
         const thumb = findImg('stage', this.stageList[_map])
         const embed = new EmbedBuilder()
@@ -51,12 +55,12 @@ class CmdRandomMap extends CmdBase {
             .setTitle(`${this.cmdData.icon} ${database.getListObject('Label', 'Random')[_lang]} ${database.getListObject('Label', 'Stage')[_lang]}!`)
             .setDescription(map[_lang])
             .setImage(`attachment://${basename(thumb)}`)
-            .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
+            .setFooter({ text: `/${this.cmdKey}.${_cnt} (${_interaction.user.username})`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()
 
-        const langSelect = this.buildLangSelect({res: _map}, _lang)
+        const langSelect = this.buildLangSelect({res: _map, cnt: _cnt}, _lang)
 
-        const btn = {cmd: 'rm', act: 'redo'}
+        const btn = {cmd: 'rm', act: 'redo', cnt: _cnt + 1, lang: _lang}
         const retry = new ActionRowBuilder()
             .addComponents( new ButtonBuilder()
                 .setCustomId(JSON.stringify(btn))

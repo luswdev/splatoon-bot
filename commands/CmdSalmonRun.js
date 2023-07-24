@@ -107,7 +107,7 @@ class CmdSalmonRun extends CmdBase {
                 { name: database.getListObject('Label', 'Stage')[_lang], value: map[_lang] },
             )
             .setImage(`attachment://${basename(map.thumb)}`)
-            .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
+            .setFooter({ text: `/${this.cmdKey}.${_idx} (${_interaction.user.username})`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()
 
         if (bossThumb.indexOf('Unknown') === -1) {

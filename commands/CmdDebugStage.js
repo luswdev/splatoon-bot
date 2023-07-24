@@ -51,7 +51,7 @@ class CmdDebugWeapon extends CmdBase {
                 `- ${stage['zh-CN']}\n` + `- ${stage['zh-TW']}\n`
             )
             .setImage(`attachment://${basename(thumb)}`)
-            .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
+            .setFooter({ text: `/${this.cmdKey} (${_interaction.user.username})`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()
 
         const btnNext = {cmd: this.cmdKey, act: 'next', res: _start}

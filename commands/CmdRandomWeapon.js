@@ -27,23 +27,27 @@ class CmdRandomWeapon extends CmdBase {
         this.random.initRandom()
         const weapon = this.randomList()
         const lang = this.locale2Lang(_interaction.locale) ?? 'en-US'
-        const reply = this.buildMessage(weapon, lang, _interaction)
+        const reply = this.buildMessage(weapon, lang, 1, _interaction)
         return reply
     }
 
     doSelect (_option, _interaction) {
         const weapon = parseInt(_option.res)
-        const reply = this.buildMessage(weapon, _option.lang, _interaction)
+        const cnt = parseInt(_option.cnt)
+        const reply = this.buildMessage(weapon, _option.lang, cnt, _interaction)
         return reply
     }
 
     doButton (_btn, _interaction) {
-        if (_btn.act === 'redo') {
-            return this.doCmd(_interaction)
-        }
+        this.random.initRandom()
+        const map = this.randomList()
+        const lang = _btn.lang
+        const cnt = _btn.cnt
+        const reply = this.buildMessage(map, lang, cnt, _interaction)
+        return reply
     }
 
-    buildMessage (_weapon, _lang, _interaction) {
+    buildMessage (_weapon, _lang, _cnt, _interaction) {
         const weapon = database.getListObject(this.dataCategory, this.weaponList[_weapon])
         const thumb = findImg('weapon', this.weaponList[_weapon])
         const embed = new EmbedBuilder()
@@ -51,12 +55,12 @@ class CmdRandomWeapon extends CmdBase {
             .setTitle(`${this.cmdData.icon} ${database.getListObject('Label', 'Random')[_lang]} ${database.getListObject('Label', 'Weapon')[_lang]}!`)
             .setDescription(`${weapon[_lang]}`)
             .setThumbnail(`attachment://${basename(thumb)}`)
-            .setFooter({ text: `Requested by ${_interaction.user.username}`, iconURL: _interaction.user.avatarURL()})
+            .setFooter({ text: `/${this.cmdKey}.${_cnt} (${_interaction.user.username})`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()
 
-        const langSelect = this.buildLangSelect({res: _weapon}, _lang)
+        const langSelect = this.buildLangSelect({res: _weapon, cnt: _cnt}, _lang)
 
-        const btn = {cmd: 'rw', act: 'redo'}
+        const btn = {cmd: 'rw', act: 'redo', cnt: _cnt + 1, lang: _lang}
         const retry = new ActionRowBuilder()
             .addComponents( new ButtonBuilder()
                 .setCustomId(JSON.stringify(btn))
