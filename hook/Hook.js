@@ -137,10 +137,12 @@ class Hook {
                 embeds.push(embed)
             }
 
-            this.webhookGitHubClient.send({
-                username: 'GitHub Agent 3',
-                embeds: embeds
-            })
+            if (embeds.length) {
+                this.webhookGitHubClient.send({
+                    username: 'GitHub Agent 3',
+                    embeds: embeds
+                })
+            }
 
             res.json(reply)
         }
