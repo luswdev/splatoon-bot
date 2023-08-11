@@ -33,7 +33,7 @@ class CmdRandomMap extends CmdBase {
 
     doSelect (_option, _interaction) {
         const map = parseInt(_option.res)
-        const cnt = parseInt(_option.cnt)
+        const cnt = parseInt(_option.cnt) ?? 1
         const reply = this.buildMessage(map, _option.lang, cnt, _interaction)
         return reply
     }
@@ -41,8 +41,8 @@ class CmdRandomMap extends CmdBase {
     doButton (_btn, _interaction) {
         this.random.initRandom()
         const map = this.randomList()
-        const lang = _btn.lang
-        const cnt = _btn.cnt
+        const lang = _btn.lang ?? 'en-US'
+        const cnt = _btn.cnt ?? 1
         const reply = this.buildMessage(map, lang, cnt, _interaction)
         return reply
     }

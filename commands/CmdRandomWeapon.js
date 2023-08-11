@@ -33,17 +33,17 @@ class CmdRandomWeapon extends CmdBase {
 
     doSelect (_option, _interaction) {
         const weapon = parseInt(_option.res)
-        const cnt = parseInt(_option.cnt)
+        const cnt = parseInt(_option.cnt) ?? 1
         const reply = this.buildMessage(weapon, _option.lang, cnt, _interaction)
         return reply
     }
 
     doButton (_btn, _interaction) {
         this.random.initRandom()
-        const map = this.randomList()
-        const lang = _btn.lang
-        const cnt = _btn.cnt
-        const reply = this.buildMessage(map, lang, cnt, _interaction)
+        const weapon = this.randomList()
+        const lang = _btn.lang ?? 'en-US'
+        const cnt = _btn.cnt ?? 2
+        const reply = this.buildMessage(weapon, lang, cnt, _interaction)
         return reply
     }
 
