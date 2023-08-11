@@ -64,6 +64,7 @@ class CmdRandomMap extends CmdBase {
         const retry = new ActionRowBuilder()
             .addComponents( new ButtonBuilder()
                 .setCustomId(JSON.stringify(btn))
+                .setEmoji(database.getListObject('Label', 'Redo')['icon'])
                 .setLabel(database.getListObject('Label', 'Redo')[_lang])
                 .setStyle(ButtonStyle.Success),
             )
