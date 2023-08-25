@@ -59,8 +59,8 @@ class CmdRotation extends CmdBase {
         const rule_main = database.getListObject('EventMatch', `${_rotation.rule}_Title`)
         const rule_sub =  database.getListObject('EventMatch', `${_rotation.rule}_Subtitle`)
         const rule_desc = database.getListObject('EventMatch', `${_rotation.rule}_Manual`)
-        const map1 =      database.getListObject('VSStage',    _rotation.maps[0])
-        const map2 =      database.getListObject('VSStage',    _rotation.maps[1])
+        const map1 =      database.getListObject('VSStage',    _rotation.maps[0].length ? _rotation.maps[0] : "???")
+        const map2 =      database.getListObject('VSStage',    _rotation.maps[1].length ? _rotation.maps[1] : "???")
 
         let periodString = ''
         for (let period of _rotation.periods) {
@@ -70,6 +70,10 @@ class CmdRotation extends CmdBase {
             if ((Date.now() / 1000) < ends) {
                 periodString += `<t:${start}> ~ <t:${ends}> (<t:${ends}:R>)\n`
             }
+        }
+
+        if (periodString.length === 0) {
+            periodString = "???"
         }
 
         const timeLable = database.getListObject('Label', 'Time')

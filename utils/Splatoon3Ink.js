@@ -87,12 +87,12 @@ class Splatoon3Ink {
         const eventSchedules = this.rotationData.eventSchedules.nodes[_idx]
 
         let maps = [
-            database.getListKey('VSStage', eventSchedules.leagueMatchSetting.vsStages[0].name),
-            database.getListKey('VSStage', eventSchedules.leagueMatchSetting.vsStages[1].name)
+            eventSchedules.leagueMatchSetting.vsStages[0] ? database.getListKey('VSStage', eventSchedules.leagueMatchSetting.vsStages[0].name) : "???",
+            eventSchedules.leagueMatchSetting.vsStages[1] ? database.getListKey('VSStage', eventSchedules.leagueMatchSetting.vsStages[1].name) : "???",
         ]
 
-        let mode = database.getListKey('VSRule', eventSchedules.leagueMatchSetting.vsRule.name)
-        let rule = database.getListKey('EventMatch', eventSchedules.leagueMatchSetting.leagueMatchEvent.name)
+        let mode = eventSchedules.leagueMatchSetting.vsRule ? database.getListKey('VSRule', eventSchedules.leagueMatchSetting.vsRule.name) : "???"
+        let rule = eventSchedules.leagueMatchSetting.leagueMatchEvent ? database.getListKey('EventMatch', eventSchedules.leagueMatchSetting.leagueMatchEvent.name) : "???"
         if (rule.indexOf('_Title') !== -1) {
             rule = rule.replace('_Title', '')
         }
