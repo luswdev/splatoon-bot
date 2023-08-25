@@ -132,8 +132,8 @@ class Splatoon3Ink {
         const innerImgW = imgPerSize - padW / 2
         const innerImgH = imgPerSize
 
-        ctx.drawImage(map1Img, 175, 0, 450, 450, 0, 0, innerImgW, innerImgH)
-        ctx.drawImage(map2Img, 175, 0, 450, 450, imgPerSize + padW / 2, 0, innerImgW, innerImgH)
+        ctx.drawImage(map1Img, (map1Img.width - map1Img.height) / 2, 0, map1Img.height, map1Img.height, 0, 0, innerImgW, innerImgH)
+        ctx.drawImage(map2Img, (map2Img.width - map2Img.height) / 2, 0, map2Img.height, map2Img.height, imgPerSize + padW / 2, 0, innerImgW, innerImgH)
 
         writeFileSync(imgOutPath, canvas.toBuffer())
     }
