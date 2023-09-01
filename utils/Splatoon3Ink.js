@@ -181,7 +181,7 @@ class Splatoon3Ink {
 
         let battles = []
         for (let i = 0; i < this.rotationData.regularSchedules.nodes.length; ++i) {
-            let isFest = (this.rotationData.regularSchedules.nodes[i].festMatchSetting !== null)
+            let isFest = (this.rotationData.regularSchedules.nodes[i].festMatchSetting ? true : false)
             battles.push(await this.parseBattle(i, isFest))
         }
 
