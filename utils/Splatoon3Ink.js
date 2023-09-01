@@ -162,7 +162,12 @@ class Splatoon3Ink {
             }
         }
 
-        let map = database.getListKey('CoopStage', _set.setting.coopStage.name)
+        let map
+        if (_type === this.salmonType.bigRun) {
+            map = database.getListKey('VSStage', _set.setting.coopStage.name)
+        } else {
+            map = database.getListKey('CoopStage', _set.setting.coopStage.name)
+        }
 
         let rotation = {
             match: _type,
