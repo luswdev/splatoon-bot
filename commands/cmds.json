@@ -496,5 +496,10 @@
         "info": "DEBUG ONLY Stage List",
         "value": "xrm",
         "permission": true
+    },
+    {
+        "info": "DEBUG ONLY Event List",
+        "value": "xevt",
+        "permission": true
     }
 ]
