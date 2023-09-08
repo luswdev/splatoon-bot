@@ -35,9 +35,10 @@ class Splatoon3Ink {
         }
     }
 
-    async parseBattle (_idx, isFest) {
+    async parseBattle (_idx) {
         let rotation = []
 
+        const isFest = this.rotationData.regularSchedules.nodes[_idx].festMatchSettings != null
         const matchObject = [
             isFest ? undefined : this.rotationData.regularSchedules.nodes[_idx].regularMatchSetting,
             isFest ? undefined : this.rotationData.bankaraSchedules.nodes[_idx].bankaraMatchSettings[0],
@@ -186,8 +187,7 @@ class Splatoon3Ink {
 
         let battles = []
         for (let i = 0; i < this.rotationData.regularSchedules.nodes.length; ++i) {
-            let isFest = (this.rotationData.regularSchedules.nodes[i].festMatchSetting ? true : false)
-            battles.push(await this.parseBattle(i, isFest))
+            battles.push(await this.parseBattle(i))
         }
 
         let events = []
