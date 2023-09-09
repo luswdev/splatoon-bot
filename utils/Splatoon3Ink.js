@@ -44,7 +44,8 @@ class Splatoon3Ink {
             isFest ? undefined : this.rotationData.bankaraSchedules.nodes[_idx].bankaraMatchSettings[0],
             isFest ? undefined : this.rotationData.bankaraSchedules.nodes[_idx].bankaraMatchSettings[1],
             isFest ? undefined : this.rotationData.xSchedules.nodes[_idx].xMatchSetting,
-            isFest ? this.rotationData.festSchedules.nodes[_idx].festMatchSetting : undefined,
+            isFest ? this.rotationData.festSchedules.nodes[_idx].festMatchSettings[0] : undefined,
+            isFest ? this.rotationData.festSchedules.nodes[_idx].festMatchSettings[1] : undefined,
         ]
 
         const matchName = [
@@ -52,7 +53,8 @@ class Splatoon3Ink {
             'Bankara',
             'BankaraOpen',
             'XMatch',
-            'Fest'
+            'FestChallenge',
+            'FestRegular'
         ]
 
         const period = {
