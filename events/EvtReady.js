@@ -3,7 +3,7 @@
 const { ActivityType, Collection } = require('discord.js')
 const EvtBase = require('events/EvtBase')
 
-const { bot } = require('config.json')
+const { bot, rotation_api } = require('config.json')
 
 const Hook = require('hook/Hook.js')
 
@@ -12,6 +12,7 @@ const BotInfo = require('utils/BotInfo.js')
 const { log } = require('utils/Log.js')
 const ErrorHandler = require('../utils/ErrorHandler')
 const Analytics = require('utils/Analytics.js')
+const RotationAncmt = require('utils/RotationAncmt.js')
 
 class EvtReady extends EvtBase {
 
@@ -41,6 +42,9 @@ class EvtReady extends EvtBase {
         _client.analytics = new Analytics(_client, bot.debug)
         _client.analytics.report()
         _client.analytics.schedule()
+
+        _client.reporter = new RotationAncmt(_client, rotation_api.announcement)
+        _client.reporter.schedule()
 
         log.write('bot ready')
     }
