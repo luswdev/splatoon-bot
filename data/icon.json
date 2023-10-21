@@ -103,30 +103,30 @@
         "Stringer_Short_00": "<:LACT:1067467847187562637>"
     },
     "VSRule": {
-        "Pnt": "<:regular1:1068232342591778816>",
-        "Tcl": "<:splatfest:1073592583831421079>",
-        "Var": "<:area:1068232354910457936>",
-        "Vcl": "<:asari:1068232356554608781>",
-        "Vgl": "<:hoko:1068232351886348289>",
-        "Vlf": "<:yagura:1068232350233804951>"
+        "Pnt": "<:turfwar:1165307766013968534>",
+        "Tcl": "<:fest:1165306477091762236>",
+        "Var": "<:splatzone:1165307457015386192>",
+        "Vcl": "<:clam:1165307459787837450> ",
+        "Vgl": "<:rainmaker:1165307462564462624>",
+        "Vlf": "<:tower:1165307465538207864>"
     },
     "Match": {
-        "Bankara": "<:bankara:1068232359134117919>",
-        "BankaraOpen": "<:bankara:1068232359134117919>",
-        "BankaraTitle": "<:bankara:1068232359134117919>",
+        "Bankara": "<:bankara:1165306181061971998>",
+        "BankaraOpen": "<:bankara:1165306181061971998>",
+        "BankaraTitle": "<:bankara:1165306181061971998>",
         "Coop": "<:salmon_run:1073600987723464786>",
         "CoopBigRun": "<:Big_Run:1080106754240675903>",
         "CoopPrivate": "<:salmon_run:1073600987723464786>",
         "CoopTeamContest": "<:eggstra_work_5:1096256247751266344>",
-        "FestChallenge": "<:splatfest:1073592583831421079>",
-        "FestRegular": "<:splatfest:1073592583831421079>",
-        "Fest": "<:splatfest:1073592583831421079>",
-        "FestTriColor": "<:splatfest:1073592583831421079>",
+        "FestChallenge": "<:fest:1165306477091762236>",
+        "FestRegular": "<:fest:1165306477091762236>",
+        "Fest": "<:fest:1165306477091762236>",
+        "FestTriColor": "<:fest:1165306477091762236>",
         "League": "<:Challenge:1115651445740544022>",
         "MiniGame": "<:tableturf:1123901420299636756>",
         "Private": "<:private:1073642241828081686>",
-        "Regular": "<:regular:1068232344193994852>",
-        "XMatch": "<:x_:1068232347469750332>"
+        "Regular": "<:regular:1165306787696758924>",
+        "XMatch": "<:xmatch:1165305779079872532>"
     },
     "CoopWeapon": {
         "Blaster_Bear_Coop": "<:Grizzco_Blaster:1075480942866595840>",
