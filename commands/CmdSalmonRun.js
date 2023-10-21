@@ -7,13 +7,14 @@ const { basename } = require('path')
 const CmdBase = require('commands/CmdBase.js')
 const database = require('utils/Database.js')
 const { findImg } = require('utils/ImgFinder.js')
+const { rotation_api } = require('config.json')
 
 class CmdSalmonRun extends CmdBase {
 
     constructor () {
         super('sr')
 
-        this.dataPath = '/tmp/spl3/rotation.json'
+        this.dataPath = rotation_api.store_path.data
     }
 
     doCmd (_interaction) {

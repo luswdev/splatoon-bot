@@ -5,14 +5,15 @@ const { readFileSync } = require('fs')
 
 const CmdBase = require('commands/CmdBase.js')
 const database = require('utils/Database.js')
+const { rotation_api } = require('config.json')
 
 class CmdRotation extends CmdBase {
 
     constructor () {
         super('xmatch')
 
-        this.imgPath = '/tmp/spl3/img/'
-        this.dataPath = '/tmp/spl3/rotation.json'
+        this.imgPath = rotation_api.store_path.image
+        this.dataPath = rotation_api.store_path.data
     }
 
     doCmd (_interaction) {

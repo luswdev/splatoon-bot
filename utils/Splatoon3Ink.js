@@ -9,13 +9,14 @@ const looksSame = require('looks-same')
 const database = require('utils/Database.js')
 const { log } = require('utils/Log.js')
 const { findImg } = require('utils/ImgFinder.js')
+const { rotation_api } = require('config.json')
 
 class Splatoon3Ink {
 
     constructor () {
-        this.apiBase = 'https://splatoon3.ink/data/'
-        this.dataOut = `/tmp/spl3/`
-        this.imgOut = `/tmp/spl3/img/`
+        this.apiBase = rotation_api.url.base
+        this.dataOut = rotation_api.store_path.data
+        this.imgOut = rotation_api.store_path.image
         this.imgSrc = `${__dirname}/../img/map/`
         this.rotationData = undefined
         this.salmonType = Object.freeze({ 'salmonRun': 'Coop', 'bigRun': 'CoopBigRun', 'teamContest': 'CoopTeamContest' })
@@ -25,7 +26,7 @@ class Splatoon3Ink {
 
     async fetchRotation (_rotation) {
         try {
-            const url = 'schedules.json'
+            const url = rotation_api.url.path
             log.write('fetching', this.apiBase + url)
 
             const res = await axios.get(`${this.apiBase}${url}`)
@@ -220,7 +221,7 @@ class Splatoon3Ink {
             teamContests: teamContests,
         }
 
-        writeFileSync(`${this.dataOut}rotation.json`, JSON.stringify(rotations, (k, v) => v === undefined ? null : v))
+        writeFileSync(this.dataOut, JSON.stringify(rotations, (k, v) => v === undefined ? null : v))
     }
 }
 
