@@ -11,9 +11,15 @@ const { rotation_api } = require('config.json')
 
 class RotationAncmt {
 
-    constructor (_client, _channel) {
+    constructor (_client, _channels) {
         this.client = _client
-        _client.channels.fetch(_channel).then( (ch) => this.channel = ch)
+
+        this.channels = []
+        _channels.forEach(ch => {
+            _client.channels.fetch(ch.id).then( (el) => {
+                this.channels.push({channel: el, locale: ch.locale})
+            })
+        })
 
         this.imgPath = rotation_api.store_path.image
         this.dataPath = rotation_api.store_path.data
@@ -21,9 +27,12 @@ class RotationAncmt {
 
     startAncmt () {
         const rotation = 0
-        const lang = 'en-US'
-        const report = this.buildMessage(lang, rotation)
-        this.channel.send(report)
+        this.channels.forEach(ch => {
+            log.write('send rotation update', ch.locale)
+            const lang = ch.locale
+            const report = this.buildMessage(lang, rotation)
+            ch.channel.send(report)
+        })
     }
 
     schedule () {
