@@ -111,7 +111,7 @@ class CmdSalmonRun extends CmdBase {
             .setFooter({ text: `/${this.cmdKey}.${_idx} (${_interaction.user.username})`, iconURL: _interaction.user.avatarURL()})
             .setTimestamp()
 
-        if (bossThumb.indexOf('Unknown') === -1) {
+        if (bossThumb.indexOf('Unknown') === -1 && bossThumb.indexOf('Random') === -1) {
             embed.setThumbnail(`attachment://${basename(bossThumb)}`)
         }
 
@@ -125,8 +125,11 @@ class CmdSalmonRun extends CmdBase {
 
         if (rotation.salmon) {
             thumb.push(this.getImage(rotation.salmon).thumb)
-            thumb.push(findImg('coopBoss', rotation.salmon.boss))
             embeds.push(this.buildEmbed(rotation.salmon, _rotation, _lang, _interaction))
+
+            if (rotation.salmon.boss.indexOf('Unknown') === -1 && rotation.salmon.boss.indexOf('Random') === -1) {
+                thumb.push(findImg('coopBoss', rotation.salmon.boss))
+            }
         } else {
             embeds.push(this.defaultEmbed(_lang, _interaction))
         }
