@@ -26,7 +26,7 @@ class RotationAncmt {
     }
 
     startAncmt () {
-        const rotation = 0
+        const rotation = 1
         this.channels.forEach(ch => {
             log.write('send rotation update', ch.locale)
             const lang = ch.locale
@@ -37,7 +37,7 @@ class RotationAncmt {
 
     schedule () {
         log.write('send rotation update every 2 hours')
-        schedule.scheduleJob('2 */2 * * *', () => {
+        schedule.scheduleJob('0 */2 * * *', () => {
             this.startAncmt()
         })
     }
