@@ -1,5 +1,7 @@
 'use strict'
 
+const child_process = require('child_process')
+
 const { ActivityType, Collection } = require('discord.js')
 const EvtBase = require('events/EvtBase')
 
@@ -7,7 +9,6 @@ const { bot, rotation_api } = require('config.json')
 
 const Hook = require('hook/Hook.js')
 
-const { splatoon3InkScheduler } = require('utils/Splatoon3Ink.js')
 const BotInfo = require('utils/BotInfo.js')
 const { log } = require('utils/Log.js')
 const ErrorHandler = require('../utils/ErrorHandler')
@@ -28,7 +29,8 @@ class EvtReady extends EvtBase {
         _client.hooks = new Hook()
         _client.hooks.connect()
 
-        splatoon3InkScheduler()
+        // run splatoon3.ink scheduler in child thread
+        child_process.fork('workers/wkrSplatoon3Ink.js')
 
         _client.commands = new Collection()
         _client.commands = await _client.application.commands.fetch()
