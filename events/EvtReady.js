@@ -30,7 +30,7 @@ class EvtReady extends EvtBase {
         _client.hooks.connect()
 
         // run splatoon3.ink scheduler in child thread
-        child_process.fork('workers/wkrSplatoon3Ink.js')
+        child_process.fork('workers/WkrSplatoon3Ink.js')
 
         _client.commands = new Collection()
         _client.commands = await _client.application.commands.fetch()
