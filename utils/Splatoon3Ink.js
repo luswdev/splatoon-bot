@@ -240,5 +240,9 @@ module.exports.splatoon3InkScheduler = () => {
     log.write('start fetch', splatoon3Ink.apiBase, 'every 2 hours')
     schedule.scheduleJob('1 */2 * * *', () => {
         splatoon3Ink.buildRotations()
+            .catch( (err) => {
+                console.log("build rotation failed, error:", err)
+                // do nothing
+            })
     })
 }
