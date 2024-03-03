@@ -144,7 +144,11 @@ class Splatoon3Ink {
 
     async downloadImg (_url, _path) {
         const res = await axios.get(_url, {responseType: 'stream'})
-        res.data.pipe(createWriteStream(_path))
+        return new Promise(resolve => {
+            let stm = createWriteStream(_path)
+            res.data.pipe(stm)
+            stm.on('finish', resolve)
+        })
     }
 
     async parseSalmonRun (_type, _set) {
