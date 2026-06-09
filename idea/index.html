@@ -31,9 +31,11 @@
                     <i class="fas fa-robot"></i>
                     SplatoonBot
                 </span>
-                <ul class="nav justify-content-md-end justify-content-center">
+                <ul class="nav justify-content-md-end justify-content-center gap-2">
                     <li v-for="link in links" class="nav-item">
-                        <a class="nav-link active btn btn-clear round-32 shadow-none" :class="get_font_by_lang(2)" aria-current="page" :href="link.url">
+                        <a class="nav-link active btn btn-clear round-32 shadow-none" :class="get_font_by_lang(2)" aria-current="page" :href="link.url"
+                            :target="link.url.indexOf('http') !== -1 ? 'blank' : null">
+                            <i :class="link.icon"></i>
                             {{get_tstring(link.title)}}
                         </a>
                     </li>
@@ -93,7 +95,7 @@
         <div class="footer-inner container py-3 text-white-50">
             This website is not affiliated with Nintendo. All product names, logos, and brands are property of their respective owners.
             <hr class="m-1">
-            &copy; {{new Date().getFullYear()}} {{author}} v{{version}}
+            &copy; {{new Date().getFullYear()}} <a href="/" target="_blank" class="text-decoration-none">{{author}}<i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a> v{{version}}
             <div v-for="link in links"class="d-inline-block">
                 |
                 <a :href="link.url" class="text-decoration-none" target="_blank">

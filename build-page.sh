@@ -43,7 +43,7 @@ echo "[$?%] minify $js.js"
 uglifyjs ./scripts/$js.js -o ./scripts/$js.min.js
 done
 
-#minify css
+# minify css
 for css in "${CSS_LIST[@]}"; do
 get_precent
 echo "[$?%] minify $css.css"

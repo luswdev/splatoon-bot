@@ -66,7 +66,7 @@
         <div class="footer-inner container py-3 text-white-50">
             This website is not affiliated with Nintendo. All product names, logos, and brands are property of their respective owners.
             <hr class="m-1">
-            &copy; {{new Date().getFullYear()}} {{author}} v{{version}}
+            &copy; {{new Date().getFullYear()}} <a href="/" target="_blank" class="text-decoration-none">{{author}}<i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a> v{{version}}
             <div v-for="link in links"class="d-inline-block">
                 |
                 <a :href="link.url" class="text-decoration-none" target="_blank">

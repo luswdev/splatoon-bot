@@ -1,5 +1,10 @@
 const header_links = [
     {
+        "icon": "far fa-heart",
+        "title": "sponsor_us",
+        "url": "https://ko-fi.com/luswdev"
+    },
+    {
         "icon": "",
         "title": "anarchy_calculator",
         "url": "/splatoon/anarchy"
@@ -7,6 +12,11 @@ const header_links = [
 ]
 
 const footer_links = [
+    {
+        "icon": "far fa-heart",
+        "title": "sponsor_us",
+        "url": "https://ko-fi.com/luswdev"
+    },
     {
         "icon": "",
         "title": "Privacy Policy",
@@ -23,7 +33,7 @@ const footer_links = [
         "url": "https://github.com/luswdev/SplatoonBot"
     },
     {
-        "icon": "fab fa-twitter",
+        "icon": "fab fa-x-twitter",
         "title": "author",
         "url": "https://twitter.com/luswdev"
     },

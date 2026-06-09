@@ -65,7 +65,8 @@ const tstrings = {
         ],
         anarchy_calculator: 'Anarchy Calculator',
         author: 'Author',
-        source_code: 'Source code'
+        source_code: 'Source code',
+        sponsor_us: 'Sponsor Us'
     },
     zh: {
         info: 'SplatoonBot 是專為斯普拉遁 3 所打造的機器人',
@@ -133,6 +134,7 @@ const tstrings = {
         ],
         anarchy_calculator: '真格計算機',
         author: '作者',
-        source_code: '原始碼'
+        source_code: '原始碼',
+        sponsor_us: '支持我們'
     }
 }
