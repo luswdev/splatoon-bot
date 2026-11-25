@@ -2,7 +2,7 @@
 
 <img src="https://github.com/luswdev/splatoon-bot/blob/doc-page/img/splatoon-bot-title.png">
 
-![Discord Bots](https://top.gg/api/widget/servers/898993695418908702.svg)
+[![Discord Bots](https://top.gg/api/widget/servers/898993695418908702.svg)](https://top.gg/bot/898993695418908702)
 
 SplatoonBot is a simple bot for Splatoon 3.
 
